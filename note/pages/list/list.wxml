@@ -1,0 +1,23 @@
+<!--pages/list/list.wxml-->
+<!--wxml-->
+
+<!-- <block wx:for="{{list}}">
+  <view> {{index}}:{{item.title}}  </view>
+</block> -->
+
+<scroll-view scroll-y='true' class='container scroll'>
+  <block wx:for="{{list}}">
+    <view class='item clf'>
+      <view class='title'><text>{{item.title}}</text></view>
+      <view class='context'><text class='shengl'>{{item.context}}</text></view>
+      <view class='flex-wrap'>
+        <view class='time'>{{item.postime}}</view>
+        <view class='opera'>
+          <text catchtap='editNote' data-id="{{item.ID}}">编辑</text>
+          <text catchtap='delNote' data-id="{{item.ID}}">删除</text>
+        </view>
+      </view>
+    </view>
+  </block>
+  <image catchtap='toAddNote' class='edit' src="../../assets/images/edit.png"></image>
+</scroll-view>

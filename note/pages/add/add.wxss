@@ -1,0 +1,27 @@
+/* pages/add/add.wxss */
+form{
+  width: 90%;
+  display: block;
+  margin: 0 auto;
+}
+input{
+  height: 60rpx;
+  margin: 20rpx auto;
+  border: 1rpx #efefef solid;
+  font-size: 24rpx;  
+  padding:0 20rpx;
+}
+textarea{
+  display: block;
+  width: 93.5%;
+  padding:20rpx;
+  height:250rpx;
+  margin: 0 auto;
+  line-height: 50rpx;
+  border: 1rpx #efefef solid;
+  font-size: 24rpx;
+  margin-bottom: 20rpx;
+}
+button{
+  float: right;
+}

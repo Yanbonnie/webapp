@@ -1,0 +1,44 @@
+/* pages/list/list.wxss */
+.scroll{
+  height: 100%;
+}
+
+.item{
+  font-size: 24rpx;
+  padding:10rpx 20rpx;
+  border-bottom: 1rpx #efefef solid;
+}
+.item .title{
+  font-size: 28rpx;
+}
+.item .context text{
+  width: 100%;
+  display: block;
+  line-height: 50rpx;
+}
+.flex-wrap{
+  display: -webkit-flex;
+  /* flex-direction: column; */
+}
+.time{
+  flex: 1;
+}
+.opera{
+  flex: 1;
+}
+.opera text{
+  float: right;
+  margin-right: 20rpx;
+}
+
+.edit{
+  background: rgba(255,255,255,0.5);
+  box-shadow: 0 3rpx 5rpx #4b4b4b;
+  border-radius: 100%;
+  padding: 15rpx 8rpx 15rpx 15rpx;
+  width: 80rpx;
+   height: 80rpx; 
+  position: fixed;
+  right: 50rpx;
+  bottom: 50rpx;
+}

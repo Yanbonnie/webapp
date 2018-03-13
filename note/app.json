@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/test/test",
+    "pages/list/list",
+    "pages/add/add",
+    "pages/index/index",
+    "pages/logs/logs"    
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "笔记本",
+    "navigationBarTextStyle": "#fff"
+  }
+}

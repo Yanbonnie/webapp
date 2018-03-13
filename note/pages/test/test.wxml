@@ -1,0 +1,6 @@
+<!--pages/test/test.wxml-->
+<text>pages/test/test.wxml</text>
+<image wx:if="{{tempFilePaths.length > 0}}" src="{{tempFilePaths[0]}}"></image>
+<view bindtap='uploadFileHandle'>上传文件</view>
+
+<view bindtap='previewImg'>显示图片</view>
