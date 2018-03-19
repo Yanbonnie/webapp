@@ -8,20 +8,23 @@ input{
   height: 60rpx;
   margin: 20rpx auto;
   border: 1rpx #efefef solid;
-  font-size: 24rpx;  
+  font-size: 32rpx;  
   padding:0 20rpx;
 }
 textarea{
   display: block;
   width: 93.5%;
   padding:20rpx;
-  height:250rpx;
+  height:550rpx;
   margin: 0 auto;
   line-height: 50rpx;
   border: 1rpx #efefef solid;
-  font-size: 24rpx;
+  font-size: 32rpx;
   margin-bottom: 20rpx;
 }
 button{
   float: right;
+}
+.button-hover{
+  background: #ccc;
 }

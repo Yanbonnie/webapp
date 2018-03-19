@@ -1,15 +1,46 @@
 {
   "pages": [
-    "pages/test/test",
-    "pages/list/list",
-    "pages/add/add",
     "pages/index/index",
-    "pages/logs/logs"    
+    "pages/list/list",
+    "pages/test/component/form/form",
+    "pages/test/test",
+    "pages/interface/Interface",
+    "pages/system/system",
+    "pages/storage/storage",
+    "pages/add/add",
+    "pages/logs/logs",
+    "pages/detail/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#000",
     "navigationBarTitleText": "笔记本",
-    "navigationBarTextStyle": "#fff"
+    "navigationBarTextStyle": "#fff",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/images/account.png",
+        "selectedIconPath": "assets/images/account-active.png"
+      },
+      {
+        "pagePath": "pages/list/list",
+        "text": "我的笔记",
+        "iconPath": "assets/images/launch.png",
+        "selectedIconPath": "assets/images/launch-active.png"
+      },
+      {
+        "pagePath": "pages/add/add",
+        "text": "新增笔记",
+        "iconPath": "assets/images/per-sign.png",
+        "selectedIconPath": "assets/images/per-sign-active.png"
+      }
+    ],
+    "selectedColor": "#00ca2b",
+    "color": "#000000",
+    "position": "bottom"
   }
 }

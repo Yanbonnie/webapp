@@ -1,0 +1,17 @@
+/* pages/detail/detail.wxss */
+.detailBox{
+  width: 90%;
+  margin: 0 auto;
+}
+
+.title{
+  width: 80%;
+  margin: 0 auto;
+  font-size:40rpx;
+  line-height: 100rpx;
+  text-align: center;
+  /* display:block; */
+}
+.context text{
+  word-wrap:break-word
+}

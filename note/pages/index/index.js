@@ -4,10 +4,25 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
+    motto: '便捷笔记本',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
+  },  
+  onShow(){
+    app.globalData.editId = null;
+  },
+  showTabBarRedDot(){
+    wx.showTabBarRedDot({
+      index:1,
+    })
+  },
+  setBarBadge(){
+    console.log(123)
+    wx.setTabBarBadge({
+      index:0,
+      text:'1'
+    })
   },
   //事件处理函数
   bindViewTap: function() {
@@ -16,7 +31,6 @@ Page({
     })
   },
   onLoad: function (options) {
-    console.log(options)
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -34,6 +48,7 @@ Page({
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
+        withCredentials:true,
         success: res => {
           app.globalData.userInfo = res.userInfo
           this.setData({

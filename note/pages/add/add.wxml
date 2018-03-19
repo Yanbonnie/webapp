@@ -3,6 +3,6 @@
    <form bindsubmit="submitNote">
     <input  placeholder="请输入标题" name="title" value="{{noteObj.title}}"/>
     <textarea placeholder="请输入内容" name="context" value="{{noteObj.context}}"></textarea>  
-    <button size="mini"  form-type="submit">提交</button> 
+    <button size="mini"  form-type="submit" type="primary" hover-stay-time="300">提交</button> 
    </form>
 </view>

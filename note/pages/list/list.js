@@ -1,23 +1,32 @@
 // pages/list/list.js
-const util = require('../../utils/util.js')
+const util = require('../../utils/util.js');
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list:null
+    list:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getList()
+    
+  },
+  //监听页面显示
+  onShow:function(){
+    app.globalData.editId = null;
+    this.getList();
+    console.log('user_id'+app.globalData.user_id)
   },
   //获取笔记列表
   getList(){
-    util.WXREQ('note/list','GET',{},(json)=>{
+    util.WXREQ('note/list','POST',{
+      user_id:app.globalData.user_id
+    },(json)=>{
       if(json.meta.success){
         let data = json.data.list.map((item)=>{
           return {
@@ -29,16 +38,18 @@ Page({
       }
     })
   },
-  //添加笔记  
-  toAddNote(){
+  detailFn(e){
+    console.log(e)
     wx.navigateTo({
-      url: '/pages/add/add',
+      url: `/pages/detail/detail?id=${e.target.dataset.id}`,
     })
   },
   //编辑笔记
   editNote(e){
-    wx.navigateTo({
-      url: `/pages/add/add?id=${e.target.dataset.id}`,
+    console.log(e)
+    app.globalData.editId = e.target.dataset.id;
+    wx.switchTab({
+      url: '/pages/add/add',
     })
   },
   //删除笔记
@@ -50,13 +61,17 @@ Page({
         if(res.confirm){ //点击了确定
         console.log('删除')
           util.WXREQ('handle/del','POST',{id:e.target.dataset.id},(json)=>{
-            console.log(json)
             if(json.meta.success){
               this.getList();
             }
           })
         }
       },
+    })
+  },
+  addNoteNav(){
+    wx.switchTab({
+      url: '/pages/add/add',
     })
   }
 })

@@ -1,0 +1,10 @@
+<!--pages/storage/storage.wxml-->
+<text bindtap='go'>pages/storage/storage.wxml</text>
+<view bindtap='setStorage'>设置本地缓存</view>
+<view bindtap='getStorage'>获取本地缓存</view>
+<view bindtap='getStorageInfo'>异步获取当前storage的相关信息</view>
+<view bindtap='removeStorage'>从本地缓存中异步移除指定 key 。</view>
+<view bindtap='getLocation'>获取位置信息</view>
+<view bindtap='chooseLocation'>打开地图选择位置。</view>
+<view bindtap='openLocation'>​使用微信内置地图查看位置。</view>
+<map id="myMap" show-location />

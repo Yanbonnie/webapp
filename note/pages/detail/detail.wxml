@@ -1,0 +1,9 @@
+<!--pages/detail/detail.wxml-->
+<scroll-view scroll-y='true' class='container scroll'>
+    <view class='detailBox'>
+      <text class='shengl title'>{{detail.title}}</text>
+      <view class='context'>
+        <text>{{detail.context}}</text>
+      </view>
+    </view>
+</scroll-view>

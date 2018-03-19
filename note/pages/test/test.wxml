@@ -1,6 +1,16 @@
 <!--pages/test/test.wxml-->
-<text>pages/test/test.wxml</text>
-<image wx:if="{{tempFilePaths.length > 0}}" src="{{tempFilePaths[0]}}"></image>
+ <text>pages/test/test.wxml</text>
+ <image wx:if="{{saveFileSrc}}" src="{{saveFileSrc}}"></image> 
 <view bindtap='uploadFileHandle'>上传文件</view>
-
-<view bindtap='previewImg'>显示图片</view>
+<view bindtap='getSavedFileList'>获取本地已保存的文件列表{{getSavedFileList.length}}</view>
+<view bindtap='removeSavedFile'>删除本地存储的文件</view>
+<view bindtap='previewImg'>预览图片</view>
+<view bindtap='startRecord' wx:if="{{recordState}}">开启录音</view>
+<view bindtap='stopRecord' wx:if="{{!recordState}}">停止录音</view>
+<view bindtap='startVideo'>选择视频</view>
+<video id="myVideo" src="{{videoSrc}}" wx:if="{{videoSrc}}"></video> 
+<!-- camera.wxml -->
+<camera device-position="back" flash="off" binderror="error" style="width: 100%; height: 100px;" device-position="back" flash="on"></camera>
+<button type="primary" bindtap="takePhoto" >拍照</button>
+<view>预览</view>
+<image mode="widthFix" src="{{src}}"></image>

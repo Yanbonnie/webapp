@@ -6,10 +6,16 @@
 </block> -->
 
 <scroll-view scroll-y='true' class='container scroll'>
-  <block wx:for="{{list}}">
+  <view  class="noMessage" wx:if="{{list.length == 0}}">
+    <image src='/assets/images/cry.png' mode="aspectFit"></image>
+    <text>暂无笔记</text>
+    <button type='primary' bindtap='addNoteNav'>添加笔记</button>
+  </view>
+  <block wx:for="{{list}}" > 
     <view class='item clf'>
-      <view class='title'><text>{{item.title}}</text></view>
-      <view class='context'><text class='shengl'>{{item.context}}</text></view>
+      <!--data-id="{{item.ID}}" 放到view上e.detail.target找不到-->
+      <view class='title'><text bindtap='detailFn' data-id="{{item.ID}}">{{item.title}}</text></view>  
+      <view class='context'><text class='shengl' bindtap='detailFn' data-id="{{item.ID}}">{{item.context}}</text></view>
       <view class='flex-wrap'>
         <view class='time'>{{item.postime}}</view>
         <view class='opera'>
@@ -19,5 +25,4 @@
       </view>
     </view>
   </block>
-  <image catchtap='toAddNote' class='edit' src="../../assets/images/edit.png"></image>
 </scroll-view>
