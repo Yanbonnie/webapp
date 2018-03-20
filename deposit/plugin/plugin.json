@@ -1,0 +1,7 @@
+{
+  "publicComponents": {
+    "list": "components/list/list",
+    "model": "components/model/model"
+  },
+  "main": "index.js"
+}

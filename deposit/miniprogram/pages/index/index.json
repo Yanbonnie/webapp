@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "list": "plugin://myPlugin/list",
+    "model": "plugin://myPlugin/model"
+  }
+}
