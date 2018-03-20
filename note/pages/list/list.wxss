@@ -61,3 +61,18 @@
   margin-top: 100rpx;
   font-size: 30rpx;
 }
+
+.loading {
+  text-align: center;
+  height: 80rpx;
+  padding: 20rpx;
+}
+
+.loading image {
+  height: 100%;
+}
+
+.ending{
+  text-align: center;
+  padding: 20rpx 0;
+}

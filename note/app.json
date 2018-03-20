@@ -15,8 +15,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#000",
     "navigationBarTitleText": "笔记本",
-    "navigationBarTextStyle": "#fff",
-    "enablePullDownRefresh": true
+    "navigationBarTextStyle": "#fff"
   },
   "tabBar": {
     "list": [

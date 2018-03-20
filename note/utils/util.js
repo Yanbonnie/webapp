@@ -13,6 +13,14 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
+const unique3 = (arr, field)=>{
+  var hash = {};
+  arr = arr.reduce(function (item, next) {
+    hash[next[field]] ? '' : hash[next[field]] = true && item.push(next);
+    return item
+  }, [])
+  return arr;
+}
 //配置参数
 const Config = {
   reqUrl: 'http://192.168.22.212:8888/'
@@ -40,5 +48,6 @@ module.exports = {
   formatTime: formatTime,
   config:Config,
   WXREQ,
-  TRIM
+  TRIM,
+  unique3
 }

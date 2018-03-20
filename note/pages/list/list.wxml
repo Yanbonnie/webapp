@@ -5,16 +5,15 @@
   <view> {{index}}:{{item.title}}  </view>
 </block> -->
 
-<scroll-view scroll-y='true' class='container scroll'>
-  <view  class="noMessage" wx:if="{{list.length == 0}}">
+<scroll-view scroll-y='true' class='container scroll' bindscrolltolower="scrolltolowerHandle">
+  <view  class="noMessage" wx:if="{{list.length == 0 && !loading}}">
     <image src='/assets/images/cry.png' mode="aspectFit"></image>
     <text>暂无笔记</text>
     <button type='primary' bindtap='addNoteNav'>添加笔记</button>
   </view>
   <block wx:for="{{list}}" > 
     <view class='item clf'>
-      <!--data-id="{{item.ID}}" 放到view上e.detail.target找不到-->
-      <view class='title'><text bindtap='detailFn' data-id="{{item.ID}}">{{item.title}}</text></view>  
+      <view class='title' bindtap='detailFn' data-id="{{item.ID}}"><text>{{item.title}}</text></view>  
       <view class='context'><text class='shengl' bindtap='detailFn' data-id="{{item.ID}}">{{item.context}}</text></view>
       <view class='flex-wrap'>
         <view class='time'>{{item.postime}}</view>
@@ -25,4 +24,10 @@
       </view>
     </view>
   </block>
+  <view class="loading" wx:if="{{loading}}">
+      <image src="/assets/images/loading-bars.svg"></image>
+  </view>
+  <view class="ending" wx:if="{{ending}}">
+      已经到底部啦...
+  </view>
 </scroll-view>
