@@ -1,0 +1,237 @@
+<!--index.wxml-->
+<!-- <view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view> -->
+<view>
+    <scroll-view scroll-y="true">
+        <swiper indicator-dots="{{true}}" indicator-active-color="#38f" class="swiperWrap" autoplay="true" interval="4000">
+            <block wx:for="{{imgUrls}}" wx:key="unique">
+                <swiper-item>
+                    <image src="{{item}}" class="slide-image" width="355" height="150" />
+                </swiper-item>
+            </block>
+        </swiper>
+    </scroll-view>
+    <view class='productList'>
+        <view class="zan-card">
+            <!-- 卡片左侧商品图片 -->
+            <view class="zan-card__thumb">
+                <image class="zan-card__img" src="/assets/images/picture.jpeg" mode="aspectFit"></image>
+            </view>
+            <!-- 卡片右侧详情描述 -->
+            <view class="zan-card__detail">
+                <!-- 商品标题行 -->
+                <!-- 每行可以使用 zan-card__detail-row 来控制展示区域 -->
+                <!-- 每行里面可以用 zan-card__left-col zan-card__right-col 来控制左右展示 -->
+                <view class="zan-card__detail-row">
+                    <view class="zan-card__left-col zan-ellipsis--l2">
+                        店名：新冰城休闲店店名店名：新冰城休闲店店名店名：新冰城休闲店店名店名：新冰城休闲店店名
+                    </view>
+                </view>
+                <!-- 商品附属信息展示行 -->
+                <view class="zan-card__detail-row zan-c-gray-darker">
+                    <view class="zan-card__left-col  zan-ellipsis">
+                        地址：南塘镇新塘大道地址：南塘镇新塘大道地址：南塘镇新塘大道
+                    </view>
+                </view>
+                <!-- 商品操作按钮相关 -->
+                <view class="zan-card__detail-row zan-c-gray-darker ">
+                    <view class="zan-card__left-col operBox">
+                        <view class="zan-icon zan-icon-contact"></view>
+                        <view>3466</view>
+                        <view class="zan-icon zan-icon-like-o"></view>
+                    </view>
+                </view>
+            </view>
+            <view>
+                <button class="zan-btn zan-btn--small btn1">拨打电话</button>
+                <button class="zan-btn zan-btn--small btn2">查看菜单</button>
+            </view>
+        </view>
+        <view class="zan-card">
+            <!-- 卡片左侧商品图片 -->
+            <view class="zan-card__thumb">
+                <image class="zan-card__img" src="/assets/images/picture.jpeg" mode="aspectFit"></image>
+            </view>
+            <!-- 卡片右侧详情描述 -->
+            <view class="zan-card__detail">
+                <!-- 商品标题行 -->
+                <!-- 每行可以使用 zan-card__detail-row 来控制展示区域 -->
+                <!-- 每行里面可以用 zan-card__left-col zan-card__right-col 来控制左右展示 -->
+                <view class="zan-card__detail-row">
+                    <view class="zan-card__left-col zan-ellipsis--l2">
+                        店名：新冰城休闲店店名店名：新冰城休闲店店名店名：新冰城休闲店店名店名：新冰城休闲店店名
+                    </view>
+                </view>
+                <!-- 商品附属信息展示行 -->
+                <view class="zan-card__detail-row zan-c-gray-darker">
+                    <view class="zan-card__left-col  zan-ellipsis">
+                        地址：南塘镇新塘大道地址：南塘镇新塘大道地址：南塘镇新塘大道
+                    </view>
+                </view>
+                <!-- 商品操作按钮相关 -->
+                <view class="zan-card__detail-row zan-c-gray-darker ">
+                    <view class="zan-card__left-col operBox">
+                        <view class="zan-icon zan-icon-contact"></view>
+                        <view>3466</view>
+                        <view class="zan-icon zan-icon-like-o"></view>
+                    </view>
+                </view>
+            </view>
+            <view>
+                <button class="zan-btn zan-btn--small btn1">拨打电话</button>
+                <button class="zan-btn zan-btn--small btn2">查看菜单</button>
+            </view>
+        </view>
+        <view class="zan-card">
+            <!-- 卡片左侧商品图片 -->
+            <view class="zan-card__thumb">
+                <image class="zan-card__img" src="/assets/images/picture.jpeg" mode="aspectFit"></image>
+            </view>
+            <!-- 卡片右侧详情描述 -->
+            <view class="zan-card__detail">
+                <!-- 商品标题行 -->
+                <!-- 每行可以使用 zan-card__detail-row 来控制展示区域 -->
+                <!-- 每行里面可以用 zan-card__left-col zan-card__right-col 来控制左右展示 -->
+                <view class="zan-card__detail-row">
+                    <view class="zan-card__left-col zan-ellipsis--l2">
+                        店名：新冰城休闲店店名店名：新冰城休闲店店名店名：新冰城休闲店店名店名：新冰城休闲店店名
+                    </view>
+                </view>
+                <!-- 商品附属信息展示行 -->
+                <view class="zan-card__detail-row zan-c-gray-darker">
+                    <view class="zan-card__left-col  zan-ellipsis">
+                        地址：南塘镇新塘大道地址：南塘镇新塘大道地址：南塘镇新塘大道
+                    </view>
+                </view>
+                <!-- 商品操作按钮相关 -->
+                <view class="zan-card__detail-row zan-c-gray-darker ">
+                    <view class="zan-card__left-col operBox">
+                        <view class="zan-icon zan-icon-contact"></view>
+                        <view>3466</view>
+                        <view class="zan-icon zan-icon-like-o"></view>
+                    </view>
+                </view>
+            </view>
+            <view>
+                <button class="zan-btn zan-btn--small btn1">拨打电话</button>
+                <button class="zan-btn zan-btn--small btn2">查看菜单</button>
+            </view>
+        </view>
+        <view class="zan-card">
+            <!-- 卡片左侧商品图片 -->
+            <view class="zan-card__thumb">
+                <image class="zan-card__img" src="/assets/images/picture.jpeg" mode="aspectFit"></image>
+            </view>
+            <!-- 卡片右侧详情描述 -->
+            <view class="zan-card__detail">
+                <!-- 商品标题行 -->
+                <!-- 每行可以使用 zan-card__detail-row 来控制展示区域 -->
+                <!-- 每行里面可以用 zan-card__left-col zan-card__right-col 来控制左右展示 -->
+                <view class="zan-card__detail-row">
+                    <view class="zan-card__left-col zan-ellipsis--l2">
+                        店名：新冰城休闲店店名店名：新冰城休闲店店名店名：新冰城休闲店店名店名：新冰城休闲店店名
+                    </view>
+                </view>
+                <!-- 商品附属信息展示行 -->
+                <view class="zan-card__detail-row zan-c-gray-darker">
+                    <view class="zan-card__left-col  zan-ellipsis">
+                        地址：南塘镇新塘大道地址：南塘镇新塘大道地址：南塘镇新塘大道
+                    </view>
+                </view>
+                <!-- 商品操作按钮相关 -->
+                <view class="zan-card__detail-row zan-c-gray-darker ">
+                    <view class="zan-card__left-col operBox">
+                        <view class="zan-icon zan-icon-contact"></view>
+                        <view>3466</view>
+                        <view class="zan-icon zan-icon-like-o"></view>
+                    </view>
+                </view>
+            </view>
+            <view>
+                <button class="zan-btn zan-btn--small btn1">拨打电话</button>
+                <button class="zan-btn zan-btn--small btn2">查看菜单</button>
+            </view>
+        </view>
+        <view class="zan-card">
+            <!-- 卡片左侧商品图片 -->
+            <view class="zan-card__thumb">
+                <image class="zan-card__img" src="/assets/images/picture.jpeg" mode="aspectFit"></image>
+            </view>
+            <!-- 卡片右侧详情描述 -->
+            <view class="zan-card__detail">
+                <!-- 商品标题行 -->
+                <!-- 每行可以使用 zan-card__detail-row 来控制展示区域 -->
+                <!-- 每行里面可以用 zan-card__left-col zan-card__right-col 来控制左右展示 -->
+                <view class="zan-card__detail-row">
+                    <view class="zan-card__left-col zan-ellipsis--l2">
+                        店名：新冰城休闲店店名店名：新冰城休闲店店名店名：新冰城休闲店店名店名：新冰城休闲店店名
+                    </view>
+                </view>
+                <!-- 商品附属信息展示行 -->
+                <view class="zan-card__detail-row zan-c-gray-darker">
+                    <view class="zan-card__left-col  zan-ellipsis">
+                        地址：南塘镇新塘大道地址：南塘镇新塘大道地址：南塘镇新塘大道
+                    </view>
+                </view>
+                <!-- 商品操作按钮相关 -->
+                <view class="zan-card__detail-row zan-c-gray-darker ">
+                    <view class="zan-card__left-col operBox">
+                        <view class="zan-icon zan-icon-contact"></view>
+                        <view>3466</view>
+                        <view class="zan-icon zan-icon-like-o"></view>
+                    </view>
+                </view>
+            </view>
+            <view>
+                <button class="zan-btn zan-btn--small btn1">拨打电话</button>
+                <button class="zan-btn zan-btn--small btn2">查看菜单</button>
+            </view>
+        </view>
+        <view class="zan-card">
+            <!-- 卡片左侧商品图片 -->
+            <view class="zan-card__thumb">
+                <image class="zan-card__img" src="/assets/images/picture.jpeg" mode="aspectFit"></image>
+            </view>
+            <!-- 卡片右侧详情描述 -->
+            <view class="zan-card__detail">
+                <!-- 商品标题行 -->
+                <!-- 每行可以使用 zan-card__detail-row 来控制展示区域 -->
+                <!-- 每行里面可以用 zan-card__left-col zan-card__right-col 来控制左右展示 -->
+                <view class="zan-card__detail-row">
+                    <view class="zan-card__left-col zan-ellipsis--l2">
+                        店名：新冰城休闲店店名店名：新冰城休闲店店名店名：新冰城休闲店店名店名：新冰城休闲店店名
+                    </view>
+                </view>
+                <!-- 商品附属信息展示行 -->
+                <view class="zan-card__detail-row zan-c-gray-darker">
+                    <view class="zan-card__left-col  zan-ellipsis">
+                        地址：南塘镇新塘大道地址：南塘镇新塘大道地址：南塘镇新塘大道
+                    </view>
+                </view>
+                <!-- 商品操作按钮相关 -->
+                <view class="zan-card__detail-row zan-c-gray-darker ">
+                    <view class="zan-card__left-col operBox">
+                        <view class="zan-icon zan-icon-contact"></view>
+                        <view>3466</view>
+                        <view class="zan-icon zan-icon-like-o"></view>
+                    </view>
+                </view>
+            </view>
+            <view>
+                <button class="zan-btn zan-btn--small btn1">拨打电话</button>
+                <button class="zan-btn zan-btn--small btn2">查看菜单</button>
+            </view>
+        </view>
+    </view>
+
+</view>
