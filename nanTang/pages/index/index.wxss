@@ -1,0 +1,56 @@
+/**index.wxss**/
+/* .userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usermotto {
+  margin-top: 200px;
+} */
+@import "/assets/css/index.wxss";
+.swiperWrap image{
+  width: 100%;
+  display: block;
+}
+
+.productList{
+    padding: 50rpx 0;
+    background: #efefef;
+}
+.zan-card{
+    background: #fff;
+    position: relative;
+    margin-bottom: 10px;
+}
+.zan-card .btn1,.zan-card .btn2{
+    position: absolute;
+    right: 15rpx;
+    
+}
+.zan-card .btn1{
+    top: 40rpx;
+    margin-right: 0;
+}
+.zan-card .btn2{
+    bottom: 40rpx;
+}
+.rowBtn{
+    top: 20rpx;
+    position: absolute;
+}
+.operBox view{
+   margin: 0 20rpx;
+   display: inline-block; 
+}
