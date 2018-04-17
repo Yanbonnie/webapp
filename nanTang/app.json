@@ -1,7 +1,10 @@
 {
     "pages": [
-        "pages/business/business",
         "pages/index/index",
+        "pages/detail/detail",
+        "pages/search/search",
+        "pages/business/business",
+        
         "pages/logs/logs"
         
     ],
@@ -27,7 +30,7 @@
                 "selectedIconPath": "/assets/images/chat_on.png"
             },
             {
-                "pagePath": "pages/logs/logs",
+                "pagePath": "pages/search/search",
                 "text": "我要搜索",
                 "iconPath": "/assets/images/search.png",
                 "selectedIconPath": "/assets/images/search_on.png"

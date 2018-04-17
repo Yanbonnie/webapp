@@ -1,0 +1,41 @@
+/* pages/search/search.wxss */
+
+
+.searchBox {
+    position: fixed;
+    top: 0rpx;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background: #ffffff;
+    padding: 30rpx 0;
+}
+
+.searchBox image {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 10%;
+    top: 10rpx;
+}
+
+.searchBox .zan-col {
+    position: relative;
+}
+.searchBox .zan-col button{
+    margin-left: 8%;
+}
+.searchBox .zan-col input {
+    width: 75%;
+    margin: 0 auto;
+    border: 1rpx #e5e5e5 solid;
+    border-radius: 50px;
+    font-size: 28rpx;
+    height: 58rpx;
+    line-height: 58rpx;
+    padding-left: 40px;
+}
+ @import "/pages/index/index.wxss"; 
+.productList{
+    padding-top: 150rpx;
+}

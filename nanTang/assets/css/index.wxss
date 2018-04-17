@@ -119,7 +119,7 @@
     transform-origin: 0 0;
     pointer-events: none;
     box-sizing: border-box;
-    border: 0 solid #e5e5e5;
+    /* border: 0 solid #e5e5e5; */
     border-width: 1px;
     border-radius: 4px;
 }
@@ -687,7 +687,7 @@
     transform: translate3d(-50%, -50%, 0);
     color: #333;
     opacity: 0;
-    z-index: 1;
+    z-index: 5;
 }
 
 .zan-dialog--mask {

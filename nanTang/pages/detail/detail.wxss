@@ -1,0 +1,13 @@
+/* pages/detail/detail.wxss */
+ @import "/pages/index/index.wxss"; 
+  .menus{
+      padding:25rpx;
+      background: #ffffff;
+      margin-top: -50rpx;
+  }
+ .menus .zan-col image{
+     width: 85%;
+     display: block;
+     margin: 0 auto;
+     height: 230rpx;
+ }

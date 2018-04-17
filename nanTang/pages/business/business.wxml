@@ -1,6 +1,7 @@
 <!--pages/business/business.wxml-->
 <import src="/assets/component/field/index.wxml" />
-<!-- <template is="zan-field" data="{{ value }}"></template> -->
+<import src="/assets/component/dialog/index.wxml" />
+<template is="zan-dialog" data="{{ zanDialog }}"></template>
 <!-- Field 基础用法 -->
 <view class="container">
     <view class="zan-panel">
