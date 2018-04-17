@@ -1,0 +1,12 @@
+/* pages/business/business.wxss */
+/* @import "/assets/css/index.wxss"; */
+.add{
+    width: 100rpx;
+    height: 100rpx;
+    background: #efefef;
+}
+.add image{
+    width: 50rpx; 
+    height: 50rpx;
+    padding: 25rpx;
+}

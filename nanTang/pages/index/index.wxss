@@ -19,7 +19,7 @@
 .usermotto {
   margin-top: 200px;
 } */
-@import "/assets/css/index.wxss";
+/* @import "/assets/css/index.wxss"; */
 .swiperWrap image{
   width: 100%;
   display: block;
