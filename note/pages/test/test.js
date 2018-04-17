@@ -83,7 +83,7 @@ Page({
   previewImg(){
     wx.previewImage({
       current: '', // 当前显示图片的http链接
-      urls: this.data.tempFilePaths,    // 需要预览的图片http链接列表
+      urls: this.data.tempFilePaths[0],    // 需要预览的图片http链接列表
       success:function(res){
         console.log(res)
       },

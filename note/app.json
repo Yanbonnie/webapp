@@ -1,9 +1,10 @@
 {
   "pages": [
+    "pages/test/test",
     "pages/index/index",
     "pages/list/list",
     "pages/test/component/form/form",
-    "pages/test/test",
+    
     "pages/interface/Interface",
     "pages/system/system",
     "pages/storage/storage",
