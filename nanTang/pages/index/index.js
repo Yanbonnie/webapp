@@ -1,7 +1,13 @@
 //index.js
 //获取应用实例
-const app = getApp()
 const { Actionsheet, extend } = require('../../assets/component/index.js');
+const app = getApp();
+const { key, userInfo } = app.globalData;
+import { URL, WXREQ } from '../../utils/util';
+import { comData, methodsArr} from '../../utils/pageCom';
+
+// import { banner, config, data } from '../../utils/data'
+
 Page(extend({}, Actionsheet, {
     data: {
         /*motto: 'Hello World',
@@ -13,17 +19,54 @@ Page(extend({}, Actionsheet, {
             'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
             'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
         ],
+        banner: [],
+        config: [],
+        businessList: [],
         baseActionsheet: {   //点击拨打电话弹层配置
             show: false,
             // cancelText: '关闭 Action',
             closeOnClickOverlay: true,
             componentId: 'baseActionsheet',
             actions: []
-
-        }
+        },
+        /*公共数据 */
+        ...comData
+    },
+    ...methodsArr,
+    //获取首页基本配置
+    getConfig(){
+        wx.showLoading({
+            title: '加载中...',
+        })
+        WXREQ('GET', URL['getConfig'],{
+            key
+        },res=>{
+            wx.hideLoading();
+            if(res.status == 0){
+                const { banner, config, data} = res;
+                this.setData({
+                    banner,
+                    config,
+                    businessList:data
+                })
+            }else{
+                wx.showToast({
+                    title: res.msg,
+                    icon:'none',
+                    mask:true
+                })
+            }
+        })
     },
     //点击拨打电话
-    toggleActionsheet() {
+    toggleActionsheet(e) {
+        // console.log(this)
+        this.getPhoneList(e).then(res=>{
+            console.log(res)
+            if(res.status == 0){
+                
+            }
+        });
         this.setData({
             'baseActionsheet.actions': [{
                 name: '18825039689',
@@ -56,7 +99,13 @@ Page(extend({}, Actionsheet, {
             url:'/pages/detail/detail'
         })
     },
-    onLoad: function () {
+    
+    onLoad: function () {  
+        if (userInfo){
+            this.getConfig();
+        }
+          
+        // this.getUserInfo();    
         /*if (app.globalData.userInfo) {
             this.setData({
                 userInfo: app.globalData.userInfo,

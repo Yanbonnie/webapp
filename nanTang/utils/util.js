@@ -14,6 +14,32 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+const Config = {
+    reqUrl: 'https://xnt.xhwxpos.com/sznt/wxapp/Index/'
+}
+
+const URL = {
+    'userLogin':'userLogin',
+    'getConfig':'getConfig',
+    'getShop':'getShop',
+    'getTel':'getTel'
+}
+
+const WXREQ = (method,url,data,succfn)=>{
+    wx.request({
+        url: Config.reqUrl + url, //仅为示例，并非真实的接口地址
+        data: data,
+        method: method,
+        header: {
+            'content-type': 'application/json' // 默认值
+        },
+        success: res => {
+            succfn(res.data)
+        }
+    })
+}
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  URL,
+  WXREQ
 }
