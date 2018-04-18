@@ -22,7 +22,10 @@ const URL = {
     'userLogin':'userLogin',
     'getConfig':'getConfig',
     'getShop':'getShop',
-    'getTel':'getTel'
+    'getTel':'getTel',
+    'postShopInfo': 'postShopInfo',     //商家⼊入驻信息提交接⼝口
+    'uploadFile':'uploadFile',          //上传图片接口
+
 }
 
 const WXREQ = (method,url,data,succfn)=>{
@@ -41,5 +44,6 @@ const WXREQ = (method,url,data,succfn)=>{
 module.exports = {
   formatTime: formatTime,
   URL,
-  WXREQ
+  WXREQ,
+  Config
 }

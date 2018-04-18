@@ -4,27 +4,34 @@
 <template is="zan-dialog" data="{{ zanDialog }}"></template>
 <!-- Field 基础用法 -->
 <view class="container">
-    <view class="zan-panel">
-        <template is="zan-field" data="{{ ...shop,value:shopVal}}"></template>
-        <template is="zan-field" data="{{ ...charge,value:chargeVal }}"></template>
-        <template is="zan-field" data="{{ ...phone }}"></template>
-        <template is="zan-field" data="{{ ...phones }}"></template>
-        <template is="zan-field" data="{{ ...address }}"></template>
-        <template is="zan-field" data="{{ ...label }}"></template>
-        <view class="zan-cell zan-field">
-            <view class="zan-cell__hd zan-field__title">Logo</view>
-            <view class="add">
-                <image src="/assets/images/add.png"></image>
+    <form bindsubmit="formSubmit" report-submit="fromId">
+        <view class="zan-panel">
+            <template is="zan-field" data="{{ ...shop,value:shopVal}}"></template>
+            <template is="zan-field" data="{{ ...charge,value:chargeVal }}"></template>
+            <template is="zan-field" data="{{ ...phone }}"></template>
+            <template is="zan-field" data="{{ ...phones }}"></template>
+            <template is="zan-field" data="{{ ...address }}"></template>
+            <template is="zan-field" data="{{ ...label }}"></template>
+            <view class="zan-cell zan-field">
+                <view class="zan-cell__hd zan-field__title">Logo</view>
+                <view wx:if="{{!logo.src}}" class="add" bindtap='selectLogo'>
+                    <image src="/assets/images/add.png"></image>
+                </view>
+                <view wx:if="{{logo.src}}" class="show" bindtap='selectLogo'>
+                    <image src="{{logo.src}}"></image>
+                </view>
+                <view > </view>
+            </view>
+            <view class="zan-cell zan-field">
+                <view class="zan-cell__hd zan-field__title">菜单</view>
+                <view class="add">
+                    <image src="/assets/images/add.png"></image>
+                </view>
+            </view>
+            <view class="zan-btns">
+                <button class="zan-btn zan-btn--primary" formType="submit"> 提交</button> <!--bindtap="submitInput" -->
             </view>
         </view>
-        <view class="zan-cell zan-field">
-            <view class="zan-cell__hd zan-field__title">菜单</view>
-            <view class="add">
-                <image src="/assets/images/add.png"></image>
-            </view>
-        </view>
-        <view class="zan-btns">
-            <button class="zan-btn zan-btn--primary" bindtap="submitInput">提交</button>
-        </view>
-    </view>
+    </form>
+
 </view>

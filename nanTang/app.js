@@ -74,6 +74,8 @@ App({
         },res=>{
             if (res.status == 0){
                 this.globalData.userInfo = res.data;
+                console.log(res)
+                console.log(this.globalData.userInfo)
             }else{
                 wx.showToast({
                     title:res.msg ? res.msg : '',

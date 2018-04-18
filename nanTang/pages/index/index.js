@@ -2,7 +2,7 @@
 //获取应用实例
 const { Actionsheet, extend } = require('../../assets/component/index.js');
 const app = getApp();
-const { key, userInfo } = app.globalData;
+let { key } = app.globalData;
 import { URL, WXREQ } from '../../utils/util';
 import { comData, methodsArr} from '../../utils/pageCom';
 
@@ -14,11 +14,7 @@ Page(extend({}, Actionsheet, {
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo')*/
-        imgUrls: [
-            'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-            'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-            'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-        ],
+        userInfo:{},
         banner: [],
         config: [],
         businessList: [],
@@ -38,8 +34,10 @@ Page(extend({}, Actionsheet, {
         wx.showLoading({
             title: '加载中...',
         })
+        const { unionid } = this.data.userInfo;
         WXREQ('GET', URL['getConfig'],{
-            key
+            key,
+            unionid
         },res=>{
             wx.hideLoading();
             if(res.status == 0){
@@ -100,10 +98,19 @@ Page(extend({}, Actionsheet, {
         })
     },
     
-    onLoad: function () {  
-        if (userInfo){
-            this.getConfig();
-        }
+    onReady: function () {
+        let Timer = setInterval(()=>{
+            if (app.globalData.userInfo){
+                clearInterval(Timer);
+                this.setData({
+                    userInfo: app.globalData.userInfo
+                })
+                this.getConfig();
+            }
+        },100)
+        // if (userInfo){
+        //     this.getConfig();
+        // }
           
         // this.getUserInfo();    
         /*if (app.globalData.userInfo) {

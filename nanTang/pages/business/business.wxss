@@ -10,3 +10,8 @@
     height: 50rpx;
     padding: 25rpx;
 }
+.show image{
+    width:100rpx; 
+    height: 100rpx;
+    padding: 0rpx;
+}
