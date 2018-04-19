@@ -10,8 +10,29 @@
     height: 50rpx;
     padding: 25rpx;
 }
+.show {
+    margin-right: 20rpx;
+}
 .show image{
     width:100rpx; 
     height: 100rpx;
     padding: 0rpx;
+}
+.menuArr .add,.menuArr .show{
+    display: block;
+    float: left;
+    margin-right: 10rpx;
+    margin-bottom: 10rpx;
+    position: relative;
+}
+.menuArr .show .icon{
+    position: absolute;
+    height: 30rpx;
+    right: -5rpx;
+    top: -5rpx;
+    width: 30rpx;
+    z-index: 10;
+}
+.gray{
+    background: #ccc;
 }

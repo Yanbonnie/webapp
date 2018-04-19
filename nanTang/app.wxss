@@ -9,7 +9,7 @@
   box-sizing: border-box;
 }  */
 
-@import "/assets/css/index.wxss";
+ @import "/assets/css/index.wxss"; 
 page{
     background: #efefef;
 }

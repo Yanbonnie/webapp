@@ -1,35 +1,71 @@
 <!--pages/business/business.wxml-->
-<import src="/assets/component/field/index.wxml" />
+<!-- <import src="/assets/component/field/index.wxml" />
 <import src="/assets/component/dialog/index.wxml" />
-<template is="zan-dialog" data="{{ zanDialog }}"></template>
+<template is="zan-dialog" data="{{ zanDialog }}"></template> -->
 <!-- Field 基础用法 -->
 <view class="container">
     <form bindsubmit="formSubmit" report-submit="fromId">
         <view class="zan-panel">
-            <template is="zan-field" data="{{ ...shop,value:shopVal}}"></template>
+            <!-- <template is="zan-field" data="{{ ...shop,value:shopVal}}"></template>
             <template is="zan-field" data="{{ ...charge,value:chargeVal }}"></template>
-            <template is="zan-field" data="{{ ...phone }}"></template>
-            <template is="zan-field" data="{{ ...phones }}"></template>
-            <template is="zan-field" data="{{ ...address }}"></template>
-            <template is="zan-field" data="{{ ...label }}"></template>
+            <template is="zan-field" data="{{ ...phone ,value:phoneVal}}"></template>
+            <template is="zan-field" data="{{ ...phones, value:phonesVal }}"></template>
+            <template is="zan-field" data="{{ ...address,value:addressVal }}"></template>
+            <template is="zan-field" data="{{ ...label,value:labelVal }}"></template>  -->
+            <view class="zan-cell zan-field">
+                <view class="zan-cell__hd zan-field__title">商家</view>
+                 <view wx:if="{{shopStatus == 0}}" class="zan-field__input">{{shopVal}}</view> 
+                <input wx:else class="zan-field__input zan-cell__bd" name="shop" placeholder="请输入商家名称" type="text" value="{{shopVal}}" data-componentid="shop" bindinput='bindinputHandle'/>                
+            </view>
+            <view class="zan-cell zan-field">
+                <view class="zan-cell__hd zan-field__title">负责人</view>
+                <view wx:if="{{shopStatus == 0}}" class="zan-field__input">{{chargeVal}}</view>
+                <input wx:else class="zan-field__input zan-cell__bd" name="charge" placeholder="请输入负责人姓名" type="text" value="{{chargeVal}}" data-componentid="charge" bindinput='bindinputHandle'/>
+                
+            </view>
+            <view class="zan-cell zan-field">
+                <view class="zan-cell__hd zan-field__title">联系电话</view>                
+                <view wx:if="{{shopStatus == 0}}" class="zan-field__input">{{phoneVal}}</view>
+                <input wx:else class="zan-field__input zan-cell__bd" name="phone" placeholder="请输入联系电话" type="text" value="{{phoneVal}}" data-componentid="phone" bindinput='bindinputHandle'/>
+            </view>
+            <view class="zan-cell zan-field">
+                <view class="zan-cell__hd zan-field__title">外卖电话</view>                
+                <view wx:if="{{shopStatus == 0}}" class="zan-field__input">{{phonesVal}}</view>
+                <input wx:else class="zan-field__input zan-cell__bd" name="phones" placeholder="请输入外卖号码用,分隔多个" type="text" value="{{phonesVal}}" data-componentid="phones" bindinput='bindinputHandle'/>
+            </view>
+            <view class="zan-cell zan-field">
+                <view class="zan-cell__hd zan-field__title">地址</view>                
+                <view wx:if="{{shopStatus == 0}}" class="zan-field__input">{{addressVal}}</view>
+                <input wx:else class="zan-field__input zan-cell__bd" name="address" placeholder="请输入地址" type="text" value="{{addressVal}}" data-componentid="address" bindinput='bindinputHandle'/>
+            </view>
+            <view class="zan-cell zan-field">
+                <view class="zan-cell__hd zan-field__title">标签</view>                
+                <view wx:if="{{shopStatus == 0}}" class="zan-field__input">{{labelVal}}</view>
+                <input wx:else class="zan-field__input zan-cell__bd" name="label" placeholder="请输入标签便于用户搜索" type="text" value="{{labelVal}}" data-componentid="label" bindinput='bindinputHandle'/>
+            </view>
             <view class="zan-cell zan-field">
                 <view class="zan-cell__hd zan-field__title">Logo</view>
-                <view wx:if="{{!logo.src}}" class="add" bindtap='selectLogo'>
+                <view wx:if="{{!logo.src}}" class="add" data-fileid="{{logo.id}}" bindtap='selectLogo'>
                     <image src="/assets/images/add.png"></image>
                 </view>
-                <view wx:if="{{logo.src}}" class="show" bindtap='selectLogo'>
+                <view wx:if="{{logo.src}}" class="show" data-fileid="{{logo.id}}" bindtap='selectLogo'>
                     <image src="{{logo.src}}"></image>
                 </view>
-                <view > </view>
             </view>
             <view class="zan-cell zan-field">
                 <view class="zan-cell__hd zan-field__title">菜单</view>
-                <view class="add">
-                    <image src="/assets/images/add.png"></image>
+                <view class='menuArr'>
+                    <view wx:if="{{menuSrc.length > 0 }}" class="show" wx:for="{{menuSrc}}" wx:key="index" data-fileid="{{item.file_id}}">
+                        <image src="{{item.pic}}"></image>
+                        <image  class='icon' src="/assets/images/del_solid.png"></image>
+                    </view>
+                    <view class="add" bindtap="selectMenu" wx:if="{{shopStatus != 0}}">
+                        <image src="/assets/images/add.png"></image>
+                    </view>
                 </view>
             </view>
             <view class="zan-btns">
-                <button class="zan-btn zan-btn--primary" formType="submit"> 提交</button> <!--bindtap="submitInput" -->
+                <button class="{{shopStatus == 0 ? 'zan-btn gray':'zan-btn zan-btn--primary' }}" formType="submit">{{submitBtn}}</button>
             </view>
         </view>
     </form>

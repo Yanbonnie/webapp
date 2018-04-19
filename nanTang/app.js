@@ -15,10 +15,13 @@ App({
         //     }
         // })
         // 获取用户信息
+        this.init();
+    },
+    init(){
         wx.getSetting({
             success: res => {
                 if (res.authSetting['scope.userInfo']) {
-                    Promise.all([this.loginHandle(), this.getUserInfo()]).then(results=> {
+                    Promise.all([this.loginHandle(), this.getUserInfo()]).then(results => {
                         // console.log(results); // 获得一个Array: ['P1', 'P2']
                         const { code } = results[0];
                         const { iv, encryptedData } = results[1];
@@ -74,19 +77,23 @@ App({
         },res=>{
             if (res.status == 0){
                 this.globalData.userInfo = res.data;
-                console.log(res)
-                console.log(this.globalData.userInfo)
             }else{
-                wx.showToast({
-                    title:res.msg ? res.msg : '',
-                    icon:'none',
-                    mask:true
+                wx.showModal({
+                    title:'',
+                    content:'登录失败，请重新登录',
+                    showCancel:false,
+                    confirmText:'确定',
+                    success:res=>{
+                        this.init();
+                    }
                 })
             }
         })
     },
     globalData: {
         userInfo: null,
-        key
+        key,
+        is_pay_apply:null,
+        is_pay_praise:null
     }
 })

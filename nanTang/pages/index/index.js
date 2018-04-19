@@ -47,6 +47,9 @@ Page(extend({}, Actionsheet, {
                     config,
                     businessList:data
                 })
+                app.globalData.is_pay_apply = config.is_pay_apply;
+                app.globalData.is_pay_praise = config.is_pay_praise;
+                console.log(app.globalData)
             }else{
                 wx.showToast({
                     title: res.msg,
@@ -58,7 +61,6 @@ Page(extend({}, Actionsheet, {
     },
     //点击拨打电话
     toggleActionsheet(e) {
-        // console.log(this)
         this.getPhoneList(e).then(res=>{
             console.log(res)
             if(res.status == 0){
