@@ -28,6 +28,7 @@ Page({
         menuSrc:[],
         is_apply:null,   //是否入驻
         shopStatus:null, //商家状态   0待审核-待确认（不可点击） 1已通过-修改 2已过期-提交续期  -1已拒绝-重新提交
+        shopId:null,     //商家id
         submitBtn:""
     },  
 
@@ -37,10 +38,6 @@ Page({
     onReady: function (options) {
         // wx.clearStorage({key:'business'})
     },
-    // bindinputHandle(e){
-    //     const {  }
-    //     console.log(e)
-    // },
     //获取上家入驻信息接口
     getShopInfo(){
         return new Promise((resolve,reject)=>{
@@ -54,8 +51,7 @@ Page({
                     })
                     if (res.is_apply == 1) {
                         const { menu_pic } = res;
-                        const { name, logo, boss, mobile, tel, address, label, status } = res.data;
-                        console.log(status)
+                        const { name, logo, boss, mobile, tel, address, label, status, id } = res.data;
                         this.setData({
                             shopVal: name,
                             chargeVal: boss,
@@ -66,9 +62,11 @@ Page({
                             'logo.src': logo.pic,
                             'logo.id': logo.file_id,
                             menuSrc: menu_pic,
+                            shopId:id,
                             shopStatus: status
                         })
                     }
+                    console.log(this.data)
                     resolve(res.is_apply)
                 } else {
                     wx.showToast({
@@ -84,11 +82,27 @@ Page({
     onShow(){
         this.init(); 
     },
+    //离开页面保存信息
+    onHide() {
+        if (this.data.is_apply != 1) {  //没有入驻设置缓存
+            const { shopVal, chargeVal, phoneVal, phonesVal, addressVal, labelVal, logo, menuSrc } = this.data;
+            wx.setStorage({
+                key: 'business',
+                data: {
+                    shopVal, chargeVal, phoneVal, phonesVal, addressVal, labelVal, logo, menuSrc
+                }
+            })
+        }
+    },
+    //初始化项目
     init(){
         //获取本地缓存
         if (this.data.is_apply != 1) {  //未入驻
-
+            wx.showLoading({
+                title: '加载中...',
+            })
             this.getShopInfo().then(res => {  //res - is_apply
+                wx.hideLoading()
                 this.setData({
                     is_apply: res
                 })
@@ -131,22 +145,9 @@ Page({
                 submitBtn: '提交'
             })
         }
-    },
-    //离开页面保存信息
-    onHide(){
-        if(this.data.is_apply != 1){  //没有入驻设置缓存
-            const { shopVal, chargeVal, phoneVal, phonesVal, addressVal, labelVal, logo, menuSrc } = this.data;
-            wx.setStorage({
-                key: 'business',
-                data: {
-                    shopVal, chargeVal, phoneVal, phonesVal, addressVal, labelVal, logo, menuSrc
-                }
-            })
-        }
-    },
+    },    
     //点击提交按钮
     formSubmit(e){
-        console.log(e)
         if (this.data.shopStatus == 0) return;
         let { address,charge,label,phone,phones,shop} = e.detail.value;
         let { id } = this.data.logo;
@@ -188,7 +189,17 @@ Page({
             });
             return;
         }
-        WXREQ('POST', URL['postShopInfo'],{
+        let objData = null;
+        let link = '';
+        if (this.data.shopStatus == 1){  //修改
+            link = URL['setShopInfo']
+            objData = { id: this.data.shopId };
+            
+        }else{  //提交
+            link = URL['postShopInfo'];
+            objData = {}
+        }
+        WXREQ('POST', link ,{
             key,
             unionid: app.globalData.userInfo.unionid,
             form_id:'fromId',
@@ -198,7 +209,8 @@ Page({
             mobile: phone,
             tel: phones,
             address:address,
-            label:label
+            label:label,
+            ...objData
         },res=>{
             if(res.status == 0){
                 wx.removeStorage({
@@ -345,6 +357,22 @@ Page({
                     })
                 }
             })
+        })
+    },
+    menuPicDel(e){
+        const {file_id} = e.currentTarget.dataset;
+        this.deleteFile(file_id).then(res=>{
+            wx.showToast({
+                title: '删除成功',
+                mask:'true',
+                icon:'success'
+            })
+            wx.showLoading({
+                title: '加载中...',
+            })
+            this.getShopInfo().then(res=>{
+                wx.hideLoading();
+            });
         })
     },
     bindinputHandle(e) {

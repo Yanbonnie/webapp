@@ -25,7 +25,7 @@
         <view class='productList'>
             <view class="zan-card" wx:for="{{businessList}}" wx:key="{{index}}">
                 <!-- 卡片左侧商品图片 -->
-                <view class="zan-card__thumb">
+                <view class="zan-card__thumb" data-id="{{item.id}}" bindtap='goDetail'>
                     <image class="zan-card__img" src="{{item.logo}}" mode="aspectFit"></image>
                 </view>
                 <!-- 卡片右侧详情描述 -->
@@ -55,11 +55,14 @@
                 </view>
                 <view>
                     <button class="zan-btn zan-btn--small btn1" data-id="{{item.id}}" bindtap='toggleActionsheet'>拨打电话</button>
-                    <button class="zan-btn zan-btn--small btn2" bindtap='lookMenu'>查看菜单</button>
+                    <button class="zan-btn zan-btn--small btn2" data-id="{{item.id}}" bindtap='lookMenu'>查看菜单</button>
                 </view>
             </view>
 
         </view>
+        <!-- <view class='center' wx:if="businessList.length == 0">
+            <image src="/assets/images/noAnyThing.png"></image>
+        </view> -->
     </scroll-view>
 
 

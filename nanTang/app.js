@@ -18,13 +18,19 @@ App({
         this.init();
     },
     init(){
+        wx.showLoading({
+            title: '加载中...',
+            mask:true
+        })
         wx.getSetting({
             success: res => {
+                
                 if (res.authSetting['scope.userInfo']) {
                     Promise.all([this.loginHandle(), this.getUserInfo()]).then(results => {
                         // console.log(results); // 获得一个Array: ['P1', 'P2']
                         const { code } = results[0];
                         const { iv, encryptedData } = results[1];
+                        
                         this.getAllUserInfo(code, iv, encryptedData);
                     });
                 } else {   //未授权，拉起授权获取用户信息
@@ -51,7 +57,7 @@ App({
     //获取用户信息
     getUserInfo(){
         // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-        return new Promise((resolve, reject)=>{
+        return new Promise((resolve, reject)=>{            
             wx.getUserInfo({
                 success: res => {
                     // 可以将 res 发送给后台解码出 unionId
@@ -75,9 +81,11 @@ App({
             encryptedData,
             key
         },res=>{
+            console.log(res)
             if (res.status == 0){
                 this.globalData.userInfo = res.data;
             }else{
+                wx.hideLoading();
                 wx.showModal({
                     title:'',
                     content:'登录失败，请重新登录',

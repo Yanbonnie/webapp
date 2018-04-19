@@ -17,7 +17,7 @@ Page(extend({}, Actionsheet, {
         userInfo:{},
         banner: [],
         config: [],
-        businessList: [],
+        businessList: null,
         baseActionsheet: {   //点击拨打电话弹层配置
             show: false,
             // cancelText: '关闭 Action',
@@ -31,9 +31,9 @@ Page(extend({}, Actionsheet, {
     ...methodsArr,
     //获取首页基本配置
     getConfig(){
-        wx.showLoading({
-            title: '加载中...',
-        })
+        // wx.showLoading({
+        //     title: '加载中...',
+        // })
         const { unionid } = this.data.userInfo;
         WXREQ('GET', URL['getConfig'],{
             key,
@@ -49,7 +49,6 @@ Page(extend({}, Actionsheet, {
                 })
                 app.globalData.is_pay_apply = config.is_pay_apply;
                 app.globalData.is_pay_praise = config.is_pay_praise;
-                console.log(app.globalData)
             }else{
                 wx.showToast({
                     title: res.msg,
@@ -59,47 +58,14 @@ Page(extend({}, Actionsheet, {
             }
         })
     },
-    //点击拨打电话
-    toggleActionsheet(e) {
-        this.getPhoneList(e).then(res=>{
-            console.log(res)
-            if(res.status == 0){
-                
-            }
-        });
-        this.setData({
-            'baseActionsheet.actions': [{
-                name: '18825039689',
-                className: 'action-class',
-                loading: false
-            },
-            {
-                name: '17098902598',
-                className: 'action-class',
-                loading: false
-            }],
-            'baseActionsheet.show': true
-        })
-    },
-    //选择电话号码
-    _handleZanActionsheetBtnClick(res) {
-        const { componentId, index } = res.currentTarget.dataset;
-        const { actions } = this.data.baseActionsheet;
-        console.log(actions[index])
-    },
-    //弹出层点击消失
-    _handleZanActionsheetMaskClick(){
-        this.setData({
-            'baseActionsheet.show': false
-        })
-    },
-    //点击查看查单
-    lookMenu(e){  
+    //到达详情页
+    goDetail(e){
+        const { id } = e.currentTarget.dataset;
         wx.navigateTo({
-            url:'/pages/detail/detail'
+            url: `/pages/detail/detail?id=${id}`,
         })
     },
-    
+     
     onReady: function () {
         let Timer = setInterval(()=>{
             if (app.globalData.userInfo){

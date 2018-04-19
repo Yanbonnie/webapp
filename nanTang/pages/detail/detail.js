@@ -1,31 +1,66 @@
 // pages/detail/detail.js
+const app = getApp();
+let { key } = app.globalData;
+import { URL, WXREQ } from '../../utils/util';
+import { comData, methodsArr } from '../../utils/pageCom';
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        imgUrl: ['../../assets/images/home_page_on.png', '/assets/images/picture.jpeg', '/assets/images/picture.jpeg']
+        shopData:{},
+        menu_pic:[],
+        imgUrl: ['../../assets/images/home_page_on.png', '/assets/images/picture.jpeg', '/assets/images/picture.jpeg'],
+        /*公共数据 */
+        ...comData
     },
-
+    ...methodsArr,
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        const { id } = options;
+        this.getShopDetails(id);
+    },
+    getShopDetails(id){
+        wx.showLoading({
+            title: '加载中...',
+            mask:'true'
+        })
+        WXREQ('GET', URL['getShopDetails'],{
+            key,
+            unionid: app.globalData.userInfo.unionid,
+            id
+        },res=>{
+            wx.hideLoading();
+            console.log(res)
+            const { data, menu_pic, status, msg } = res;
+            if (status == 0) {
+                this.setData({
+                    shopData: data,
+                    menu_pic
+                })
+            } else {
+                wx.showToast({
+                    title: msg,
+                })
+            }
+        })
     },
     /**
      * 预览图片函数
      */
     previewHandle(e) {
-        const { ids } = e.currentTarget.dataset;
-        const { imgUrl } = this.data;
-        console.log(imgUrl[ids])
+        const { id } = e.currentTarget.dataset;
+        const { menu_pic } = this.data;
+        let urls = [];        
+        menu_pic.forEach(item => urls.push(item.pic))
         wx.previewImage({
-            current: imgUrl[ids], // 当前显示图片的http链接
-            urls: imgUrl, // 需要预览的图片http链接列表
+            current: menu_pic[id].pic, // 当前显示图片的http链接
+            urls: urls, // 需要预览的图片http链接列表
             success: (res) => {
-                console.log(res)
+                
             }
         })
     },

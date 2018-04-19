@@ -1,12 +1,13 @@
 <!--pages/search/search.wxml-->
-
+<import src="/assets/component/actionsheet/index.wxml" />
+<template is="zan-actionsheet" data="{{ ...baseActionsheet }}"></template>
 <view class='container'>
     <scroll-view scroll-y="true">
         <view class='productList'>
             <view class="zan-card">
                 <!-- 卡片左侧商品图片 -->
                 <view class="zan-card__thumb">
-                    <image class="zan-card__img" src="/assets/images/picture.jpeg" mode="aspectFit"></image>
+                    <image class="zan-card__img" src="{{shopData.logo}}" mode="aspectFit"></image>
                 </view>
                 <!-- 卡片右侧详情描述 -->
                 <view class="zan-card__detail">
@@ -15,34 +16,34 @@
                     <!-- 每行里面可以用 zan-card__left-col zan-card__right-col 来控制左右展示 -->
                     <view class="zan-card__detail-row">
                         <view class="zan-card__left-col zan-ellipsis--l2">
-                            店名：新冰城休闲店店名店名：新冰城休闲店店名店名：新冰城休闲店店名店名：新冰城休闲店店名
+                            {{shopData.name}}
                         </view>
                     </view>
                     <!-- 商品附属信息展示行 -->
                     <view class="zan-card__detail-row zan-c-gray-darker">
                         <view class="zan-card__left-col  zan-ellipsis">
-                            地址：南塘镇新塘大道地址：南塘镇新塘大道地址：南塘镇新塘大道
+                            {{shopData.address}}
                         </view>
                     </view>
                     <!-- 商品操作按钮相关 -->
                     <view class="zan-card__detail-row zan-c-gray-darker ">
                         <view class="zan-card__left-col operBox">
                             <view class="zan-icon zan-icon-contact"></view>
-                            <view>3466</view>
+                            <view>{{shopData.praise}}</view>
                             <view class="zan-icon zan-icon-like-o"></view>
                         </view>
                     </view>
                 </view>
                 <view>
-                    <button class="zan-btn zan-btn--small btn1">拨打电话</button>
-                    <button class="zan-btn zan-btn--small btn2">查看菜单</button>
+                    <button class="zan-btn zan-btn--small btn1" data-id="{{shopData.id}}" bindtap='toggleActionsheet'>拨打电话</button>
+                    <button class="zan-btn zan-btn--small btn2" data-id="{{shopData.id}}" bindtap='lookMenu'>查看菜单</button>
                 </view>
             </view>
         </view>
         <view class='menus'>
             <view class="zan-row">
-                <view class="zan-col zan-col-8" wx:for="{{imgUrl}}" wx:key="{{index}}">
-                    <image src='{{item}}' data-ids="{{index}}" mode="aspectFit" bindtap="previewHandle"></image>
+                <view class="zan-col zan-col-8" wx:for="{{menu_pic}}" wx:key="{{index}}">
+                    <image src='{{item.pic}}' data-id="{{index}}" mode="aspectFit" bindtap="previewHandle"></image>
                 </view>
             </view>
         </view>

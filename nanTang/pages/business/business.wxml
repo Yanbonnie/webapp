@@ -56,8 +56,8 @@
                 <view class="zan-cell__hd zan-field__title">菜单</view>
                 <view class='menuArr'>
                     <view wx:if="{{menuSrc.length > 0 }}" class="show" wx:for="{{menuSrc}}" wx:key="index" data-fileid="{{item.file_id}}">
-                        <image src="{{item.pic}}"></image>
-                        <image  class='icon' src="/assets/images/del_solid.png"></image>
+                        <image src="{{item.pic}}" ></image>
+                        <image  bindtap='menuPicDel' data-file_id ="{{item.file_id}}" class='icon' src="/assets/images/del_solid.png" wx:if="{{shopStatus != 0}}"></image>
                     </view>
                     <view class="add" bindtap="selectMenu" wx:if="{{shopStatus != 0}}">
                         <image src="/assets/images/add.png"></image>

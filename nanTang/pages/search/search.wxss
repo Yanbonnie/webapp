@@ -39,3 +39,7 @@
 .productList{
     padding-top: 150rpx;
 }
+.searchBtn{
+    background: #ff503f;
+    color: #ffffff;
+}

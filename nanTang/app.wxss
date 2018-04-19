@@ -13,3 +13,11 @@
 page{
     background: #efefef;
 }
+
+.center image{
+   width: 274rpx;
+   height: 169rpx;
+   display: block;
+   margin: 0 auto;
+   padding-top: 150rpx;
+}
