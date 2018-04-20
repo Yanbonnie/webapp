@@ -4,14 +4,12 @@
         "pages/index/index",
         "pages/detail/detail",
         "pages/search/search",
-        "pages/business/business",
-        "pages/logs/logs"
-        
+        "pages/business/business"        
     ],
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "测试，哈哈哈哈哈哈哈哈",
+        "navigationBarTitleText": "食在南塘",
         "navigationBarTextStyle": "black"
     },
     "tabBar": {

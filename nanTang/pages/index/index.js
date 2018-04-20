@@ -6,8 +6,6 @@ let { key } = app.globalData;
 import { URL, WXREQ, randomWord } from '../../utils/util';
 import { comData, methodsArr} from '../../utils/pageCom';
 
-// import { banner, config, data } from '../../utils/data'
-
 Page(extend({}, Actionsheet, {
     data: {
         userInfo:{},
@@ -21,6 +19,7 @@ Page(extend({}, Actionsheet, {
             componentId: 'baseActionsheet',
             actions: []
         },
+        temId:null,
         /*公共数据 */
         ...comData
     },
@@ -66,7 +65,34 @@ Page(extend({}, Actionsheet, {
         },100)
     },
     scrolltolowerHandle(e){
-        console.log(e)
+        let length = thid.data.businessList.length;
+        if (this.data.temId == this.data.businessList[length - 1].id) return;   //如果最后的id相同，不加载    
+        WXREQ('GET',URL['getShop'],{
+            key,
+            unionid:app.globalData.userInfo.unionid,
+            id: this.data.businessList[length-1].id,
+            limit:10
+        },res=>{
+            if(res.status == 0){
+                let arr = res.data;
+                let temList = this.data.businessList;
+                arr.forEach((item,index)=>{
+                    temList.push(item)
+                })
+                this.setData({
+                    businessList:temList
+                })
+                this.setData({
+                    temId: this.data.businessList[length - 1].id
+                })
+            }else{
+                wx.showToast({
+                    title: res.msg,
+                    mask:true,
+                    icon:'none'
+                })
+            }
+        })
     }
     
 }))

@@ -7,7 +7,7 @@ page{
 }
 
 .productList{
-    padding: 50rpx 0;
+    padding: 30rpx 0;
     background: #efefef;
 }
 .zan-card{

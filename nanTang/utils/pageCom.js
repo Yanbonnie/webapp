@@ -174,7 +174,6 @@ module.exports = {
         },
         //商家支付点赞接口
         payMoneyHandle(options){
-            console.log(options)
             let money = options.detail;
             let id = this.data.zanData.id;
             wx.showLoading({
@@ -242,10 +241,6 @@ module.exports = {
                     })
                 }
             }
-        },
-        //提交分享记录
-        postLogShare(){
-
         }
     }
 }
