@@ -47,7 +47,6 @@ module.exports = {
         getPhoneList(e){
             const { id } = e.currentTarget.dataset;
             return new Promise((resolve,reject)=>{
-                console.log(id)
                 WXREQ('GET',URL['getTel'],{
                     key,
                     id
@@ -87,7 +86,6 @@ module.exports = {
         _handleZanActionsheetBtnClick(res) {
             const { componentId, index } = res.currentTarget.dataset;
             const { actions } = this.data.baseActionsheet;
-            console.log(actions[index].name)
             wx.makePhoneCall({
                 phoneNumber: actions[index].name
             })
@@ -202,7 +200,6 @@ module.exports = {
                             })
                         },
                         'fail':res=> {
-                            console.log(res)
                         }
                     }) 
                 }else{
@@ -217,7 +214,6 @@ module.exports = {
         },
         //关闭弹框操作弹框
         closeHandle(){
-            console.log(123)
             this.setData({
                 operState: false
             })

@@ -3,7 +3,7 @@
 const { Actionsheet, extend } = require('../../assets/component/index.js');
 const app = getApp();
 let { key } = app.globalData;
-import { URL, WXREQ, randomWord } from '../../utils/util';
+import { URL, WXREQ } from '../../utils/util';
 import { comData, methodsArr} from '../../utils/pageCom';
 
 Page(extend({}, Actionsheet, {

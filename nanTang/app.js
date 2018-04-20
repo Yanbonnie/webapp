@@ -24,10 +24,8 @@ App({
         // })
         wx.getSetting({
             success: res => {
-                
                 if (res.authSetting['scope.userInfo']) {
                     Promise.all([this.loginHandle(), this.getUserInfo()]).then(results => {
-                        // console.log(results); // 获得一个Array: ['P1', 'P2']
                         const { code } = results[0];
                         const { iv, encryptedData } = results[1];
                         
@@ -81,8 +79,7 @@ App({
             encryptedData,
             key
         },res=>{
-            console.log(res)
-            if (res.status == 0){
+            if(res.status == 0){
                 this.globalData.userInfo = res.data;
                 
             }else{

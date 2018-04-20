@@ -31,24 +31,6 @@ const Check = {
     }
 }
 
-// 随机数
-// 3-32位 randomWord(true,3,32)
-// 43位  randomWord(false,43)
-const randomWord = (randomFlag, min, max) => {
-    var str = "",
-        pos,
-        range = min,
-        arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-    // 随机产生
-    if (randomFlag) {
-        range = Math.round(Math.random() * (max - min)) + min;
-    }
-    for (var i = 0; i < range; i++) {
-        pos = Math.round(Math.random() * (arr.length - 1));
-        str += arr[pos];
-    }
-    return str;
-}
 
 const Config = {
     reqUrl: 'https://xnt.xhwxpos.com/sznt/wxapp/Index/'
@@ -67,11 +49,11 @@ const URL = {
     'getPic':'getPic',                  //获取商家菜单图片接口    
     'postPraise':'postPraise',          //商家点赞接口            
     'getShopDetails':'getShopDetails',  //获取商家详情接口        
-    'payPraise':'payPraise',            //点赞拉起支付参数接口  x
-    'payApply':'payApply',              //商家入驻支付接口      x 
+    'payPraise':'payPraise',            //点赞拉起支付参数接口  
+    'payApply':'payApply',              //商家入驻支付接口      x
     'postSearch':'postSearch',          //商家信息搜索接口        
     'postLogTel':'postLogTel',          //拨打电话记录接口        
-    'postLogShare':'postLogShare',      //分享记录接口         x
+    'postLogShare':'postLogShare',      //分享记录接口         
 }
 
 const WXREQ = (method,url,data,succfn)=>{
@@ -89,7 +71,6 @@ const WXREQ = (method,url,data,succfn)=>{
 }
 module.exports = {
   formatTime: formatTime,
-  randomWord,
   Trim,
   Check,
   URL,

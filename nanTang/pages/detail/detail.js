@@ -34,7 +34,6 @@ Page({
             id
         },res=>{
             wx.hideLoading();
-            console.log(res)
             const { data, menu_pic, status, msg } = res;
             if (status == 0) {
                 this.setData({

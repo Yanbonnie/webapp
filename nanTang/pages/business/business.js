@@ -516,7 +516,6 @@ Page({
                         this.payInfoSubmit(URL['postShopInfo'], {}).then(res => {})
                     },
                     'fail': res => {
-                        console.log(res)
                     }
                 })
             } else {
