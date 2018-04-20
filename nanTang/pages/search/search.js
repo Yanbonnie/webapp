@@ -22,10 +22,9 @@ Page({
 
     },    
     postSearch(){
-        wx.showToast({
+        wx.showLoading({
             title: '加载中...',
-            mask:true,
-            icon:'none'
+            mask:true
         })
         WXREQ('POST', URL['postSearch'],{
             key,
@@ -49,7 +48,6 @@ Page({
         })
     },
     inputEnter(e){
-        console.log(e)
         const { value } = e.detail;
         this.setData({
             keyword:value

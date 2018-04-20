@@ -18,10 +18,10 @@ App({
         this.init();
     },
     init(){
-        wx.showLoading({
-            title: '加载中...',
-            mask:true
-        })
+        // wx.showLoading({
+        //     title: '加载中...',
+        //     mask:true
+        // })
         wx.getSetting({
             success: res => {
                 
@@ -84,8 +84,9 @@ App({
             console.log(res)
             if (res.status == 0){
                 this.globalData.userInfo = res.data;
+                
             }else{
-                wx.hideLoading();
+                // wx.hideLoading();
                 wx.showModal({
                     title:'',
                     content:'登录失败，请重新登录',

@@ -15,9 +15,28 @@ page{
 }
 
 .center image{
-   width: 274rpx;
-   height: 169rpx;
+   width: 200rpx;
+   height: 200rpx;
    display: block;
    margin: 0 auto;
    padding-top: 150rpx;
+}
+.center text{
+    width: 100%;
+    line-height: 80rpx;
+    text-align: center;
+    display: block;
+    font-size: 28rpx;
+    color: #bfbfbf;
+}
+
+.loading {
+  text-align: center;
+  height: 80rpx;
+  padding: 20rpx;
+  margin-top: 400rpx;
+}
+
+.loading image {
+  height: 100%;
 }

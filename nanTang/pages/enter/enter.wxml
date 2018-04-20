@@ -1,0 +1,4 @@
+<!--pages/enter/enter.wxml-->
+<view class="loading">
+    <image src="/assets/images/loading-bars.svg"></image>
+</view>

@@ -1,17 +1,17 @@
 {
     "pages": [
+        "pages/enter/enter",
         "pages/index/index",
         "pages/detail/detail",
         "pages/search/search",
         "pages/business/business",
-        
         "pages/logs/logs"
         
     ],
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "食在南塘",
+        "navigationBarTitleText": "测试，哈哈哈哈哈哈哈哈",
         "navigationBarTextStyle": "black"
     },
     "tabBar": {

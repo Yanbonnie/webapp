@@ -13,57 +13,65 @@
 </view> -->
 <import src="/assets/component/actionsheet/index.wxml" />
 <template is="zan-actionsheet" data="{{ ...baseActionsheet }}"></template>
-<view>
-    <scroll-view scroll-y="true">
-        <swiper indicator-dots="{{true}}" indicator-active-color="#38f" class="swiperWrap" autoplay="true" interval="4000">
-            <block wx:for="{{banner}}" wx:key="unique">
-                <swiper-item>
-                    <image src="{{item.pic}}" class="slide-image" width="355" height="150" />
-                </swiper-item>
-            </block>
-        </swiper>
-        <view class='productList'>
-            <view class="zan-card" wx:for="{{businessList}}" wx:key="{{index}}">
-                <!-- 卡片左侧商品图片 -->
-                <view class="zan-card__thumb" data-id="{{item.id}}" bindtap='goDetail'>
-                    <image class="zan-card__img" src="{{item.logo}}" mode="aspectFit"></image>
-                </view>
-                <!-- 卡片右侧详情描述 -->
-                <view class="zan-card__detail">
-                    <!-- 商品标题行 -->
-                    <!-- 每行可以使用 zan-card__detail-row 来控制展示区域 -->
-                    <!-- 每行里面可以用 zan-card__left-col zan-card__right-col 来控制左右展示 -->
-                    <view class="zan-card__detail-row">
-                        <view class="zan-card__left-col zan-ellipsis">
-                            {{item.name}}
-                        </view>
-                    </view>
-                    <!-- 商品附属信息展示行 -->
-                    <view class="zan-card__detail-row zan-c-gray-darker">
-                        <view class="zan-card__left-col zan-ellipsis--l2" style='min-height:40px;'>
-                            {{item.address}}
-                        </view>
-                    </view>
-                    <!-- 商品操作按钮相关 -->
-                    <view class="zan-card__detail-row zan-c-gray-darker ">
-                        <view class="zan-card__left-col operBox">
-                            <view class="zan-icon zan-icon-contact"></view>
-                            <view>{{item.praise}}</view>
-                            <view class="zan-icon zan-icon-like-o"></view>
-                        </view>
+<scroll-view scroll-y="true" class='scroll-view' style="height: 100%;" bindscrolltolower="scrolltolowerHandle">
+    <swiper indicator-dots="{{true}}" indicator-active-color="#38f" class="swiperWrap" autoplay="true" interval="4000">
+        <block wx:for="{{banner}}" wx:key="unique">
+            <swiper-item>
+                <image src="{{item.pic}}" class="slide-image" width="355" height="150" />
+            </swiper-item>
+        </block>
+    </swiper>
+    <view class='productList'>
+        <view class="zan-card" wx:for="{{businessList}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap='goDetail'>
+            <!-- 卡片左侧商品图片 -->
+            <view class="zan-card__thumb">
+                <image class="zan-card__img" src="{{item.logo}}" mode="aspectFill"></image>
+            </view>
+            <!-- 卡片右侧详情描述 -->
+            <view class="zan-card__detail">
+                <!-- 商品标题行 -->
+                <!-- 每行可以使用 zan-card__detail-row 来控制展示区域 -->
+                <!-- 每行里面可以用 zan-card__left-col zan-card__right-col 来控制左右展示 -->
+                <view class="zan-card__detail-row">
+                    <view class="zan-card__left-col zan-ellipsis">
+                        {{item.name}}
                     </view>
                 </view>
-                <view>
-                    <button class="zan-btn zan-btn--small btn1" data-id="{{item.id}}" bindtap='toggleActionsheet'>拨打电话</button>
-                    <button class="zan-btn zan-btn--small btn2" data-id="{{item.id}}" bindtap='lookMenu'>查看菜单</button>
+                <!-- 商品附属信息展示行 -->
+                <view class="zan-card__detail-row zan-c-gray-darker">
+                    <view class="zan-card__left-col zan-ellipsis">
+                        <!--zan-ellipsis--l2-->
+                        {{item.address}}
+                    </view>
+                    <view class="zan-card__left-col zan-ellipsis">
+                        <!--zan-ellipsis--l2-->
+                        营业时间：{{item.open_time + '-' + item.close_time}}
+                    </view>
+                </view>
+                <!-- 商品操作按钮相关 -->
+                <view class="zan-card__detail-row zan-c-gray-darker ">
+                    <view class="zan-card__left-col operBox">
+                        <view>
+                            <image src="/assets/images/man.png"></image>
+                        </view>
+                        <view>{{item.praise}}</view>
+                        <view>
+                            <image catchtap='zanHandle' data-id="{{item.id}}" data-index="index" data-is_praise="{{item.is_praise}}" src="{{item.is_praise == 0 ? '/assets/images/zan.png' :'/assets/images/zan_on.png'}}"></image>
+                        </view>
+                    </view>
                 </view>
             </view>
-
+            <view>
+                <button class="zan-btn zan-btn--small btn1" data-id="{{item.id}}" catchtap='toggleActionsheet'>拨打电话</button>
+                <button class="zan-btn zan-btn--small btn2" data-id="{{item.id}}" catchtap='lookMenu'>查看菜单</button>
+            </view>
         </view>
-        <!-- <view class='center' wx:if="businessList.length == 0">
-            <image src="/assets/images/noAnyThing.png"></image>
-        </view> -->
-    </scroll-view>
+        
+    </view>
+    <view class='center' wx:if="{{businessList.length == 0}}">
+        <image src="/assets/images/404.png"></image>
+        <text>暂无数据</text>
+    </view>
+</scroll-view>
 
-
-</view>
+<oper_model data="{{zanData}}" wx:if="{{operState}}" bind:closeHandle="closeHandle" bind:payMoney="payMoneyHandle"></oper_model>

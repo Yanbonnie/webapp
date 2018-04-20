@@ -69,6 +69,21 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
+        const { id, logo } = this.data.shopData;
+        return {
+            'title': '食在南塘',
+            'path': '/pages/enter/enter?id='+id,
+            'imageUrl': logo,
+            success: res => {
+                // 转发成功
+                WXREQ('POST', URL['postLogShare'], {
+                    key,
+                    unionid: app.globalData.userInfo.unionid,
+                    page: '/pages/detail/detail'
+                }, res => {
 
+                })
+            }
+        }
     }
 })

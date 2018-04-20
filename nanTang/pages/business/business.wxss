@@ -36,3 +36,12 @@
 .gray{
     background: #ccc;
 }
+.timeClass picker,.timeClass .picker{
+    width: 100%;
+    display: block;
+    height: 70rpx;
+    line-height: 70rpx;
+}
+.enterPre .picker{
+    color: #808080 !important;
+}

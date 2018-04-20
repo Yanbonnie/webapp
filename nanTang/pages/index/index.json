@@ -1,5 +1,4 @@
 {
-    "navigationBarTitleText": "搜索",
     "usingComponents": {
         "oper_model": "../../assets/component/oper_model/index"
     }

@@ -1,25 +1,6 @@
-/**index.wxss**/
-/* .userinfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+page{
+    height: 100%;
 }
-
-.userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-}
-
-.userinfo-nickname {
-  color: #aaa;
-}
-
-.usermotto {
-  margin-top: 200px;
-} */
-/* @import "/assets/css/index.wxss"; */
 .swiperWrap image{
   width: 100%;
   display: block;
@@ -53,4 +34,11 @@
 .operBox view{
    margin: 0 20rpx;
    display: inline-block; 
+   
+}
+.operBox view image{
+    width: 35rpx;
+    height: 35rpx;
+    position: relative;
+    top: 5rpx;
 }

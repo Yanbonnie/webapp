@@ -4,12 +4,48 @@ const { key } = app.globalData;
 import { URL, WXREQ } from './util';
 module.exports = {
     'comData': {
-        'phoneList':[1,2]
+        'phoneList':[1,2],
+        'operState': false,        
+        'zanData':{  //点赞支付弹窗数据
+            context:'您今天已经为商家点过赞了，你可购买以下产品为商家增加人气',
+            btnArr:[{
+                txt:'鲜花',
+                price:1
+            },{
+                txt:'壁画',
+                price:6
+            },{
+                txt:'花圈',
+                price:18
+            }],
+            icon:'zan',
+            id:null
+        },
+        'operState2': true,
+        'shopInfoData':{  //入驻支付弹窗数据
+            context:'请选择你的信息服务周期',
+            btnArr:[
+                {
+                    txt:'1个月',
+                    price:12
+                },
+                {
+                    txt:'3个月',
+                    price:30,
+                },
+                {
+                    txt:'12个月',
+                    price:100
+                }
+            ],
+            icon:'inShop',
+            id:null,
+        }
     },
     'methodsArr':{
+        //获取电话列表
         getPhoneList(e){
             const { id } = e.currentTarget.dataset;
-            
             return new Promise((resolve,reject)=>{
                 console.log(id)
                 WXREQ('GET',URL['getTel'],{
@@ -66,7 +102,7 @@ module.exports = {
         lookMenu(e) {
             const { id } = e.currentTarget.dataset;
             wx.showLoading({
-                title: '',
+                title: '加载中...',
             })
             WXREQ('GET', URL['getPic'], {
                 key,
@@ -94,6 +130,122 @@ module.exports = {
                     })
                 }
             })
-        },   
+        }, 
+        //到达详情页
+        goDetail(e) {
+            const { id } = e.currentTarget.dataset;
+            wx.navigateTo({
+                url: `/pages/detail/detail?id=${id}`,
+            })
+        },  
+        //点赞
+        zanHandle(e){
+            const { id, is_praise } = e.currentTarget.dataset;
+            if (app.globalData.is_pay_praise == 1){  //支付点赞
+                if(is_praise == 0){  //第一次免费
+                    this.postPraise(id);
+                }else{
+                    this.setData({
+                        operState:true,   
+                        'zanData.id':id                 
+                    })
+                }
+            }else{
+                if(is_praise == 1) return;
+                this.postPraise(id);
+            }
+        },
+        //商家点赞接口
+        postPraise(id){
+            WXREQ('POST', URL['postPraise'],{
+                key,
+                unionid:app.globalData.userInfo.unionid,
+                id
+            },res=>{
+                if(res.status == 0){
+                    this.getConfig();
+                }else{
+                    wx.showToast({
+                        title: res.msg,
+                        icon:'none'
+                    })
+                }
+            })
+        },
+        //商家支付点赞接口
+        payMoneyHandle(options){
+            console.log(options)
+            let money = options.detail;
+            let id = this.data.zanData.id;
+            wx.showLoading({
+                title: '加载中...',
+                mask:true
+            })
+            WXREQ('POST', URL['payPraise'],{
+                key,
+                id,
+                unionid:app.globalData.userInfo.unionid,
+                money
+            },res=>{
+                wx.hideLoading();
+                const { appId, nonceStr, paySign, signType, timeStamp} = res.data;
+                const package2 = res.data.package;
+                if(res.status == 0){
+                    wx.requestPayment({
+                        timeStamp,
+                        nonceStr,
+                        'package': package2,
+                        signType,
+                        paySign,
+                        'success':res=>{
+                            this.setData({
+                                operState:false
+                            })
+                        },
+                        'fail':res=> {
+                            console.log(res)
+                        }
+                    }) 
+                }else{
+                    wx.showToast({
+                        title: res.msg,
+                        mask:false,
+                        icon:'none'
+                    })
+                }
+                
+            })
+        },
+        //关闭弹框操作弹框
+        closeHandle(){
+            console.log(123)
+            this.setData({
+                operState: false
+            })
+        },
+        /**
+     * 用户点击右上角分享
+     */
+        onShareAppMessage: function () {
+            return {
+                'title': '食在南塘',
+                'path': '/pages/enter/enter',
+                'imageUrl': '/assets/images/picture.jpeg',
+                success: res => {
+                    // 转发成功
+                    WXREQ('POST', URL['postLogShare'],{
+                        key,
+                        unionid:app.globalData.userInfo.unionid,
+                        page:'/pages/index/index'
+                    },res=>{
+                        
+                    })
+                }
+            }
+        },
+        //提交分享记录
+        postLogShare(){
+
+        }
     }
 }

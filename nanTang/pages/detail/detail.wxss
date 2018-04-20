@@ -5,9 +5,12 @@
       background: #ffffff;
       margin-top: -50rpx;
   }
+.menus .zan-col{
+    margin-bottom: 20rpx;
+}
  .menus .zan-col image{
      width: 85%;
      display: block;
      margin: 0 auto;
-     height: 230rpx;
+     height: 200rpx;
  }

@@ -3,6 +3,7 @@
 const app = getApp();
 let { key } = app.globalData;
 import { URL, WXREQ, Config, Trim, Check } from '../../utils/util';
+import { comData, methodsArr } from '../../utils/pageCom';
 Page({
 
     /**
@@ -25,13 +26,17 @@ Page({
             src:'',
             id:''
         },
+        open_time:'请输入开业时间',
+        close_time:'请输入打洋时间',
         menuSrc:[],
         is_apply:null,   //是否入驻
         shopStatus:null, //商家状态   0待审核-待确认（不可点击） 1已通过-修改 2已过期-提交续期  -1已拒绝-重新提交
         shopId:null,     //商家id
-        submitBtn:""
+        submitBtn:"",
+        /*公共数据 */
+        ...comData
     },  
-
+    ...methodsArr,
     /**
      * 生命周期函数--监听页面加载
      */
@@ -51,7 +56,7 @@ Page({
                     })
                     if (res.is_apply == 1) {
                         const { menu_pic } = res;
-                        const { name, logo, boss, mobile, tel, address, label, status, id } = res.data;
+                        const { name, logo, boss, mobile, tel, address, label, status, id, open_time,close_time } = res.data;
                         this.setData({
                             shopVal: name,
                             chargeVal: boss,
@@ -63,10 +68,11 @@ Page({
                             'logo.id': logo.file_id,
                             menuSrc: menu_pic,
                             shopId:id,
-                            shopStatus: status
+                            shopStatus: status,
+                            open_time,
+                            close_time
                         })
                     }
-                    console.log(this.data)
                     resolve(res.is_apply)
                 } else {
                     wx.showToast({
@@ -85,11 +91,11 @@ Page({
     //离开页面保存信息
     onHide() {
         if (this.data.is_apply != 1) {  //没有入驻设置缓存
-            const { shopVal, chargeVal, phoneVal, phonesVal, addressVal, labelVal, logo, menuSrc } = this.data;
+            const { shopVal, chargeVal, phoneVal, phonesVal, addressVal, labelVal, logo, menuSrc, open_time,close_time } = this.data;
             wx.setStorage({
                 key: 'business',
                 data: {
-                    shopVal, chargeVal, phoneVal, phonesVal, addressVal, labelVal, logo, menuSrc
+                    shopVal, chargeVal, phoneVal, phonesVal, addressVal, labelVal, logo, menuSrc, open_time, close_time
                 }
             })
         }
@@ -110,9 +116,9 @@ Page({
                     wx.getStorage({
                         key: 'business',
                         success: res => {
-                            let { addressVal, chargeVal, labelVal, logo, menuSrc, phoneVal, phonesVal, shopVal } = res.data;
+                            let { addressVal, chargeVal, labelVal, logo, menuSrc, phoneVal, phonesVal, shopVal,close_time,open_time } = res.data;
                             this.setData({
-                                addressVal, chargeVal, labelVal, logo, menuSrc, phoneVal, phonesVal, shopVal
+                                addressVal, chargeVal, labelVal, logo, menuSrc, phoneVal, phonesVal, shopVal, close_time, open_time
                             })
                         }
                     })
@@ -150,8 +156,11 @@ Page({
     formSubmit(e){
         if (this.data.shopStatus == 0) return;
         let { address,charge,label,phone,phones,shop} = e.detail.value;
+        let { open_time,close_time} = this.data;
+        const { formId } = e.detail;
         let { id } = this.data.logo;
-        let arr = ['商家名称不能为空','负责人不能为空','联系电话不能为空','联系电话格式不正确','外卖电话不能为空','地址不能为空','标签不能为空','请上传logo'];
+        let arr = ['商家名称不能为空','负责人不能为空','联系电话不能为空','联系电话格式不正确',
+        '外卖电话不能为空','地址不能为空','请输入开业时间','请输入打洋时间','标签不能为空','请上传logo'];
         let index = null;
         let showToast = false;
         if (!Trim(shop)){
@@ -172,8 +181,14 @@ Page({
         }else if (!Trim(address)) {
             index = 5; 
             showToast = true;
+        } else if (open_time.length > 5){
+            index = 6;
+            showToast = true;
+         } else if (close_time.length > 5){
+            index= 7;
+            showToast = true;
         }else if (!Trim(label)) {
-            index = 6; 
+            index = 8; 
             showToast = true;
         }/*else if(!id){
             index = 7; 
@@ -202,7 +217,7 @@ Page({
         WXREQ('POST', link ,{
             key,
             unionid: app.globalData.userInfo.unionid,
-            form_id:'fromId',
+            form_id: formId,
             name: shop,
             // logo:id,
             boss: charge,
@@ -210,6 +225,8 @@ Page({
             tel: phones,
             address:address,
             label:label,
+            open_time,
+            close_time,
             ...objData
         },res=>{
             if(res.status == 0){
@@ -221,6 +238,16 @@ Page({
                     icon:'success',
                     mask:true
                 })
+
+                //判断是否要点赞服务周期
+
+                if (this.data.is_apply == 0){  //提交入驻
+                    wx.showModal({
+                        title: '提示',
+                        content: '您提交的信息将由工作人员审核，审核结果将在48小时内通过微信消息的方式通知你',
+                        showCancel:false
+                    })
+                }
                 this.init();
             }else{
                 wx.showToast({
@@ -413,6 +440,22 @@ Page({
                 break;
 
         }
+    },
+    bindTimeChange: function (e) {
+        const { name } = e.currentTarget.dataset;
+        const { value } = e.detail;
+        if(name == 'open_time'){
+            this.setData({
+                open_time: value
+            })
+        }else{
+            this.setData({
+                close_time: value
+            })
+        }
+    },
+    payInShopMoneyHandle(options){
+
     },
     /**
      * 用户点击右上角分享

@@ -7,7 +7,7 @@
             <view class="zan-card">
                 <!-- 卡片左侧商品图片 -->
                 <view class="zan-card__thumb">
-                    <image class="zan-card__img" src="{{shopData.logo}}" mode="aspectFit"></image>
+                    <image class="zan-card__img" src="{{shopData.logo}}" mode="aspectFill"></image>
                 </view>
                 <!-- 卡片右侧详情描述 -->
                 <view class="zan-card__detail">
@@ -24,29 +24,38 @@
                         <view class="zan-card__left-col  zan-ellipsis">
                             {{shopData.address}}
                         </view>
+                        <view class="zan-card__left-col zan-ellipsis">
+                            <!--zan-ellipsis--l2-->
+                            营业时间：{{shopData.open_time + '-' + shopData.close_time}}
+                        </view>
                     </view>
                     <!-- 商品操作按钮相关 -->
                     <view class="zan-card__detail-row zan-c-gray-darker ">
                         <view class="zan-card__left-col operBox">
-                            <view class="zan-icon zan-icon-contact"></view>
+                            <view>
+                                <image src="/assets/images/man.png"></image>
+                            </view>
                             <view>{{shopData.praise}}</view>
-                            <view class="zan-icon zan-icon-like-o"></view>
+                            <view>
+                                <image catchtap='zanHandle' data-id="{{shopData.id}}" data-index="index" data-is_praise="{{shopData.is_praise}}" src="{{shopData.is_praise == 0 ? '/assets/images/zan.png' :'/assets/images/zan_on.png'}}"></image>
+                            </view>
                         </view>
                     </view>
                 </view>
                 <view>
-                    <button class="zan-btn zan-btn--small btn1" data-id="{{shopData.id}}" bindtap='toggleActionsheet'>拨打电话</button>
-                    <button class="zan-btn zan-btn--small btn2" data-id="{{shopData.id}}" bindtap='lookMenu'>查看菜单</button>
+                    <button class="zan-btn zan-btn--small btn1" data-id="{{shopData.id}}" catchtap='toggleActionsheet'>拨打电话</button>
+                    <button class="zan-btn zan-btn--small btn2" data-id="{{shopData.id}}" catchtap='lookMenu'>查看菜单</button>
                 </view>
             </view>
         </view>
         <view class='menus'>
             <view class="zan-row">
                 <view class="zan-col zan-col-8" wx:for="{{menu_pic}}" wx:key="{{index}}">
-                    <image src='{{item.pic}}' data-id="{{index}}" mode="aspectFit" bindtap="previewHandle"></image>
+                    <image src='{{item.thumbnail}}' data-id="{{index}}" mode="aspectFill" bindtap="previewHandle"></image>
                 </view>
             </view>
         </view>
-        
+
     </scroll-view>
 </view>
+<oper_model data="{{zanData}}" wx:if="{{operState}}" bind:closeHandle="closeHandle" bind:payMoney="payMoneyHandle"></oper_model>

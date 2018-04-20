@@ -43,3 +43,7 @@
     background: #ff503f;
     color: #ffffff;
 }
+
+.center image{
+    padding-top: 250rpx;
+}

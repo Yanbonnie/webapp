@@ -1,25 +1,22 @@
 <!--pages/search/search.wxml-->
 <import src="/assets/component/actionsheet/index.wxml" />
 <template is="zan-actionsheet" data="{{ ...baseActionsheet }}"></template>
-<view class='container'>
-    <view class="searchBox">
+    
+    <scroll-view scroll-y="true"  style="height: 100%;" bindscrolltolower="scrolltolowerHandle">
+        <view class="searchBox">
         <view class="zan-col zan-col-19">
             <image src='/assets/images/search.png'></image>
-            <input placeholder="请输入店名" bindinput="inputEnter" bindconfirm="postSearch"/>
+            <input placeholder="请输入店名" bindinput="inputEnter" bindconfirm="postSearch" value="{{keyword}}"/>
         </view>
         <view class="zan-col zan-col-5">
             <button class="{{keyword.length > 0 ? 'zan-btn zan-btn--small searchBtn': 'zan-btn zan-btn--small '}}" bindtap='postSearch' value="{{keyword}}">搜索</button>
         </view>
-
-
     </view>
-    <scroll-view scroll-y="true">
-        
         <view class='productList' wx:if="{{shopList.length>0}}">
             <view class="zan-card" wx:for="{{shopList}}" wx:key="{{index}}">
                 <!-- 卡片左侧商品图片 -->
                 <view class="zan-card__thumb" data-id="{{item.id}}" bindtap='goDetail'>
-                    <image class="zan-card__img" src="{{item.logo}}" mode="aspectFit"></image>
+                    <image class="zan-card__img" src="{{item.logo}}" mode="aspectFill"></image>
                 </view>
                 <!-- 卡片右侧详情描述 -->
                 <view class="zan-card__detail">
@@ -33,27 +30,36 @@
                     </view>
                     <!-- 商品附属信息展示行 -->
                     <view class="zan-card__detail-row zan-c-gray-darker">
-                        <view class="zan-card__left-col zan-ellipsis--l2" style='min-height:40px;'>
+                        <view class="zan-card__left-col zan-ellipsis--l2">
                             {{item.address}}
+                        </view>
+                        <view class="zan-card__left-col zan-ellipsis">
+                            <!--zan-ellipsis--l2-->
+                            营业时间：{{item.open_time + '-' + item.close_time}}
                         </view>
                     </view>
                     <!-- 商品操作按钮相关 -->
                     <view class="zan-card__detail-row zan-c-gray-darker ">
                         <view class="zan-card__left-col operBox">
-                            <view class="zan-icon zan-icon-contact"></view>
+                            <view>
+                                <image src="/assets/images/man.png"></image>
+                            </view>
                             <view>{{item.praise}}</view>
-                            <view class="zan-icon zan-icon-like-o"></view>
+                            <view>
+                                <image  catchtap='zanHandle' data-id="{{item.id}}" data-index="index" data-is_praise="{{item.is_praise}}" src="{{item.is_praise == 0 ? '/assets/images/zan.png' :'/assets/images/zan_on.png'}}"></image>
+                            </view>
                         </view>
                     </view>
                 </view>
                 <view>
-                    <button class="zan-btn zan-btn--small btn1" data-id="{{item.id}}" bindtap='toggleActionsheet'>拨打电话</button>
-                    <button class="zan-btn zan-btn--small btn2" data-id="{{item.id}}" bindtap='lookMenu'>查看菜单</button>
+                    <button class="zan-btn zan-btn--small btn1" data-id="{{item.id}}" catchtap='toggleActionsheet'>拨打电话</button>
+                    <button class="zan-btn zan-btn--small btn2" data-id="{{item.id}}" catchtap='lookMenu'>查看菜单</button>
                 </view>
             </view>
         </view>
-        <view class='center' wx:if="shopList.length == 0">
-            <image src="/assets/images/noAnyThing.png"></image>
+        <view class='center' wx:if="{{shopList.length == 0}}">
+            <image src="/assets/images/404.png"></image>
+            <text>暂无数据</text>
         </view>
     </scroll-view>
-</view>
+<oper_model data="{{zanData}}" wx:if="{{operState}}" bind:closeHandle="closeHandle" bind:payMoney="payMoneyHandle"></oper_model>
