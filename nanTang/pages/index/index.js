@@ -34,6 +34,7 @@ Page(extend({}, Actionsheet, {
             key,
             unionid
         },res=>{
+            wx.stopPullDownRefresh();   //处理下拉刷新
             wx.hideLoading();
             if(res.status == 0){
                 const { banner, config, data} = res;
@@ -65,14 +66,19 @@ Page(extend({}, Actionsheet, {
         },100)
     },
     scrolltolowerHandle(e){
-        let length = thid.data.businessList.length;
-        if (this.data.temId == this.data.businessList[length - 1].id) return;   //如果最后的id相同，不加载    
+        let length = this.data.businessList.length;
+        // if (this.data.temId == this.data.businessList[length - 1].id) return;   //如果最后的id相同，不加载
+        wx.showLoading({
+            title: '加载中...',
+            mask:true
+        })    
         WXREQ('GET',URL['getShop'],{
             key,
             unionid:app.globalData.userInfo.unionid,
             id: this.data.businessList[length-1].id,
             limit:10
         },res=>{
+            wx.hideLoading();
             if(res.status == 0){
                 let arr = res.data;
                 let temList = this.data.businessList;
@@ -82,9 +88,9 @@ Page(extend({}, Actionsheet, {
                 this.setData({
                     businessList:temList
                 })
-                this.setData({
-                    temId: this.data.businessList[length - 1].id
-                })
+                // this.setData({
+                //     temId: this.data.businessList[length - 1].id
+                // })
             }else{
                 wx.showToast({
                     title: res.msg,
@@ -93,6 +99,9 @@ Page(extend({}, Actionsheet, {
                 })
             }
         })
+    },
+    onPullDownRefresh(e){
+        this.getConfig();
     }
     
 }))

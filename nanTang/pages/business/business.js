@@ -51,6 +51,7 @@ Page({
                 key,
                 unionid: app.globalData.userInfo.unionid
             }, res => {
+                wx.stopPullDownRefresh();
                 if (res.status == 0) { 
                     this.setData({
                         is_apply: res.is_apply
@@ -109,7 +110,7 @@ Page({
                 title: '加载中...',
             })
             this.getShopInfo().then(res => {  //res - is_apply
-                wx.hideLoading()
+                wx.hideLoading();
                 this.setData({
                     is_apply: res
                 })
@@ -527,5 +528,13 @@ Page({
             }
 
         })
+    },
+    onPullDownRefresh(e) {
+        if (this.data.is_apply == 1){
+            this.getShopInfo().then(res=>{})
+        }else{
+            this.init(); 
+        }
+        
     }
 })

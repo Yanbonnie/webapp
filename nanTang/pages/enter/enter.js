@@ -17,11 +17,11 @@ Page({
         let Timer = setInterval(() => {
             if (app.globalData.userInfo) {
                 clearInterval(Timer);
-                if(id || id == 0){  //首页                    
-                    wx.navigateTo({
-                        url: "/pages/detail/detail?id="+id
+                if(id || id == 0){                   
+                    wx.redirectTo({
+                        url: "/pages/detail/detail?id="+id+"&index=1"
                     })
-                }else{
+                } else { //首页   
                     wx.switchTab({
                         url: "/pages/index/index"
                     })

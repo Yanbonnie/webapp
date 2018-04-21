@@ -39,7 +39,7 @@ const Config = {
 const URL = {
     'userLogin':'userLogin',            //用户登录接口         
     'getConfig': 'getConfig',           //获取小程序配置接口    
-    'getShop': 'getShop',               //获取商家列表分页接口   x 
+    'getShop': 'getShop',               //获取商家列表分页接口   
     'getTel': 'getTel',                 //获取商家电话列表接口   
     'postShopInfo': 'postShopInfo',     //商家入驻信息提交接口   
     'getShopInfo': 'getShopInfo',       //获取商家入驻接口       
