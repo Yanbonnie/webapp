@@ -19,6 +19,11 @@
      height: 200rpx;
  }
 
+.tipTitle{
+    font-size: 28rpx;
+    text-align: center;
+    display: block;
+}
  .navTabBar{
      width: 100%;
      height: 102rpx;

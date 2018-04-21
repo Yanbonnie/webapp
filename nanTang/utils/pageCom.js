@@ -184,7 +184,6 @@ module.exports = {
             let money = options.detail;
             let id = this.data.zanData.id;
             let enter = this.data.zanData.enter;
-            console.log(enter)
             wx.showLoading({
                 title: '加载中...',
                 mask:true

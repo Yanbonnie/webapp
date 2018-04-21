@@ -49,6 +49,11 @@
             </view>
         </view>
         <view class='menus'>
+        <view class="zan-row">
+                <view class="zan-col zan-col-24 " >
+                    <text class='tipTitle'>点击下面图片查看菜单大图</text>
+                </view>
+            </view>
             <view class="zan-row">
                 <view class="zan-col zan-col-8" wx:for="{{menu_pic}}" wx:key="{{index}}">
                     <image src='{{item.thumbnail}}' data-id="{{index}}" mode="aspectFill" bindtap="previewHandle"></image>

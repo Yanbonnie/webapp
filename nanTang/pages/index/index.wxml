@@ -61,6 +61,9 @@
         <image src="/assets/images/404.png"></image>
         <text>暂无数据</text>
     </view>
+    <view class='center' wx:if="{{indexEnd}}" >
+        <text>到底了</text>
+    </view>
 </scroll-view>
 
 <oper_model data="{{zanData}}" wx:if="{{operState}}" bind:closeHandle="closeHandle" bind:payMoney="payMoneyHandle"></oper_model>

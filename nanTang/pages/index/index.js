@@ -20,6 +20,7 @@ Page(extend({}, Actionsheet, {
             actions: []
         },
         temId:null,
+        indexEnd:false,
         /*公共数据 */
         ...comData
     },
@@ -67,7 +68,7 @@ Page(extend({}, Actionsheet, {
     },
     scrolltolowerHandle(e){
         let length = this.data.businessList.length;
-        // if (this.data.temId == this.data.businessList[length - 1].id) return;   //如果最后的id相同，不加载
+        if (this.data.indexEnd) return;
         wx.showLoading({
             title: '加载中...',
             mask:true
@@ -88,9 +89,11 @@ Page(extend({}, Actionsheet, {
                 this.setData({
                     businessList:temList
                 })
-                // this.setData({
-                //     temId: this.data.businessList[length - 1].id
-                // })
+                if(arr.length < 10){
+                    this.setData({
+                        indexEnd:true
+                    })
+                }
             }else{
                 wx.showToast({
                     title: res.msg,
