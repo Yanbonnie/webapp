@@ -24,12 +24,12 @@
                     <!-- 每行可以使用 zan-card__detail-row 来控制展示区域 -->
                     <!-- 每行里面可以用 zan-card__left-col zan-card__right-col 来控制左右展示 -->
                     <view class="zan-card__detail-row">
-                        <view class="zan-card__left-col zan-ellipsis">
+                        <view class="zan-card__left-col zan-ellipsis" data-id="{{item.id}}" bindtap='goDetail'>
                             {{item.name}}
                         </view>
                     </view>
                     <!-- 商品附属信息展示行 -->
-                    <view class="zan-card__detail-row zan-c-gray-darker">
+                    <view class="zan-card__detail-row zan-c-gray-darker" data-id="{{item.id}}" bindtap='goDetail'>
                         <view class="zan-card__left-col zan-ellipsis--l2">
                             {{item.address}}
                         </view>
@@ -42,11 +42,11 @@
                     <view class="zan-card__detail-row zan-c-gray-darker ">
                         <view class="zan-card__left-col operBox">
                             <view>
-                                <image src="/assets/images/man.png"></image>
+                                <image class='manIcon' src="/assets/images/man.png"></image>
                             </view>
                             <view>{{item.praise}}</view>
                             <view>
-                                <image  catchtap='zanHandle' data-id="{{item.id}}" data-index="index" data-is_praise="{{item.is_praise}}" src="{{item.is_praise == 0 ? '/assets/images/zan.png' :'/assets/images/zan_on.png'}}"></image>
+                                <image class='zanIcon' catchtap='zanHandle' data-id="{{item.id}}" data-enter="search"  data-is_praise="{{item.is_praise}}" src="{{item.is_praise == 0 ? '/assets/images/zan.png' :'/assets/images/zan_on.png'}}"></image>
                             </view>
                         </view>
                     </view>

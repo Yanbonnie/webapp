@@ -29,14 +29,14 @@ Page({
         WXREQ('POST', URL['postSearch'],{
             key,
             unionid:app.globalData.userInfo.unionid,
-            keyword:this.data.keyword
+            keyword: this.data.keyword
         },res=>{
+            wx.stopPullDownRefresh()
             wx.hideLoading();
             const {data,msg,status} = res;
             if(status == 0){
                 this.setData({
                     shopList:data,
-                    keyword:'',
                 })
             }else{
                 wx.showToast({
@@ -56,21 +56,7 @@ Page({
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
+    onPullDownRefresh(e) {
+        this.postSearch();
     }
 })

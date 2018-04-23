@@ -13,16 +13,15 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(options)
         const { id } = options;
         let Timer = setInterval(() => {
             if (app.globalData.userInfo) {
                 clearInterval(Timer);
-                if(id || id == 0){  //首页                    
-                    wx.navigateTo({
-                        url: "/pages/detail/detail?id="+id
+                if(id || id == 0){                   
+                    wx.redirectTo({
+                        url: "/pages/detail/detail?id="+id+"&index=1"
                     })
-                }else{
+                } else { //首页   
                     wx.switchTab({
                         url: "/pages/index/index"
                     })

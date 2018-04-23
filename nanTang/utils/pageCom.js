@@ -19,7 +19,8 @@ module.exports = {
                 price:18
             }],
             icon:'zan',
-            id:null
+            id:null,
+            enter:''
         },
         'operState2': true,
         'shopInfoData':{  //入驻支付弹窗数据
@@ -47,7 +48,6 @@ module.exports = {
         getPhoneList(e){
             const { id } = e.currentTarget.dataset;
             return new Promise((resolve,reject)=>{
-                console.log(id)
                 WXREQ('GET',URL['getTel'],{
                     key,
                     id
@@ -87,7 +87,6 @@ module.exports = {
         _handleZanActionsheetBtnClick(res) {
             const { componentId, index } = res.currentTarget.dataset;
             const { actions } = this.data.baseActionsheet;
-            console.log(actions[index].name)
             wx.makePhoneCall({
                 phoneNumber: actions[index].name
             })
@@ -140,30 +139,38 @@ module.exports = {
         },  
         //点赞
         zanHandle(e){
-            const { id, is_praise } = e.currentTarget.dataset;
+            const { id, is_praise,enter } = e.currentTarget.dataset;
             if (app.globalData.is_pay_praise == 1){  //支付点赞
                 if(is_praise == 0){  //第一次免费
-                    this.postPraise(id);
+                    this.postPraise(id,enter);
                 }else{
                     this.setData({
                         operState:true,   
-                        'zanData.id':id                 
+                        'zanData.id':id,
+                        'zanData.enter':enter              
                     })
                 }
             }else{
                 if(is_praise == 1) return;
-                this.postPraise(id);
+                this.postPraise(id,enter);
             }
         },
         //商家点赞接口
-        postPraise(id){
+        postPraise(id,enter){
             WXREQ('POST', URL['postPraise'],{
                 key,
                 unionid:app.globalData.userInfo.unionid,
                 id
             },res=>{
                 if(res.status == 0){
-                    this.getConfig();
+                    if(enter == 'index'){  //首页点赞
+                        this.getConfig();
+                    }else if(enter == 'detail'){  //详情页点赞
+                        this.getShopDetails(id);
+                    }else if(enter == 'search'){  //搜索页点赞
+                        this.postSearch()
+                    }
+                    
                 }else{
                     wx.showToast({
                         title: res.msg,
@@ -174,9 +181,9 @@ module.exports = {
         },
         //商家支付点赞接口
         payMoneyHandle(options){
-            console.log(options)
             let money = options.detail;
             let id = this.data.zanData.id;
+            let enter = this.data.zanData.enter;
             wx.showLoading({
                 title: '加载中...',
                 mask:true
@@ -201,9 +208,18 @@ module.exports = {
                             this.setData({
                                 operState:false
                             })
+                            //支付成功
+                            if (enter == 'index') {  //首页点赞
+                                this.getConfig();
+                            } else if (enter == 'detail') {  //详情页点赞
+                                this.getShopDetails(id);
+                            } else if (enter == 'search') {  //搜索页点赞
+                                console.log("调用search接口")
+                                this.postSearch()
+                            }
+
                         },
                         'fail':res=> {
-                            console.log(res)
                         }
                     }) 
                 }else{
@@ -218,7 +234,6 @@ module.exports = {
         },
         //关闭弹框操作弹框
         closeHandle(){
-            console.log(123)
             this.setData({
                 operState: false
             })
@@ -228,7 +243,7 @@ module.exports = {
      */
         onShareAppMessage: function () {
             return {
-                'title': '食在南塘',
+                'title': '南塘生活圈',
                 'path': '/pages/enter/enter',
                 'imageUrl': '/assets/images/picture.jpeg',
                 success: res => {
@@ -242,10 +257,6 @@ module.exports = {
                     })
                 }
             }
-        },
-        //提交分享记录
-        postLogShare(){
-
         }
     }
 }

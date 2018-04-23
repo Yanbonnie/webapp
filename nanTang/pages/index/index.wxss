@@ -7,7 +7,7 @@ page{
 }
 
 .productList{
-    padding: 50rpx 0;
+    padding: 30rpx 0;
     background: #efefef;
 }
 .zan-card{
@@ -36,9 +36,16 @@ page{
    display: inline-block; 
    
 }
-.operBox view image{
+.operBox view image{    
+    position: relative;    
+}
+.manIcon{
     width: 35rpx;
     height: 35rpx;
-    position: relative;
     top: 5rpx;
 }
+ .zanIcon{
+     top: 8rpx;
+    width:50rpx;
+    height: 50rpx;
+} 

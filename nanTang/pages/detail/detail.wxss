@@ -1,9 +1,13 @@
 /* pages/detail/detail.wxss */
  @import "/pages/index/index.wxss"; 
+ .scrollWrap{
+     height:calc(100% - 100rpx);
+     padding-bottom:100rpx;
+ }
   .menus{
       padding:25rpx;
       background: #ffffff;
-      margin-top: -50rpx;
+      margin-top: -20rpx;
   }
 .menus .zan-col{
     margin-bottom: 20rpx;
@@ -14,3 +18,36 @@
      margin: 0 auto;
      height: 200rpx;
  }
+
+.tipTitle{
+    font-size: 28rpx;
+    text-align: center;
+    display: block;
+}
+ .navTabBar{
+     width: 100%;
+     height: 102rpx;
+     position: fixed;
+     bottom: 0;
+     left: 0;
+     background: #fff;
+     border-top: 1px #ccc solid;
+ }
+  .navTabBar .zan-col{
+      text-align: center;
+  }
+ .navTabBar .zan-col image{
+     width:51rpx;
+     height: 51rpx;
+     text-align: center;
+     display: block;
+     margin: 10rpx auto 0;
+ }
+  .navTabBar .zan-col text{
+      text-align: center;
+      font-size: 24rpx;
+      color: #8a8a8a;
+      line-height: 20rpx;
+      position: relative;
+      top:-10rpx;
+  }

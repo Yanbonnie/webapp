@@ -9,8 +9,10 @@ Page({
      * 页面的初始数据
      */
     data: {
+        navStatus:false,
         shopData:{},
         menu_pic:[],
+        id:null,
         imgUrl: ['../../assets/images/home_page_on.png', '/assets/images/picture.jpeg', '/assets/images/picture.jpeg'],
         /*公共数据 */
         ...comData
@@ -20,7 +22,15 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        const { id } = options;
+        const { id,index } = options;
+        this.setData({
+            id
+        })
+        if(options.index){
+            this.setData({
+                navStatus:true
+            })
+        }
         this.getShopDetails(id);
     },
     getShopDetails(id){
@@ -33,8 +43,8 @@ Page({
             unionid: app.globalData.userInfo.unionid,
             id
         },res=>{
+            wx.stopPullDownRefresh();
             wx.hideLoading();
-            console.log(res)
             const { data, menu_pic, status, msg } = res;
             if (status == 0) {
                 this.setData({
@@ -71,7 +81,7 @@ Page({
     onShareAppMessage: function () {
         const { id, logo } = this.data.shopData;
         return {
-            'title': '食在南塘',
+            'title': '南塘生活圈',
             'path': '/pages/enter/enter?id='+id,
             'imageUrl': logo,
             success: res => {
@@ -85,5 +95,32 @@ Page({
                 })
             }
         }
+    },
+    onPullDownRefresh(e) {
+        this.getShopDetails(this.data.id);
+    },
+    go(e){
+        const {index} = e.currentTarget.dataset;
+        switch (index){
+            case '1':
+                wx.switchTab({
+                    url: '/pages/index/index',
+                })
+                break;
+            case '2':
+                wx.switchTab({
+                    url: '/pages/business/business',
+                })
+                break;
+            case '3':
+            console.log(111)
+                wx.switchTab({
+                    url: '/pages/search/search',
+                })
+                break;
+            default:
+                break;
+        }
     }
+    
 })

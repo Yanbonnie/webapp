@@ -1,5 +1,5 @@
 // exports.Actionsheet = require('./actionsheet/index');
-exports.Dialog = require('./dialog/index');
+// exports.Dialog = require('./dialog/index');
 // exports.Field = require('./field/index');
 // exports.NoticeBar = require('./noticebar/index');
 // exports.Select = require('./select/index');

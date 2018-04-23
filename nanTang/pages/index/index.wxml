@@ -1,30 +1,18 @@
 <!--index.wxml-->
-<!-- <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-</view> -->
 <import src="/assets/component/actionsheet/index.wxml" />
 <template is="zan-actionsheet" data="{{ ...baseActionsheet }}"></template>
-<scroll-view scroll-y="true" class='scroll-view' style="height: 100%;" bindscrolltolower="scrolltolowerHandle">
-    <swiper indicator-dots="{{true}}" indicator-active-color="#38f" class="swiperWrap" autoplay="true" interval="4000">
+<view>
+<swiper indicator-dots="{{true}}" indicator-active-color="#38f" class="swiperWrap" style="height:400rpx" autoplay="true" interval="4000">
         <block wx:for="{{banner}}" wx:key="unique">
             <swiper-item>
-                <image src="{{item.pic}}" class="slide-image" width="355" height="150" />
+                <image src="{{item.pic}}" class="slide-image" mode='aspectFill' bindtap='geDetail' data-url="{{item.url}}" data-type="{{item.type}}"/>
             </swiper-item>
         </block>
     </swiper>
     <view class='productList'>
-        <view class="zan-card" wx:for="{{businessList}}" wx:key="{{index}}" data-id="{{item.id}}" bindtap='goDetail'>
+        <view class="zan-card" wx:for="{{businessList}}" wx:key="{{index}}">
             <!-- 卡片左侧商品图片 -->
-            <view class="zan-card__thumb">
+            <view class="zan-card__thumb" data-id="{{item.id}}" bindtap='goDetail'>
                 <image class="zan-card__img" src="{{item.logo}}" mode="aspectFill"></image>
             </view>
             <!-- 卡片右侧详情描述 -->
@@ -32,13 +20,13 @@
                 <!-- 商品标题行 -->
                 <!-- 每行可以使用 zan-card__detail-row 来控制展示区域 -->
                 <!-- 每行里面可以用 zan-card__left-col zan-card__right-col 来控制左右展示 -->
-                <view class="zan-card__detail-row">
+                <view class="zan-card__detail-row" data-id="{{item.id}}" bindtap='goDetail'>
                     <view class="zan-card__left-col zan-ellipsis">
                         {{item.name}}
                     </view>
                 </view>
                 <!-- 商品附属信息展示行 -->
-                <view class="zan-card__detail-row zan-c-gray-darker">
+                <view class="zan-card__detail-row zan-c-gray-darker" data-id="{{item.id}}" bindtap='goDetail'>
                     <view class="zan-card__left-col zan-ellipsis">
                         <!--zan-ellipsis--l2-->
                         {{item.address}}
@@ -52,11 +40,11 @@
                 <view class="zan-card__detail-row zan-c-gray-darker ">
                     <view class="zan-card__left-col operBox">
                         <view>
-                            <image src="/assets/images/man.png"></image>
+                            <image class='manIcon' src="/assets/images/man.png"></image>
                         </view>
                         <view>{{item.praise}}</view>
                         <view>
-                            <image catchtap='zanHandle' data-id="{{item.id}}" data-index="index" data-is_praise="{{item.is_praise}}" src="{{item.is_praise == 0 ? '/assets/images/zan.png' :'/assets/images/zan_on.png'}}"></image>
+                            <image catchtap='zanHandle' data-enter="index" class="zanIcon" data-id="{{item.id}}" data-is_praise="{{item.is_praise}}" src="{{item.is_praise == 0 ? '/assets/images/zan.png' :'/assets/images/zan_on.png'}}"></image>
                         </view>
                     </view>
                 </view>
@@ -66,12 +54,14 @@
                 <button class="zan-btn zan-btn--small btn2" data-id="{{item.id}}" catchtap='lookMenu'>查看菜单</button>
             </view>
         </view>
-        
     </view>
     <view class='center' wx:if="{{businessList.length == 0}}">
         <image src="/assets/images/404.png"></image>
         <text>暂无数据</text>
     </view>
-</scroll-view>
+    <view class='center' wx:if="{{indexEnd}}">
+        <text>到底了</text>
+    </view>
+</view>
 
 <oper_model data="{{zanData}}" wx:if="{{operState}}" bind:closeHandle="closeHandle" bind:payMoney="payMoneyHandle"></oper_model>

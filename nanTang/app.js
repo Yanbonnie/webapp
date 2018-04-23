@@ -4,17 +4,7 @@ const key = '21ed62ad89c8b67d1a1172d4411a0c21';
 import { WXREQ, URL } from '/utils/util';
 App({
     onLaunch: function () {
-        // 展示本地存储能力
-        var logs = wx.getStorageSync('logs') || []
-        logs.unshift(Date.now())
-        wx.setStorageSync('logs', logs)
-        // 登录
-        // wx.login({
-        //     success: res => {
-        //         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        //     }
-        // })
-        // 获取用户信息
+
         this.init();
     },
     init(){
@@ -24,10 +14,8 @@ App({
         // })
         wx.getSetting({
             success: res => {
-                
                 if (res.authSetting['scope.userInfo']) {
                     Promise.all([this.loginHandle(), this.getUserInfo()]).then(results => {
-                        // console.log(results); // 获得一个Array: ['P1', 'P2']
                         const { code } = results[0];
                         const { iv, encryptedData } = results[1];
                         
@@ -37,6 +25,7 @@ App({
                     wx.authorize({
                         scope: 'scope.userInfo',
                         success: res => {  //调用成功
+                            this.init();
                         }
                     })
                 }
@@ -81,8 +70,7 @@ App({
             encryptedData,
             key
         },res=>{
-            console.log(res)
-            if (res.status == 0){
+            if(res.status == 0){
                 this.globalData.userInfo = res.data;
                 
             }else{

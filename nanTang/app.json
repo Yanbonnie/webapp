@@ -5,14 +5,14 @@
         "pages/detail/detail",
         "pages/search/search",
         "pages/business/business",
-        "pages/logs/logs"
-        
+        "pages/webview/webview"
     ],
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "测试，哈哈哈哈哈哈哈哈",
-        "navigationBarTextStyle": "black"
+        "navigationBarTitleText": "南塘生活圈",
+        "navigationBarTextStyle": "black",
+        "enablePullDownRefresh": true
     },
     "tabBar": {
         "selectedColor": "#3388ff",

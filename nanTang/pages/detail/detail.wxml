@@ -2,7 +2,7 @@
 <import src="/assets/component/actionsheet/index.wxml" />
 <template is="zan-actionsheet" data="{{ ...baseActionsheet }}"></template>
 <view class='container'>
-    <scroll-view scroll-y="true">
+    <scroll-view scroll-y="true" class='scrollWrap'>
         <view class='productList'>
             <view class="zan-card">
                 <!-- 卡片左侧商品图片 -->
@@ -33,11 +33,11 @@
                     <view class="zan-card__detail-row zan-c-gray-darker ">
                         <view class="zan-card__left-col operBox">
                             <view>
-                                <image src="/assets/images/man.png"></image>
+                                <image class='manIcon' src="/assets/images/man.png"></image>
                             </view>
                             <view>{{shopData.praise}}</view>
                             <view>
-                                <image catchtap='zanHandle' data-id="{{shopData.id}}" data-index="index" data-is_praise="{{shopData.is_praise}}" src="{{shopData.is_praise == 0 ? '/assets/images/zan.png' :'/assets/images/zan_on.png'}}"></image>
+                                <image class='zanIcon' catchtap='zanHandle' data-id="{{shopData.id}}" data-enter="detail" data-is_praise="{{shopData.is_praise}}" src="{{shopData.is_praise == 0 ? '/assets/images/zan.png' :'/assets/images/zan_on.png'}}"></image>
                             </view>
                         </view>
                     </view>
@@ -49,13 +49,31 @@
             </view>
         </view>
         <view class='menus'>
+        <view class="zan-row">
+                <view class="zan-col zan-col-24 " >
+                    <text class='tipTitle'>点击下面图片查看菜单大图</text>
+                </view>
+            </view>
             <view class="zan-row">
                 <view class="zan-col zan-col-8" wx:for="{{menu_pic}}" wx:key="{{index}}">
                     <image src='{{item.thumbnail}}' data-id="{{index}}" mode="aspectFill" bindtap="previewHandle"></image>
                 </view>
             </view>
         </view>
-
+        <view class="zan-row navTabBar" wx:if="{{navStatus}}">
+            <view class="zan-col zan-col-8" bindtap='go' data-index="1">
+                <image src="/assets/images/home_page.png"></image>
+                <text>首页</text>
+            </view>
+            <view class="zan-col zan-col-8" bindtap='go'  data-index="2">
+                <image src="/assets/images/chat.png"></image>
+                <text>我是商家</text>
+            </view>
+            <view class="zan-col zan-col-8" bindtap='go'  data-index="3">
+                <image src="/assets/images/search.png"></image>
+                <text>搜索</text>
+            </view>
+        </view>
     </scroll-view>
 </view>
 <oper_model data="{{zanData}}" wx:if="{{operState}}" bind:closeHandle="closeHandle" bind:payMoney="payMoneyHandle"></oper_model>
