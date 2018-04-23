@@ -81,7 +81,7 @@ Page({
     onShareAppMessage: function () {
         const { id, logo } = this.data.shopData;
         return {
-            'title': '食在南塘',
+            'title': '南塘生活圈',
             'path': '/pages/enter/enter?id='+id,
             'imageUrl': logo,
             success: res => {
@@ -102,17 +102,17 @@ Page({
     go(e){
         const {index} = e.currentTarget.dataset;
         switch (index){
-            case '0':
+            case '1':
                 wx.switchTab({
                     url: '/pages/index/index',
                 })
                 break;
-            case '1':
+            case '2':
                 wx.switchTab({
                     url: '/pages/business/business',
                 })
                 break;
-            case '2':
+            case '3':
             console.log(111)
                 wx.switchTab({
                     url: '/pages/search/search',

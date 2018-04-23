@@ -20,6 +20,7 @@ module.exports = {
             }],
             icon:'zan',
             id:null,
+            index:null,
             enter:''
         },
         'operState2': true,
@@ -88,7 +89,10 @@ module.exports = {
             const { componentId, index } = res.currentTarget.dataset;
             const { actions } = this.data.baseActionsheet;
             wx.makePhoneCall({
-                phoneNumber: actions[index].name
+                phoneNumber: actions[index].name,
+                success:res=>{
+
+                }
             })
         },
         //弹出层点击消失
@@ -139,24 +143,25 @@ module.exports = {
         },  
         //点赞
         zanHandle(e){
-            const { id, is_praise,enter } = e.currentTarget.dataset;
+            const { id, is_praise,enter,index } = e.currentTarget.dataset;
             if (app.globalData.is_pay_praise == 1){  //支付点赞
                 if(is_praise == 0){  //第一次免费
-                    this.postPraise(id,enter);
+                    this.postPraise(id,enter,index);
                 }else{
                     this.setData({
                         operState:true,   
                         'zanData.id':id,
-                        'zanData.enter':enter              
+                        'zanData.enter':enter,
+                        'zanData.index':index         
                     })
                 }
             }else{
                 if(is_praise == 1) return;
-                this.postPraise(id,enter);
+                this.postPraise(id,enter,index);
             }
         },
         //商家点赞接口
-        postPraise(id,enter){
+        postPraise(id,enter,index){
             WXREQ('POST', URL['postPraise'],{
                 key,
                 unionid:app.globalData.userInfo.unionid,
@@ -164,7 +169,11 @@ module.exports = {
             },res=>{
                 if(res.status == 0){
                     if(enter == 'index'){  //首页点赞
-                        this.getConfig();
+                        // this.getConfig();
+                        console.log(index)
+                        let num = Math.floor(index/10)+1;
+                        console.log(num)
+                        this.getShop(num);
                     }else if(enter == 'detail'){  //详情页点赞
                         this.getShopDetails(id);
                     }else if(enter == 'search'){  //搜索页点赞
@@ -243,7 +252,7 @@ module.exports = {
      */
         onShareAppMessage: function () {
             return {
-                'title': '食在南塘',
+                'title': '南塘生活圈',
                 'path': '/pages/enter/enter',
                 'imageUrl': '/assets/images/picture.jpeg',
                 success: res => {

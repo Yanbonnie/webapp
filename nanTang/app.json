@@ -4,14 +4,15 @@
         "pages/index/index",
         "pages/detail/detail",
         "pages/search/search",
-        "pages/business/business"        
+        "pages/business/business",
+        "pages/webview/webview"
     ],
     "window": {
-        "backgroundTextStyle": "light",
+        "backgroundTextStyle": "dark",
         "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "食在南塘",
+        "navigationBarTitleText": "南塘生活圈",
         "navigationBarTextStyle": "black",
-        "enablePullDownRefresh":true
+        "enablePullDownRefresh": true
     },
     "tabBar": {
         "selectedColor": "#3388ff",
