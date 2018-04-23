@@ -94,7 +94,7 @@ Page(extend({}, Actionsheet, {
                 })
                 this.setData({
                     businessList:temList,
-                    pageNum:this.data.pageNum++
+                    pageNum:this.data.pageNum+1
                 })
                 if(arr.length < 10){
                     this.setData({
