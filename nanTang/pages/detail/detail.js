@@ -75,14 +75,21 @@ Page({
             }
         })
     },
-
-    /**
+    preImg(){
+        let urls = [];
+        urls.push(this.data.ewmUrl)
+        wx.previewImage({
+            urls,
+            success:res=>{}
+        })
+    },
+    /**name
      * 用户点击右上角分享
      */
     onShareAppMessage: function () {
-        const { id, logo } = this.data.shopData;
+        const { id, logo, name } = this.data.shopData;
         return {
-            'title': '南塘生活圈',
+            'title': '南塘生活圈·'+name,
             'path': '/pages/enter/enter?id='+id,
             'imageUrl': logo,
             success: res => {

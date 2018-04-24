@@ -42,9 +42,9 @@
                         </view>
                     </view>
                 </view>
-                <view>
+                <view class="btnBox">
                     <button class="zan-btn zan-btn--small btn1" data-id="{{shopData.id}}" catchtap='toggleActionsheet'>拨打电话</button>
-                    <button class="zan-btn zan-btn--small btn2" data-id="{{shopData.id}}" catchtap='showEwm'>查看菜单</button>
+                    <button class="zan-btn zan-btn--small btn2 share" data-id="{{shopData.id}}" catchtap='showEwm'>分享朋友圈</button>
                 </view>
             </view>
         </view>
@@ -80,9 +80,10 @@
 <!--二维码  -->
 <view class='ewmCover' wx:if="{{ewmState}}" bindtap='hideEwm'>
     <view class='ewmBox'>
-        <image class='image' src="/assets/images/picture.jpeg"></image>
+        <image catchtap='preImg' class='image' src="{{ewmUrl}}" mode='aspectFit'></image>
         <view>
-            <text>长按保存可以分享到朋友圈</text>
+            <text>点击查看大图</text>
+            <text>长按大图保存可分享到朋友圈</text>
         </view>
     </view>
 </view>

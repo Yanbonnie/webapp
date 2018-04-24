@@ -51,6 +51,13 @@
       position: relative;
       top:-10rpx;
   }
+  .btnBox .zan-btn{
+      width: 175rpx;
+      padding: 0px !important;
+  }
+  .btnBox .share{
+      color: #2d78f4;
+  }
   .ewmCover{
       width: 100%;
       height: 100%;
@@ -75,7 +82,7 @@
 
   .ewmBox .image{
       width: 450rpx;
-      height: 450rpx;
+      height:600rpx;
       display: block;
       margin: 0 auto;
       margin-top: 30rpx;
@@ -85,5 +92,7 @@
         font-size: 28rpx;
         text-align: center;
         display: block;
-        line-height: 50rpx;
+        line-height: 40rpx;
+        color: #ff503f;
+        font-weight: bold;
     }
