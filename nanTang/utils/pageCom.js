@@ -15,7 +15,7 @@ module.exports = {
                 txt:'壁画',
                 price:6
             },{
-                txt:'花圈',
+                txt:'装修',
                 price:18
             }],
             icon:'zan',
@@ -169,7 +169,7 @@ module.exports = {
             },res=>{
                 if(res.status == 0){
                     if(enter == 'index'){  //首页点赞
-                        this.zanUpdate(index);
+                        this.zanUpdate(index,1);
                     }else if(enter == 'detail'){  //详情页点赞
                         this.getShopDetails(id);
                     }else if(enter == 'search'){  //搜索页点赞
@@ -215,7 +215,7 @@ module.exports = {
                             })
                             //支付成功
                             if (enter == 'index') {  //首页点赞
-                                this.zanUpdate(this.data.zanData.index);
+                                this.zanUpdate(this.data.zanData.index, money);
                             } else if (enter == 'detail') {  //详情页点赞
                                 this.getShopDetails(id);
                             } else if (enter == 'search') {  //搜索页点赞

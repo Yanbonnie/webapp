@@ -1,51 +1,86 @@
-page{
+page {
     height: 100%;
 }
-.swiperWrap image{
-  width: 100%;
-  display: block;
+
+.swiperWrap image {
+    width: 100%;
+    display: block;
 }
 
-.productList{
+.productList {
     padding: 30rpx 0;
     background: #efefef;
 }
-.zan-card{
+
+.zan-card {
     background: #fff;
     position: relative;
     margin-bottom: 10px;
 }
-.zan-card .btn1,.zan-card .btn2{
+
+.zan-card .btn1, .zan-card .btn2 {
     position: absolute;
     right: 15rpx;
-    
 }
-.zan-card .btn1{
+
+.zan-card .btn1 {
     top: 40rpx;
     margin-right: 0;
 }
-.zan-card .btn2{
+
+.zan-card .btn2 {
     bottom: 40rpx;
 }
-.rowBtn{
+
+.rowBtn {
     top: 20rpx;
     position: absolute;
 }
-.operBox view{
-   margin: 0 20rpx;
-   display: inline-block; 
-   
+
+.operBox view {
+    margin: 0 20rpx;
+    display: inline-block;
 }
-.operBox view image{    
-    position: relative;    
+
+.operBox view image {
+    position: relative;
 }
-.manIcon{
+
+.manIcon {
     width: 35rpx;
     height: 35rpx;
     top: 5rpx;
 }
- .zanIcon{
-     top: 8rpx;
-    width:50rpx;
+
+.zanIcon {
+    top: 8rpx;
+    width: 50rpx;
     height: 50rpx;
-} 
+}
+
+.videoCover {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    right: 0;
+    bottom: 0;
+    background: #000;
+}
+
+.videoBox {
+    width: 100%;
+    height: 500rpx;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -250rpx;
+    background: #fff;
+}
+
+.videoBox video {
+    width: 100%;
+    height: 500rpx;
+}

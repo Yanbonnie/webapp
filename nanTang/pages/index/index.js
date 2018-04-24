@@ -22,6 +22,8 @@ Page(extend({}, Actionsheet, {
         shopcount:0,
         pageNum:2,     //翻页数据
         indexEnd:false,
+        showVideo:false,
+        videoSrc:null,
         /*公共数据 */
         ...comData
     },
@@ -133,16 +135,25 @@ Page(extend({}, Actionsheet, {
             }
         })
     },
-    zanUpdate(index){
+    zanUpdate(index,num){
         let tem = this.data.businessList.map(item=>{
             return item;
         });
         tem[index].is_praise = 1;
-        tem[index].praise = tem[index].praise+1;
+        tem[index].praise = tem[index].praise+num;
         this.setData({
             businessList: tem,
         })
     },
+    //关闭视频
+    closeVideoHandle(){
+        this.setData({
+            showVideo:false
+        })
+        this.videoContext.pause();
+    },
+    //去除默认
+    delDefault(){},
     geDetail(e){  //banenr跳链接
         const { url, } = e.currentTarget.dataset;
         const typeNum = e.currentTarget.dataset.type;
@@ -154,7 +165,13 @@ Page(extend({}, Actionsheet, {
             wx.navigateTo({
                 url: '/pages/webview/webview?url='+url,
             })
-        }        
+        }else if(typeNum == 3){
+            this.setData({
+                videoSrc: url,
+                showVideo: true
+            })
+            this.videoContext = wx.createVideoContext('myVideo');
+        }    
     },
     onPullDownRefresh(e){
         this.getConfig();
