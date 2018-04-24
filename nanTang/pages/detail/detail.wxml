@@ -26,7 +26,7 @@
                         </view>
                         <view class="zan-card__left-col zan-ellipsis">
                             <!--zan-ellipsis--l2-->
-                            营业时间：{{shopData.open_time + '-' + shopData.close_time}}
+                            营业时间：{{shopData.open_time}}-{{shopData.close_time}}
                         </view>
                     </view>
                     <!-- 商品操作按钮相关 -->
@@ -44,7 +44,7 @@
                 </view>
                 <view>
                     <button class="zan-btn zan-btn--small btn1" data-id="{{shopData.id}}" catchtap='toggleActionsheet'>拨打电话</button>
-                    <button class="zan-btn zan-btn--small btn2" data-id="{{shopData.id}}" catchtap='lookMenu'>查看菜单</button>
+                    <button class="zan-btn zan-btn--small btn2" data-id="{{shopData.id}}" catchtap='showEwm'>查看菜单</button>
                 </view>
             </view>
         </view>
@@ -77,3 +77,12 @@
     </scroll-view>
 </view>
 <oper_model data="{{zanData}}" wx:if="{{operState}}" bind:closeHandle="closeHandle" bind:payMoney="payMoneyHandle"></oper_model>
+<!--二维码  -->
+<view class='ewmCover' wx:if="{{ewmState}}" bindtap='hideEwm'>
+    <view class='ewmBox'>
+        <image class='image' src="/assets/images/picture.jpeg"></image>
+        <view>
+            <text>长按保存可以分享到朋友圈</text>
+        </view>
+    </view>
+</view>

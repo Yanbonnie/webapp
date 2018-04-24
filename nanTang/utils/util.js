@@ -53,7 +53,8 @@ const URL = {
     'payApply':'payApply',              //商家入驻支付接口      x
     'postSearch':'postSearch',          //商家信息搜索接口        
     'postLogTel':'postLogTel',          //拨打电话记录接口        
-    'postLogShare':'postLogShare',      //分享记录接口         
+    'postLogShare':'postLogShare',      //分享记录接口    
+    'getShare':'getShare',              //分享二维码     
 }
 
 const WXREQ = (method,url,data,succfn)=>{

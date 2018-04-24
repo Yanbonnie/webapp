@@ -169,9 +169,7 @@ module.exports = {
             },res=>{
                 if(res.status == 0){
                     if(enter == 'index'){  //首页点赞
-                        console.log(index)
-                        let num = Math.floor(index/10)+1;
-                        this.getShop(num);
+                        this.zanUpdate(index);
                     }else if(enter == 'detail'){  //详情页点赞
                         this.getShopDetails(id);
                     }else if(enter == 'search'){  //搜索页点赞
@@ -217,11 +215,10 @@ module.exports = {
                             })
                             //支付成功
                             if (enter == 'index') {  //首页点赞
-                                this.getConfig();
+                                this.zanUpdate(this.data.zanData.index);
                             } else if (enter == 'detail') {  //详情页点赞
                                 this.getShopDetails(id);
                             } else if (enter == 'search') {  //搜索页点赞
-                                console.log("调用search接口")
                                 this.postSearch()
                             }
 

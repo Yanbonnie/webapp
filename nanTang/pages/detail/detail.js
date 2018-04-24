@@ -13,7 +13,8 @@ Page({
         shopData:{},
         menu_pic:[],
         id:null,
-        imgUrl: ['../../assets/images/home_page_on.png', '/assets/images/picture.jpeg', '/assets/images/picture.jpeg'],
+        ewmState:false,
+        ewmUrl:'',
         /*公共数据 */
         ...comData
     },
@@ -96,6 +97,37 @@ Page({
             }
         }
     },
+    showEwm(e){
+        const { id } = e.currentTarget.dataset;
+        wx.showLoading({
+            title: '加载中...',
+            mask:true
+        })
+        WXREQ('GET', URL['getShare'],{
+            key,
+            unionid: app.globalData.userInfo.unionid,
+            id
+        },res=>{
+            wx.hideLoading()
+            if(res.status == 0){
+                this.setData({
+                    ewmUrl:res.url,
+                    ewmState:true
+                })
+            }else{
+                wx.showToast({
+                    title: res.msg,
+                    mask:true,
+                    icon:'none'
+                })
+            }
+        })
+    },
+    hideEwm(){
+        this.setData({
+            ewmState:false
+        })
+    },
     onPullDownRefresh(e) {
         this.getShopDetails(this.data.id);
     },
@@ -113,7 +145,6 @@ Page({
                 })
                 break;
             case '3':
-            console.log(111)
                 wx.switchTab({
                     url: '/pages/search/search',
                 })

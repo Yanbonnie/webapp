@@ -133,39 +133,15 @@ Page(extend({}, Actionsheet, {
             }
         })
     },
-    getShop(num){
-      wx.showLoading({
-        title: '加载中...',
-        mask:true
-      })
-      WXREQ('GET', URL['getShop'], {
-        key,
-        unionid: app.globalData.userInfo.unionid,
-        page: num,
-        limit: 10
-      }, res => {
-        wx.hideLoading();
-        if (res.status == 0) {
-          let arr = res.data;
-          let temList = this.data.businessList;
-          for (let i = 0; i < temList.length; i++){
-            for(let j=0; j < arr.length;j++){
-              if(temList[i].id == arr[j].id){
-                temList[i] = arr[j]
-              }
-            }
-          }
-          this.setData({
-            businessList: temList
-          })
-        } else {
-          wx.showToast({
-            title: res.msg,
-            mask: true,
-            icon: 'none'
-          })
-        }
-      })
+    zanUpdate(index){
+        let tem = this.data.businessList.map(item=>{
+            return item;
+        });
+        tem[index].is_praise = 1;
+        tem[index].praise = tem[index].praise+1;
+        this.setData({
+            businessList: tem,
+        })
     },
     geDetail(e){  //banenr跳链接
         const { url, } = e.currentTarget.dataset;
