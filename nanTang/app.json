@@ -7,13 +7,12 @@
         "pages/business/business",
         "pages/webview/webview"
     ],
-    "window": {        
+    "window": {
+        "backgroundTextStyle": "dark",
         "navigationBarBackgroundColor": "#fff",
         "navigationBarTitleText": "南塘生活圈",
         "navigationBarTextStyle": "black",
-        "enablePullDownRefresh": true,
-        "backgroundColor":"#efefef",
-        "backgroundTextStyle": "dark"
+        "enablePullDownRefresh": true
     },
     "tabBar": {
         "selectedColor": "#3388ff",

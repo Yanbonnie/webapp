@@ -11,7 +11,7 @@ Page(extend({}, Actionsheet, {
         userInfo:{},
         banner: [],
         config: [],
-        businessList: null,
+        businessList: [],
         baseActionsheet: {   //点击拨打电话弹层配置
             show: false,
             // cancelText: '关闭 Action',
@@ -32,6 +32,7 @@ Page(extend({}, Actionsheet, {
             title: '加载中...',
         })
         const { unionid } = this.data.userInfo;
+        let temShopCount = this.data.shopcount;
         WXREQ('GET', URL['getConfig'],{
             key,
             unionid
@@ -39,18 +40,40 @@ Page(extend({}, Actionsheet, {
             wx.stopPullDownRefresh();   //处理下拉刷新
             wx.hideLoading();
             if(res.status == 0){
-                const { banner, config, data, shopcount} = res;
+                const { banner, config, data, shopcount } = res;
+                let TemBusinessList = this.data.businessList;
+                if (this.data.businessList.length == 0){  //列表没有数据  第一次获取数据
+                  this.setData({
+                    businessList: data
+                  })
+                  if (shopcount < 10) {
+                    this.setData({
+                      indexEnd: true
+                    })
+                  }
+                }else{   //列表有数据    第二次之后获取数据
+                  if (temShopCount < shopcount){  //再次获取的时候， 发现数据比之前的要多。
+                    this.setData({
+                      indexEnd: false
+                    })
+                  }
+                  if(data.length == 0) return;
+                  for (let i = 0; i < TemBusinessList.length; i++){
+                    for(let j = 0; j < data.length; j++){
+                      if (TemBusinessList[i].id == data[j].id){
+                        TemBusinessList[i] = data[j]
+                      }
+                    }
+                  }
+                  this.setData({
+                    businessList: TemBusinessList
+                  })
+                }                
                 this.setData({
                     banner,
-                    config,
-                    businessList:data,
+                    config,                    
                     shopcount
                 })
-                if (shopcount < 10){
-                    this.setData({
-                        indexEnd:true
-                    })
-                }
                 app.globalData.is_pay_apply = config.is_pay_apply;
                 app.globalData.is_pay_praise = config.is_pay_praise;
             }else{
@@ -109,6 +132,40 @@ Page(extend({}, Actionsheet, {
                 })
             }
         })
+    },
+    getShop(num){
+      wx.showLoading({
+        title: '加载中...',
+        mask:true
+      })
+      WXREQ('GET', URL['getShop'], {
+        key,
+        unionid: app.globalData.userInfo.unionid,
+        page: num,
+        limit: 10
+      }, res => {
+        wx.hideLoading();
+        if (res.status == 0) {
+          let arr = res.data;
+          let temList = this.data.businessList;
+          for (let i = 0; i < temList.length; i++){
+            for(let j=0; j < arr.length;j++){
+              if(temList[i].id == arr[j].id){
+                temList[i] = arr[j]
+              }
+            }
+          }
+          this.setData({
+            businessList: temList
+          })
+        } else {
+          wx.showToast({
+            title: res.msg,
+            mask: true,
+            icon: 'none'
+          })
+        }
+      })
     },
     geDetail(e){  //banenr跳链接
         const { url, } = e.currentTarget.dataset;

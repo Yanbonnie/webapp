@@ -44,7 +44,7 @@
                         </view>
                         <view>{{item.praise}}</view>
                         <view>
-                            <image catchtap='zanHandle' data-enter="index" class="zanIcon" data-id="{{item.id}}" data-is_praise="{{item.is_praise}}" src="{{item.is_praise == 0 ? '/assets/images/zan.png' :'/assets/images/zan_on.png'}}"></image>
+                            <image catchtap='zanHandle' data-enter="index" class="zanIcon" data-id="{{item.id}}" data-is_praise="{{item.is_praise}}" data-index="{{index}}" src="{{item.is_praise == 0 ? '/assets/images/zan.png' :'/assets/images/zan_on.png'}}"></image>
                         </view>
                     </view>
                 </view>
