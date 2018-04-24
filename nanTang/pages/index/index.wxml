@@ -5,7 +5,7 @@
     <swiper indicator-dots="{{true}}" indicator-active-color="#38f" class="swiperWrap" style="height:400rpx" autoplay="true" interval="4000">
         <block wx:for="{{banner}}" wx:key="unique">
             <swiper-item>
-                <image src="{{item.pic}}" class="slide-image" mode='aspectFill' bindtap='geDetail' data-url="{{item.url}}" data-type="{{item.type}}" />
+                <image src="{{item.pic}}" class="slide-image" mode='aspectFill' bindtap='geDetail' data-url="{{item.url}}" data-src="{{item.pic}}" data-type="{{item.type}}" />
             </swiper-item>
         </block>
     </swiper>

@@ -155,7 +155,7 @@ Page(extend({}, Actionsheet, {
     //去除默认
     delDefault() { },
     geDetail(e) {  //banenr跳链接
-        const { url, } = e.currentTarget.dataset;
+        const { url,src } = e.currentTarget.dataset;
         const typeNum = e.currentTarget.dataset.type;
         if (typeNum == 1) {   //小程序
             wx.navigateTo({
@@ -171,6 +171,13 @@ Page(extend({}, Actionsheet, {
                 showVideo: true
             })
             this.videoContext = wx.createVideoContext('myVideo');
+        }else if(typeNum == 0){
+            let urls = [];
+            urls.push(src)
+            wx.previewImage({
+                urls,
+                success: res => { }
+            })
         }
     },
     onPullDownRefresh(e) {
