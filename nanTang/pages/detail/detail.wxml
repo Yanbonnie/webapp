@@ -49,8 +49,8 @@
             </view>
         </view>
         <view class='menus'>
-        <view class="zan-row">
-                <view class="zan-col zan-col-24 " >
+            <view class="zan-row">
+                <view class="zan-col zan-col-24 ">
                     <text class='tipTitle'>点击下面图片查看菜单大图</text>
                 </view>
             </view>
@@ -65,11 +65,11 @@
                 <image src="/assets/images/home_page.png"></image>
                 <text>首页</text>
             </view>
-            <view class="zan-col zan-col-8" bindtap='go'  data-index="2">
+            <view class="zan-col zan-col-8" bindtap='go' data-index="2">
                 <image src="/assets/images/chat.png"></image>
                 <text>我是商家</text>
             </view>
-            <view class="zan-col zan-col-8" bindtap='go'  data-index="3">
+            <view class="zan-col zan-col-8" bindtap='go' data-index="3">
                 <image src="/assets/images/search.png"></image>
                 <text>搜索</text>
             </view>

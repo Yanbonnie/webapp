@@ -4,11 +4,11 @@ const { Actionsheet, extend } = require('../../assets/component/index.js');
 const app = getApp();
 let { key } = app.globalData;
 import { URL, WXREQ } from '../../utils/util';
-import { comData, methodsArr} from '../../utils/pageCom';
+import { comData, methodsArr } from '../../utils/pageCom';
 
 Page(extend({}, Actionsheet, {
     data: {
-        userInfo:{},
+        userInfo: {},
         banner: [],
         config: [],
         businessList: [],
@@ -19,162 +19,162 @@ Page(extend({}, Actionsheet, {
             componentId: 'baseActionsheet',
             actions: []
         },
-        shopcount:0,
-        pageNum:2,     //翻页数据
-        indexEnd:false,
-        showVideo:false,
-        videoSrc:null,
+        shopcount: 0,
+        pageNum: 2,     //翻页数据
+        indexEnd: false,
+        showVideo: false,
+        videoSrc: null,
         /*公共数据 */
         ...comData
     },
     ...methodsArr,
     //获取首页基本配置
-    getConfig(){
+    getConfig() {
         wx.showLoading({
             title: '加载中...',
         })
         const { unionid } = this.data.userInfo;
         let temShopCount = this.data.shopcount;
-        WXREQ('GET', URL['getConfig'],{
+        WXREQ('GET', URL['getConfig'], {
             key,
             unionid
-        },res=>{
+        }, res => {
             wx.stopPullDownRefresh();   //处理下拉刷新
             wx.hideLoading();
-            if(res.status == 0){
+            if (res.status == 0) {
                 const { banner, config, data, shopcount } = res;
                 let TemBusinessList = this.data.businessList;
-                if (this.data.businessList.length == 0){  //列表没有数据  第一次获取数据
-                  this.setData({
-                    businessList: data
-                  })
-                  if (shopcount < 10) {
+                if (this.data.businessList.length == 0) {  //列表没有数据  第一次获取数据
                     this.setData({
-                      indexEnd: true
+                        businessList: data
                     })
-                  }
-                }else{   //列表有数据    第二次之后获取数据
-                  if (temShopCount < shopcount){  //再次获取的时候， 发现数据比之前的要多。
-                    this.setData({
-                      indexEnd: false
-                    })
-                  }
-                  if(data.length == 0) return;
-                  for (let i = 0; i < TemBusinessList.length; i++){
-                    for(let j = 0; j < data.length; j++){
-                      if (TemBusinessList[i].id == data[j].id){
-                        TemBusinessList[i] = data[j]
-                      }
+                    if (shopcount < 10) {
+                        this.setData({
+                            indexEnd: true
+                        })
                     }
-                  }
-                  this.setData({
-                    businessList: TemBusinessList
-                  })
-                }                
+                } else {   //列表有数据    第二次之后获取数据
+                    if (temShopCount < shopcount) {  //再次获取的时候， 发现数据比之前的要多。
+                        this.setData({
+                            indexEnd: false
+                        })
+                    }
+                    if (data.length == 0) return;
+                    for (let i = 0; i < TemBusinessList.length; i++) {
+                        for (let j = 0; j < data.length; j++) {
+                            if (TemBusinessList[i].id == data[j].id) {
+                                TemBusinessList[i] = data[j]
+                            }
+                        }
+                    }
+                    this.setData({
+                        businessList: TemBusinessList
+                    })
+                }
                 this.setData({
                     banner,
-                    config,                    
+                    config,
                     shopcount
                 })
                 app.globalData.is_pay_apply = config.is_pay_apply;
                 app.globalData.is_pay_praise = config.is_pay_praise;
-            }else{
+            } else {
                 wx.showToast({
                     title: res.msg,
-                    icon:'none',
-                    mask:true
+                    icon: 'none',
+                    mask: true
                 })
             }
         })
-    },   
+    },
     onReady: function () {
-        let Timer = setInterval(()=>{
-            if (app.globalData.userInfo){
+        let Timer = setInterval(() => {
+            if (app.globalData.userInfo) {
                 clearInterval(Timer);
                 this.setData({
                     userInfo: app.globalData.userInfo
                 })
                 this.getConfig();
             }
-        },100)
+        }, 100)
     },
     onReachBottom(e) {
         if (this.data.indexEnd) return;
         wx.showLoading({
             title: '加载中...',
-            mask:true
-        })    
-        WXREQ('GET',URL['getShop'],{
+            mask: true
+        })
+        WXREQ('GET', URL['getShop'], {
             key,
-            unionid:app.globalData.userInfo.unionid,
-            page:this.data.pageNum,
-            limit:10
-        },res=>{
+            unionid: app.globalData.userInfo.unionid,
+            page: this.data.pageNum,
+            limit: 10
+        }, res => {
             wx.hideLoading();
-            if(res.status == 0){
+            if (res.status == 0) {
                 let arr = res.data;
                 let temList = this.data.businessList;
-                arr.forEach((item,index)=>{
+                arr.forEach((item, index) => {
                     temList.push(item)
                 })
                 this.setData({
-                    businessList:temList,
-                    pageNum:this.data.pageNum+1
+                    businessList: temList,
+                    pageNum: this.data.pageNum + 1
                 })
-                if(arr.length < 10){
+                if (arr.length < 10) {
                     this.setData({
-                        indexEnd:true
+                        indexEnd: true
                     })
                 }
-            }else{
+            } else {
                 wx.showToast({
                     title: res.msg,
-                    mask:true,
-                    icon:'none'
+                    mask: true,
+                    icon: 'none'
                 })
             }
         })
     },
-    zanUpdate(index,num){
-        let tem = this.data.businessList.map(item=>{
+    zanUpdate(index, num) {
+        let tem = this.data.businessList.map(item => {
             return item;
         });
         tem[index].is_praise = 1;
-        tem[index].praise = tem[index].praise+num;
+        tem[index].praise = tem[index].praise + num;
         this.setData({
             businessList: tem,
         })
     },
     //关闭视频
-    closeVideoHandle(){
+    closeVideoHandle() {
         this.setData({
-            showVideo:false
+            showVideo: false
         })
         this.videoContext.pause();
     },
     //去除默认
-    delDefault(){},
-    geDetail(e){  //banenr跳链接
+    delDefault() { },
+    geDetail(e) {  //banenr跳链接
         const { url, } = e.currentTarget.dataset;
         const typeNum = e.currentTarget.dataset.type;
-        if (typeNum == 1){   //小程序
+        if (typeNum == 1) {   //小程序
             wx.navigateTo({
                 url: url,
             })
-        }else if(typeNum == 2) { //外链
+        } else if (typeNum == 2) { //外链
             wx.navigateTo({
-                url: '/pages/webview/webview?url='+url,
+                url: '/pages/webview/webview?url=' + url,
             })
-        }else if(typeNum == 3){
+        } else if (typeNum == 3) {
             this.setData({
                 videoSrc: url,
                 showVideo: true
             })
             this.videoContext = wx.createVideoContext('myVideo');
-        }    
+        }
     },
-    onPullDownRefresh(e){
+    onPullDownRefresh(e) {
         this.getConfig();
     }
-    
+
 }))

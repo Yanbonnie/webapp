@@ -4,61 +4,61 @@ const { key } = app.globalData;
 import { URL, WXREQ } from './util';
 module.exports = {
     'comData': {
-        'phoneList':[1,2],
-        'operState': false,        
-        'zanData':{  //点赞支付弹窗数据
-            context:'您今天已经为商家点过赞了，你可购买以下产品为商家增加人气',
-            btnArr:[{
-                txt:'鲜花',
-                price:1
-            },{
-                txt:'壁画',
-                price:6
-            },{
-                txt:'装修',
-                price:18
+        'phoneList': [1, 2],
+        'operState': false,
+        'zanData': {  //点赞支付弹窗数据
+            context: '您今天已经为商家点过赞了，你可购买以下产品为商家增加人气',
+            btnArr: [{
+                txt: '鲜花',
+                price: 1
+            }, {
+                txt: '壁画',
+                price: 6
+            }, {
+                txt: '装修',
+                price: 18
             }],
-            icon:'zan',
-            id:null,
-            index:null,
-            enter:''
+            icon: 'zan',
+            id: null,
+            index: null,
+            enter: ''
         },
         'operState2': true,
-        'shopInfoData':{  //入驻支付弹窗数据
-            context:'请选择你的信息服务周期',
-            btnArr:[
+        'shopInfoData': {  //入驻支付弹窗数据
+            context: '请选择你的信息服务周期',
+            btnArr: [
                 {
-                    txt:'1个月',
-                    price:12
+                    txt: '1个月',
+                    price: 12
                 },
                 {
-                    txt:'3个月',
-                    price:30,
+                    txt: '3个月',
+                    price: 30,
                 },
                 {
-                    txt:'12个月',
-                    price:100
+                    txt: '12个月',
+                    price: 100
                 }
             ],
-            icon:'inShop',
-            id:null,
+            icon: 'inShop',
+            id: null,
         }
     },
-    'methodsArr':{
+    'methodsArr': {
         //获取电话列表
-        getPhoneList(e){
+        getPhoneList(e) {
             const { id } = e.currentTarget.dataset;
-            return new Promise((resolve,reject)=>{
-                WXREQ('GET',URL['getTel'],{
+            return new Promise((resolve, reject) => {
+                WXREQ('GET', URL['getTel'], {
                     key,
                     id
-                },res=>{
-                    if(res.status == 0){
+                }, res => {
+                    if (res.status == 0) {
                         resolve(res.data);
-                    }else{
+                    } else {
                         wx.showToast({
                             title: '获取联系方式失败',
-                            icon:'none'
+                            icon: 'none'
                         })
                     }
                 })
@@ -90,7 +90,7 @@ module.exports = {
             const { actions } = this.data.baseActionsheet;
             wx.makePhoneCall({
                 phoneNumber: actions[index].name,
-                success:res=>{
+                success: res => {
 
                 }
             })
@@ -133,85 +133,85 @@ module.exports = {
                     })
                 }
             })
-        }, 
+        },
         //到达详情页
         goDetail(e) {
             const { id } = e.currentTarget.dataset;
             wx.navigateTo({
                 url: `/pages/detail/detail?id=${id}`,
             })
-        },  
+        },
         //点赞
-        zanHandle(e){
-            const { id, is_praise,enter,index } = e.currentTarget.dataset;
-            if (app.globalData.is_pay_praise == 1){  //支付点赞
-                if(is_praise == 0){  //第一次免费
-                    this.postPraise(id,enter,index);
-                }else{
+        zanHandle(e) {
+            const { id, is_praise, enter, index } = e.currentTarget.dataset;
+            if (app.globalData.is_pay_praise == 1) {  //支付点赞
+                if (is_praise == 0) {  //第一次免费
+                    this.postPraise(id, enter, index);
+                } else {
                     this.setData({
-                        operState:true,   
-                        'zanData.id':id,
-                        'zanData.enter':enter,
-                        'zanData.index':index       
+                        operState: true,
+                        'zanData.id': id,
+                        'zanData.enter': enter,
+                        'zanData.index': index
                     })
                 }
-            }else{
-                if(is_praise == 1) return;
-                this.postPraise(id,enter,index);
+            } else {
+                if (is_praise == 1) return;
+                this.postPraise(id, enter, index);
             }
         },
         //商家点赞接口
-        postPraise(id,enter,index){
-            WXREQ('POST', URL['postPraise'],{
+        postPraise(id, enter, index) {
+            WXREQ('POST', URL['postPraise'], {
                 key,
-                unionid:app.globalData.userInfo.unionid,
+                unionid: app.globalData.userInfo.unionid,
                 id
-            },res=>{
-                if(res.status == 0){
-                    if(enter == 'index'){  //首页点赞
-                        this.zanUpdate(index,1);
-                    }else if(enter == 'detail'){  //详情页点赞
+            }, res => {
+                if (res.status == 0) {
+                    if (enter == 'index') {  //首页点赞
+                        this.zanUpdate(index, 1);
+                    } else if (enter == 'detail') {  //详情页点赞
                         this.getShopDetails(id);
-                    }else if(enter == 'search'){  //搜索页点赞
+                    } else if (enter == 'search') {  //搜索页点赞
                         this.postSearch()
                     }
-                    
-                }else{
+
+                } else {
                     wx.showToast({
                         title: res.msg,
-                        icon:'none'
+                        icon: 'none'
                     })
                 }
             })
         },
         //商家支付点赞接口
-        payMoneyHandle(options){
+        payMoneyHandle(options) {
             let money = options.detail;
             let id = this.data.zanData.id;
             let enter = this.data.zanData.enter;
             wx.showLoading({
                 title: '加载中...',
-                mask:true
+                mask: true
             })
-            WXREQ('POST', URL['payPraise'],{
+            WXREQ('POST', URL['payPraise'], {
                 key,
                 id,
-                unionid:app.globalData.userInfo.unionid,
+                unionid: app.globalData.userInfo.unionid,
                 money
-            },res=>{
+            }, res => {
                 wx.hideLoading();
-                const { appId, nonceStr, paySign, signType, timeStamp} = res.data;
+                const { appId, nonceStr, paySign, signType, timeStamp } = res.data;
                 const package2 = res.data.package;
-                if(res.status == 0){
+                if (res.status == 0) {
                     wx.requestPayment({
                         timeStamp,
                         nonceStr,
                         'package': package2,
                         signType,
                         paySign,
-                        'success':res=>{
+                        'success': res => {
                             this.setData({
-                                operState:false
+                                operState: false
                             })
                             //支付成功
                             if (enter == 'index') {  //首页点赞
@@ -223,21 +223,21 @@ module.exports = {
                             }
 
                         },
-                        'fail':res=> {
+                        'fail': res => {
                         }
-                    }) 
-                }else{
+                    })
+                } else {
                     wx.showToast({
                         title: res.msg,
-                        mask:false,
-                        icon:'none'
+                        mask: false,
+                        icon: 'none'
                     })
                 }
-                
+
             })
         },
         //关闭弹框操作弹框
-        closeHandle(){
+        closeHandle() {
             this.setData({
                 operState: false
             })
@@ -252,12 +252,12 @@ module.exports = {
                 'imageUrl': '/assets/images/picture.jpeg',
                 success: res => {
                     // 转发成功
-                    WXREQ('POST', URL['postLogShare'],{
+                    WXREQ('POST', URL['postLogShare'], {
                         key,
-                        unionid:app.globalData.userInfo.unionid,
-                        page:'/pages/index/index'
-                    },res=>{
-                        
+                        unionid: app.globalData.userInfo.unionid,
+                        page: '/pages/index/index'
+                    }, res => {
+
                     })
                 }
             }

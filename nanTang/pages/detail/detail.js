@@ -9,12 +9,12 @@ Page({
      * 页面的初始数据
      */
     data: {
-        navStatus:false,
-        shopData:{},
-        menu_pic:[],
-        id:null,
-        ewmState:false,
-        ewmUrl:'',
+        navStatus: false,
+        shopData: {},
+        menu_pic: [],
+        id: null,
+        ewmState: false,
+        ewmUrl: '',
         /*公共数据 */
         ...comData
     },
@@ -23,27 +23,27 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        const { id,index } = options;
+        const { id, index } = options;
         this.setData({
             id
         })
-        if(options.index){
+        if (options.index) {
             this.setData({
-                navStatus:true
+                navStatus: true
             })
         }
         this.getShopDetails(id);
     },
-    getShopDetails(id){
+    getShopDetails(id) {
         wx.showLoading({
             title: '加载中...',
-            mask:'true'
+            mask: 'true'
         })
-        WXREQ('GET', URL['getShopDetails'],{
+        WXREQ('GET', URL['getShopDetails'], {
             key,
             unionid: app.globalData.userInfo.unionid,
             id
-        },res=>{
+        }, res => {
             wx.stopPullDownRefresh();
             wx.hideLoading();
             const { data, menu_pic, status, msg } = res;
@@ -65,22 +65,22 @@ Page({
     previewHandle(e) {
         const { id } = e.currentTarget.dataset;
         const { menu_pic } = this.data;
-        let urls = [];        
+        let urls = [];
         menu_pic.forEach(item => urls.push(item.pic))
         wx.previewImage({
             current: menu_pic[id].pic, // 当前显示图片的http链接
             urls: urls, // 需要预览的图片http链接列表
             success: (res) => {
-                
+
             }
         })
     },
-    preImg(){
+    preImg() {
         let urls = [];
         urls.push(this.data.ewmUrl)
         wx.previewImage({
             urls,
-            success:res=>{}
+            success: res => { }
         })
     },
     /**name
@@ -89,8 +89,8 @@ Page({
     onShareAppMessage: function () {
         const { id, logo, name } = this.data.shopData;
         return {
-            'title': '南塘生活圈·'+name,
-            'path': '/pages/enter/enter?id='+id,
+            'title': '南塘生活圈·' + name,
+            'path': '/pages/enter/enter?id=' + id,
             'imageUrl': logo,
             success: res => {
                 // 转发成功
@@ -104,43 +104,43 @@ Page({
             }
         }
     },
-    showEwm(e){
+    showEwm(e) {
         const { id } = e.currentTarget.dataset;
         wx.showLoading({
             title: '加载中...',
-            mask:true
+            mask: true
         })
-        WXREQ('GET', URL['getShare'],{
+        WXREQ('GET', URL['getShare'], {
             key,
             unionid: app.globalData.userInfo.unionid,
             id
-        },res=>{
+        }, res => {
             wx.hideLoading()
-            if(res.status == 0){
+            if (res.status == 0) {
                 this.setData({
-                    ewmUrl:res.url,
-                    ewmState:true
+                    ewmUrl: res.url,
+                    ewmState: true
                 })
-            }else{
+            } else {
                 wx.showToast({
                     title: res.msg,
-                    mask:true,
-                    icon:'none'
+                    mask: true,
+                    icon: 'none'
                 })
             }
         })
     },
-    hideEwm(){
+    hideEwm() {
         this.setData({
-            ewmState:false
+            ewmState: false
         })
     },
     onPullDownRefresh(e) {
         this.getShopDetails(this.data.id);
     },
-    go(e){
-        const {index} = e.currentTarget.dataset;
-        switch (index){
+    go(e) {
+        const { index } = e.currentTarget.dataset;
+        switch (index) {
             case '1':
                 wx.switchTab({
                     url: '/pages/index/index',
@@ -160,5 +160,5 @@ Page({
                 break;
         }
     }
-    
+
 })
