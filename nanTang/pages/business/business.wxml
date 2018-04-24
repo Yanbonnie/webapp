@@ -89,6 +89,5 @@
             </view>
         </view>
     </form>
-
 </view>
 <oper_model data="{{shopInfoData}}" wx:if="{{operState}}" bind:closeHandle="closeHandle" bind:payMoney="payInShopMoneyHandle"></oper_model>
