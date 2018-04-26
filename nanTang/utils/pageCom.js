@@ -92,7 +92,14 @@ module.exports = {
             wx.makePhoneCall({
                 phoneNumber: actions[index].name,
                 success: res => {
+                  // 转发成功
+                  WXREQ('POST', URL['postLogTel'], {
+                    key,
+                    unionid: app.globalData.userInfo.unionid,
+                    tel: actions[index].name
+                  }, res => {
 
+                  })
                 }
             })
         },

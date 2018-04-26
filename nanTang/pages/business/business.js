@@ -17,7 +17,7 @@ Page({
         chargeVal: '',
         phone: { title: '联系电话', type: 'input', placeholder: '请输入联系电话', componentId: 'phone' },
         phoneVal: '',
-        phones: { title: '外卖电话', type: 'input', placeholder: '请输入外卖号码用,分隔多个', componentId: 'phones' },
+        phones: { title: '展示电话', type: 'input', placeholder: '请输入展示号码用,分隔多个', componentId: 'phones' },
         phonesVal: '',
         address: { title: '地址', type: 'input', placeholder: '请输入地址', componentId: 'address' },
         addressVal: '',
@@ -28,7 +28,7 @@ Page({
             id: ''
         },
         open_time: '请输入开业时间',
-        close_time: '请输入打洋时间',
+        close_time: '请输入打烊时间',
         menuSrc: [],
         is_apply: null,   //是否入驻
         shopStatus: null, //商家状态   0待审核-待确认（不可点击） 1已通过-修改 2已过期-提交续期  -1已拒绝-重新提交

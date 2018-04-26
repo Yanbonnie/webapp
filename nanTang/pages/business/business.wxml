@@ -49,7 +49,7 @@
                 </view>
             </view>
             <view class="{{close_time.length > 5 ? 'zan-cell zan-field timeClass enterPre' : 'zan-cell zan-field timeClass'}}">
-                <view class="zan-cell__hd zan-field__title">打洋时间</view>
+                <view class="zan-cell__hd zan-field__title">打烊时间</view>
                 <view wx:if="{{shopStatus == 0}}" class="zan-field__input">{{close_time}}</view>
                 <view wx:else class='zan-field__input zan-cell__bd'>
                     <picker mode="time" value="{{close_time}}" data-name="close_time" bindchange="bindTimeChange">
