@@ -31,7 +31,17 @@ page {
 .zan-card .btn2 {
     bottom: 40rpx;
 }
-
+.detail_thumb{
+    position: static;
+} 
+.detail_thumb image{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 25rpx;
+    width: 180rpx;
+    height: 180rpx;
+}
 .rowBtn {
     top: 20rpx;
     position: absolute;
