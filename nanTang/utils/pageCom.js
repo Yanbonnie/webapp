@@ -2,6 +2,7 @@
 const app = getApp();
 const { key } = app.globalData;
 import { URL, WXREQ } from './util';
+const Promise = require('./es6-promise')
 module.exports = {
     'comData': {
         'phoneList': [1, 2],

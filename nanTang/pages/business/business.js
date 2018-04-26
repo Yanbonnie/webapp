@@ -4,6 +4,7 @@ const app = getApp();
 let { key } = app.globalData;
 import { URL, WXREQ, Config, Trim, Check } from '../../utils/util';
 import { comData, methodsArr } from '../../utils/pageCom';
+const Promise = require('../../utils/es6-promise')
 Page({
 
     /**
