@@ -178,6 +178,13 @@ Page(extend({}, Actionsheet, {
                 urls,
                 success: res => { }
             })
+        }else if(typeNum == 4){
+            let urls = [];
+            urls.push(url)
+            wx.previewImage({
+                urls,
+                success: res => { }
+            })
         }
     },
     onPullDownRefresh(e) {
