@@ -20,7 +20,6 @@ App({
                         let Info = wx.getStorageSync('Info')
                         if (Info) {
                             this.globalData.userInfo = Info;
-                            console.log(Info)
                         } else {
                             Promise.all([this.loginHandle(), this.getUserInfo()]).then(results => {
                                 const { code } = results[0];
