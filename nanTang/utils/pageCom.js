@@ -58,7 +58,7 @@ module.exports = {
                         resolve(res.data);
                     } else {
                         wx.showToast({
-                            title: '获取联系方式失败',
+                          title: res.msg,
                             icon: 'none'
                         })
                     }

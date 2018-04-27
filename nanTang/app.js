@@ -14,14 +14,30 @@ App({
         //     mask:true
         // })
         wx.getSetting({
-            success: res => {
+            success: res => {                
                 if (res.authSetting['scope.userInfo']) {
-                    Promise.all([this.loginHandle(), this.getUserInfo()]).then(results => {
-                        const { code } = results[0];
-                        const { iv, encryptedData } = results[1];
-                        
-                        this.getAllUserInfo(code, iv, encryptedData);
-                    });
+                    try {
+                        let Info = wx.getStorageSync('Info')
+                        if (Info) {
+                            this.globalData.userInfo = Info;
+                            console.log(Info)
+                        } else {
+                            Promise.all([this.loginHandle(), this.getUserInfo()]).then(results => {
+                                const { code } = results[0];
+                                const { iv, encryptedData } = results[1];
+
+                                this.getAllUserInfo(code, iv, encryptedData);
+                            });
+                        }
+                    } catch (e) {
+                        Promise.all([this.loginHandle(), this.getUserInfo()]).then(results => {
+                            const { code } = results[0];
+                            const { iv, encryptedData } = results[1];
+
+                            this.getAllUserInfo(code, iv, encryptedData);
+                        });
+                    }                   
+                    
                 } else {   //未授权，拉起授权获取用户信息
                     wx.authorize({
                         scope: 'scope.userInfo',
@@ -72,8 +88,9 @@ App({
             key
         },res=>{
             if(res.status == 0){
+                console.log(res.data)
                 this.globalData.userInfo = res.data;
-                
+                wx.setStorageSync('Info', res.data)
             }else{
                 // wx.hideLoading();
                 wx.showModal({
