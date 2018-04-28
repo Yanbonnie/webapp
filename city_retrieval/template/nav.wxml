@@ -1,6 +1,9 @@
 <template name="nav">
     <view class='nav'>
-        <view class="nav_left">北京</view>
-        <view class="nav_right">信息</view>
+        <view class="nav_left">
+            <image  src="/assets/images/address.png"></image>
+            北京
+        </view>
+        <view class="nav_right"><image  src="/assets/images/wechat.png"></image></view>
     </view>
 </template>

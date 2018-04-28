@@ -2,5 +2,8 @@
 <import src="/template/nav.wxml"/>
 <view class="container">
     <template is="nav" />
+    <view class='contain_box'>
+        
+    </view>
    <!-- <citylist styles='max-height:100%;' citylist="{{citylist}}" bindcitytap='cityTap' ></citylist>  -->
 </view>
