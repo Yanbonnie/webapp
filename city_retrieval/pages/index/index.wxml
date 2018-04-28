@@ -2,9 +2,9 @@
 <import src="/template/nav.wxml"/>
 <view class="container">
     <template is="nav" />
-    <view class='contain_box'>
+    <view class='contain_box'>        
         <view class="side_left">
-            <scroll-view scroll-y="true"  style='height:400vh'>
+            <scroll-view scroll-y="true"  style='height:100%'>
                 <text>123</text>
                 <text>123</text>
                 <text>123</text>
@@ -77,7 +77,7 @@
             </scroll-view>
         </view>
         <view class="side_right">
-            <scroll-view scroll-y="true"  style='height:400vh'>
+            <scroll-view scroll-y="true"  style='height:100%'>
                 <text>123</text>
                 <text>123</text>
                 <text>123</text>
@@ -150,5 +150,5 @@
             </scroll-view>
         </view>
     </view>
-   <!-- <citylist styles='max-height:100%;' citylist="{{citylist}}" bindcitytap='cityTap' ></citylist>  -->
+    <!-- <citylist styles='max-height:100%;' citylist="{{citylist}}" bindcitytap='cityTap' ></citylist>   -->
 </view>

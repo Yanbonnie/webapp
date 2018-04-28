@@ -90,6 +90,7 @@ Component({
         }
     },
     ready() {
+        console.log(wx.getStorageSync('locatecity'))
         let cityOrTime = wx.getStorageSync('locatecity') || {},
             time = new Date().getTime(),
             city = '';
