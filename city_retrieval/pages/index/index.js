@@ -1,60 +1,28 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+import Sort from '../../utils/city_sort';   //城市排序
+let arr2 = [
+    { "id": "v1", "cityName": "北京" },
+    { "id": "v2", "cityName": "上海" },
+    { "id": "v5", "cityName": "天津" },
+    { "id": "v7", "cityName": "安徽" },
+    { "id": "v3", "cityName": "呼和浩特" },
+    { "id": "v4", "cityName": "包头" },
+    { "id": "v9", "cityName": "海南" },
+    { "id": "v8", "cityName": "张家口" }
+];
+let str = Sort.pySegSort(arr2);
 Page({
-  data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
-  cityTap(e) {
-      console.log('fasdfsdfsdfds');
-      console.log(e);
-      const cityName = e.detail.cityname;
-      wx.navigateBack();
-  },
+    data: {
+        citylist: str,
+    },
+    onLoad: function () {
+
+    },
+    cityTap(e) {
+        console.log(e);
+        const cityName = e.detail.cityname;
+        wx.navigateBack();
+    },
 })

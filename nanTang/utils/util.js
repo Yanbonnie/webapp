@@ -54,7 +54,8 @@ const URL = {
     'postSearch':'postSearch',          //商家信息搜索接口        
     'postLogTel':'postLogTel',          //拨打电话记录接口        
     'postLogShare':'postLogShare',      //分享记录接口    
-    'getShare':'getShare',              //分享二维码     
+    'getShare':'getShare',              //分享二维码  
+    'postAdLog':'postAdLog',            //获取记录   
 }
 
 const WXREQ = (method,url,data,succfn)=>{

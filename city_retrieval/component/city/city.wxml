@@ -14,7 +14,7 @@
             </view>
             <view class='city_list_box'>
                 <block wx:for='{{citylist}}' wx:key='this' wx:for-item='letterItem' wx:for-index='letterIndex'>
-                    <view class='city_first_letter' id='{{letterItem.letter}}'>{{letterItem.letter}}</view>
+                    <view class='city_first_letter' id='{{letterItem.letter}}' wx:if="{{letterItem.data.length > 0}}">{{letterItem.letter}}</view>
                     <text class='city_name' wx:for='{{letterItem.data}}' wx:key='this' data-types='list' catchtap='cityTap' data-index='{{index}}' data-val='{{item}}'>{{item.cityName}}</text>
                 </block>
             </view>

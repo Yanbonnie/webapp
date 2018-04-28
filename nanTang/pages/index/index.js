@@ -155,8 +155,15 @@ Page(extend({}, Actionsheet, {
     //去除默认
     delDefault() { },
     geDetail(e) {  //banenr跳链接
-        const { url,src } = e.currentTarget.dataset;
+        const { url,src,id } = e.currentTarget.dataset;
         const typeNum = e.currentTarget.dataset.type;
+        WXREQ('POST',URL['postAdLog'],{
+            key,
+            unionid: app.globalData.userInfo.unionid,
+            id
+        },res=>{
+            
+        })
         if (typeNum == 1) {   //小程序
             wx.navigateTo({
                 url: url,

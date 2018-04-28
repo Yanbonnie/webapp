@@ -1,7 +1,3 @@
-scroll-view{
-    /* height:  calc(100% - 10px); */
-    /* height: 900rpx; */
-}
 .city_box {
     height: 100%;
     background: #fff;

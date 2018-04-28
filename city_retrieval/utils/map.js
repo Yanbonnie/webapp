@@ -1,9 +1,9 @@
-const wxqqmap = require('../libs/qqmap-wx-jssdk.min.js'),
-    qqwxmap = new wxqqmap({
-        key: 'GTDBZ-WFSRX-JOT4W-7WYBD-Z2CTO-7QBEM' // 必填，这里最好填自己申请的的
-    });
-import util from './util.js';
-const qq = 'sdfsdf';
+const   wxqqmap = require('../libs/qqmap-wx-jssdk.min.js'),
+        qqwxmap = new wxqqmap({
+            key: 'GTDBZ-WFSRX-JOT4W-7WYBD-Z2CTO-7QBEM' // 必填，这里最好填自己申请的的
+        });
+import  util from './util.js';
+const   qq = 'sdfsdf';
 export default class qqmap {//获取定位信息
     getLocateInfo() {
         let that = this;
@@ -16,20 +16,16 @@ export default class qqmap {//获取定位信息
                         longitude: val.longitude
                     },
                     success: function (res) {
-                        console.log(res.result.address_component.city);
+                        console.log(res);
                         resolve(res.result.address_component.city);//返回城市
                     },
                     fail: function (res) {
                         reject(res);
-                    },
-                    complete: function (res) {
-                        console.log(res);
                     }
                 });
 
             }, function (error) {
                 //如果用户拒绝了授权，那么这里会提醒他，去授权后再定位
-                console.log('shibai');
                 wx.showModal({
                     title: '',
                     content: '自动定位需要授权地理定位选项',
@@ -63,8 +59,5 @@ export default class qqmap {//获取定位信息
                 }
             })
         });
-
     }
-
-
 }

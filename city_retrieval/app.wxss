@@ -8,3 +8,17 @@
   padding: 200rpx 0;
   box-sizing: border-box; */
 } 
+
+/*nav*/
+.nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; 
+}
+.nav view{
+    display: block;
+    padding:10rpx 20rpx;
+    font-size:28rpx;
+    /* flex-basis:50%; */
+}
