@@ -197,5 +197,6 @@ Page(extend({}, Actionsheet, {
     onPullDownRefresh(e) {
         this.getConfig();
     }
+    
 
 }))

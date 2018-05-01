@@ -3,7 +3,7 @@
 <template is="zan-actionsheet" data="{{ ...baseActionsheet }}"></template>
 <view class='container'>
     <scroll-view scroll-y="true" class='scrollWrap'>
-        <view class='productList'>
+        <view class='productList d_product'>
             <view class="zan-card">
                 <!-- 卡片左侧商品图片 -->
                 <view class="zan-card__thumb">
@@ -37,14 +37,21 @@
                             </view>
                             <view>{{shopData.praise}}</view>
                             <view>
-                                <image class='zanIcon' catchtap='zanHandle' data-id="{{shopData.id}}" data-enter="detail" data-is_praise="{{shopData.is_praise}}" src="{{shopData.is_praise == 0 ? '/assets/images/zan.png' :'/assets/images/zan_on.png'}}"></image>
+                                <image class='zanIcon' catchtap='zanHandle' data-id="{{shopData.id}}" data-enter="detail" data-is_praise="{{shopData.is_praise}}" src="{{shopData.is_praise == 1 ? '/assets/images/zan_on.png' :'/assets/images/zan.png'}}"></image>
                             </view>
                         </view>
                     </view>
                 </view>
-                <view class="btnBox">
+                <view class="btnBox" wx:if="{{gift_type == 0 || gift_type == 1 && is_myself  == 0}}">
                     <button class="zan-btn zan-btn--small btn1" data-id="{{shopData.id}}" catchtap='toggleActionsheet'>拨打电话</button>
+                    <button class="zan-btn zan-btn--small btn2" data-id="{{shopData.id}}" catchtap='showEwm'>分享朋友圈</button>
+                </view>
+                <view class="btnBox" wx:else>
+                    <button class="zan-btn zan-btn--small btn1 call" data-id="{{shopData.id}}" catchtap='toggleActionsheet'>拨打电话</button>
                     <button class="zan-btn zan-btn--small btn2 share" data-id="{{shopData.id}}" catchtap='showEwm'>分享朋友圈</button>
+                      <button class='zan-btn zan-btn--small btn3'  data-id="{{shopData.id}}" catchtap='getMyGift'>
+                        Ta的礼物
+                    </button>  
                 </view>
             </view>
         </view>
@@ -76,7 +83,7 @@
         </view>
     </scroll-view>
 </view>
-<oper_model data="{{zanData}}" wx:if="{{operState}}" bind:closeHandle="closeHandle" bind:payMoney="payMoneyHandle"></oper_model>
+<oper_model data="{{zanData}}" wx:if="{{operState}}" bind:closeHandle="closeHandle" bind:payMoney="payMoneyHandle" bind:showMore="showMoreHandle"></oper_model>
 <!--二维码  -->
 <view class='ewmCover' wx:if="{{ewmState}}" bindtap='hideEwm'>
     <view class='ewmBox'>
@@ -85,5 +92,35 @@
             <text>点击查看大图</text>
             <text>长按大图保存可分享到朋友圈</text>
         </view>
+    </view>
+</view>
+<!--礼物列表  -->
+<view class='giftCover' wx:if="{{lookGiftState}}">
+    <view class='gift_box'>
+        <view class='head'>
+            收到的礼物
+            <text catchtap='closeGiftHandle'>x</text>
+        </view>
+        <scroll-view scroll-y="true" bindscrolltolower="getMyGift" data-id="{{shopData.id}}">            
+            <view class='gift_item clearfix' wx:for="{{giftList}}" wx:key="{{index}}">
+                <view class='gift_left'>
+                    <image src="{{item.wxheadpic}}"></image>
+                    <text class='shengl'>{{item.wxname}}</text>
+                </view>
+                <view class='gift_center'>
+                    <view class='main_txt'>
+                        给Ta送了
+                        <text class='strong_txt'>[{{item.gift}}]</text>
+                    </view>
+                    <text class='time'>{{item.time}}</text>
+                </view>
+                <view class='gift_right'>
+                    人气+{{item.money}}
+                </view>
+            </view>
+            <view class='endtxt' wx:if="{{giftEnd}}">
+                <text>到底了</text>
+            </view>
+        </scroll-view>
     </view>
 </view>

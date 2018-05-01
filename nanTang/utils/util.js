@@ -56,6 +56,7 @@ const URL = {
     'postLogShare':'postLogShare',      //分享记录接口    
     'getShare':'getShare',              //分享二维码  
     'postAdLog':'postAdLog',            //获取记录   
+    'getMyGift':'getMyGift',            //获取我的礼物列表接口
 }
 
 const WXREQ = (method,url,data,succfn)=>{

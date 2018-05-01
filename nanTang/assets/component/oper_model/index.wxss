@@ -34,7 +34,12 @@
     padding: 40rpx;
     line-height: 40rpx;
 }
-
+.cover_body{
+  padding-bottom:20rpx;
+}
+.mainbody {
+  overflow:hidden;_zoom:1;
+}
 .mainbody view{
     width: 30%; 
     margin: 1.5%;
@@ -45,10 +50,21 @@
     display: block;
     margin: 0 auto;
     font-size: 28rpx;
+    line-height: 30rpx;
+    padding: 10rpx 0;
+}
+.tuhao_title{
+  width: 100%;
+  line-height: 60rpx;
+  text-align: center;
+  display: block;
+  color: #ff503f;
+}
+.mainbody  button text{
+  font-size: 22rpx;
 }
 .mainbody  text{
     width: 100%;
     display: block;
     text-align: center;
-    line-height: 100rpx;
 }

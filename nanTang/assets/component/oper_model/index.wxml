@@ -8,8 +8,15 @@
             </view>
             <view class='mainbody'> 
                 <view wx:for="{{data.btnArr}}" wx:key="{{index}}">
-                    <button plain="true" bindtap='payMoney' data-price="{{item.price}}">{{item.txt}}</button>
-                    <text>￥{{item.price}}.00元</text>
+                    <button plain="true" bindtap='payMoney' data-price="{{item.price}}">{{item.txt}}<text>￥{{item.price}}.00元</text>
+                    </button>
+                </view>
+            </view>
+            <text class='tuhao_title' wx:if="{{data.btnArr2}}" bindtap='showMore'>点击变身土豪</text>
+            <view class='mainbody' wx:if="{{data.btnArr2State}}"> 
+                <view wx:for="{{data.btnArr2}}" wx:key="{{index}}">
+                    <button plain="true" bindtap='payMoney' data-price="{{item.price}}">{{item.txt}}<text>￥{{item.price}}.00元</text>
+                    </button>
                 </view>
             </view>
         </view>

@@ -23,8 +23,10 @@ Component({
           this.triggerEvent('payMoney',price)
       },
       closeHandle(e){
-          console.log(e)
           this.triggerEvent('closeHandle')
+      },
+      showMore(){
+        this.triggerEvent('showMore')
       }
   }
 })

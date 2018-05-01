@@ -6,7 +6,7 @@ const Promise = require('./es6-promise')
 module.exports = {
     'comData': {
         'phoneList': [1, 2],
-        'operState': false,
+        'operState':false,
         'zanData': {  //点赞支付弹窗数据
             context: '您今天已经为商家点过赞了，你可购买以下产品为商家增加人气',
             btnArr: [{
@@ -19,6 +19,17 @@ module.exports = {
                 txt: '装修',
                 price: 18
             }],
+            btnArr2: [{
+              txt:'跑车',
+              price:88
+            },{
+              txt:'别墅',
+              price:188
+            },{
+              txt:'火箭',
+              price:666
+            }],
+            btnArr2State:false,
             icon: 'zan',
             id: null,
             index: null,
@@ -160,7 +171,7 @@ module.exports = {
                         operState: true,
                         'zanData.id': id,
                         'zanData.enter': enter,
-                        'zanData.index': index
+                        'zanData.index': index ? index : ''
                     })
                 }
             } else {
@@ -248,6 +259,12 @@ module.exports = {
         closeHandle() {
             this.setData({
                 operState: false
+            })
+        },
+        //点赞展示更多
+        showMoreHandle() {
+            this.setData({
+                'zanData.btnArr2State': !this.data.zanData.btnArr2State
             })
         },
         /**

@@ -62,4 +62,4 @@
             <text>暂无数据</text>
         </view>
     </scroll-view>
-<oper_model data="{{zanData}}" wx:if="{{operState}}" bind:closeHandle="closeHandle" bind:payMoney="payMoneyHandle"></oper_model>
+<oper_model data="{{zanData}}" wx:if="{{operState}}" bind:closeHandle="closeHandle" bind:payMoney="payMoneyHandle" bind:showMore="showMoreHandle"></oper_model>

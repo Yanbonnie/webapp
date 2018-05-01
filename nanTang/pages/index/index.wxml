@@ -64,10 +64,12 @@
     </view>
 </view>
 
-<oper_model data="{{zanData}}" wx:if="{{operState}}" bind:closeHandle="closeHandle" bind:payMoney="payMoneyHandle"></oper_model>
+<oper_model data="{{zanData}}" wx:if="{{operState}}" bind:closeHandle="closeHandle" bind:payMoney="payMoneyHandle" bind:showMore="showMoreHandle"></oper_model>
 
 <view class='videoCover' wx:if="{{showVideo}}" bindtap='closeVideoHandle'>
     <view class='videoBox' catchtap='delDefault'>
         <video class='slide-image' id="myVideo" src="{{videoSrc}}" autoplay="false" controls objectFit="cover"></video>
     </view>
 </view>
+
+

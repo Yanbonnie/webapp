@@ -15,6 +15,12 @@ Page({
         id: null,
         ewmState: false,
         ewmUrl: '',
+        lookGiftState:false,
+        giftList:[],   //礼物列表
+        giftPage:1,    //礼物翻页数据
+        giftEnd:false, //礼物是否到底
+        gift_type: null,   //0时是关闭,  1是自己可见，2大家都可以见
+        is_myself:null,    //1是自己，0不是自己
         /*公共数据 */
         ...comData
     },
@@ -22,7 +28,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function (options) {      
         const { id, index } = options;
         this.setData({
             id
@@ -46,17 +52,71 @@ Page({
         }, res => {
             wx.stopPullDownRefresh();
             wx.hideLoading();
-            const { data, menu_pic, status, msg } = res;
+            const { data, menu_pic, status, msg, gift_type, is_myself,is_pay_praise } = res;
             if (status == 0) {
                 this.setData({
                     shopData: data,
-                    menu_pic
+                    menu_pic,
+                    gift_type,
+                    is_myself
                 })
+                app.globalData.is_pay_praise = is_pay_praise;
             } else {
                 wx.showToast({
                     title: msg,
                 })
             }
+        })
+    },
+    //ta的礼物
+    getMyGift(e){
+        this.setData({
+            lookGiftState: true
+        })
+        if (this.data.giftEnd) return;
+        wx.showLoading({
+            title:'加载中...',
+            mask:true
+        })
+        const { id } = e.currentTarget.dataset;
+        const { giftPage, giftList } = this.data;
+        WXREQ('GET', URL['getMyGift'],{
+            key,
+            unionid: app.globalData.userInfo.unionid,
+            id,
+            page: giftPage
+        },res=>{
+            wx.hideLoading();
+            if(res.status == 0){
+                if(res.is_data == 1){  //有数据
+                    let nextPate = giftPage + 1;
+                    let temGiftList = giftList;
+                    for (let i = 0; i < res.date.length ; i++){
+                        temGiftList.push(res.date[i])
+                    }
+                    this.setData({
+                        giftList: temGiftList,                        
+                        giftPage:nextPate
+                    })
+                    if (res.date.length < 10 && this.data.giftList.length > 10){
+                        this.setData({
+                            giftEnd:true  //数据到底了
+                        })
+                    }
+                }
+            }else{
+                wx.showToast({
+                    title: res.msg,
+                    icon:'none',
+                    mask:true
+                })
+            }
+        })
+    },
+    //关闭它的礼物弹框
+    closeGiftHandle(){
+        this.setData({
+            lookGiftState:false
         })
     },
     /**
