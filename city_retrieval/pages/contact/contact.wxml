@@ -1,0 +1,13 @@
+<view class="contact">
+    <view class='c_info'>
+        <list_item data="{{info}}" class="listItem">
+
+            <block slot="s_btn">
+                <button size="mini" class='c_btn' plain="true">推荐Ta</button>
+            </block>
+        </list_item>
+    </view>
+    <view class='c_chat'>
+
+    </view>
+</view>

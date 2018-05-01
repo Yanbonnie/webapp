@@ -1,5 +1,6 @@
 {
     "usingComponents": {
-        "citylist": "../../component/city/city"
+        "citylist": "../../component/city/city",
+        "list_item":"../../component/list_item/list_item"
     }
 }

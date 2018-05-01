@@ -1,0 +1,12 @@
+/* pages/contact/contact.wxss */
+.contact .c_btn{
+    width: 130rpx;
+    font-size: 28rpx;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.list_item .item_right{
+    width: 100%;
+}

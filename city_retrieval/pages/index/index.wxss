@@ -1,6 +1,7 @@
 /**index.wxss**/
-.side_left{
-    width: 200rpx;
+
+.side_left {
+    width: 150rpx;
     height: 100%;
     background: #efefef;
     position: absolute;
@@ -8,13 +9,63 @@
     bottom: 0;
     top: 0;
 }
-.side_left text,.side_right text{
-    display: block;
-    line-height: 80rpx;
-}
-.side_right{
-    padding-left:200rpx;
-    width: calc(100% - 100px);
-    height: 100%;
 
+.side_left .list text {
+    padding: 0 10rpx;
+    text-align: center;
+    display: block;
+    font-size: 28rpx;
+    line-height: 80rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.side_left .list_in {
+    background: #dedede;
+}
+
+.side_right {
+    margin-left: 150rpx;
+    width: 600rpx;
+    height: 100%;
+    position: relative;
+}
+.side_right .tab{
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 80rpx;
+    height: 80rpx;
+    display: flex;
+    width: 100%;
+    align-items:center;
+    z-index: 2;
+
+}
+.side_right .tab text{
+    display: block;
+    flex-basis:1;
+    text-align: center;
+    flex-grow:1;
+    font-size: 28rpx;
+    border-bottom:1px #dedede solid;
+}
+.side_right .tab .active{
+    border-bottom: 1px #3385ff solid;
+    color: #3385ff;
+}
+.side_right .scroll_wrap{
+    height: calc( 100% - 80rpx );
+    top: 80rpx;
+    position: relative;
+}
+
+.chat_icon{
+    position: absolute;
+    top:50%;
+    width: 40rpx;
+    height: 40rpx;
+    right: 15rpx;
+    margin-top: -20rpx;
 }

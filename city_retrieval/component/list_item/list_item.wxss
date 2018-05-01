@@ -1,0 +1,83 @@
+/* component/listitem/list_item.wxss */
+.list_item{
+    border-bottom: 1px #dedede solid;
+    margin-left: 20rpx;
+    padding: 20rpx 0;
+    position: relative;
+}
+.list_item .item_left{
+    width: 130rpx;
+    float: left;
+    display: block;
+}
+.list-item  .item_left .picture{
+    width:100rpx;height:100rpx;border-radius:100%;position:relative;top:8rpx;
+    
+}
+.list_item .item_right{
+    float: left;
+    /* width: calc(100%-130rpx); */
+    /* width: 450rpx; */
+    display: block;
+    position: relative;
+}
+.item_right .title .name{
+    font-size: 28rpx;
+    margin-right: 10rpx;
+}
+.item_right .title .num{
+    font-size: 24rpx;
+    color: #acacac;
+}
+.item_right .title .red{
+    color: #ff503f;
+}
+.item_right .info{
+    position: relative;
+}
+.item_right .info image{
+    position: absolute;
+    left: 0;
+    top: 15rpx;
+
+}
+.item_right .info text{
+    font-size: 26rpx;
+    color: #acacac;
+    width: 310rpx;
+    display: block; 
+    line-height: 60rpx;
+    margin-left:50rpx;
+}
+.item_right .info .logo{
+    width:30rpx;
+    height:30rpx;
+}
+.item_right  .chat_icon{
+    position: absolute;
+    top:50%;
+    width: 40rpx;
+    height: 40rpx;
+    right: 15rpx;
+    margin-top: -20rpx;
+}
+.item_right .c_btn{
+    width: 130rpx;
+    font-size: 28rpx;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+
+
+.clearfix {
+  overflow: auto;
+  _height: 1%;
+}
+.shengl{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -13,9 +13,20 @@ let arr2 = [
     { "id": "v8", "cityName": "张家口" }
 ];
 let str = Sort.pySegSort(arr2);
+
+let list = [{
+    name: '小妮子',
+    num: 53,
+    content: '4s-广州每期雪弗兰广州每期雪弗兰广州每期雪弗兰'
+}, {
+    name: '小伙子',
+    num: 13,
+    content: '4s-广州每期雪弗兰广州每期雪弗兰广州每期雪弗兰'
+}]
 Page({
     data: {
         citylist: str,
+        list
     },
     onLoad: function () {
 

@@ -5,148 +5,34 @@
     <view class='contain_box'>        
         <view class="side_left">
             <scroll-view scroll-y="true"  style='height:100%'>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
+                <view class="list">
+                  <text>奥迪</text>
+                </view>
+                <view class='list'>
+                    <text>本田</text>
+                    <view class="list_in">
+                        <text>雅阁雅阁雅阁雅阁雅阁雅阁</text>
+                        <text>凌派</text>
+                        <text>官道</text>
+                    </view>
+                </view>
             </scroll-view>
         </view>
         <view class="side_right">
-            <scroll-view scroll-y="true"  style='height:100%'>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
-                <text>123</text>
+            <view class='tab'> 
+                <text class='active'>技工</text>
+                <text>销售</text>
+                <text>配件</text>
+            </view>
+            <scroll-view scroll-y="true" class='scroll_wrap'>
+                <block wx:for="{{list}}" wx:key="{{index}}">
+                    <list_item data="{{item}}">
+                        <block slot="s_btn">
+                        <image class='chat_icon' src='/assets/images/chat.png'></image>
+                        </block>
+                        
+                    </list_item> 
+                </block>
             </scroll-view>
         </view>
     </view>

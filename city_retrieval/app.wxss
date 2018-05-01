@@ -13,11 +13,8 @@ page{
 }
 .contain_box{
     width: 100%;
-    /* display: block; */
-    /* background: #ccc; */
-    height: calc(100% - 30px);
+     height: calc(100% - 60rpx); 
     overflow: hidden;
-    /* margin-top:60rpx; */
     position: relative;
     top: 60rpx;
 }
@@ -32,7 +29,6 @@ page {
     margin: 0;
     padding: 0;
 }
-
 .nav {
     position: fixed;
     left: 0;
@@ -67,4 +63,23 @@ page {
 .nav .nav_right image{
     width: 35rpx;
     height: 35rpx;
+    top: 10rpx;
+}
+
+.clearfix {
+  overflow: auto;
+  _height: 1%;
+}
+
+.shengl{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/*list_item*/
+.listItem{
+    position: relative;
+    width: 100%;
 }

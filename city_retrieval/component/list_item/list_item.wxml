@@ -1,0 +1,21 @@
+<!--component/listitem/list_item.wxml-->
+<view class="list_item clearfix">
+    <view class="item_left">
+        <image class='picture' style='width:100rpx;height:100rpx;border-radius:100%;position:relative;top:8rpx;' mode="aspectFill" src="/assets/images/picture.jpg"></image>
+    </view>
+    <view class="item_right">
+        <view class='title'>
+            <text class='name'>{{data.name}}</text>
+            <text class='num'><text class='red'>{{data.num}}</text>人找他买车</text>
+        </view>
+        <view class='info'>
+            <image class='logo' src='/assets/images/Smile.png'>
+            </image>
+            <text class='shengl'>{{data.content}}</text>
+        </view>
+        <slot slot="s_btn">
+        
+        </slot>
+        
+    </view>
+</view>
