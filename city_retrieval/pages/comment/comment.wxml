@@ -1,0 +1,12 @@
+<view class='comment'>
+    <view class='c_info'>
+    <list_item data="{{info}}" class="listItem">
+
+            <block slot="s_btn">
+                <image  class="c_btn" src="/assets/images/phone-circle.png"></image>
+            </block>
+        </list_item>
+        </view>
+    <view class='c_comment'></view>
+    <view class='c_send'></view>
+</view>

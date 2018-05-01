@@ -18,7 +18,7 @@ Page({
             if (app.globalData.userInfo) {
                 clearInterval(Timer);
                 if(id || id == 0){                   
-                    wx.navigateTo({
+                    wx.reLaunch({
                         url: "/pages/detail/detail?id="+id+"&index=1"
                     })
                 } else { //首页   

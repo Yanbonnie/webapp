@@ -1,12 +1,101 @@
 /* pages/contact/contact.wxss */
+page{
+    background: #f1f1f1;
+}
+.contact {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.contact .c_info{
+    background: #fff;
+    border-bottom:1px #dedede solid;
+    margin-bottom: 20rpx;
+}
+.contact .c_chat{
+    flex-grow: 1;
+    display: block;
+    background: #fff;
+    padding-bottom: 80rpx;
+    position: relative;
+}
+.contact .send{
+    height: 100rpx;
+    background: #f1f1f1;
+}
 .contact .c_btn{
-    width: 130rpx;
-    font-size: 28rpx;
+    width: 110rpx;
+    font-size: 26rpx;
     padding: 0;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 25rpx;
+    top: 50%;
+    border: 1px #38f solid;
+    height: 55rpx;
+    line-height: 55rpx;
+    color: #38f;
+    margin-top: -27.5rpx;
 }
-.list_item .item_right{
-    width: 100%;
+.contact .c_item{   
+    display: flex;
+    height: 80rpx;
+    border-bottom: 1px #dedede solid;
+    margin-left: 25rpx;
+}
+.c_item:last-child{
+    border-bottom: 0;
+}
+.c_item .c_item_left{
+    flex-grow:1;
+    align-self:center;
+    font-size: 28rpx;
+    display: flex;
+}
+.c_item .c_item_right{
+    width: 60rpx;
+    display: block;
+    overflow: hidden;
+}
+.c_item .c_item_right image{
+    width: 50rpx;
+    height: 50rpx;
+    display: block;
+    position: relative;
+    top: 15rpx;
+}
+
+.c_item_left .img{
+    width: 30rpx;
+    height: 30rpx;
+}
+.c_item_left .score{
+    margin-left: 15rpx;
+    color: #ff503f;
+}
+
+.send{
+    display: flex;
+}
+.send .send_txt{
+    height: 68rpx;
+    line-height: 68rpx;
+    font-size: 28rpx;
+    flex-grow: 1;
+    border: 1px #dedede solid;
+    margin:14rpx 0 0 20rpx;
+    padding-left: 20rpx;
+    background: #fff;
+    border-radius: 8rpx;
+}
+.send button{
+    margin: 14rpx 10rpx 0 20rpx;
+    height: 70rpx;
+    line-height:70rpx; 
+    /* padding: 0; */
+    font-size: 28rpx;
+    display: block;
+    background: #38f;
+    color: #fff;
+    border: 0;
+
 }

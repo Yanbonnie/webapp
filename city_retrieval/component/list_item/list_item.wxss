@@ -4,10 +4,10 @@
     margin-left: 20rpx;
     padding: 20rpx 0;
     position: relative;
+    display: flex;
 }
 .list_item .item_left{
     width: 130rpx;
-    float: left;
     display: block;
 }
 .list-item  .item_left .picture{
@@ -15,9 +15,7 @@
     
 }
 .list_item .item_right{
-    float: left;
-    /* width: calc(100%-130rpx); */
-    /* width: 450rpx; */
+    flex-grow:1;
     display: block;
     position: relative;
 }

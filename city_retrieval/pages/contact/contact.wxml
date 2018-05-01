@@ -6,8 +6,36 @@
                 <button size="mini" class='c_btn' plain="true">推荐Ta</button>
             </block>
         </list_item>
+        <view class='c_item'>
+            <view class='c_item_left'>
+                <text>电话：18825039689</text>
+            </view>
+            <view class='c_item_right'>
+                <image src='/assets/images/phone-circle.png'></image>
+            </view>
+        </view>
+        <view class='c_item'>
+            <view class='c_item_left'>
+                <text> 评价：</text>
+                <view>
+                   <image class='img' src="/assets/images/start_on.png"></image>
+                   <image  class='img'  src="/assets/images/start_on.png"></image>
+                   <image class='img'  src="/assets/images/start_on.png"></image>
+                   <image  class='img' src="/assets/images/start_on.png"></image>
+                </view>
+                <text class='score'>4.8</text>
+            </view>
+            <view class='c_item_right'>
+                <image src='/assets/images/right.png'></image>
+            </view>
+        </view>
     </view>
     <view class='c_chat'>
-
+        <view class='chatList'></view>
+        
+    </view>
+    <view class='send'>
+        <input class='send_txt' placeholder='请输入' />
+        <button type="mini">发送</button>
     </view>
 </view>
