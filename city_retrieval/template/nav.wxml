@@ -1,6 +1,6 @@
 <template name="nav">
     <view class='nav'>
-        <view class="nav_left">
+        <view class="nav_left" bindtap='showCityHandle'>
             <image  src="/assets/images/address.png"></image>
             {{locateCity}}
         </view>

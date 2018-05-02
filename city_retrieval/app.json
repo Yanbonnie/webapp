@@ -1,13 +1,13 @@
 {
     "pages": [
+        "pages/card/card",
         "pages/index/index",
         "pages/user/user",
-        
         "pages/send/send",
-        
         "pages/comment/comment",
         "pages/contact/contact",
         "pages/discount/discount"
+        
     ],
     "window": {
         "backgroundTextStyle": "dark",

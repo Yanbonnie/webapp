@@ -87,6 +87,10 @@ Component({
                 //把获取的定位和获取的时间放到本地存储
                 wx.setStorageSync('locatecity', { city: val, time: new Date().getTime() });
             });
+        },
+        //关闭弹框
+        closeTap() {
+            this.triggerEvent('closeCity');
         }
     },
     ready() {
@@ -101,5 +105,6 @@ Component({
                 locateCity: cityOrTime.city
             })
         }
-    }
+    },
+    
 })

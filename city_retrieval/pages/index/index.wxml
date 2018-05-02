@@ -1,12 +1,16 @@
 <!--index.wxml-->
-<import src="/template/nav.wxml"/>
+<import src="/template/nav.wxml" />
 <view class="container">
     <template is="nav" data="{{locateCity}}" />
-    <view class='contain_box'>        
+    <view class='contain_box'>
         <view class="side_left">
-            <scroll-view scroll-y="true"  style='height:100%'>
+            <scroll-view scroll-y="true" style='height:100%'>
+                <view class="list list_title">
+                    <image src="/assets/images/crown.png"></image>
+                    <text>品牌</text>
+                </view>
                 <view class="list">
-                  <text>奥迪</text>
+                    <text>奥迪</text>
                 </view>
                 <view class='list'>
                     <text>本田</text>
@@ -19,24 +23,24 @@
             </scroll-view>
         </view>
         <view class="side_right">
-            <view class='tab'> 
+            <view class='tab'>
                 <text class='active'>技工</text>
-                <text>销售</text>
                 <text>配件</text>
+                <text>保养</text>
             </view>
             <scroll-view scroll-y="true" class='scroll_wrap'>
                 <block wx:for="{{list}}" wx:key="{{index}}">
                     <list_item data="{{item}}" class="listItem" bind:tabItemHandle="selectItemHandle">
                         <block slot="s_btn">
-                        <image class='chat_icon' src='/assets/images/chat.png'></image>
+                            <image class='chat_icon' src='/assets/images/chat.png'></image>
                         </block>
-                        
-                    </list_item> 
+
+                    </list_item>
                 </block>
             </scroll-view>
         </view>
     </view>
-     <view class='cityCover'>
-        <citylist  citylist="{{citylist}}" bindcitytap='cityTap' ></citylist>   
-    </view> 
+    <view class='cityCover' wx:if="{{cityState}}">
+        <citylist citylist="{{citylist}}" bindcitytap='cityTap' bindcloseCity="closeCityHandle"></citylist>
+    </view>
 </view>

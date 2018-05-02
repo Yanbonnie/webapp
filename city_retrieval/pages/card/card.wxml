@@ -1,0 +1,33 @@
+<!--pages/card/card.wxml-->
+<view class='card'>
+    <swiper indicator-dots="{{false}}" autoplay="false" class='swiper'>
+        <swiper-item>
+            <image src="/assets/images/timg.jpg" class="slide-image" mode='aspectFill' />
+            <image class='logo' src="/assets/images/crown.png"></image>
+            <view class='info'>
+                <view class='item itme1'>
+                    <text>小妮子</text>        
+                    <image src="/assets/images/medal.png"></image>
+                </view>
+                <view class='item item2'>
+                    <text>金牌销售顾问</text>
+                    <text>易车认证</text>
+                </view>
+                <view class='item item3'>
+                    <image src="/assets/images/address.png"></image>
+                    <text>广州番禺回军店</text>
+                </view>
+            </view>
+            <view class='btnBox'>
+                <view class='btn'>
+                    <image src='/assets/images/phone.png'></image>
+                    <text>电话</text>
+                </view>
+                <view class='btn'>
+                    <image src='/assets/images/chat2.png'></image>
+                    <text>聊天</text>
+                </view>
+            </view>
+        </swiper-item>
+    </swiper>
+</view>

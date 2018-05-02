@@ -9,7 +9,9 @@
     bottom: 0;
     top: 0;
 }
-
+.side_left .list{
+    position: relative;
+}
 .side_left .list text {
     padding: 0 10rpx;
     text-align: center;
@@ -20,7 +22,14 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
+.side_left .list_title image{
+    width: 30rpx;
+    height: 30rpx;
+    position: absolute;
+    left: 15rpx;
+    top: 50%;
+    margin-top: -15rpx;
+}
 .side_left .list_in {
     background: #dedede;
 }
