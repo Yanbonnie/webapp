@@ -1,9 +1,30 @@
 .city_box {
-    height: 100%;
+    /* height: 100%;
     background: #fff;
     display: flex;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    width: 100%;
+    */
+    height: 90%;
+    background: #fff;
+    overflow: hidden;
+    top: 10%;
+    position: absolute;
+} 
+.title{
+    position: fixed;
+    top: 10%;
+    height: 80rpx;
+    line-height: 80rpx;
+    background: #f1f1f1;
+    width: 100%;
+    display: block;
+    text-align: right;
 }
-
 .city_left {
     flex: 1;
 }
@@ -13,11 +34,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 100%;
+    height: 90%;
     position: fixed;
     right: 0;
     bottom: 0;
-    top: 0;
+    top: 10%;
 }
 
 .letter_item {

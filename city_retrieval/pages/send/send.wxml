@@ -1,0 +1,38 @@
+<!--pages/send/send.wxml-->
+<view class='send'>
+    <view class='c_info'>
+        <list_item data="{{info}}" class="listItem">
+
+            <block slot="s_btn">
+                <image class="c_btn" src="/assets/images/phone-circle.png"></image>
+            </block>
+        </list_item>
+    </view>
+    <view class='send_contain'>
+        <view class='start_p'>
+            <text>星级点评</text>
+            <view class='start'>
+                <image src="/assets/images/start_gray.png"></image>
+                <image src="/assets/images/start_gray.png"></image>
+                <image src="/assets/images/start_gray.png"></image>
+                <image src="/assets/images/start_gray.png"></image>
+                <image src="/assets/images/start_gray.png"></image>
+            </view>
+        </view>
+        <view class='start_p' style='border-bottom:0;'>
+            <text>对他的印象</text>
+            <view class='label'>
+                <text>萌萌哒</text>
+                <text>热情服务</text>
+                <text>回复及时</text>
+                <text>风趣幽默</text>
+                <text>易沟通</text>
+                <text>有亲和力</text>
+            </view>
+        </view>
+        <view class='textareaBox'>
+            <textarea placeholder="请输入评价"  />
+        </view>        
+    </view>
+    <button class='send_btn'>发表评论</button>
+</view>

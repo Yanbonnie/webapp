@@ -14,7 +14,7 @@
                 <image src='/assets/images/phone-circle.png'></image>
             </view>
         </view>
-        <view class='c_item'>
+        <view class='c_item' bindtap='lookComment'>
             <view class='c_item_left'>
                 <text> 评价：</text>
                 <view>

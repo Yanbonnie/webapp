@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <import src="/template/nav.wxml"/>
 <view class="container">
-    <template is="nav" />
+    <template is="nav" data="{{locateCity}}" />
     <view class='contain_box'>        
         <view class="side_left">
             <scroll-view scroll-y="true"  style='height:100%'>
@@ -26,7 +26,7 @@
             </view>
             <scroll-view scroll-y="true" class='scroll_wrap'>
                 <block wx:for="{{list}}" wx:key="{{index}}">
-                    <list_item data="{{item}}">
+                    <list_item data="{{item}}" class="listItem" bind:tabItemHandle="selectItemHandle">
                         <block slot="s_btn">
                         <image class='chat_icon' src='/assets/images/chat.png'></image>
                         </block>
@@ -36,5 +36,7 @@
             </scroll-view>
         </view>
     </view>
-    <!-- <citylist styles='max-height:100%;' citylist="{{citylist}}" bindcitytap='cityTap' ></citylist>   -->
+     <view class='cityCover'>
+        <citylist  citylist="{{citylist}}" bindcitytap='cityTap' ></citylist>   
+    </view> 
 </view>

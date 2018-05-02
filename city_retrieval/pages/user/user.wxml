@@ -1,0 +1,11 @@
+<!--pages/user/user.wxml-->
+<view class='user'>
+    <view class="u_info">
+        <list_item data="{{info}}" class="listItem">
+
+            <block slot="s_btn">
+                <button size="mini" class='jifen' plain="true">兑换积分</button>
+            </block>
+        </list_item>
+    </view>
+</view>

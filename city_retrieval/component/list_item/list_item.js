@@ -22,6 +22,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+      tapItem(e){
+          const { id } = e.currentTarget.dataset;
+          this.triggerEvent('tabItemHandle', { id })
+      }
   }
 })

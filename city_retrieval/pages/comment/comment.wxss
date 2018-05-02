@@ -1,16 +1,20 @@
 /* pages/comment/comment.wxss */
-page{
+
+page {
     background: #f1f1f1;
 }
-.comment{
+
+.comment {
     height: 100%;
     display: flex;
     flex-direction: column;
 }
-.comment .c_info{
+
+.comment .c_info {
     background: #fff;
 }
-.comment .c_btn{
+
+.comment .c_btn {
     width: 60rpx;
     height: 60rpx;
     position: absolute;
@@ -18,12 +22,103 @@ page{
     top: 50%;
     margin-top: -30rpx;
 }
-.comment .list_item {
-    margin-left: 0 !important;
+
+.comment .c_comment {
+    flex-grow: 1;
+    overflow: hidden;
+    background: #fff;
+    margin-top: 20rpx;
 }
-.comment .c_comment{
+
+.comment .c_item {
+    height: 80rpx;
+    border-bottom: 1px #dedede solid;
+    padding-left: 25rpx;
+}
+
+.c_item .c_item_left {
+    align-self: center;
+    font-size: 28rpx;
+    display: flex;
+    line-height: 80rpx;
+}
+
+.c_item_left .img {
+    width: 30rpx;
+    height: 30rpx;
+}
+
+.c_item_left .score {
+    margin-left: 15rpx;
+    color: #ff503f;
+}
+
+.comment .c_label {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 20rpx;
+    padding-top: 15rpx;
+    border-bottom: 1px #dedede solid;
+    /* justify-content:space-around; */
+}
+
+.comment .c_label text {
+    font-size: 28rpx;
+    /* width: 200rpx; */
+    border: 1px #dedede solid;
+    margin: 15rpx;
+    padding: 0 20rpx;
+    border-radius: 8rpx;
+    line-height: 50rpx;
+    text-align: center;
+}
+
+/*评论列表*/
+
+.comment_list {
+}
+
+.comment_list .cList_item {
+    margin: 0 20rpx;
+    border-bottom: 1px #dedede solid;
+    padding: 10rpx 0 20rpx;
+}
+
+.cList_item .name {
+    display: flex;
+}
+
+.cList_item .name .name_l {
+    font-size: 28rpx;
+    line-height: 60rpx;
     flex-grow: 1;
 }
-.comment .c_send{
-    height: 100rpx;
+
+.cList_item .name .name_r {
+    width: 200rpx;
+    font-size: 20rpx;
+    color: #acacac;
+    line-height: 60rpx;
+    text-align: right;
+}
+
+.cList_item .start {
+    display: flex;
+}
+
+.cList_item .start image {
+    width: 15rpx;
+    height: 15rpx;
+}
+
+.comment .c_send {
+    height: 180rpx;
+}
+
+.comment .c_send button {
+    background: #38f;
+    color: #fff;
+    width: 90%;
+    display: block;
+    margin: 20rpx auto 0;
 }

@@ -19,7 +19,12 @@ Page({
   onLoad: function (options) {
   
   },
-
+  //发表评价
+  sendComment(){
+      wx.navigateTo({
+          url: '/pages/send/send',
+      })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

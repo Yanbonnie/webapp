@@ -1,12 +1,171 @@
 <view class='comment'>
     <view class='c_info'>
-    <list_item data="{{info}}" class="listItem">
+        <list_item data="{{info}}" class="listItem">
 
             <block slot="s_btn">
-                <image  class="c_btn" src="/assets/images/phone-circle.png"></image>
+                <image class="c_btn" src="/assets/images/phone-circle.png"></image>
             </block>
         </list_item>
-        </view>
-    <view class='c_comment'></view>
-    <view class='c_send'></view>
+    </view>
+    <view class='c_comment'>
+        <scroll-view scroll-y="true" style='height:100vh'>
+            <view class='c_item'>
+                <view class='c_item_left'>
+                    <text> 评价：</text>
+                    <view>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                    </view>
+                    <text class='score'>4.8</text>
+                </view>
+            </view>
+            <view class='c_label'>
+                <text>服务热情176</text>
+                <text>有责任心174</text>
+                <text>很专业153</text>
+                <text>回复及时152</text>
+                <text>态度诚恳140</text>
+                <text>有亲和力129</text>
+            </view>
+            <view class='comment_list'>
+                <view class='cList_item'>
+                    <view class='name'>
+                        <text class='name_l'>小妮子</text>
+                        <text class='name_r'>2015-08-12</text>
+                    </view>
+                    <view class='start'>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                    </view>
+                </view>
+                <view class='cList_item'>
+                    <view class='name'>
+                        <text class='name_l'>小妮子</text>
+                        <text class='name_r'>2015-08-12</text>
+                    </view>
+                    <view class='start'>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                    </view>
+                </view>
+                <view class='cList_item'>
+                    <view class='name'>
+                        <text class='name_l'>小妮子</text>
+                        <text class='name_r'>2015-08-12</text>
+                    </view>
+                    <view class='start'>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                    </view>
+                </view>
+                <view class='cList_item'>
+                    <view class='name'>
+                        <text class='name_l'>小妮子</text>
+                        <text class='name_r'>2015-08-12</text>
+                    </view>
+                    <view class='start'>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                    </view>
+                </view>
+                <view class='cList_item'>
+                    <view class='name'>
+                        <text class='name_l'>小妮子</text>
+                        <text class='name_r'>2015-08-12</text>
+                    </view>
+                    <view class='start'>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                    </view>
+                </view>
+                <view class='cList_item'>
+                    <view class='name'>
+                        <text class='name_l'>小妮子</text>
+                        <text class='name_r'>2015-08-12</text>
+                    </view>
+                    <view class='start'>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                    </view>
+                </view>
+                <view class='cList_item'>
+                    <view class='name'>
+                        <text class='name_l'>小妮子</text>
+                        <text class='name_r'>2015-08-12</text>
+                    </view>
+                    <view class='start'>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                    </view>
+                </view>
+                <view class='cList_item'>
+                    <view class='name'>
+                        <text class='name_l'>小妮子</text>
+                        <text class='name_r'>2015-08-12</text>
+                    </view>
+                    <view class='start'>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                    </view>
+                </view>
+                <view class='cList_item'>
+                    <view class='name'>
+                        <text class='name_l'>小妮子</text>
+                        <text class='name_r'>2015-08-12</text>
+                    </view>
+                    <view class='start'>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                    </view>
+                </view>
+                <view class='cList_item'>
+                    <view class='name'>
+                        <text class='name_l'>小妮子</text>
+                        <text class='name_r'>2015-08-12</text>
+                    </view>
+                    <view class='start'>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                    </view>
+                </view>
+                <view class='cList_item'>
+                    <view class='name'>
+                        <text class='name_l'>小妮子</text>
+                        <text class='name_r'>2015-08-12</text>
+                    </view>
+                    <view class='start'>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                        <image class='img' src="/assets/images/start_on.png"></image>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class='c_send'>
+        <button bindtap='sendComment'>发表评价</button>
+    </view>
 </view>

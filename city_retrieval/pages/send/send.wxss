@@ -1,0 +1,74 @@
+/* pages/send/send.wxss */
+page {
+    background: #f1f1f1;
+}
+
+/* .send {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+} */
+
+.send .c_info {
+    background: #fff;
+}
+
+.send .c_btn {
+    width: 60rpx;
+    height: 60rpx;
+    position: absolute;
+    right: 25rpx;
+    top: 50%;
+    margin-top: -30rpx;
+}
+.send_contain{
+    margin-top: 10rpx;
+    background: #fff;
+    padding:0 20rpx 20rpx;
+}
+.send_contain .start_p{
+    border-bottom: 1px #dedede solid;
+    padding:20rpx 0;
+}
+.send_contain .start_p text{
+    font-size: 28rpx;
+}
+.send_contain .start{
+    display: flex;
+}
+.send_contain .start image{
+    width: 50rpx;
+    height: 50rpx;
+    margin-right: 15rpx;
+    padding:10rpx 0;
+}
+.start_p .label{
+    display: flex;
+    flex-wrap: wrap;
+}
+.start_p .label text{
+    line-height: 50rpx;
+    border: 1px #dedede solid;
+    border-radius: 8rpx;
+    margin-right: 20rpx;
+    padding: 0 40rpx;
+    margin:15rpx 20rpx 15rpx 0;
+}
+.textareaBox textarea{
+    width: 94%;
+    height: 300rpx;
+    background: #efefef;
+    border-radius: 8rpx;
+    border: 1px #dedede solid;
+    line-height: 60rpx;
+    padding: 25rpx 2.5% 25rpx;
+    font-size: 28rpx;
+}
+.send_btn{
+    width: 94%;
+    display: block;
+    margin: 25rpx auto 0;
+    background: #38f;
+    color: #fff;
+    border: 0;
+}

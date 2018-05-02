@@ -1,4 +1,4 @@
-// pages/contact/contact.js
+// pages/send/send.js
 var info = {
     name: '小妮子',
     num: 53,
@@ -10,7 +10,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    info
+      info
   },
 
   /**
@@ -19,12 +19,7 @@ Page({
   onLoad: function (options) {
   
   },
-  //查看评论
-  lookComment(){
-      wx.navigateTo({
-          url: '/pages/comment/comment',
-      })
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

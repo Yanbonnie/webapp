@@ -1,0 +1,5 @@
+<!--pages/discount/discount.wxml-->
+<view class='discount'>
+    <image src='/assets/images/smile.png'></image>
+    <text>开发中...</text>
+</view>

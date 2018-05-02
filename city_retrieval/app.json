@@ -1,31 +1,41 @@
 {
     "pages": [
+        "pages/index/index",
+        "pages/user/user",
+        
+        "pages/send/send",
+        
         "pages/comment/comment",
         "pages/contact/contact",
-        "pages/index/index",
-        "pages/logs/logs"
-        
+        "pages/discount/discount"
     ],
     "window": {
         "backgroundTextStyle": "dark",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "WeChat",
-        "navigationBarTextStyle": "black",
+        "navigationBarBackgroundColor": "#38f",
+        "navigationBarTitleText": "车价天天报",
+        "navigationBarTextStyle": "white",
         "enablePullDownRefresh": true
     },
     "tabBar": {
+        "selectedColor": "#38f",
         "list": [
             {
                 "pagePath": "pages/index/index",
                 "text": "首页",
-                "iconPath": "/assets/images/man.png",
-                "selectedIconPath": "/assets/images/man_on.png"
+                "iconPath": "/assets/images/home.png",
+                "selectedIconPath": "/assets/images/home_on.png"
             },
             {
-                "pagePath": "pages/logs/logs",
+                "pagePath": "pages/discount/discount",
                 "text": "今日优惠",
                 "iconPath": "/assets/images/order.png",
                 "selectedIconPath": "/assets/images/order_on.png"
+            },
+            {
+                "pagePath": "pages/user/user",
+                "text": "我的",
+                "iconPath": "/assets/images/man.png",
+                "selectedIconPath": "/assets/images/man_on.png"
             }
         ]
     }

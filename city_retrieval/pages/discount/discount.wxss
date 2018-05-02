@@ -1,0 +1,14 @@
+/* pages/discount/discount.wxss */
+.discount image{
+    width:200rpx;
+    height: 200rpx;
+    display: block;
+    margin: 100rpx auto 0;
+}
+.discount text{
+    display: block;
+    text-align: center;
+    line-height: 100rpx;
+    font-size: 28rpx;
+    color: #acacac;
+}

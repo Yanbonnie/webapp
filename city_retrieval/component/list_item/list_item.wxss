@@ -1,7 +1,6 @@
 /* component/listitem/list_item.wxss */
 .list_item{
     border-bottom: 1px #dedede solid;
-    margin-left: 20rpx;
     padding: 20rpx 0;
     position: relative;
     display: flex;
@@ -9,6 +8,7 @@
 .list_item .item_left{
     width: 130rpx;
     display: block;
+    margin-left: 20rpx;
 }
 .list-item  .item_left .picture{
     width:100rpx;height:100rpx;border-radius:100%;position:relative;top:8rpx;

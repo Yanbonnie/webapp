@@ -1,7 +1,7 @@
 <!--component/listitem/list_item.wxml-->
-<view class="list_item clearfix">
+<view class="list_item clearfix" bindtap='tapItem' data-id="{{data.id}}">
     <view class="item_left">
-        <image class='picture' style='width:100rpx;height:100rpx;border-radius:100%;position:relative;top:8rpx;' mode="aspectFill" src="/assets/images/picture.jpg"></image>
+        <image src='/assets/images/picture.jpg' style='width:100rpx;height:100rpx;border-radius:100%;position:relative;top:8rpx;' class='picture'></image>
     </view>
     <view class="item_right">
         <view class='title'>

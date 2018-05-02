@@ -1,16 +1,11 @@
-// pages/contact/contact.js
-var info = {
-    name: '小妮子',
-    num: 53,
-    content: '4s-广州每期雪弗兰广州每期雪弗兰广州每期雪弗兰'
-}
+// pages/discount/discount.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    info
+  
   },
 
   /**
@@ -19,12 +14,7 @@ Page({
   onLoad: function (options) {
   
   },
-  //查看评论
-  lookComment(){
-      wx.navigateTo({
-          url: '/pages/comment/comment',
-      })
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

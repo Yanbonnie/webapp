@@ -56,16 +56,27 @@
     color: #3385ff;
 }
 .side_right .scroll_wrap{
-    height: calc( 100% - 80rpx );
+    height: calc( 100% - 80rpx);
     top: 80rpx;
     position: relative;
+    width: 580rpx;
+    margin-left: 20rpx; 
 }
-
 .chat_icon{
     position: absolute;
     top:50%;
     width: 40rpx;
     height: 40rpx;
     right: 15rpx;
-    margin-top: -20rpx;
+     margin-top: -20rpx; 
+}
+.cityCover{
+    position: fixed;
+    background: rgba(0,0,0,0.9);
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
 }
