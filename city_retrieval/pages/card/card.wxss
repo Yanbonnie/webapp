@@ -17,7 +17,64 @@ page,.card{
     left: 50rpx;
     top: 50rpx;
 }
-
+.homeBox{
+    display: flex;
+    width: 350rpx;
+    background: rgba(51,136,255,0.7);
+    position: absolute;
+    top: 80rpx;
+    left:730rpx;
+    justify-content: space-around;
+    padding: 10rpx 0;
+}
+.homeBox .item image{
+    width: 40rpx;
+    height: 40rpx;
+    display: block;
+    margin: 0 auto;
+}
+.homeBox .item text{
+    display: block;
+    font-size: 24rpx;
+    color: #fff;
+    padding-top: 10rpx;
+    width: 100%;
+    text-align: center;
+}
+.homeBox .item{
+    position: relative;
+     flex-grow: 1; 
+}
+.homeBox .item:nth-child(1){
+    position: relative;
+    z-index: 10;
+}
+.homeBox .line{
+    position: absolute;
+    height: 90%;
+    top: 5%;
+    width: 4rpx;
+    background: #fff;
+    left: 8rpx;
+}
+.homeBox .icon{
+    border: 10rpx solid;
+    border-color: rgba(51,136,255,0) rgba(51,136,255,0)  rgba(51,136,255,0) #fff;
+    position: absolute;
+    top: 50%;
+    margin-top: -5rpx;
+    width: 0;
+    height: 0;
+    left: 10rpx;
+}
+.homeBox .tabBob{
+    width: 50rpx;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: -25rpx;
+    background:rgba(0,0,0,0);
+}
 .info{
     background: #38f;
     position: absolute;

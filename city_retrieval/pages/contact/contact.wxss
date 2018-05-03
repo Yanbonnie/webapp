@@ -99,3 +99,58 @@ page{
     border: 0;
 
 }
+
+/*分享*/
+.shareCover{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 10;
+}
+.shareCover .shareBox{
+    width: 600rpx;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    background: #fff;
+    border-radius: 12rpx;
+    padding: 50rpx 0;
+}
+.shareBox .mianContain{
+    display: flex;
+    justify-content: space-around;
+}
+.mianContain .item{
+    width: 50%;
+    background: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    position: static;
+    border-radius: 0;
+    line-height: 40rpx;
+}
+.mianContain .item:nth-child(1){
+    border-right: 1px #dedede solid;
+}
+.mianContain image{
+    width: 60rpx;
+    height: 60rpx;
+    display: block;
+    margin: 0 auto;
+    padding-bottom: 15rpx;
+    
+}
+.mianContain text{
+    font-size: 28rpx;
+    display: block;
+    text-align: center;
+}
+.mianContain .txt2{
+    color: #ff503f;
+    font-size: 20rpx;
+}

@@ -1,4 +1,5 @@
 // pages/user/user.js
+import { comData, methodsArr } from '../../utils/pageCom';
 var info = {
     name: '小妮子',
     num: 53,
@@ -10,7 +11,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-      info
+      info,
+      ...comData
   },
 
   /**
@@ -19,7 +21,7 @@ Page({
   onLoad: function (options) {
   
   },
-
+  ...methodsArr,
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

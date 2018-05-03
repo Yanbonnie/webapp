@@ -3,6 +3,7 @@
 const app = getApp();
 import qqmap from '../../utils/map.js';
 import Sort from '../../utils/city_sort';   //城市排序
+import { comData, methodsArr } from '../../utils/pageCom';
 let arr2 = [
     { "id": "v1", "cityName": "北京" },
     { "id": "v2", "cityName": "上海" },
@@ -32,17 +33,12 @@ Page({
         list,             //右边数据列表
         locateCity:'',     //当前城市
         cityState:false,   //是否显示城市弹框
+        ...comData
     },
     onLoad: function () {
         this.getAddress();
-    },   
-    //到达联系页面
-    selectItemHandle(e){
-        console.log(e)
-        wx.navigateTo({
-            url: '/pages/contact/contact',
-        })
-    },
+    },  
+    ...methodsArr,    
     //初始化定位
     getAddress() {
         let cityOrTime = wx.getStorageSync('locatecity') || {},
@@ -89,6 +85,13 @@ Page({
     closeCityHandle(){
         this.setData({
             cityState:false
+        })
+    },
+    //到达我的销售页面
+    goMySale(){
+        console.log
+        wx.navigateTo({
+            url:"/pages/mysale/mysale"
         })
     }
 })

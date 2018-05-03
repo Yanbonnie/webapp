@@ -9,7 +9,7 @@
             <text class='num'><text class='red'>{{data.num}}</text>人找他买车</text>
         </view>
         <view class='info'>
-            <image class='logo' src='/assets/images/Smile.png'>
+            <image class='logo' src='/assets/images/start_on.png'>
             </image>
             <text class='shengl'>{{data.content}}</text>
         </view>

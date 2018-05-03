@@ -1,0 +1,45 @@
+/* pages/mySale/mysale.wxss */
+.saleList .item{
+    display: flex;
+    padding: 20rpx 0;
+    border-bottom: 1px #dedede solid;
+}
+.saleList .item_left{
+    /* width: 120rpx; */
+    display: block;
+    padding: 0 10rpx;
+}
+.saleList .item_left image{
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 100%;
+    position: relative;
+    top: 10rpx;
+    
+}
+.saleList .item_right{
+    flex-grow: 1;
+    padding-right: 10rpx;
+    overflow: hidden;
+}
+.item_right .txt1 text:nth-child(1){
+    font-size: 30rpx;
+    float: left;
+    color: #000;
+}
+.item_right .txt1 text:nth-child(2){
+    font-size: 20rpx;
+    color: #ccc;
+    float: right;
+    line-height: 40rpx;
+}
+.item_right .txt2{
+    width: 100%;
+    font-size: 26rpx;
+    color: #ccc;
+    line-height: 40rpx;
+    display: block;
+}
+.item_right .black{
+    color: #767676;
+}

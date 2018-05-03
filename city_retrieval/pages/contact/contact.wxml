@@ -1,12 +1,12 @@
 <view class="contact">
     <view class='c_info'>
-        <list_item data="{{info}}" class="listItem">
+        <list_item data="{{info}}" class="listItem" bind:tabItemHandle="goCard">
 
-            <block slot="s_btn">
-                <button size="mini" class='c_btn' plain="true">推荐Ta</button>
+            <block slot="s_btn" >
+                <button size="mini" class='c_btn' plain="true" catchtap="recommendHandle">推荐Ta</button>
             </block>
         </list_item>
-        <view class='c_item'>
+        <view class='c_item' data-phone="18825039689" bindtap='makePhoneCall' >
             <view class='c_item_left'>
                 <text>电话：18825039689</text>
             </view>
@@ -37,5 +37,22 @@
     <view class='send'>
         <input class='send_txt' placeholder='请输入' />
         <button type="mini">发送</button>
+    </view>
+</view>
+
+<!--分享  -->
+<view class='shareCover' wx:if="{{shareState}}" bindtap='closeShare'>
+    <view class='shareBox'>    
+        <view class='mianContain'>
+            <button open-type='share' class="item" catchtap='onShareAppMessage'>
+                <image src="/assets/images/wechat2.png"></image>
+                <text>推荐给好友</text>
+            </button>
+            <view class='item'>
+                <image src="/assets/images/friend.png"></image>
+                <text>分享到朋友圈</text>
+                <text class='txt2'>(保存图片到相册发送朋友圈)</text>
+            </view>
+        </view>
     </view>
 </view>

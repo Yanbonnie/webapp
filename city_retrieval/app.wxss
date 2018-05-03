@@ -92,3 +92,15 @@ page {
     top: 50%;
     margin-top: -30rpx;
 } 
+
+
+.shareBtn{
+    background: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+     position: static !important; 
+    border-radius: 0;
+    line-height: 40rpx;
+    border: 0;
+}

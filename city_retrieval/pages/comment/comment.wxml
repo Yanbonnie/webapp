@@ -1,9 +1,9 @@
 <view class='comment'>
     <view class='c_info'>
-        <list_item data="{{info}}" class="listItem">
+        <list_item data="{{info}}" class="listItem" bind:tabItemHandle="goCard">
 
             <block slot="s_btn">
-                <image class="c_btn" src="/assets/images/phone-circle.png"></image>
+                <image data-phone="18825039689" catchtap='makePhoneCall' class="c_btn" src="/assets/images/phone-circle.png"></image>
             </block>
         </list_item>
     </view>
