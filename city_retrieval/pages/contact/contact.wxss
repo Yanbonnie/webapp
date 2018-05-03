@@ -1,23 +1,37 @@
 /* pages/contact/contact.wxss */
 page{
     background: #f1f1f1;
+    height: 100%;
 }
 .contact {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     height: 100%;
+    overflow: hidden;
 }
 .contact .c_info{
     background: #fff;
     border-bottom:1px #dedede solid;
-    margin-bottom: 20rpx;
+     margin-bottom: 20rpx; 
 }
 .contact .c_chat{
     flex-grow: 1;
-    display: block;
     background: #fff;
-    padding-bottom: 80rpx;
     position: relative;
+}
+.c_chat .chat_item {
+     padding: 10rpx 20rpx; 
+}
+.c_chat .chat_item text{
+    font-size: 28rpx;
+}
+.c_chat .chat_item text:nth-child(1){font-weight: bold;}
+.c_chat .chat_item text:nth-child(2){margin-right: 10rpx;}
+.c_chat .chat_item text:nth-child(3){
+    font-size: 20rpx;
+    background: #f7f7f7;
+    padding: 0 10rpx;
+    color: #ccc;
 }
 .contact .send{
     height: 100rpx;
@@ -88,7 +102,7 @@ page{
     border-radius: 8rpx;
 }
 .send button{
-    margin: 14rpx 10rpx 0 20rpx;
+     margin: 14rpx 10rpx 0 20rpx; 
     height: 70rpx;
     line-height:70rpx; 
     /* padding: 0; */

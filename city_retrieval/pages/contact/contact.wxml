@@ -31,13 +31,59 @@
         </view>
     </view>
     <view class='c_chat'>
-        <view class='chatList'></view>
-        
+        <scroll-view class='chatList' scroll-y="true" style='height:650rpx;'>
+            <view class='chat_item'>
+                <text>我：</text>
+                <text>你好，我想购买风度MX5,询问一下最新优惠，谢谢</text>
+                <text>2018-04-27 08:38</text>
+            </view>
+            <view class='chat_item'>
+                <text>小火：</text>
+                <text>我店里没有在这款车，你自己再去其他店里看看</text>
+                <text>2018-04-27 08:38</text>
+            </view>
+            <view class='chat_item'>
+                <text>小火：</text>
+                <text>如果找不到的话，建议你到官网查查这款车有没有下架</text>
+                <text>2018-04-27 08:38</text>
+            </view>
+           <view class='chat_item'>
+                <text>我：</text>
+                <text>你好，我想购买风度MX5,询问一下最新优惠，谢谢</text>
+                <text>2018-04-27 08:38</text>
+            </view>
+            <view class='chat_item'>
+                <text>小火：</text>
+                <text>我店里没有在这款车，你自己再去其他店里看看</text>
+                <text>2018-04-27 08:38</text>
+            </view>
+            <view class='chat_item'>
+                <text>小火：</text>
+                <text>如果找不到的话，建议你到官网查查这款车有没有下架</text>
+                <text>2018-04-27 08:38</text>
+            </view>
+            <view class='chat_item'>
+                <text>我：</text>
+                <text>你好，我想购买风度MX5,询问一下最新优惠，谢谢</text>
+                <text>2018-04-27 08:38</text>
+            </view>
+            <view class='chat_item'>
+                <text>小火：</text>
+                <text>我店里没有在这款车，你自己再去其他店里看看</text>
+                <text>2018-04-27 08:38</text>
+            </view>
+            <view class='chat_item'>
+                <text>小火：</text>
+                <text>如果找不到的话，建议你到官网查查这款车有没有下架</text>
+                <text>2018-04-27 08:38</text>
+            </view>
+
+        </scroll-view>        
     </view>
-    <view class='send'>
-        <input class='send_txt' placeholder='请输入' />
-        <button type="mini">发送</button>
-    </view>
+     <view class='send'>
+         <input class='send_txt' placeholder='请输入' />
+         <button type="mini">发送</button>  
+    </view> 
 </view>
 
 <!--分享  -->

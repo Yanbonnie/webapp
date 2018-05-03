@@ -14,5 +14,31 @@
                 <text class='shengl txt2'>建议您咨询一下其他店</text>
             </view>
         </view>
+        <view class='item'>
+            <view class='item_left'>
+                <image src="/assets/images/picture.jpg"></image>
+            </view>
+            <view class='item_right'>
+                <view class='txt1 clearfix'>
+                    <text>小妮子</text>
+                    <text>2018-04-08</text>
+                </view>
+                <text class='shengl black txt2'>上祺同事的交付给六岁关键是的发送积分啥地方上祺同事的交付给六岁关键是的发送积分啥地方</text>
+                <text class='shengl txt2'>建议您咨询一下其他店</text>
+            </view>
+        </view>
+        <view class='item'>
+            <view class='item_left'>
+                <image src="/assets/images/picture.jpg"></image>
+            </view>
+            <view class='item_right'>
+                <view class='txt1 clearfix'>
+                    <text>小妮子</text>
+                    <text>2018-04-08</text>
+                </view>
+                <text class='shengl black txt2'>上祺同事的交付给六岁关键是的发送积分啥地方上祺同事的交付给六岁关键是的发送积分啥地方</text>
+                <text class='shengl txt2'>建议您咨询一下其他店</text>
+            </view>
+        </view>
     </view>
 </view>

@@ -21,6 +21,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        options.id = 10;   //防止报错
         // console.log(options)
         this.setTitle('小妮子')
         const { id } = options;

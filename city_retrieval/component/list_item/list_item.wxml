@@ -14,8 +14,7 @@
             <text class='shengl'>{{data.content}}</text>
         </view>
         <slot slot="s_btn">
-        
+            
         </slot>
-        
     </view>
 </view>

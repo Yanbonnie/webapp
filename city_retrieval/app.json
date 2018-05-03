@@ -1,12 +1,12 @@
 {
     "pages": [
+        "pages/contact/contact",
         "pages/index/index",
         "pages/mysale/mysale",
         "pages/card/card",        
         "pages/user/user",
         "pages/send/send",
         "pages/comment/comment",
-        "pages/contact/contact",
         "pages/discount/discount"
     ],
     "window": {
