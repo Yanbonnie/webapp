@@ -1,0 +1,61 @@
+/* pages/manage/uploadCert/uploadCert.wxss */
+
+page {
+    background: #fff;
+}
+.uploadCert .flexBox{
+    width: 90%;
+    margin: 100rpx auto 30rpx;
+}
+.flexBox {
+    display: flex;
+    width: 100%;
+    align-items: center;  
+}
+
+.flexBox text {
+    font-size: 28rpx;
+}
+
+.flexBox .flexLeft {
+    width: 200rpx;
+}
+
+.flexBox .flexRight {
+    flex-grow: 1;
+    display: flex;
+}
+
+.flexRight .add {
+    width: 200rpx;
+    height: 200rpx;
+    background: #f1f1f1;
+}
+.flexRight view{
+    margin-right: 20rpx;
+}
+.flexRight .add image {
+    width: 100%;
+    height: 100%;
+}
+.flexRight .add  text{
+    text-align: center;
+    line-height: 200rpx;
+    display: block;
+    color: #ccc;
+}
+
+.tip{
+    text-align: center;
+    color: #ff503f;
+    display: block;
+    width: 100%;
+}
+.submitBtn{
+    width: 80%;
+    margin: 0 auto;
+    display:block;
+    border: 1px #38f solid;
+    color: #38f;
+    background: #fff;
+}

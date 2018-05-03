@@ -45,3 +45,9 @@
 .enterPre .picker{
     color: #808080 !important;
 }
+/*第二部分*/
+.applyBtn{
+    background: #38f;
+    color: #fff;
+    border:1px #38f solid;
+}

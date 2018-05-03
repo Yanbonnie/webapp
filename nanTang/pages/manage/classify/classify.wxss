@@ -1,0 +1,27 @@
+/* pages/manage/classify/classify.wxss */
+page{
+    background: #fff;
+}
+.flexBox{
+    display: flex;
+    align-items: center;
+    height: 100rpx;
+    padding: 0 20rpx;
+    border-bottom: 1px #f1f1f1 solid;
+}
+.flex_l text{
+    display: block;
+}
+.flex text:nth-child(2){
+    font-size: 24rpx;
+    color: #ccc;
+}
+.flex view{
+    font-size: 28rpx;
+}
+.flexBox .flex_l{
+    flex-grow: 1;
+}
+.flexBox .flex_c,.flexBox .flex_r{
+    flex-basis: 150rpx;
+}

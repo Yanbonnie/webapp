@@ -1,0 +1,51 @@
+<!--pages/manage/manage/manage.wxml-->
+<view class='manage'>
+    <view class='flexThree'>
+        <view class='flex flex_l'>
+            <image src="/assets/images/picture.jpg"></image>
+            <text class='shengl'>店名店名店名店名</text>
+        </view>
+        <view class='flex flex_c'>
+            <text>总订单:133</text>
+            <text>总收入:133</text>
+            <text>可提现金额:133</text>
+        </view>
+        <view class='flex flex_r'>
+            <text>今日订单:1</text>
+            <text>今日收入:231</text>
+            <view class='viewBtn'>提现</view>
+        </view>
+    </view>
+    <view class='panelBox'>
+        <view class='item'>
+            <text>分类管理</text>
+            <view class='icon'>
+            <image src='/assets/images/right.png'></image>
+            </view>
+        </view>
+        <view class='item'>
+            <text>商品管理</text>
+            <view class='icon'>
+            <image src='/assets/images/right.png'></image>
+            </view>
+        </view>
+        <view class='item'>
+            <text>员工管理</text>
+            <view class='icon'>
+            <image src='/assets/images/right.png'></image>
+            </view>
+        </view>
+        <view class='item'>
+            <text>订单管理</text>
+            <view class='icon'>
+            <image src='/assets/images/right.png'></image>
+            </view>
+        </view>
+        <view class='item'>
+            <text>财务明细</text>
+            <view class='icon'>
+            <image src='/assets/images/right.png'></image>
+            </view>
+        </view>
+    </view>
+</view>

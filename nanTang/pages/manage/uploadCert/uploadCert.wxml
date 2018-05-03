@@ -1,0 +1,32 @@
+<!--pages/manage/uploadCert/uploadCert.wxml-->
+<view class='uploadCert container'>
+    <view class='flexBox'>
+        <view class='flexLeft'>
+            <text>营业执照</text>
+        </view>
+        <view class='flexRight'>
+            <view class='add'>
+                <image src="/assets/images/add.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class='flexBox'>
+        <view class='flexLeft'>
+            <text>负责人身份证</text>
+        </view>
+        <view class='flexRight'>
+            <view class='add'>
+                <text>上传正面</text>
+            </view>
+            <view class='add'>
+                <text>上传反面</text>
+            </view>
+        </view>
+    </view>
+    <view class='flexBox'>
+        <text class='tip'>请提交以上两种材料的其中一个</text>
+    </view>
+    <view class='flexBox'>
+        <button class='submitBtn'>提交</button>
+    </view>
+</view>

@@ -1,0 +1,87 @@
+/* pages/manage/manage/manage.wxss */
+
+.flexThree {
+    display: flex;
+    padding: 20rpx 0;
+    background: #fff;
+    margin-top: 20rpx;
+}
+
+.flex text {
+    display: block;
+    font-size: 28rpx;
+    line-height: 65rpx;
+}
+
+.flex_l image {
+    width: 80rpx;
+    height: 80rpx;
+    display: block;
+    border-radius: 100%;
+    margin: 30rpx auto 0;
+    position: relative;
+}
+
+text {
+    font-size: 28rpx;
+}
+
+.flex_l {
+    flex-basis: 200rpx;
+    display: block;
+    overflow: hidden;
+}
+
+.flex_c, .flex_r {
+    flex-grow: 1;
+}
+
+.flex_l text {
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.flex_r .viewBtn {
+    height: 50rpx;
+    line-height: 50rpx;
+    width: 150rpx;
+    font-size: 28rpx;
+    padding: 0;
+    margin: 10rpx 0 0;
+    border: 1px #38f solid;
+    color: #38f;
+    background: #fff;
+    border-radius: 8rpx;
+    text-align: center;
+}
+
+.panelBox {
+    background: #fff;
+    margin-top: 20rpx;
+}
+
+.panelBox .item {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    height: 100rpx;
+    align-items: center;
+    border-bottom: 1px #f1f1f1 solid;
+}
+
+.panelBox .item .icon {
+    width: 40rpx;
+    height: 80rpx;
+    align-self: center;
+}
+
+.panelBox .item image {
+    width: 40rpx;
+    height: 40rpx;
+    display: block;
+    position: relative;
+    top: 23rpx;
+}

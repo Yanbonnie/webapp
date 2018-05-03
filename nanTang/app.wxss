@@ -13,7 +13,9 @@
 page{
     background: #efefef;
 }
-
+text{
+    font-size: 28rpx;
+}
 .center image{
    width: 200rpx;
    height: 200rpx;
@@ -52,4 +54,24 @@ page{
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.viewBtn{
+    border: 1px #38f solid;
+    color: #38f;
+    width: 90%;
+    margin: 0 auto;
+    line-height: 50rpx;
+    border-radius: 8rpx;
+    text-align: center;
+}
+.iconBtn image{
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 8rpx;
+    position: relative;
+    top: 5rpx;
+}
+.iconBlue{
+    color: #38f;
 }

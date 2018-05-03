@@ -87,6 +87,9 @@
             <view class="zan-btns">
                 <button class="{{shopStatus == 0 ? 'zan-btn gray':'zan-btn zan-btn--primary' }}" formType="submit">{{submitBtn}}</button>
             </view>
+            <view class="zan-btns">
+                <button class='applyBtn'>申请开通在线下单</button>
+            </view>
         </view>
     </form>
 </view>

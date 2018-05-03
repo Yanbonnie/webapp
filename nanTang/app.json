@@ -1,11 +1,15 @@
 {
     "pages": [
+        "pages/manage/classify/classify",
+        "pages/manage/manage/manage",
+        "pages/manage/uploadCert/uploadCert",
         "pages/enter/enter",
         "pages/index/index",
         "pages/detail/detail",
         "pages/search/search",
         "pages/business/business",
         "pages/webview/webview"
+        
     ],
     "window": {
         "backgroundTextStyle": "dark",
