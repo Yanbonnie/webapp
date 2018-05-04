@@ -1,0 +1,46 @@
+/* pages/manage/member/index/index.wxss */
+.member{
+    padding-bottom: 102rpx;
+}
+.flexBox{
+    margin-top: 2rpx;
+    display: flex;
+    align-items: center;
+    padding: 20rpx;
+    background: #fff;
+}
+.flexBox .flex_l{
+    width: 120rpx;
+    overflow: hidden;
+    padding: 0 10rpx;
+}
+.flex_l text{
+    width: 100%;
+    display: block;
+}
+.flexBox .flex_l image{
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 100%;
+}
+.flex_c{
+    flex-grow: 1;
+}
+.flex_c view{
+    display: flex;
+}
+.flex_c view text{
+    line-height: 50rpx;
+}
+.flex_c view text:nth-child(1){
+    flex-basis: 180rpx;
+    padding-right: 20rpx;
+    text-align: right;
+}
+.flex_r{
+    width: 100rpx;
+}
+
+.comFoot view{
+    width: 100%;
+}

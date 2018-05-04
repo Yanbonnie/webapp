@@ -1,0 +1,131 @@
+/* pages/manage/goods/index/index.wxss */
+page{
+     height: 100%; 
+    overflow: hidden;
+    background: #fff;
+}
+.goods{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.goods .mainBox{
+    flex-grow: 1;
+    height: calc(100%-100rpx);
+    overflow: hidden;
+    position: relative;
+}
+.goods .bottomBox{
+    flex-basis: 100rpx;
+     display: block; 
+}
+.goods .bottomBox view{
+    width: 50%;
+    float: left;
+    text-align: center;
+    line-height: 100rpx;
+    background: #4a4a4a;
+    color: #fff;
+}
+
+.mainBody{
+    display: flex;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+}
+.mainBody .good_l{
+    flex-basis: 180rpx;
+    background: #f1f1f1;
+    overflow: hidden;
+    padding:0;
+    box-shadow: 0 5rpx 20rpx #acacac;
+    position: relative;
+    z-index: 2;
+}
+.mainBody .good_l .item1{
+    padding:0 20rpx;
+    position: relative;
+    color: #666666;    
+}
+.mainBody .good_l .item2{
+    border-bottom: 1px #ccc dashed;
+    padding: 20rpx 0;
+}
+.mainBody .good_l text{
+   
+    line-height:40rpx;
+}
+.mainBody .good_l .active{
+    background: #fff;
+    
+}
+.mainBody .good_l .active .item2{
+    border-bottom: 1px #fff solid;
+}
+.mainBody .good_l .active::before{
+    content: '.';
+    height: 80%;
+    width: 6rpx;
+    background: #1aad19;
+    position: absolute;
+    font-size: 0;
+    left: 0;
+    top: 10%;
+}
+.mainBody .good_r{
+    flex-grow: 1;
+    height: 100%;
+}
+
+
+/*商品列表*/
+.goodItem .item .itemL{
+    width: 140rpx;
+    overflow: hidden;
+}
+.goodItem .itemL image{
+    width: 120rpx;
+    height: 120rpx;
+}
+.good_r .title{
+    background: #f1f1f1;
+    line-height:80rpx;
+    padding-left: 20rpx;
+    margin-bottom: 10rpx;
+}
+.goodItem{
+    margin: 0 20rpx 0;
+    padding: 10rpx 0 ;
+    border-bottom: 1px #f1f1f1 dashed;
+}
+.goodItem .item{
+    display: flex;
+}
+.goodItem .item text{
+    display: block;
+    width: 100%;
+}
+.goodItem .item text:nth-child(2){
+    color: #acacac;
+    font-size: 24rpx;
+    line-height: 40rpx;
+}
+.goodItem .item text:nth-child(3){
+    color: #ff503f;
+    font-size: 30rpx;
+}
+.goodItem .eidtBox{
+    display: flex;
+}
+.goodItem .eidtBox view{
+    flex-grow: 1;
+    display: block;
+    padding: 10rpx 30rpx;
+}
+.goodItem .viewBtn{
+    line-height:30rpx; 
+    width: auto;
+}

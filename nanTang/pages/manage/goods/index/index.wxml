@@ -1,0 +1,65 @@
+<!--pages/manage/goods/index/index.wxml-->
+<view class='goods'>
+    <view class='mainBox'>
+        <view class='mainBody'>
+            <view class='good_l'>
+                <scroll-view scroll-y="true" style='height:100%;'>
+                    <view class='item1 active'>
+                        <view class='item2 '>
+                            <text>小吃</text>
+                        </view>
+                    </view>
+
+                    <view class='item1 '>
+                        <view class='item2'>
+                            <text class='shengl2'>星时代果茶（多口味，任君选择）</text>
+                        </view>
+                    </view>
+                    <view class='item1'>
+                        <view class='item2'>
+                            <text>牛排</text>
+                        </view>
+                    </view>
+                    <view class='item1 ' wx:for="{{[1,1,1,1,1,1,11,1,1,1,1,1,1,1,1]}}" wx:key="{{item}}">
+                        <view class='item2'>
+                            <text>披萨</text>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+            <view class='good_r'>
+                <scroll-view scroll-y="true" style='height:100%;'>
+                    <view class='title'>小吃</view>
+                    <view class='goodsList' wx:for="{{[1,2,3,4,5,6,7,8,9,41,1,11,11,1,44,12]}}" wx:key="{{index}}">
+                        <view class='goodItem'>
+                            <view class='item'>
+                                <view class="itemL">
+                                    <image src='/assets/images/food.jpg' mode='aspectFill'></image>
+                                </view>
+                                <view class="itemR">
+                                    <text class='shengl'>鲍汁脆脆鸡</text>
+                                    <text>库存无限 月售3</text>
+                                    <text>￥15</text>
+                                </view>
+                            </view>
+                            <view class='eidtBox'>
+                                <view>
+                                    <view class='viewBtn'>编辑</view>
+                                </view>
+                                <view>
+                                    <view class='viewBtn'>下架</view>
+                                </view>
+                            </view>
+                        </view>
+
+
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+    <view class='bottomBox'>
+        <view>管理分类</view>
+        <view>增加商品</view>
+    </view>
+</view>

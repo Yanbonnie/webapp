@@ -1,7 +1,12 @@
 {
     "pages": [
-        "pages/manage/classify/classify",
-        "pages/manage/manage/manage",
+        "pages/manage/member/scan/scan",
+        "pages/manage/member/index/index",
+        "pages/manage/goods/opera/opera",
+        "pages/manage/goods/index/index",
+        "pages/manage/classify/opera/opera",
+        "pages/manage/classify/index/index",
+        "pages/manage/index/index",
         "pages/manage/uploadCert/uploadCert",
         "pages/enter/enter",
         "pages/index/index",

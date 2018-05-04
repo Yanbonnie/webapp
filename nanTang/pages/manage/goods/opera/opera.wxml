@@ -1,0 +1,96 @@
+<!--pages/manage/goods/opera/opera.wxml-->
+<view class='opera'>
+    <form>
+        <view class='contain'>
+            <view class='flexBox'>
+                <view class='flexL'>
+                    <text>商品名称<text class='fontRed require'>*</text></text>
+                </view>
+                <view class='flexR'>
+                    <input class='input' value='鲍汁脆脆鸡'></input>
+                </view>
+            </view>
+            <view class='flexBox multiline'>
+                <view class='flexL'>
+                    <text>图片设置</text>
+                    <text class='tip'>图片需大于600x450像素</text>
+                </view>
+                <view class='flexR'>
+                    <view class='imgBox'>
+                        <image src='/assets/images/food.jpg' mode="aspectFill"></image>
+                    </view>
+                </view>
+            </view>
+            <view class='flexBox'>
+                <view class='flexL'>
+                    <text>商品分类<text class='require fontRed'>*</text></text>
+                </view>
+                <view class='flexR'>
+                    <view>
+                        <text>小吃</text>
+                        <image class='iconRight' src='/assets/images/right.png'></image>
+                    </view>
+                </view>
+            </view>
+            <view class='flexBox borderNone'>
+                <view class='flexL'>
+                    <text>商品描述</text>
+                </view>
+                <view class='flexR' style='position:relative;'>
+                    <input class='descript' placeholder='200字以内,请输入'></input><image class='iconRight iconInput' src='/assets/images/right.png'></image>
+                </view>
+            </view>
+        </view>
+        <view class='blank'></view>
+        <view class='contain'>
+            <view class='flexBox'>
+                <view class='flexL'>
+                    <text>价格<text class='fontRed require'>*</text></text>
+                </view>
+                <view class='flexR'>
+                    <input class='input' value='15'></input>
+                </view>
+            </view>
+            <view class='flexBox'>
+                <view class='flexL'>
+                    <text>库存无限<text class='fontRed require'>*</text></text>
+                </view>
+                <view class='flexR'>
+                    <switch checked bindchange="switchChange"/>
+                </view>
+            </view>
+            <view class='flexBox'>
+                <view class='flexL'>
+                    <text>库存数量</text>
+                </view>
+                <view class='flexR'>
+                    <input class='input' placeholder='请输入数字'></input>
+                </view>
+            </view>
+            <view class='flexBox'>
+                <view class='flexL'>
+                    <text>是否打折<text class='fontRed require'>*</text></text>
+                </view>
+                <view class='flexR'>
+                    <switch checked bindchange="switchChange"/>
+                </view>
+            </view>
+            <view class='flexBox'>
+                <view class='flexL'>
+                    <text>折扣</text>
+                </view>
+                <view class='flexR'>
+                    <input class='input' placeholder='请输入折扣'></input>
+                </view>
+            </view>
+            <view class='comFoot'>
+                <view class='active'>
+                    <text>保存</text>
+                </view>
+                <view>
+                    <text>删除</text>
+                </view>
+            </view>
+        </view>
+    </form>
+</view>

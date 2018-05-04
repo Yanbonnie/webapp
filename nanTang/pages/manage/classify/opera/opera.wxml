@@ -1,0 +1,19 @@
+<!--pages/manage/operaClassify/operaClassify.wxml-->
+<view class='operaC'>
+    <text class='title'>分类名称</text>
+    <view >
+        <input class='input' placeholder='请输入分类名称'></input>
+    </view>
+    <text class='title'>分类描述</text>
+    <view>
+        <textarea placeholder='请输入分裂描述，最多255字' value="{{descript}}" bindinput="textareaInput">
+        
+        </textarea>
+        <view class='num'>{{num}}/255</view>
+    </view>
+    <view class='btnBox'>
+        <view class='item'>保存</view>
+        <view class='item'>删除</view>
+    </view>
+</view>
+

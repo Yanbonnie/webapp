@@ -1,0 +1,25 @@
+<!--pages/manage/member/index/index.wxml-->
+<view class='member'>
+    <view class='flexBox' wx:for="{{[1,1,1,11,1,1,1,1,1]}}" wx:key="{{index}}"> 
+        <view class='flex_l'>
+            <image src='/assets/images/picture.jpg'></image>
+            <text class='shengl'>员工名啊哈的控件奥康国际</text>
+        </view>
+        <view class='flex_c'>
+            <view>
+                <text>今日接单数：</text>
+                <text>15</text>
+            </view>
+            <view>
+                <text>总接单数：</text>
+                <text>15</text>
+            </view>
+        </view>
+        <view class='flex_r'>
+            <view class='viewBtn'>删除</view>
+        </view>
+    </view>
+    <view class='comFoot'>
+        <view>增加员工</view>
+    </view>
+</view>

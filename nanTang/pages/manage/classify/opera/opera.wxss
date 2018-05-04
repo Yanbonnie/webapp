@@ -1,0 +1,55 @@
+/* pages/manage/operaClassify/operaClassify.wxss */
+page{
+    background: #f1f1f1;
+}
+.title{
+    background: #f1f1f1;
+    line-height: 80rpx;
+    display: block;
+    padding-left: 20rpx;
+}
+.input{
+    font-size: 28rpx;
+    line-height: 100rpx;
+    height: 100rpx;
+    padding-left: 20rpx;
+    display: block;
+    background: #fff;
+}
+textarea{
+    height: 300rpx;
+    background: #fff;
+     width: 95%; 
+    display: block;
+    font-size: 28rpx;
+    line-height: 50rpx;
+    padding:2.5%;
+}
+.num{
+    float: right;
+    font-size: 28rpx;
+    margin-right: 15rpx;
+    color: #acacac;
+    line-height: 50rpx;
+}
+.btnBox{
+    position: fixed;
+    height: 100rpx;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width:100%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    background: #fff;
+}
+.btnBox .item{
+    flex-grow: 1;
+    font-size: 32rpx;
+    text-align: center;
+}
+.btnBox .item:nth-child(1){
+    border-right: 1px #f1f1f1 solid;
+    color: #ff503f;
+}

@@ -1,0 +1,62 @@
+/* pages/manage/goods/opera/opera.wxss */
+page{
+    height: 100%;
+    background: #fff;
+}
+.opera{
+    padding-bottom: 100rpx;
+}
+.multiline text{
+    display: block;
+}
+.contain{
+    padding: 20rpx 20rpx 0;
+}
+.blank{
+    height: 30rpx;
+    background: #f1f1f1;
+}
+.flexBox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px #f1f1f1 solid;
+    padding: 20rpx 0;
+}
+.borderNone{
+    border: 0;
+}
+.require{
+    padding: 0 10rpx;
+}
+.tip{
+    color: #ccc;
+    font-size: 24rpx;
+}
+.imgBox{
+    width: 120rpx;
+    height: 120rpx;
+}
+.imgBox image{
+    width: 120rpx;
+    height: 120rpx;
+}
+.iconRight{
+    width: 30rpx;
+    height: 30rpx;
+    position: relative;
+    top: 6rpx;
+    margin-left: 10rpx;
+}
+.descript{
+    text-align: right;
+    padding-right: 30rpx;
+}
+.iconInput{
+    position: absolute;
+    right: 0;
+    top: 10rpx;
+}
+.input{
+    text-align: right;
+}

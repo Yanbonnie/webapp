@@ -1,6 +1,8 @@
-/* pages/manage/classify/classify.wxss */
 page{
     background: #fff;
+}
+.classify .list{
+    padding-bottom: 120rpx;
 }
 .flexBox{
     display: flex;
@@ -24,4 +26,19 @@ page{
 }
 .flexBox .flex_c,.flexBox .flex_r{
     flex-basis: 150rpx;
+}
+.addClassify{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100rpx;
+    background: #38f;
+    color: #fff;
+}
+.addClassify text{
+    line-height: 100rpx;
+    text-align: center;
+    width: 100%;
+    display: block;
 }
