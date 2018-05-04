@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/order/placeOrder/placeOrder", 
         "pages/manage/member/scan/scan",
         "pages/manage/member/index/index",
         "pages/manage/goods/opera/opera",

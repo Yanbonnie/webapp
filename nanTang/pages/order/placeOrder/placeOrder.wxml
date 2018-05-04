@@ -1,0 +1,114 @@
+<!--pages/order/placeOrder/placeOrder.wxml-->
+<view class='placeOrder'>
+    <view class='info'>
+        <view class='info_l'>
+            <image src='/assets/images/picture.jpg'></image>
+        </view>
+        <view class='info_c'>
+            <view>店名：新冰城</view>
+            <view>电话：
+                <text>拨打电话</text>
+            </view>
+            <view>地址：广东省陆丰市</view>
+        </view>
+        <view class='info_r'>
+            <view class='viewBtn'>发给好友</view>
+            <view class='viewBtn'>分享朋友圈</view>
+        </view>
+    </view>
+    <view class='goodsBox'>
+        <view class='goodsList'>
+            <view class='goodsLeft'>
+                <scroll-view scroll-y="true" style='height:100%;'>
+                    <view class='item1 active'>
+                        <view class='item2 '>
+                            <text>小吃</text>
+                        </view>
+                    </view>
+
+                    <view class='item1 '>
+                        <view class='item2'>
+                            <text class='shengl2'>星时代果茶（多口味，任君选择）</text>
+                        </view>
+                    </view>
+                    <view class='item1'>
+                        <view class='item2'>
+                            <text>牛排</text>
+                        </view>
+                    </view>
+                    <view class='item1 ' wx:for="{{[1,1,1,1,1,1,11,1,1,1,1,1,1,1,1]}}" wx:key="{{item}}">
+                        <view class='item2'>
+                            <text>披萨</text>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+            <view class='goodsRight'>
+                <view class='title'>折扣</view>
+                <view class='scrollWrap'>
+                    <view style='height:80rpx'></view>
+                    <view class='flexBox'>
+                        <view class='flexL'>
+                            <image src='/assets/images/food.jpg'></image>
+                        </view>
+                        <view class='flexC'>
+                            <text>凉小皮家蜜汁凉皮</text>
+                            <view class='label'>
+                                <text>热品</text>
+                            </view>
+                            <view class='tip'>
+                                <text>月售111</text>
+                                <text>赞12</text>
+                            </view>
+                            <view class='price'>
+                                <view class='money'>￥21</view>
+                                <view class='numBox'>
+                                    <text class='circle reduce'>-</text>
+                                    <text>1</text>
+                                    <text class='circle add'>+</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+
+                    <view class='flexBox' wx:for="{{[1,1,1,11,1,1,11,1]}}" wx:key="{{index}}">
+                        <view class='flexL'>
+                            <image src='/assets/images/food.jpg'></image>
+                        </view>
+                        <view class='flexC'>
+                            <text>凉小皮家蜜汁凉皮</text>
+                            <view class='tip'>
+                                <text>月售111</text>
+                                <text>赞12</text>
+                            </view>
+                            <view class='price'>
+                                <view class='money'>￥21</view>
+                                <view class='numBox'>
+                                    <text class='circle reduce'>-</text>
+                                    <text>1</text>
+                                    <text class='circle add'>+</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class='settle_accounts'>
+        <view class='itme1'>
+            <view class='cart'>
+                <image src='/assets/images/cart_on.png'></image>
+                <text>1</text>
+            </view>
+        </view>
+        <view class='item2'>
+            <text>￥62</text>
+            <text>另需配送费￥9</text>
+        </view>
+        <view class='item3'>
+            <text>去结算</text>
+        </view>
+    </view>
+</view>
