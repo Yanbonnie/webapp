@@ -13,7 +13,7 @@ page{
     align-items: center;
     padding: 20rpx;
     background: #fff;
-    /* margin-bottom: 5rpx; */
+     margin-bottom: 5rpx; 
 }
 .info .info_l{
     width: 120rpx;
