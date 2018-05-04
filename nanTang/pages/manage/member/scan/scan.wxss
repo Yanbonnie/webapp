@@ -1,4 +1,7 @@
 /* pages/manage/member/scan/scan.wxss */
+page{
+    background: #fff;
+}
 image{
     width: 150rpx;
     display: block;
