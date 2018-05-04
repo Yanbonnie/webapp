@@ -1,2 +1,9 @@
 <!--pages/manage/member/scan/scan.wxml-->
-<text>pages/manage/member/scan/scan.wxml</text>
+<view class='scan'>
+    <image src="/assets/images/picture.jpg"></image>
+    <text>新冰城</text>
+    <text class='tip'>是否确认成为此店的接单员</text>
+
+    <view class='viewBtn active'>同意</view>
+    <view class='viewBtn gray'>拒绝</view>
+</view>
