@@ -1,0 +1,114 @@
+/* pages/order/submitOrder/submitOrder.wxss */
+.submitOrder{
+    padding-bottom: 100rpx;
+}
+.list{
+    background: #fff;
+    margin: 5rpx auto 20rpx;
+}
+.listItem{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20rpx;
+    border-bottom: 1px #f1f1f1 solid;
+}
+.listItem .icon2{
+    flex-grow: 1;
+
+}
+.listItem .icon1{
+    flex-basis: 50rpx;
+}
+.listItem .icon3{
+    flex-basis: 30rpx;
+}
+.listItem .icon1 image,.listItem .icon3 image{
+    width:30rpx;
+    height: 30rpx;
+}
+.listItem .icon1 image{
+    position: relative;
+    top: 5rpx;
+}
+
+.address .icon2{
+    color: #fda903;
+}
+.peisong .icon3{
+    flex-basis: 120rpx;
+    text-align: right;
+}
+.peisong .icon3 text{
+    font-size: 20rpx;
+    background: #ffd161;
+    color: #000;
+    padding: 0 5rpx;
+}
+
+.orderList{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20rpx;
+    background: #fcfcfc;
+}
+.orderL{
+    flex-basis: 120rpx;
+}
+.orderL image{
+    width: 100rpx;
+    height: 100rpx;
+}
+.orderC{
+    flex-grow: 1;
+     align-self: flex-start;
+}
+.orderC text{
+    display: block;
+}
+.orderC text:nth-child(2){
+    font-size: 20rpx;
+    color: #acacac;
+}
+.orderR{
+    flex: 100rpx;
+    text-align: right;
+    align-self: flex-start;
+}
+.countPrice{
+    text-align: right;
+    padding: 20rpx;
+    border-top: 1px #f1f1f1 solid;
+}
+.countPrice text:nth-child(2){
+    color: #ff503f;
+    
+}
+.submitFoot{
+    height: 100rpx;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: #4a4a4a;
+    display: flex;
+}
+.submitFoot .item1{
+    flex-grow: 1;
+    line-height: 100rpx;
+    text-align: right;
+    padding-right: 30rpx;
+    color: #fff;
+}
+.submitFoot .item1 text{
+    color: #ff503f;
+}
+.submitFoot .item2{
+    flex-basis: 200rpx;
+    background: #ffd161;
+    color: #000;
+    line-height: 100rpx;
+    text-align: center;
+    font-weight: bold;
+}

@@ -84,9 +84,9 @@
                             <view class='price'>
                                 <view class='money'>￥21</view>
                                 <view class='numBox'>
-                                    <text class='circle reduce'>-</text>
+                                    <text class='circle reduce'>－</text>
                                     <text>1</text>
-                                    <text class='circle add'>+</text>
+                                    <text class='circle add'>＋</text>
                                 </view>
                             </view>
                         </view>

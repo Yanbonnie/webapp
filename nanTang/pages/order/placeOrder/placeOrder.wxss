@@ -1,54 +1,74 @@
 /* pages/order/placeOrder/placeOrder.wxss */
-page{
+
+page {
     height: 100%;
 }
-.placeOrder{
+
+.placeOrder {
     display: flex;
     height: 100%;
     flex-direction: column;
 }
 
-.info{
+.info {
     display: flex;
     align-items: center;
     padding: 20rpx;
-    background: #fff;
-     margin-bottom: 5rpx; 
+    background: #505050;
+    color: #fff;
 }
-.info .info_l{
+
+.info .info_l {
     width: 120rpx;
 }
-.info .info_l image{
+
+.info .info_l image {
     width: 100rpx;
     height: 100rpx;
     border-radius: 100%;
     display: block;
 }
-.info .info_c{
+
+.info .info_c {
     flex-grow: 1;
 }
-.info .info_c text{
-    border: 1px #38f solid;
-    height:40rpx;
-    color: #38f;
+
+.info .info_c view {
+    padding: 10rpx 0;
+}
+
+.info .info_c text {
+    border: 1px #fff solid;
+    height: 40rpx;
+    color: #505050;
+    background: #fff;
     border-radius: 8rpx;
     display: inline-block;
     padding: 0 10rpx;
     font-size: 24rpx;
     line-height: 40rpx;
 }
-.info .info_r{
-    width:180rpx;
+
+.info .info_r {
+    width: 180rpx;
 }
-.info .viewBtn:nth-child(1){
-    margin-bottom: 20rpx;
+
+.info .viewBtn {
+    border: 1px #fff solid;
+    color: #fff;
 }
-.goodsBox{
+
+.info .viewBtn:nth-child(1) {
+    margin-bottom: 30rpx;
+}
+
+.goodsBox {
     flex-grow: 1;
     position: relative;
     background: #fff;
 }
-.goodsList{
+
+.goodsList {
     height: 100%;
     position: absolute;
     left: 0;
@@ -58,36 +78,41 @@ page{
     justify-content: space-between;
     align-items: center;
 }
-.goodsList .goodsLeft{
+
+.goodsList .goodsLeft {
     width: 180rpx;
     height: 100%;
     background: #f1f1f1;
 }
-.goodsList .goodsRight{
+
+.goodsList .goodsRight {
     flex-grow: 1;
     height: 100%;
 }
 
-.goodsLeft .item1{
-    padding:0 20rpx;
+.goodsLeft .item1 {
+    padding: 0 20rpx;
     position: relative;
-    color: #666666;    
+    color: #666;
 }
-.goodsLeft .item2{
+
+.goodsLeft .item2 {
     /* border-bottom: 1px #ccc dashed; */
     padding: 20rpx 0;
 }
-.goodsLeft text{
-   
-    line-height:40rpx;
+
+.goodsLeft text {
+    line-height: 40rpx;
 }
-.goodsLeft .active{
+
+.goodsLeft .active {
     background: #fff;
-    
 }
-.goodsLeft .active .item2{
+
+.goodsLeft .active .item2 {
     border-bottom: 1px #fff solid;
 }
+
 /* .goodsLeft .active::before{
     content: '.';
     height: 80%;
@@ -98,11 +123,13 @@ page{
     left: 0;
     top: 10%;
 } */
+
 .goodsRight {
-    overflow:hidden;
+    overflow: hidden;
     position: relative;
 }
-.goodsRight  .title{
+
+.goodsRight  .title {
     line-height: 80rpx;
     position: absolute;
     left: 0;
@@ -112,96 +139,113 @@ page{
     width: 100%;
     padding-left: 40rpx;
 }
-.goodsRight  .title:before{
+
+.goodsRight  .title:before {
     content: '.';
     font-size: 0;
-    height:40rpx;
+    height: 40rpx;
     left: 20rpx;
     top: 20rpx;
     border-right: 4rpx #ff503f solid;
     position: absolute;
 }
+
 .goodsRight .scrollWrap {
     height: 100%;
     overflow-y: scroll;
 }
-.goodsRight .flexBox{
+
+.goodsRight .flexBox {
     display: flex;
     align-items: center;
     padding: 15rpx;
 }
-.goodsRight .flexL{
+
+.goodsRight .flexL {
     width: 100rpx;
     /* align-self: flex-start; */
 }
-.goodsRight .flexL image{
+
+.goodsRight .flexL image {
     width: 80rpx;
     height: 80rpx;
 }
+
 .goodsRight .flexC {
     flex-grow: 1;
 }
-.goodsRight .flexC .label text{
+
+.goodsRight .flexC .label text {
     display: inline-block;
     font-size: 18rpx;
     padding: 0 5rpx;
     border: 1px green solid;
-    height:25rpx;
+    height: 25rpx;
     line-height: 22rpx;
     color: green;
 }
-.goodsRight .flexC .tip text{
+
+.goodsRight .flexC .tip text {
     font-size: 22rpx;
     color: #acacac;
     margin-right: 10rpx;
 }
-.price{
+
+.price {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
-.price .money{
+
+.price .money {
     color: #ff503f;
     font-weight: bold;
     flex-grow: 1;
 }
-.price .numBox{
+
+.price .numBox {
     flex-basis: 200rpx;
     text-align: right;
 }
-.price .numBox text{
+
+.price .numBox text {
     margin: 0 15rpx;
     display: inline-block;
 }
-.price .circle{
+
+.price .circle {
     width: 40rpx;
     height: 40rpx;
     border-radius: 100%;
 }
-.price .numBox .reduce{    
+
+.price .numBox .reduce {
     border: 2rpx #ccc solid;
     color: #ccc;
     text-align: center;
-    line-height:40rpx;
+    line-height: 40rpx;
 }
-.price .numBox .add{    
+
+.price .numBox .add {
     border: 2rpx #ffd161 solid;
     color: #4a4a4a;
     text-align: center;
-    line-height:40rpx;
+    line-height: 40rpx;
     background: #ffd161;
-
 }
-.settle_accounts{
+
+.settle_accounts {
     height: 100rpx;
     background: #505050;
     display: flex;
     align-items: center;
 }
-.settle_accounts .itme1{
+
+.settle_accounts .itme1 {
     width: 120rpx;
 }
-.settle_accounts  .cart{
+
+.settle_accounts  .cart {
     position: relative;
     padding: 10rpx;
     /* background: #4a4a4a; */
@@ -213,7 +257,8 @@ page{
     top: -30rpx;
     z-index: 2;
 }
-.settle_accounts .cart text{
+
+.settle_accounts .cart text {
     background: #f25340;
     font-size: 18rpx;
     position: absolute;
@@ -226,33 +271,40 @@ page{
     text-align: center;
     display: block;
 }
-.settle_accounts .cart image{
+
+.settle_accounts .cart image {
     width: 50rpx;
     height: 50rpx;
     left: 20rpx;
     top: 20rpx;
     position: absolute;
 }
-.settle_accounts .item2{
+
+.settle_accounts .item2 {
     flex-grow: 1;
 }
-.settle_accounts .item2 text{
+
+.settle_accounts .item2 text {
     display: block;
 }
-.settle_accounts .item2 text:nth-child(1){
+
+.settle_accounts .item2 text:nth-child(1) {
     color: #fff;
 }
-.settle_accounts .item2 text:nth-child(2){
+
+.settle_accounts .item2 text:nth-child(2) {
     color: #bebdbd;
     font-size: 20rpx;
 }
-.settle_accounts .item3{
+
+.settle_accounts .item3 {
     width: 200rpx;
 }
-.settle_accounts .item3 text{
+
+.settle_accounts .item3 text {
     display: block;
     background: #ffd161;
-    color:#000;
+    color: #000;
     height: 100rpx;
     text-align: center;
     line-height: 100rpx;
