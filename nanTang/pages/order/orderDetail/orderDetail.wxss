@@ -1,0 +1,6 @@
+/* pages/order/orderDetail/orderDetail.wxss */
+@import '../../manage/member/orderTaking/orderTaking.wxss';
+
+.orderDetail .info .flexL image{
+    border-radius: 0;
+}

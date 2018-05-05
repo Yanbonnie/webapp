@@ -1,0 +1,76 @@
+/* pages/manage/finance/finance.wxss */
+page,.finance{
+    height: 100%;
+}
+.finance{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.nav{
+    flex-basis: 100rpx;
+    width: 100%;
+    background: #505050;
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+.nav view{
+    flex-grow: 1;
+}
+.nav .day{
+    padding-left: 20rpx;
+}
+.nav .iconDown{
+    width: 30rpx;
+    height: 30rpx;
+    position: relative;
+    top: 5rpx;
+    margin-left: 10rpx;
+}
+.financeBody{
+    flex-grow: 1;
+    position: relative;
+    width: 100%;
+    background: #fff;
+}
+.list{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.list .item{
+    display: flex;
+    align-items: center;
+    padding: 20rpx;
+    border-bottom: 1rpx #f1f1f1 solid;
+}
+.list .item .itemL{
+    flex-basis: 120rpx;
+}
+.list .item .itemL image{
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 100%;
+}
+.list .item .itemR{
+    flex-grow: 1;
+}
+.itemR .txt{
+    display: flex;
+    padding: 0 20rpx 0 0;
+    justify-content: space-between;
+}
+.itemR .txt text:nth-child(2){
+    font-size: 36rpx;
+    color: #ff503f;
+}
+.itemR .time{
+    font-size: 20rpx;
+    color: #acacac;
+}

@@ -1,0 +1,89 @@
+/* pages/manage/member/orderTaking/orderTaking.wxss */
+.info{
+    background: #505050;
+    display: flex;
+    align-items: center;
+    padding: 20rpx;
+    color: #fff;
+}
+.flexL{
+    flex-basis: 150rpx;
+    overflow: hidden;
+    text-align: center;
+     line-height: 60rpx;
+}
+.flexL image{
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 100%;
+}
+.flexL text{
+    width: 100%;
+    display: block;
+}
+.flexR{
+    flex-grow: 1;
+    padding-left: 20rpx;
+    line-height: 60rpx;
+}
+.flexR .orderNum{
+    font-size: 38rpx;
+    color: #ff503f;
+}
+.flexR .call{
+    display: inline-block;
+    background: #fff;
+    font-size: 24rpx;
+    color: #505050;
+    height: 40rpx;
+    line-height: 40rpx;
+    padding: 0 10rpx;
+    border-radius: 8rpx;
+    margin-left: 10rpx;
+}
+
+.orderList{
+    background: #fff;
+}
+
+.orderList .item{
+    display: flex;
+    justify-content: space-between;
+    padding: 30rpx;
+}
+
+.price{
+    color: #ff503f;
+}
+
+.btnBox{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 50rpx;
+}
+.btnBox .viewBtn{
+    width: 250rpx;
+    line-height: 70rpx;
+    height: 70rpx;
+}
+.btnBox .wancheng{
+    background: #1aad19;
+    border: 1px #1aad19 solid;
+    color: #fff;
+    width: 60%;
+}
+.btnBox .yisong{
+    background: #ffd161;
+    border: 1px #ffd161 solid;
+    color: #fff;
+}
+.btnBox .jiedan{
+    background: #ff503f;
+    border: 1px #ff503f solid;
+    color: #fff;
+}
+.btnBox .refuse{
+    background: #fff;
+    border: 1px #ccc solid;
+    color: #4a4a4a;
+}

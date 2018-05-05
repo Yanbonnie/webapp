@@ -1,0 +1,41 @@
+/* pages/order/myOrder/myOrder.wxss */
+.orderList{
+    margin-top: 5rpx;
+}
+.orderList .flexBox{
+    display: flex;
+    align-items: center;
+    padding: 25rpx 20rpx;
+    background: #fff;
+    border-bottom: 1rpx #f1f1f1 solid;
+}
+.orderList .flexL{
+    width: 120rpx;
+}
+.orderList .flexL image{
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 100%;
+    display: block;
+}
+.orderList .flexR{
+    flex-grow: 1;
+     overflow: hidden; 
+}
+.orderList .flexR .mainTxt{
+    display: flex;
+    justify-content: space-between;
+    line-height: 60rpx;
+}
+.orderList .flexR .mainTxt .wait{
+    color: #fed15f;
+}
+.orderList .flexR .mainTxt .psz{
+    color: #1aad19;
+}
+.orderList .flexR .mainTxt .refuse{
+    color: #ff503f;
+}
+.orderList .flexR .mainTxt .finish{
+    color: #acacac;
+}

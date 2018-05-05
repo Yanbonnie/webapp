@@ -1,0 +1,53 @@
+<!--我的订单.wxml-->
+<view class='myOrder'>
+    <view class='orderList'>
+        <view class='flexBox'>
+            <view class='flexL'>
+                <image src="/assets/images/picture.jpg"></image>
+            </view>
+            <view class='flexR'>
+                <view class='mainTxt'>
+                    <text>店名</text>
+                    <text class='wait'>待接单</text>
+                </view>
+                <view>下单时间：2018-03-25 12:35:59</view>
+            </view>
+        </view>
+        <view class='flexBox'>
+            <view class='flexL'>
+                <image src="/assets/images/picture.jpg"></image>
+            </view>
+            <view class='flexR'>
+                <view class='mainTxt'>
+                    <text>店名</text>
+                    <text class='psz'>派送中</text>
+                </view>
+                <view>下单时间：2018-03-25 12:35:59</view>
+            </view>
+        </view>
+        <view class='flexBox'>
+            <view class='flexL'>
+                <image src="/assets/images/picture.jpg"></image>
+            </view>
+            <view class='flexR'>
+                <view class='mainTxt'>
+                    <text>店名</text>
+                    <text class='refuse'>已拒绝</text>
+                </view>
+                <view>下单时间：2018-03-25 12:35:59</view>
+            </view>
+        </view>
+        <view class='flexBox'>
+            <view class='flexL'>
+                <image src="/assets/images/picture.jpg"></image>
+            </view>
+            <view class='flexR'>
+                <view class='mainTxt'>
+                    <text>店名</text>
+                    <text class='finish'>已完成</text>
+                </view>
+                <view>下单时间：2018-03-25 12:35:59</view>
+            </view>
+        </view>
+    </view>
+</view>

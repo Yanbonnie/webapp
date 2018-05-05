@@ -1,20 +1,26 @@
 {
     "pages": [
+        "pages/manage/finance/finance",
+        "pages/order/orderManage/orderManage",
+        "pages/order/orderDetail/orderDetail",
+        "pages/order/myOrder/myOrder",
+        "pages/user/user",
+        "pages/manage/member/orderTaking/orderTaking",
         "pages/order/submitOrder/submitOrder",
         "pages/order/placeOrder/placeOrder",
         "pages/manage/member/scan/scan",
         "pages/manage/member/index/index",
         "pages/manage/goods/opera/opera",
-        "pages/manage/goods/index/index",
+        "pages/manage/goods/index/index",        
         "pages/manage/classify/opera/opera",
         "pages/manage/classify/index/index",
-        "pages/manage/index/index",
+        "pages/manage/index/index",        
         "pages/manage/uploadCert/uploadCert",
+        "pages/business/business",
         "pages/enter/enter",
         "pages/index/index",
         "pages/detail/detail",
-        "pages/search/search",
-        "pages/business/business",
+        "pages/search/search",        
         "pages/webview/webview"
     ],
     "window": {
@@ -44,6 +50,12 @@
                 "text": "我要搜索",
                 "iconPath": "/assets/images/search.png",
                 "selectedIconPath": "/assets/images/search_on.png"
+            },
+            {
+                "pagePath": "pages/user/user",
+                "text": "我的信息",
+                "iconPath": "/assets/images/user.png",
+                "selectedIconPath": "/assets/images/user_on.png"
             }
         ]
     }

@@ -1,0 +1,27 @@
+<!--用户个人中心.wxml-->
+<view class='user'>
+    <view class='userInfo'>
+        <image src='/assets/images/picture.jpg'></image>
+        <text>微信名</text>
+    </view>
+    <view class='list'>
+        <view class='item'>
+            <view>我的订单</view>
+            <view>
+                <image src='/assets/images/right.png'></image>
+            </view>
+        </view>
+        <view class='item'>
+            <view>地址管理</view>
+            <view>
+                <image src='/assets/images/right.png'></image>
+            </view>
+        </view>
+        <view class='item'>
+            <view>店铺管理</view>
+            <view>
+                <image src='/assets/images/right.png'></image>
+            </view>
+        </view>
+    </view>
+</view>

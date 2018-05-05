@@ -1,0 +1,46 @@
+/* pages/order/orderManage/orderManage.wxss */
+@import '../myOrder/myOrder.wxss';
+page,.orderManage,.manage{
+    height: 100%;
+}
+.manage{
+    display: flex;
+    flex-direction: column;
+}
+.manage .nav{
+    flex-basis: 100rpx;
+    display: flex;
+    background: #f7f7f7;
+    align-items: center;
+}
+
+.manage .nav view{
+    flex-grow: 1;
+    text-align: center;
+}
+.manage .nav .active{
+    color: #38f;
+}
+.manage .nav image{
+    width: 40rpx;
+    height: 40rpx;
+    display: block;
+    margin: 0 auto;
+}
+.manage .nav text{
+    display: block;
+    font-size: 26rpx;
+}
+.manage .listBox{
+    flex-grow: 1;
+    overflow: hidden;
+    position: relative;
+}
+.manage .listBox .orderList{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

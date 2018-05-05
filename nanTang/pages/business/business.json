@@ -1,5 +1,6 @@
 {
     "usingComponents": {
         "oper_model": "../../assets/component/oper_model/index"
-    }
+    },
+    "navigationBarTitleText": "商家入驻"
 }

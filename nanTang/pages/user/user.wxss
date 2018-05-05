@@ -1,0 +1,40 @@
+/* pages/user/user.wxss */
+.userInfo{
+    background: #fff;
+    margin: 5rpx auto;
+    padding: 20rpx;
+}
+.userInfo image{
+    width: 120rpx;
+    height: 120rpx;
+    display: block;
+    margin: 0 auto;
+    border-radius: 100%;
+}
+.userInfo text{
+    display: block;
+    text-align: center;
+    padding-top: 20rpx;
+}
+.list{
+    background: #fff;
+    margin-top: 20rpx;
+}
+.list .item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25rpx 20rpx;
+    border-bottom: 1rpx #f1f1f1 solid;
+}
+.item view:nth-child(1){
+    flex-grow: 1;
+}
+.item view:nth-child(2){
+    flex-basis: 100rpx;
+    text-align: right;
+}
+.item image{
+    width: 30rpx;
+    height: 30rpx;
+}
