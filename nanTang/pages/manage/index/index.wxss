@@ -85,3 +85,65 @@ text {
     position: relative;
     top: 23rpx;
 }
+
+
+/*提现弹框*/
+.comCoverHead .title{
+    text-align: center;
+}
+.bodyBox {
+    padding: 50rpx;
+}
+.bodyBox input{
+    height: 80rpx;
+    line-height: 80rpx;
+    padding-left: 20rpx;
+    border: 1rpx #f1f1f1 solid;
+}
+.bodyBox .tipBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50rpx 0 50rpx;
+}
+.bodyBox .tipBox view{
+    flex-grow: 1;
+}
+.bodyBox .tipBox image{
+    width: 35rpx;
+    height: 35rpx;
+    display: inline-block;
+    position: relative;
+    top: 8rpx;
+    margin-right: 10rpx;
+}
+.bodyBox .tipBox view:nth-child(2){
+    text-align: right;
+}
+.bodyBox .viewBtn{
+    height: 80rpx;
+    line-height: 80rpx;
+    background: #38f;
+    color: #fff;
+}
+.comCoverBody .formItem{
+    display: flex;
+    padding: 20rpx;
+    align-items: center;
+}
+.comCoverBody .formItem .input{
+    flex-grow: 1;
+}
+.comCoverBody .formItem input{
+    border: 1px #f1f1f1 solid;
+    padding-left: 20rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+}
+.comCoverBody .formItem .viewBtn{
+    height: 80rpx;
+    line-height: 80rpx;
+    background: #38f;
+    color: #fff;
+    position: static;
+}

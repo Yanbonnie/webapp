@@ -152,3 +152,42 @@ text, view {
     height: 5rpx;
     background: #f1f1f1;
 }
+
+
+/*cover*/
+.comCover{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 100;
+}
+
+.comCoverBox{
+    position: absolute;
+    width: 80%;
+    left: 10%;
+     transform: translateY(-50%); 
+    top: 50%;
+    background: #fff;
+}
+.comCoverBox .comCoverHead{
+    display: flex;
+    height: 80rpx;
+    justify-content: space-between;
+    padding: 0 20rpx;
+    align-items: center;
+    border-bottom: 1rpx #f1f1f1 solid;
+}
+.comCoverBox .comCoverHead text{
+    flex-grow: 1;
+}
+.comCoverBox .comCoverHead image{
+    width: 30rpx;
+    height: 30rpx;
+}
+.comCoverBox .comCoverBody{
+    padding: 20rpx;
+}

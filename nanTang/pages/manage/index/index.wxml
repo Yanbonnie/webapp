@@ -13,7 +13,7 @@
         <view class='flex flex_r'>
             <text>今日订单:1</text>
             <text>今日收入:231</text>
-            <view class='viewBtn'>提现</view>
+            <view class='viewBtn' bindtap='withdrawCash'>提现</view>
         </view>
     </view>
     <view class='panelBox'>
@@ -49,3 +49,63 @@
         </view>
     </view>
 </view>
+<!--提现  -->
+<view class='comCover withdrawCash' wx:if="{{cashState}}">
+    <view class='comCoverBox'>
+        <view class='comCoverHead'>
+            <text class='title'>请输入提现金额</text>
+            <view class='close' bindtap='closeCover' data-index="1">
+                <image src="/assets/images/close.png"></image>
+            </view>
+        </view>
+        <view class='comCoverBody'>
+            <view class='bodyBox'>
+                <input placeholder="{{'最多提现123'}}"></input>
+                <view class='tipBox'>
+                    <view><image src="/assets/images/warning.png"></image><text>提现收取资料</text></view>
+                    <view>全部提现</view>
+                </view>
+                <view class='viewBtn'>提交</view>
+            </view>
+        </view>
+    </view>
+</view>
+<!--提现资料提交  -->
+<view class='comCover' wx:if="{{infoState}}">
+    <view class='comCoverBox'>
+        <view class='comCoverHead'>
+            <text class='title'>请认真填写以下信息</text>
+            <view class='close' data-index="2"  bindtap='closeCover' >
+                <image src="/assets/images/close.png"></image>
+            </view>
+        </view>
+        <view class='comCoverBody'>
+            <form>
+                <view class='formItem'>
+                    <view>真实姓名：</view>
+                    <view  class='input'><input placeholder='请输入真实姓名'></input></view>
+                </view>
+                <view class='formItem'>
+                    <view>身份证号：</view>
+                    <view  class='input'><input placeholder='请输入身份证号'></input></view>
+                </view>
+                <view class='formItem'>
+                    <view>银行卡号：</view>
+                    <view  class='input'><input placeholder='请输入银行卡号'></input></view>
+                </view>
+                <view class='formItem'>
+                    <view>联系电话：</view>
+                    <view  class='input'><input placeholder='请输入电话号码'></input></view>
+                </view>
+                <view class='formItem'>
+                    <view>开户银行：</view>
+                    <view class='input'><input placeholder='请输入开户银行'></input></view>
+                </view>
+                <view class='formItem'>
+                    <view class='viewBtn' formType="submit">提交</view>
+                </view>
+            </form>
+        </view>
+    </view>
+</view>
+

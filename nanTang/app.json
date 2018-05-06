@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/manage/index/index",        
         "pages/manage/finance/finance",
         "pages/order/orderManage/orderManage",
         "pages/order/orderDetail/orderDetail",
@@ -14,7 +15,6 @@
         "pages/manage/goods/index/index",        
         "pages/manage/classify/opera/opera",
         "pages/manage/classify/index/index",
-        "pages/manage/index/index",        
         "pages/manage/uploadCert/uploadCert",
         "pages/business/business",
         "pages/enter/enter",

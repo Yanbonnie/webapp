@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    cashState:false,   //提现弹框状态
+    infoState:false,   //提现资料弹框状态
   },
 
   /**
@@ -14,33 +15,25 @@ Page({
   onLoad: function (options) {
   
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  //提现
+  withdrawCash(){
+      this.setData({
+          cashState:true
+      })
   },
+  //关闭弹框
+  closeCover(e){
+    const {index} = e.currentTarget.dataset;
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
+    if(index == 1){
+        this.setData({
+            cashState:false
+        })
+    }else{
+        this.setData({
+            infoState: false
+        })
+    }
   },
 
   /**
