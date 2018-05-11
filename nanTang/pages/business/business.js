@@ -33,6 +33,8 @@ Page({
         is_apply: null,   //是否入驻
         shopStatus: null, //商家状态   0待审核-待确认（不可点击） 1已通过-修改 2已过期-提交续期  -1已拒绝-重新提交
         shopId: null,     //商家id
+        is_power: 0,      //是否可开通在线下单
+        is_open_online:0, //0-不开通在线下单  1-管理店铺 2-待审核        
         submitBtn: "",
         submitData: {},
         /*公共数据 */
@@ -59,7 +61,7 @@ Page({
                     })
                     if (res.is_apply == 1) {
                         const { menu_pic } = res;
-                        const { name, logo, boss, mobile, tel, address, label, status, id, open_time, close_time } = res.data;
+                        const { name, logo, boss, mobile, tel, address, label, status, id, open_time, close_time,is_power,is_open_online } = res.data;
                         this.setData({
                             shopVal: name,
                             chargeVal: boss,

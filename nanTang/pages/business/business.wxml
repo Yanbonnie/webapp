@@ -87,11 +87,14 @@
             <view class="zan-btns">
                 <button class="{{shopStatus == 0 ? 'zan-btn gray':'zan-btn zan-btn--primary' }}" formType="submit">{{submitBtn}}</button>
             </view>
-            <!-- <view class="zan-btns">
+             <view class="zan-btns" wx:if="{{is_power == 1 && is_open_online != 1}}">
                 <button class='applyBtn'>申请开通在线下单</button>
-            </view> -->
-             <view class="zan-btns">
+            </view> 
+            <view class="zan-btns" wx:if="{{is_open_online == 1}}">
                 <button class='applyBtn'>管理店铺</button>
+            </view>
+            <view class="zan-btns" wx:if="{{is_open_online == 2}}">
+                <button class='applyBtn'>待审核</button>
             </view>
         </view>
     </form>

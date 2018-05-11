@@ -44,19 +44,24 @@ const URL = {
     'postShopInfo': 'postShopInfo',     //商家入驻信息提交接口   
     'getShopInfo': 'getShopInfo',       //获取商家入驻接口       
     'setShopInfo': 'setShopInfo',       //商家信息修改接口       
-    'uploadFile': 'uploadFile',         //上传图片接口           
+    'uploadFile': 'uploadFile',         //上传图片接口            type:menu(菜单) logo(Logo) license(营业执照) idcard(身份证)
     'deleteFile': 'deleteFile',         //图片删除               
     'getPic':'getPic',                  //获取商家菜单图片接口    
     'postPraise':'postPraise',          //商家点赞接口            
     'getShopDetails':'getShopDetails',  //获取商家详情接口        
     'payPraise':'payPraise',            //点赞拉起支付参数接口  
-    'payApply':'payApply',              //商家入驻支付接口      x
+    'payApply':'payApply',              //商家入驻支付接口      
     'postSearch':'postSearch',          //商家信息搜索接口        
     'postLogTel':'postLogTel',          //拨打电话记录接口        
     'postLogShare':'postLogShare',      //分享记录接口    
     'getShare':'getShare',              //分享二维码  
     'postAdLog':'postAdLog',            //获取记录   
     'getMyGift':'getMyGift',            //获取我的礼物列表接口
+
+    //2.0
+    'postCredentials':'postCredentials',             //证件上传
+    'getCredentialsInfo':'getCredentialsInfo',       //获取证件信息接口，
+    'getClassificationInfo':'getClassificationInfo', //
 }
 
 const WXREQ = (method,url,data,succfn)=>{
@@ -72,6 +77,8 @@ const WXREQ = (method,url,data,succfn)=>{
         }
     })
 }
+
+
 module.exports = {
   formatTime: formatTime,
   Trim,

@@ -5,7 +5,7 @@
             <text>营业执照</text>
         </view>
         <view class='flexRight'>
-            <view class='add'>
+            <view class='add' bindtap="uploadData" data-index="1">
                 <image src="/assets/images/add.png"></image>
             </view>
         </view>
@@ -15,10 +15,10 @@
             <text>负责人身份证</text>
         </view>
         <view class='flexRight'>
-            <view class='add'>
+            <view class='add' data-index="2" bindtap='uploadData'>
                 <text>上传正面</text>
             </view>
-            <view class='add'>
+            <view class='add' data-index="3" bindtap='uploadData'>
                 <text>上传反面</text>
             </view>
         </view>
