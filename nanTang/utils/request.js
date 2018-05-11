@@ -1,10 +1,7 @@
 const app = getApp();
 import { URL, WXREQ } from './util';
 const Promise = require('./es6-promise');
-
-const unionid = app.globalData.userInfo.unionid;
 const key = app.globalData.key;
-
 //返回结果公共函数
 const comResponse = function(res,hideLoad){  //hideLoad 为 1 需要关闭loading
     if(hideLoad == 1){
@@ -32,12 +29,12 @@ const uploadFile = function(options,hideLoad = 1){
             filePath: options.tempFilePath,
             name: "file",
             formData: {
-                unionid,
+                unionid: app.globalData.userInfo.unionid,
                 key,
                 'type': options.type
             },
             success: res => {
-                let { status, msg, file_id } = JSON.parse(res.data);
+                let { status, msg } = JSON.parse(res.data);
                 let resData = JSON.parse(res.data);
                 if (status == 0) {
                     resolve(resData)
@@ -58,7 +55,7 @@ const postCredentials = function (options, hideLoad = 1){
     return new Promise((resolve, reject)=>{
         WXREQ('POST', URL['postCredentials'], {
             key,
-            unionid,
+            unionid:app.globalData.userInfo.unionid,
             ...options
         },res=>{
             comResponse(res, hideLoad)
@@ -71,7 +68,7 @@ const getCredentialsInfo = function (options, hideLoad = 1){
     return new Promise((resolve,reject)=>{
         WXREQ('GET', URL['getCredentialsInfo'],{
             key,
-            unionid,
+            unionid: app.globalData.userInfo.unionid,
             ...options
         },res=>{
             comResponse(res, hideLoad)
@@ -84,7 +81,7 @@ const getClassificationInfo = function(options={},hideLoad = 1){
     return new Promise((resolve,reject)=>{
         WXREQ('GET', URL['getClassificationInfo'],{
             key,
-            unionid,
+            unionid: app.globalData.userInfo.unionid,
             ...options
         },res=>{
             comResponse(res, hideLoad)
@@ -92,21 +89,27 @@ const getClassificationInfo = function(options={},hideLoad = 1){
     })
 }
 
-const getRequest = (method, url, options = {}, hideLoad = 1) => {
+const REQUEST = (method, url, options = {}, hideLoad = 1) => {   //hideLoad为1表示隐藏加载弹层，为0不隐藏
     return new Promise((resolve, reject) => {
         WXREQ(method, URL[url], {
             key,
-            unionid,
+            unionid: app.globalData.userInfo.unionid,
             ...options
         },res=>{
             comResponse(res, hideLoad)
         })
+    })
+}
+
+const ShowToast = function(txt,icon="none",mask=true){
+    wx.showToast({
+        title: txt,
+        icon,
+        mask
     })
 }
 
 module.exports = {
     uploadFile,
-    getRequest,
-    // postCredentials,
-    // getCredentialsInfo
+    REQUEST
 }

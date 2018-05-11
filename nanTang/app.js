@@ -5,7 +5,7 @@ import { WXREQ, URL } from '/utils/util';
 const Promise = require('/utils/es6-promise')
 App({
     onLaunch: function () {
-
+        
         this.init();
     },
     init(){
@@ -14,7 +14,7 @@ App({
         //     mask:true
         // })
         wx.getSetting({
-            success: res => {                
+            success: res => {              
                 if (res.authSetting['scope.userInfo']) {
                     try {
                         let Info = wx.getStorageSync('Info')

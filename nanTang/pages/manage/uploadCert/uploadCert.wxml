@@ -5,8 +5,9 @@
             <text>营业执照</text>
         </view>
         <view class='flexRight'>
-            <view class='add' bindtap="uploadData" data-index="1">
-                <image src="/assets/images/add.png"></image>
+            <view class='add' bindtap="uploadData" data-type="license" data-fileid="{{license_file_id}}">
+                <image wx:if="{{!license_file_id}}" src="/assets/images/add.png"></image>
+                <image wx:else src="{{license}}"></image>
             </view>
         </view>
     </view>
@@ -15,11 +16,13 @@
             <text>负责人身份证</text>
         </view>
         <view class='flexRight'>
-            <view class='add' data-index="2" bindtap='uploadData'>
-                <text>上传正面</text>
+            <view class='add' data-type="idcard" bindtap='uploadData' data-fileid="{{idcard_main_file_id}}">
+                <text wx:if="{{!idcard_main_file_id}}">上传正面</text>
+                <image wx:else src="{{idcard_main}}"></image>
             </view>
-            <view class='add' data-index="3" bindtap='uploadData'>
-                <text>上传反面</text>
+            <view class='add' data-type="idcard" bindtap='uploadData' data-fileid="{{idcard_back_file_id}}">
+                <text wx:if="{{!idcard_back_file_id}}">上传反面</text>
+                <image wx:else src="{{idcard_back}}"></image>
             </view>
         </view>
     </view>
@@ -27,6 +30,6 @@
         <text class='tip'>请提交以上两种材料的其中一个</text>
     </view>
     <view class='flexBox'>
-        <button class='submitBtn'>提交</button>
+        <button class='submitBtn' bindtap='postCredentials'>提交</button>
     </view>
 </view>
