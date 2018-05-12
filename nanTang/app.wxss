@@ -38,14 +38,11 @@ text, view {
 
 .loading {
     text-align: center;
-    height: 80rpx;
-    padding: 20rpx;
-    margin-top: 400rpx;
 }
 
-.loading image {
-    height: 100%;
-}
+.loadingImg {
+    height: 80rpx;
+} 
 
 .clf:before, .clf:after {
     content: "";

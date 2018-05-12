@@ -19,8 +19,8 @@ Page({
         giftList:[],   //礼物列表
         giftPage:1,    //礼物翻页数据
         giftEnd:false, //礼物是否到底
-        gift_type: null,   //0时是关闭,  1是自己可见，2大家都可以见
-        is_myself:null,    //1是自己，0不是自己
+        gift_type: 0,   //0时是关闭,  1是自己可见，2大家都可以见
+        is_myself:0,    //1是自己，0不是自己
         /*公共数据 */
         ...comData
     },

@@ -91,12 +91,27 @@ const getClassificationInfo = function(options={},hideLoad = 1){
 
 const REQUEST = (method, url, options = {}, hideLoad = 1) => {   //hideLoad为1表示隐藏加载弹层，为0不隐藏
     return new Promise((resolve, reject) => {
+        /*let data = {
+            key,
+            ...options
+        }
+        console.log(data)*/
         WXREQ(method, URL[url], {
             key,
-            unionid: app.globalData.userInfo.unionid,
             ...options
         },res=>{
-            comResponse(res, hideLoad)
+            if (hideLoad == 1) {
+                wx.hideLoading();
+            }
+            if (res.status == 0) {
+                resolve(res)
+            } else {
+                wx.showToast({
+                    title: res.msg,
+                    icon: 'none',
+                    mask: true
+                })
+            }
         })
     })
 }

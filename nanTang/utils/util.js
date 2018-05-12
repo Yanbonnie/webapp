@@ -37,7 +37,8 @@ const Config = {
 }
 
 const URL = {
-    'userLogin':'userLogin',            //用户登录接口         
+    'userLogin':'userLogin',            //用户登录接口      
+    'getBlackList':'getBlackList',      //获取用户状态（是否是黑名单）   
     'getConfig': 'getConfig',           //获取小程序配置接口    
     'getShop': 'getShop',               //获取商家列表分页接口   
     'getTel': 'getTel',                 //获取商家电话列表接口   

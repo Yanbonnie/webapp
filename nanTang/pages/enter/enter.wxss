@@ -1,1 +1,38 @@
 /* pages/enter/enter.wxss */
+page{
+    width: 100%;
+    height: 100%;
+    background: #fff;
+}
+.page1{
+    position: relative;
+}
+.page2{
+    padding-top: 400rpx;
+}
+.enter{
+    width: 640rpx;
+    height: 900rpx;
+    display: block;
+    margin: 0 auto;
+}
+.tip{
+    font-size: 26rpx;
+    line-height: 180rpx;
+}
+.enter_btn{
+    background: #38f;
+    color: #fff;
+    line-height: 80rpx;
+    display: block;
+    position: absolute;
+    font-size: 36rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 150rpx;
+}
+text{
+    color: #4a4a4a;
+    font-size: 32rpx;
+    padding: 0 20rpx;
+}
