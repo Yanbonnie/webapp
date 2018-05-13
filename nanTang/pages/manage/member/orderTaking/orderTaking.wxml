@@ -33,16 +33,16 @@
 
     <!--用户接单-->
     <view class='btnBox' wx:if="{{oper == 1 && status == 0}}">
-        <view>
+        <view  data-status="1" bindtap="">  
             <view class='viewBtn jiedan'>接单</view>
         </view>
-        <view>
+        <view data-status="2">
             <view class='viewBtn refuse'>拒绝</view>
         </view>
     </view>
-    <view class='btnBox' wx:if="{{oper == 1 && status == 1}}">
-        <view>
-            <view class='viewBtn btnBox1'>已接单</view>
+    <view class='btnBox' wx:if="{{oper == 1 && status == 1}}" >   <!--已接单要送出-->
+        <view data-status="4">
+            <view class='viewBtn btnBox1'>送出</view>
         </view>
     </view>
     <view class='btnBox' wx:if="{{oper == 1 && status == 2}}">
@@ -55,9 +55,9 @@
             <view class='viewBtn refuse btnBox1'>用户取消</view>
         </view>
     </view>
-    <view class='btnBox' wx:if="{{oper == 1 && status == 4}}">
-        <view>
-            <view class='viewBtn refuse btnBox1'>已送出</view>
+    <view class='btnBox' wx:if="{{oper == 1 && status == 4}}" >  <!--送出要完成-->
+        <view data-status="5">
+            <view class='viewBtn refuse btnBox1'>完成</view>
         </view>
     </view>
     <view class='btnBox' wx:if="{{oper == 1 && status == 5}}">

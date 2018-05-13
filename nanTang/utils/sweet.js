@@ -25,7 +25,7 @@
  * 
  * pages/order/submitOrder/submitOrder             选择地址提交页面   √
  * 
- * pages/manage/member/orderTaking/orderTaking     员工接单
+ * pages/manage/member/orderTaking/orderTaking     员工接单     √
  * 
  * pages/user/user                                 我的信息（用户个人中心）
  * 
@@ -35,5 +35,5 @@
  * 
  * pages/order/orderManage/orderManage             订单管理
  * 
- * pages/manage/finance/finance                     财务管理
+ * pages/manage/finance/finance                    财务管理
  */

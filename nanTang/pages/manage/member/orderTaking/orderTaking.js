@@ -6,8 +6,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-        oper:1,     //1-员工接单页面，  2-订单详情页面
-        code:'',    //订单编号
+        oper:1,             //1-员工接单页面，  2-订单详情页面
+        code:'',            //订单编号
         wxname:'',          //下单用户微信名
         wxheadpic:'',       //下单用户微信头像
         'type':'',          //就餐方式，1为在线点餐，2是送货
@@ -16,7 +16,7 @@ Page({
         mobile:'',          //收货人手机
         address:'',         //收货人地址
         goodslist: [],      //⽤户所选择的商品的信息数组  name num price 
-        status: '',          //订单状态；0为待处理，1是已接单，2是已拒绝，3是⽤户取消，4已送出，5已完成
+        status: '',         //订单状态；0为待处理，1是已接单，2是已拒绝，3是⽤户取消，4已送出，5已完成
     },
 
     /**
@@ -24,7 +24,8 @@ Page({
      */
     onLoad: function (options) {
         const { code,oper } = options;
-        this.setData({code,oper})
+        this.setData({code,oper});
+        this.getOrderDetails();
     },
     //获取订单详情
     getOrderDetails(){
@@ -40,6 +41,21 @@ Page({
             this.setData({
                 wxname, wxheadpic, type, table_num, name, mobile, address, goodslist, status
             })
+        })
+    },
+    //员工订单处理接口
+    updateOrderStatus(e){
+        const { status } = e.currentTarget.dataset;
+        const { code } = this.data;
+        wx.showLoading({
+            title: '处理中...',
+            mask:true
+        })
+        REQUEST('GET','updateOrderStatus',{
+            code,
+            status
+        }).then(res=>{
+            this.getOrderDetails();
         })
     },
     /**
