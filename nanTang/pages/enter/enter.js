@@ -105,7 +105,7 @@ Page({
 
     //判断用户是否是黑名单
     getBlackList() {
-        REQUEST('GET', 'getBlackList', { unionid: app.globalData.userInfo.unionid }, 0).then(res => {
+        REQUEST('GET', 'getBlackList', {}, 0).then(res => {
             this.setData({
                 is_black: res.is_black
             })

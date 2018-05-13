@@ -1,21 +1,21 @@
-<!--pages/manage/member/index/index.wxml-->
+<!--员工管理.wxml-->
 <view class='member'>
-    <view class='flexBox' wx:for="{{[1,1,1,11,1,1,1,1,1]}}" wx:key="{{index}}"> 
+    <view class='flexBox' wx:for="{{memberList}}" wx:key="{{index}}" > 
         <view class='flex_l'>
-            <image src='/assets/images/picture.jpg'></image>
-            <text class='shengl'>员工名啊哈的控件奥康国际</text>
+            <image src='{{item.wxheadpic}}'></image>
+            <text class='shengl'>{{item.wxname}}</text>
         </view>
         <view class='flex_c'>
             <view>
                 <text>今日接单数：</text>
-                <text>15</text>
+                <text>{{item.day_order_num}}</text>
             </view>
             <view>
                 <text>总接单数：</text>
-                <text>15</text>
+                <text>{{item.order_num}}</text>
             </view>
         </view>
-        <view class='flex_r'>
+        <view class='flex_r' data-id="{{item.id}}">
             <view class='viewBtn'>删除</view>
         </view>
     </view>

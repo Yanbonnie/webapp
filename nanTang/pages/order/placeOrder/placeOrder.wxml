@@ -2,31 +2,30 @@
 <view class='placeOrder'>
     <view class='info'>
         <view class='info_l'>
-            <image src='/assets/images/picture.jpg'></image>
+            <image src='{{baseinfo.logo}}'></image>
         </view>
         <view class='info_c'>
-            <view>店名：新冰城</view>
+            <view>店名：{{baseinfo.shop_name}}</view>
             <view>电话：
                 <text>拨打电话</text>
             </view>
-            <view>地址：广东省陆丰市</view>
+            <view>地址：{{baseinfo.address}}</view>
         </view>
         <view class='info_r'>
-            <view class='viewBtn'>发给好友</view>
-            <view class='viewBtn'>分享朋友圈</view>
+            <view class='viewBtn' data-id="{{baseinfo.id}}" >发给好友</view>
+            <view class='viewBtn' data-id="{{baseinfo.id}}">分享朋友圈</view>
         </view>
     </view>
     <view class='goodsBox'>
         <view class='goodsList'>
             <view class='goodsLeft'>
                 <scroll-view scroll-y="true" style='height:100%;'>
-                    <view class='item1 active'>
-                        <view class='item2 '>
-                            <text>小吃</text>
+                    <view class="{{currentIndex == index ? 'item1 active':'item1'}}" wx:for="{{classify}}" wx:key="{{index}}" bindtap="getGoods" data-id="{{item.id}}">
+                        <view class='item2 ' data-id="{{item.id}}">
+                            <text>{{item.name}}</text>
                         </view>
                     </view>
-
-                    <view class='item1 '>
+                    <!-- <view class='item1 '>
                         <view class='item2'>
                             <text class='shengl2'>星时代果茶（多口味，任君选择）</text>
                         </view>
@@ -40,38 +39,38 @@
                         <view class='item2'>
                             <text>披萨</text>
                         </view>
-                    </view>
+                    </view> -->
                 </scroll-view>
             </view>
             <view class='goodsRight'>
                 <view class='title'>折扣</view>
                 <view class='scrollWrap'>
                     <view style='height:80rpx'></view>
-                    <view class='flexBox'>
+                    <view class='flexBox' wx:for="{{goods}}" wx:key="{{index}}">
                         <view class='flexL'>
-                            <image src='/assets/images/food.jpg'></image>
+                            <image src='{{item.pic}}'></image>
                         </view>
                         <view class='flexC'>
-                            <text>凉小皮家蜜汁凉皮</text>
-                            <view class='label'>
+                            <text>{{item.name}}</text>
+                            <!-- <view class='label'>
                                 <text>热品</text>
-                            </view>
+                            </view> -->
                             <view class='tip'>
-                                <text>月售111</text>
+                                <text>月售{{item.sales}}</text>
                                 <text>赞12</text>
                             </view>
                             <view class='price'>
-                                <view class='money'>￥21</view>
+                                <view class='money'>￥{{item.price}}</view>
                                 <view class='numBox'>
-                                    <text class='circle reduce'>-</text>
-                                    <text>1</text>
-                                    <text class='circle add'>+</text>
+                                    <text class='circle reduce' hidden="{{ item.num == 0 ? true : false }}" data-index="{{index}}" data-oper="reduce" bindtap='addGoodsNum'>-</text>
+                                    <text hidden="{{ item.num == 0 ? true : false }}">{{ item.num }}</text>
+                                    <text class='circle add' bindtap="addGoodsNum" data-index="{{index}}" data-oper="add">+</text>
                                 </view>
                             </view>
                         </view>
                     </view>
 
-                    <view class='flexBox' wx:for="{{[1,1,1,11,1,1,11,1]}}" wx:key="{{index}}">
+                    <!-- <view class='flexBox' wx:for="{{[1,1,1,11,1,1,11,1]}}" wx:key="{{index}}">
                         <view class='flexL'>
                             <image src='/assets/images/food.jpg'></image>
                         </view>
@@ -90,7 +89,7 @@
                                 </view>
                             </view>
                         </view>
-                    </view>
+                    </view> -->
 
                 </view>
             </view>
@@ -107,7 +106,7 @@
             <text>￥62</text>
             <text>另需配送费￥9</text>
         </view>
-        <view class='item3'>
+        <view class='item3' bindtap="payHandle" data-shop_id="{{baseinfo.shop_id}}">
             <text>去结算</text>
         </view>
     </view>

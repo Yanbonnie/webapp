@@ -1,7 +1,23 @@
-<!--pages/manage/classify/classify.wxml-->
+<!--分类管理-->
 <view class='classify'>
     <view class='list'>
-        <view class='flexBox'>
+        <view class='flexBox' wx:for="{{classifyList}}">
+            <view class='flex flex_l'>
+                <text>{{item.name}}</text>
+                <text>{{item.goods_num}}个商品</text>
+            </view>
+            <view class='flex flex_c'>
+                <view class='iconBtn iconBlue' data-id="{{item.id}}" bindtap='eidtClassify'>
+                    <image src="/assets/images/edit.png"></image> 编辑
+                </view>
+            </view>
+            <view class='flex flex_r'>
+                <view class='iconBtn iconBlue' bindtap='addClassify'>
+                    <image src="/assets/images/add_icon.png"></image>新建商品
+                </view>
+            </view>
+        </view>
+        <!-- <view class='flexBox'>
             <view class='flex flex_l'>
                 <text>小吃</text>
                 <text>16个商品</text>
@@ -14,161 +30,7 @@
                 <view class='iconBtn iconBlue'>
                     <image src="/assets/images/add_icon.png"></image>新建商品</view>
             </view>
-        </view>
-        <view class='flexBox'>
-            <view class='flex flex_l'>
-                <text>小吃</text>
-                <text>16个商品</text>
-            </view>
-            <view class='flex flex_c'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/edit.png"></image> 编辑</view>
-            </view>
-            <view class='flex flex_r'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/add_icon.png"></image>新建商品</view>
-            </view>
-        </view>
-        <view class='flexBox'>
-            <view class='flex flex_l'>
-                <text>小吃</text>
-                <text>16个商品</text>
-            </view>
-            <view class='flex flex_c'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/edit.png"></image> 编辑</view>
-            </view>
-            <view class='flex flex_r'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/add_icon.png"></image>新建商品</view>
-            </view>
-        </view>
-        <view class='flexBox'>
-            <view class='flex flex_l'>
-                <text>小吃</text>
-                <text>16个商品</text>
-            </view>
-            <view class='flex flex_c'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/edit.png"></image> 编辑</view>
-            </view>
-            <view class='flex flex_r'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/add_icon.png"></image>新建商品</view>
-            </view>
-        </view>
-        <view class='flexBox'>
-            <view class='flex flex_l'>
-                <text>小吃</text>
-                <text>16个商品</text>
-            </view>
-            <view class='flex flex_c'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/edit.png"></image> 编辑</view>
-            </view>
-            <view class='flex flex_r'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/add_icon.png"></image>新建商品</view>
-            </view>
-        </view>
-        <view class='flexBox'>
-            <view class='flex flex_l'>
-                <text>小吃</text>
-                <text>16个商品</text>
-            </view>
-            <view class='flex flex_c'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/edit.png"></image> 编辑</view>
-            </view>
-            <view class='flex flex_r'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/add_icon.png"></image>新建商品</view>
-            </view>
-        </view>
-        <view class='flexBox'>
-            <view class='flex flex_l'>
-                <text>小吃</text>
-                <text>16个商品</text>
-            </view>
-            <view class='flex flex_c'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/edit.png"></image> 编辑</view>
-            </view>
-            <view class='flex flex_r'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/add_icon.png"></image>新建商品</view>
-            </view>
-        </view>
-        <view class='flexBox'>
-            <view class='flex flex_l'>
-                <text>小吃</text>
-                <text>16个商品</text>
-            </view>
-            <view class='flex flex_c'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/edit.png"></image> 编辑</view>
-            </view>
-            <view class='flex flex_r'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/add_icon.png"></image>新建商品</view>
-            </view>
-        </view>
-        <view class='flexBox'>
-            <view class='flex flex_l'>
-                <text>小吃</text>
-                <text>16个商品</text>
-            </view>
-            <view class='flex flex_c'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/edit.png"></image> 编辑</view>
-            </view>
-            <view class='flex flex_r'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/add_icon.png"></image>新建商品</view>
-            </view>
-        </view>
-        <view class='flexBox'>
-            <view class='flex flex_l'>
-                <text>小吃</text>
-                <text>16个商品</text>
-            </view>
-            <view class='flex flex_c'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/edit.png"></image> 编辑</view>
-            </view>
-            <view class='flex flex_r'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/add_icon.png"></image>新建商品</view>
-            </view>
-        </view>
-        <view class='flexBox'>
-            <view class='flex flex_l'>
-                <text>小吃</text>
-                <text>16个商品</text>
-            </view>
-            <view class='flex flex_c'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/edit.png"></image> 编辑</view>
-            </view>
-            <view class='flex flex_r'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/add_icon.png"></image>新建商品</view>
-            </view>
-        </view>
-        <view class='flexBox'>
-            <view class='flex flex_l'>
-                <text>小吃</text>
-                <text>16个商品</text>
-            </view>
-            <view class='flex flex_c'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/edit.png"></image> 编辑</view>
-            </view>
-            <view class='flex flex_r'>
-                <view class='iconBtn iconBlue'>
-                    <image src="/assets/images/add_icon.png"></image>新建商品</view>
-            </view>
-        </view>
+        </view> -->
     </view>
     <view class='addClassify'>
         <text>增加分类</text>

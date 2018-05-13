@@ -10,7 +10,7 @@
                 <image src='/assets/images/right.png'></image>
             </view>
         </view>
-        <view class='listItem address' bindtap='selectAddress'>
+        <view class='listItem address' bindtap='selectAddress' wx:if="{{ orderType == '打包送出' && address == '选择收货地址' }}">
             <view class='icon1'>
                 <image src="/assets/images/address.png"></image>
             </view>
@@ -19,53 +19,53 @@
                 <image src='/assets/images/right.png'></image>
             </view>
         </view>
-        <view class='listItem'>
+        <view class='listItem' bindtap='selectAddress' wx:if="{{ orderType == '打包送出' && address != '选择收货地址' }}">
             <view class='icon1'>
                 <image src="/assets/images/address.png"></image>
             </view>
             <view class='icon2'>
-                <text>石龙仔想新村五区301</text>
-                <text>猫猫（女士） 13528362541</text>
+                <text>{{address}}</text>
+                <text>{{userName}} {{telNumber}}</text>
             </view>
             <view class='icon3'>
                 <image src='/assets/images/right.png'></image>
             </view>
         </view>
-        <view class='listItem'>
-            <input placeholder='请输入桌号'></input>
+        <view class='listItem' wx:if="{{orderType == '在店就餐'}}">
+            <input placeholder='请输入桌号' value="{{table_num}}" bindinput="tableNumInput"></input>
         </view>
     </view>
     <view class='list'>
         <view class='listItem peisong' bindtap='selectType'>
             <view class='icon1'>
-                <image src="/assets/images/food.jpg"></image>
+                <image src="{{shopLogo}}"></image>
             </view>
-            <text class='icon2'>凉皮</text>
+            <text class='icon2'>{{shop_name}}</text>
             <view class='icon3'>
                 <text>商家配送</text>
             </view>
         </view>
-        <view class='orderList'>
+        <view class='orderList' wx:for="{{goods}}" wx:key="{{index}}">
             <view class='orderL'>
-                <image src="/assets/images/food.jpg"></image>
+                <image src="{{item.pic}}"></image>
             </view>
             <view class='orderC'>
-                <text>香甜南瓜粥</text>
-                <text>x1</text>
+                <text>{{item.name}}</text>
+                <text>x{{item.num}}</text>
             </view>
             <view class='orderR'>
-                <view>￥6</view>
+                <view>￥{{item.price}}</view>
             </view>
         </view>
         <view class='countPrice'>
             <text>小计：</text>
-            <text>￥24.8</text>
+            <text>￥{{totalPrice}}</text>
         </view>
     </view>
     <view class='submitFoot'>
         <view class='item1'>合计：
-            <text>24.8</text>
+            <text>{{totalPrice}}</text>
         </view>
-        <view class='item2'>提交订单</view>
+        <view class='item2' bindtap="submitOrder">提交订单</view>
     </view>
 </view>

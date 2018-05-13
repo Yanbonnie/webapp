@@ -4,13 +4,13 @@
         <view class='mainBody'>
             <view class='good_l'>
                 <scroll-view scroll-y="true" style='height:100%;'>
-                    <view class='item1 active'>
-                        <view class='item2 '>
-                            <text>小吃</text>
+                    <view class='item1 active' wx:for="{{classifyList}}">
+                        <view class="{{currentIndex == index ? 'item2 active':'item2'}}" data-class_id="{{item.id}}" data-index="{{index}}" bindtap='getGoods'>
+                            <text>{{item.name}}</text>
                         </view>
                     </view>
 
-                    <view class='item1 '>
+                    <!-- <view class='item1 '>
                         <view class='item2'>
                             <text class='shengl2'>星时代果茶（多口味，任君选择）</text>
                         </view>
@@ -24,35 +24,34 @@
                         <view class='item2'>
                             <text>披萨</text>
                         </view>
-                    </view>
+                    </view> -->
                 </scroll-view>
             </view>
             <view class='good_r'>
                 <scroll-view scroll-y="true" style='height:100%;'>
                     <view class='title'>小吃</view>
                     <view class='goodsList' wx:for="{{[1,2,3,4,5,6,7,8,9,41,1,11,11,1,44,12]}}" wx:key="{{index}}">
-                        <view class='goodItem'>
+                        <view class='goodItem' wx:for="{{goodsList}}" wx:key="{{index}}">
                             <view class='item'>
                                 <view class="itemL">
-                                    <image src='/assets/images/food.jpg' mode='aspectFill'></image>
+                                    <image src='{{item.thumbnail}}' mode='aspectFill'></image>
                                 </view>
                                 <view class="itemR">
-                                    <text class='shengl'>鲍汁脆脆鸡</text>
-                                    <text>库存无限 月售3</text>
-                                    <text>￥15</text>
+                                    <text class='shengl'>{{item.name}}</text>
+                                    <text wx:if="{{item.is_infinite}}">库存无限 月售{{item.sales}}</text>
+                                    <text wx:else>{{"库存数量"+item.stock}} 月售{{item.sales}}</text>
+                                    <text>{{'￥'+ item.price}}</text>
                                 </view>
                             </view>
                             <view class='eidtBox'>
-                                <view>
+                                <view data-id="{{item.id}}" bindtap='editGood'>
                                     <view class='viewBtn'>编辑</view>
                                 </view>
-                                <view>
-                                    <view class='viewBtn'>下架</view>
+                                <view data-id="{{item.id}}" data-status="{{item.status}}"  bindtap='getDealGoods'>
+                                    <view class='viewBtn'>{{ item.status == 0 ? '上架' : item.status == 1 ? '下架' : '已下架' }}</view>
                                 </view>
                             </view>
                         </view>
-
-
                     </view>
                 </scroll-view>
             </view>

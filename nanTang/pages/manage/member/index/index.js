@@ -1,48 +1,40 @@
 // pages/manage/member/index/index.js
+import { REQUEST, uploadFile, ShowToast } from '../../../../utils/request.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    memberList:[],          //员工列表
+    qr_url:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+      this.getDealUser();
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  getDealUser(){
+      wx.showLoading({
+          title: '加载中...',
+          mask:true
+      })
+      REQUEST('GET','getDealUser',{}).then(res=>{
+        this.setData({
+            memberList:res.data
+        })
+      })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  //添加员工-生成员工注册二维码接口
+  addMember(){
+      REQUEST('GET','getDealUserQr',{}).then(res=>{
+        this.setData({
+            qr_url: res.qr_url
+        })
+      })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

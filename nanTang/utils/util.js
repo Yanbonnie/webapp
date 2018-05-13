@@ -60,9 +60,32 @@ const URL = {
     'getMyGift':'getMyGift',            //获取我的礼物列表接口
 
     //2.0
-    'postCredentials':'postCredentials',             //证件上传
-    'getCredentialsInfo':'getCredentialsInfo',       //获取证件信息接口，
-    'getClassificationInfo':'getClassificationInfo', //
+    'postCredentials':'postCredentials',                      //证件上传
+    'getCredentialsInfo':'getCredentialsInfo',                //获取证件信息接口，
+    'getClassificationInfo':'getClassificationInfo',          //获取当前商家分类接口
+    'getEditClassification':'getEditClassification',          //获取商家分类信息接口
+    'postEditClassification':'postEditClassification',        //修改分类
+    'postAddClassification':'postAddClassification',          //新增分类
+    'getDelClassification':'getDelClassification',            //删除分类
+    'getGoods': 'getGoods',                                   //获取当前商家分类中商品接口
+    'getGoodsInfo':'getGoodsInfo',                            //获取当前中商品详情接⼝
+    'postGoodsInfo':'postGoodsInfo',                          //新增商品
+    'pEditGoodsInfo':'pEditGoodsInfo',                        //编辑商品
+    'getDelGoods':'getDelGoods',                              //删除商品接口
+    'getDealGoods':'getDealGoods',                            //商品下架接口
+
+    'getDealUser': 'getDealUser',                             //获取员⼯列表接⼝
+    'getDealUserQr': 'getDealUserQr',                         //⽣成员⼯注册⼆维码接⼝
+    'getDealUserShop':'getDealUserShop',                      //获取商家信息接口
+    'updateDealUser': 'updateDealUser',                       //员⼯注册同意拒绝接⼝
+
+    'getOnlineShop':'getOnlineShop',                          //用户点单页面  商家店铺详情接口  
+    'getGoods':'getGoods',                                    //有待修改  ！
+    'payOrder': 'payOrder',                                   //⽤户结账提交接⼝
+
+    'getOrderDetails':'getOrderDetails',                      //员工获取订单详情接口
+
+    
 }
 
 const WXREQ = (method,url,data,succfn)=>{

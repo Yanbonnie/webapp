@@ -72,6 +72,7 @@
     color: #fff;
     width: 60%;
 }
+
 .btnBox .yisong{
     background: #ffd161;
     border: 1px #ffd161 solid;
@@ -86,4 +87,8 @@
     background: #fff;
     border: 1px #ccc solid;
     color: #4a4a4a;
+}
+
+.btnBox .btnBox1{
+    width: 60%;
 }

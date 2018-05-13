@@ -2,7 +2,7 @@
 <view class='operaC'>
     <text class='title'>分类名称</text>
     <view >
-        <input class='input' placeholder='请输入分类名称'></input>
+        <input class='input' placeholder='请输入分类名称' value="{{name}}" bindinput="nameChange"></input>
     </view>
     <text class='title'>分类描述</text>
     <view>
@@ -12,8 +12,8 @@
         <view class='num'>{{num}}/255</view>
     </view>
     <view class='btnBox'>
-        <view class='item'>保存</view>
-        <view class='item'>删除</view>
+        <view class='item' bindtap='saveClassify'>保存</view>
+        <view wx:if="{{id}}" class='item' bindtap='delClassify'>删除</view>
     </view>
 </view>
 

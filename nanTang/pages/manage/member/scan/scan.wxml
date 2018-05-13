@@ -1,9 +1,9 @@
 <!--pages/manage/member/scan/scan.wxml-->
 <view class='scan'>
-    <image src="/assets/images/picture.jpg"></image>
-    <text>新冰城</text>
+    <image src="{{shopInfo.logo}}"></image>
+    <text>{{shopInfo.name}}</text>
     <text class='tip'>是否确认成为此店的接单员</text>
 
-    <view class='viewBtn active'>同意</view>
-    <view class='viewBtn gray'>拒绝</view>
+    <view class='viewBtn active' bindtap='' data-status="1">同意</view>
+    <view class='viewBtn gray' data-status="2">拒绝</view>
 </view>

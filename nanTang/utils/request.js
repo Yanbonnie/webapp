@@ -50,45 +50,6 @@ const uploadFile = function(options,hideLoad = 1){
         })
     })
 }
-//证件上传
-const postCredentials = function (options, hideLoad = 1){
-    return new Promise((resolve, reject)=>{
-        WXREQ('POST', URL['postCredentials'], {
-            key,
-            unionid:app.globalData.userInfo.unionid,
-            ...options
-        },res=>{
-            comResponse(res, hideLoad)
-        })
-    })
-}
-
-//获取证件信息
-const getCredentialsInfo = function (options, hideLoad = 1){
-    return new Promise((resolve,reject)=>{
-        WXREQ('GET', URL['getCredentialsInfo'],{
-            key,
-            unionid: app.globalData.userInfo.unionid,
-            ...options
-        },res=>{
-            comResponse(res, hideLoad)
-        })
-    })
-}
-
-//获取当前商家分类接口
-const getClassificationInfo = function(options={},hideLoad = 1){
-    return new Promise((resolve,reject)=>{
-        WXREQ('GET', URL['getClassificationInfo'],{
-            key,
-            unionid: app.globalData.userInfo.unionid,
-            ...options
-        },res=>{
-            comResponse(res, hideLoad)
-        })
-    })
-}
-
 const REQUEST = (method, url, options = {}, hideLoad = 1) => {   //hideLoad为1表示隐藏加载弹层，为0不隐藏
     return new Promise((resolve, reject) => {
         /*let data = {
@@ -98,6 +59,7 @@ const REQUEST = (method, url, options = {}, hideLoad = 1) => {   //hideLoad为1�
         console.log(data)*/
         WXREQ(method, URL[url], {
             key,
+            unionid:app.globalData.userInfo.unionid,
             ...options
         },res=>{
             if (hideLoad == 1) {
@@ -126,5 +88,6 @@ const ShowToast = function(txt,icon="none",mask=true){
 
 module.exports = {
     uploadFile,
-    REQUEST
+    REQUEST,
+    ShowToast
 }
