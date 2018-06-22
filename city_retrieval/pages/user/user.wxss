@@ -18,3 +18,28 @@ page{
     margin-top: -27.5rpx;
     padding: 0;
 }
+
+.u_paner{
+    margin-top: 20rpx;
+    background: #fff;
+}
+.u_paner .item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25rpx;
+    border-bottom: 1px #f1f1f1 solid;
+}
+.u_paner .item .itemL{
+    flex-grow: 1;
+    font-size: 28rpx;
+}
+.u_paner .item .itemR{
+    flex-basis: 40rpx;
+}
+.u_paner .itemR image{
+    width: 40rpx;
+    height: 40rpx;
+    display: block;
+    align-self: center;
+}

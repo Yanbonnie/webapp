@@ -8,4 +8,18 @@
             </block>
         </list_item>
     </view>
+    <view class='u_paner'>
+        <view class='item'>
+            <view class='itemL'>我的销售</view>
+            <view class='itemR'><image src="/assets/images/right.png"></image></view>
+        </view>
+        <view class='item'>
+            <view class='itemL'>我的店铺</view>
+            <view class='itemR'><image src="/assets/images/right.png"></image></view>
+        </view>
+        <view class='item'>
+            <view class='itemL'>我们公司</view>
+            <view class='itemR'><image src="/assets/images/right.png"></image></view>
+        </view>
+    </view>
 </view>

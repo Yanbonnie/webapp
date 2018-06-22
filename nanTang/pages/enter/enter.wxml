@@ -1,12 +1,12 @@
 <!--pages/enter/enter.wxml-->
 <view class="loading">
-    <view wx:if="{{!authorize}}" class='page1'>
+    <view wx:if="{{!hasUserInfo}}" class='page1'>
         <image class='enter' src="/assets/images/enter.jpg"></image> 
-        <button class='enter_btn' open-type="getUserInfo">点击进入</button>  
+        <button class='enter_btn' open-type="getUserInfo" bindgetuserinfo="bindGetuserinfo">点击进入</button>  
     </view> 
     
-    <view wx:if="{{authorize}}" class='page2'>
+    <view wx:if="{{hasUserInfo}}" class='page2'>
         <text>{{msg}}</text>        
     </view>
-    <image class="loadingImg" wx:if="{{is_black == 0 && authorize}}" src="/assets/images/loading-bars.svg"></image> 
+    <image class="loadingImg" wx:if="{{is_black == 0 && hasUserInfo}}" src="/assets/images/loading-bars.svg"></image> 
 </view>

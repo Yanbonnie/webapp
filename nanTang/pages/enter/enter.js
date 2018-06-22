@@ -12,7 +12,7 @@ Page({
         id: null,
         is_black: 0,
         msg: "",
-        authorize: true,
+        hasUserInfo:true,
     },
 
     /**
@@ -21,36 +21,31 @@ Page({
     onLoad: function (options) {
         const id = options.id ? options.id : -1;
         this.setData({ id })
-        this.init();
-    },
-    init() {
         let Info = wx.getStorageSync('Info')
-        if (Info) {
+        if(Info){
             app.globalData.userInfo = Info;
             this.getBlackList();   //判断是否是黑名单
-        } else {
-            this.getUserInfo().then(()=>{
-                Promise.all([this.loginHandle(), this.getUserInfo()]).then(results => {
-                    const { code } = results[0];
-                    const { iv, encryptedData } = results[1];
-                    this.getAllUserInfo(code, iv, encryptedData);
-                });
-            }).catch(res=>{
-                this.init();
-            })
-        }
-    },
-    //登录
-    loginHandle() {
-        return new Promise((resolve, reject) => {
-            wx.login({
-                success: res => {
-                    console.log(res)
-                    // 发送 res.code 到后台换取 openId, sessionKey, unionId
-                    resolve(res)
+        }else{
+            this.getUserInfo().then(res => {   //判断授权按钮是否显示
+                if (!res.success) {
+                    this.setData({
+                        hasUserInfo: false
+                    })
                 }
             })
-        })
+            if (app.globalData.userInfoData) {
+                this.loginHandle(app.globalData.userInfoData);
+            } else {
+                // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+                // 所以此处加入 callback 以防止这种情况
+                app.userInfoReadyCallback = res => {
+                    if (res.userInfo) {
+                        this.loginHandle(res)
+                    }
+                }
+            }
+        }
+        
     },
     //获取用户信息
     getUserInfo() {
@@ -58,24 +53,38 @@ Page({
         return new Promise((resolve, reject) => {
             wx.getUserInfo({
                 success: res => {
-                    // 可以将 res 发送给后台解码出 unionId
-                    // this.globalData.userInfo = res.userInfo
-                    // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-                    // 所以此处加入 callback 以防止这种情况
-                    if (this.userInfoReadyCallback) {
-                        this.userInfoReadyCallback(res)
-                    }
-                    resolve(res)
+                    resolve({ success: true })
                 },
                 fail: res => {
-                    this.setData({
-                        authorize: false
-                    })
-                    reject(res)
+                    resolve({ success: false })
                 }
             })
         })
+    },    
+    bindGetuserinfo: function (e) {  //没有授权的时候进入页面
+        if (e.detail.userInfo) {
+            // const { iv, encryptedData } = e.detail.userInfo;
+            console.log("点击了允许授权按钮");
+            console.log(e)
+            this.loginHandle(e.detail)
+            //用户按了允许授权按钮
+        } else {
+            //用户按了拒绝按钮
+            console.log("点击了拒绝授权按钮")
+        }
     },
+    //登录获取code
+    loginHandle({ iv, encryptedData }) {
+        console.log(iv)
+        console.log(encryptedData)
+        wx.login({
+            success: res => {
+                // 发送 res.code 到后台换取 openId, sessionKey, unionId
+                const { code } = res;
+                this.getAllUserInfo(code, iv, encryptedData)
+            }
+        })
+    },    
     //获取用户的全部信息
     getAllUserInfo(code, iv, encryptedData) {
         const { key } = app.globalData;
@@ -97,7 +106,8 @@ Page({
                     showCancel: false,
                     confirmText: '确定',
                     success: res => {
-                        this.init();
+                        // this.init();
+                        this.loginHandle(app.globalData.userInfoData);
                     }
                 })
             }
