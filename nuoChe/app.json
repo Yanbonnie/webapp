@@ -1,0 +1,12 @@
+{
+    "pages": [
+        "pages/enter/enter",
+        "pages/index/index"     
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTit/pages/web/webindi": "WeChat",
+        "navigationBarTextStyle": "black"
+    }
+}
