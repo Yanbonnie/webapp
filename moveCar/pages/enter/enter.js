@@ -46,12 +46,14 @@ Page({
     },
     getUserInfo: function (e) {
         console.log(e)
-        app.globalData.userInfo = e.detail
-        this.setData({
-            userInfo: e.detail.userInfo,
-            hasUserInfo: true
-        })
-        this.loginHandle(e.detail);
+        if(e.detail.errMsg.indexOf('fail') == -1){
+            app.globalData.userInfo = e.detail
+            this.setData({
+                userInfo: e.detail.userInfo,
+                hasUserInfo: true
+            })
+            this.loginHandle(e.detail);
+        }        
 
     },
     //登录获取code
@@ -67,21 +69,25 @@ Page({
     },
     getAllUserInfo(code, iv, encryptedData) {
         let { count } = this.data;
+        wx.showLoading({
+            title: '加载中...'
+        })
         REQUEST('POST', 'userLogin', {
             code,
             iv,
             encryptedData,
         }, true).then(res => {
-            console.log(res);
             let { openid } = res.data;
+            app.globalData.openid = openid;
+            wx.hideLoading();
             wx.switchTab({
                 url: '/pages/index/index',
             })
         }).catch(res => {
-
             if (count < 5) {
                 this.loginHandle({ iv, encryptedData })
             } else {
+                wx.hideLoading();
                 wx.showToast({
                     icon: 'none',
                     mask: true,

@@ -1,0 +1,26 @@
+<view class='city_box' style='{{styles}}'>
+    <view class='title'>
+    <!-- <text class='select_txt'>选择城市</text> -->
+        <!-- <view class='city_search'>
+            <input placeholder="请输入城市名" confirm-type="search"/>
+            <text class='search'>搜索</text>
+        </view> -->
+        <text class='close' catchtap='closeTap'>X</text>
+    </view>    
+    <view class='city_left'>
+        <scroll-view scroll-y="true" style='width:100%;height:90vh;' scroll-into-view='{{cityListId}}'>
+            <view class='city_list_box'>
+                <block wx:for='{{citylist}}' wx:key='this' wx:for-item='letterItem' wx:for-index='letterIndex'>
+                    <view class='city_first_letter' id='{{letterItem.letter}}' wx:if="{{letterItem.data.length > 0}}">{{letterItem.letter}}</view>
+                    <text class='city_name' wx:for='{{letterItem.data}}' wx:key='this' data-types='list' catchtap='cityTap' data-index='{{index}}' data-val='{{item}}'>{{item.cityName}}</text>
+                </block>
+            </view>
+        </scroll-view>
+    </view>
+    <view class='city_right'>
+        <text class='letter_item' wx:for='{{letter}}' wx:key='this' catchtap='letterTap' data-item='{{item}}'>{{item}}</text>
+    </view>
+</view>
+<view class='city_cover_box' wx:if="{{coverState}}">
+    <text>{{cityListId}}</text>
+</view>

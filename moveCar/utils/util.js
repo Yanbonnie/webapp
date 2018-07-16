@@ -1,4 +1,5 @@
-const formatTime = date => {
+  const Promise = require('../libs/es6-promise.js');
+  const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -17,7 +18,11 @@ const Config = {
     reqUrl: 'https://car.jc5588.cn/index.php/wxapp/index/'
 }
 const URL = {
-    'userLogin': 'userLogin',          //登录接口
+    'userLogin': 'userLogin',                //登录接口
+    'get_banner':'get_banner',               //获取首页banner
+    'post_uploadpic':'post_uploadpic',       //图片识别车牌号码
+    'post_move_car':'post_move_car',         //提交我要挪车接口
+    
 }
 
 //请求接口封装
@@ -29,7 +34,6 @@ const REQUEST = (method, url, data, err = false) => {   //err->true  需要对�
             url: Config.reqUrl + URL[url],
             data,
             success: res => {
-                // console.log(res)
                 if (res.data.status == 0) {
                     resolve(res.data);
                 } else {

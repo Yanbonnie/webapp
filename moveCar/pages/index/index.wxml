@@ -8,7 +8,7 @@
 </swiper>
 
 <view class='formBox mt30'>
-    <view class='flexBox'>
+    <view class='flexBox' bindtap='chooseImgHandle'>
         <view class='flexL'>*车牌号码</view>
         <view class='flexC'>
              <input placeholder="请拍照上传需挪车辆" disabled="true" />
@@ -30,10 +30,10 @@
             </picker>
         </view>        
     </view>
-    <view class='flexBox'>
+    <view class='flexBox' bindtap='getLocate'>
         <view class='flexL'>*选择地址</view>
         <view class='flexC'>
-             <input placeholder="请选择地址" disabled="true" />
+             <input placeholder="请选择地址" disabled="true" value="{{address}}"/>
         </view>  
         <view class='flexR'>
             <text class='iconfont icon-address'></text>

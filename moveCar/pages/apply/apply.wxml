@@ -30,10 +30,10 @@
              <input placeholder="请输入收件人"  />
         </view>     
     </view>
-    <view class='flexBox'>
+    <view class='flexBox' bindtap='showBaoXian'>
         <view class='flexL'>*保险公司</view>
         <view class='flexC'>
-             <input placeholder="请选择保险公司" disabled="true" />
+             <input placeholder="请选择保险公司" disabled="true"  value="{{insurance}}"/>
         </view>     
     </view>
     <view class='flexBox'>
@@ -67,3 +67,7 @@
     </view>
 </view>
 
+
+<view class='cityCover' wx:if="{{cityState}}">
+    <citylist citylist="{{citylist}}" bindcitytap='cityTap' bindcloseCity="closeCityHandle"></citylist>
+</view>

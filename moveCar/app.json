@@ -1,11 +1,12 @@
 {
     "pages": [
+        "pages/apply/apply",
+        "pages/enter/enter",
+        "pages/index/index",
         "pages/user/record/record",
         "pages/user/info/info",
-        "pages/user/index/index",
-        "pages/apply/apply",
-        "pages/index/index",
-        "pages/enter/enter"  
+        "pages/user/index/index"
+        
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -21,15 +22,15 @@
         "list": [
             {
                 "pagePath": "pages/index/index",
-                "text": "aaa"
+                "text": "我要挪车"
             },
             {
                 "pagePath": "pages/apply/apply",
-                "text": "bbb"
+                "text": "我的申请"
             },
             {
                 "pagePath": "pages/user/index/index",
-                "text": "ccc"
+                "text": "我的信息"
             }
         ]
     }
