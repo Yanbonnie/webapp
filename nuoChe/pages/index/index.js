@@ -8,6 +8,7 @@ Page({
    */
   data: {
       openid:null,
+      url:null,
   },
 
   /**
@@ -15,7 +16,9 @@ Page({
    */
   onLoad: function (options) {
     const { openid } = options;
-    console.log('https://car.jc5588.cn/index.php?openid=' + openid)
+    this.setData({
+        url: 'https://car.jc5588.cn/index.php?openid=' + openid
+    })
   },
 
   /**

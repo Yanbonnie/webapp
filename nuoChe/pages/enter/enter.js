@@ -11,6 +11,12 @@ Page({
         count:0
     },
     onLoad: function () {
+        let openid = wx.getStorageSync('openid');
+        if (openid){
+            wx.reLaunch({
+                url: `/pages/index/index?openid=${openid}`
+            })
+        }
         if (app.globalData.userInfo) {
             console.log(app.globalData)
             this.setData({
@@ -76,8 +82,9 @@ Page({
             encryptedData,
         },true).then(res=>{
             let { openid } = res.data;
+            wx.setStorageSync('openid', openid);  //设置缓存
             wx.hideLoading();
-            wx.navigateTo({
+            wx.redirectTo({
                 url: `/pages/index/index?openid=${openid}`
             })
         }).catch(res=>{
