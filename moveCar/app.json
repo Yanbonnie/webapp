@@ -1,0 +1,36 @@
+{
+    "pages": [
+        "pages/user/record/record",
+        "pages/user/info/info",
+        "pages/user/index/index",
+        "pages/apply/apply",
+        "pages/index/index",
+        "pages/enter/enter"  
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#000000",
+        "navigationBarTitleText": "WeChat",
+        "navigationBarTextStyle": "white"
+    },
+    "tabBar": {
+        "color": "#929292",
+        "selectedColor": "#0894ec",
+        "backgroundColor": "#ffffff",
+        "borderStyle": "white",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "aaa"
+            },
+            {
+                "pagePath": "pages/apply/apply",
+                "text": "bbb"
+            },
+            {
+                "pagePath": "pages/user/index/index",
+                "text": "ccc"
+            }
+        ]
+    }
+}

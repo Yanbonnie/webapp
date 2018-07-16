@@ -1,0 +1,60 @@
+<!--pages/user/info/info.wxml-->
+<view class='formBox mt30'>
+    <view class='flexBox'>
+        <view class='flexL'>*车牌号码</view>
+        <view class='flexC'>
+             <input placeholder="请拍照上传您的驾驶证" disabled="true" />
+        </view>
+        <view class='flexR'>
+            <text class='iconfont icon-camera'></text>
+        </view>
+    </view>
+    
+    <view class='flexBox'>
+        <view class='flexL'>*车辆类型</view>
+        <view class='flexC'>
+             <input placeholder="车辆类型"  />
+        </view>     
+    </view>
+    <view class='flexBox'>
+        <view class='flexL'>*收件人</view>
+        <view class='flexC'>
+             <input placeholder="请输入收件人"  />
+        </view>     
+    </view>
+    <view class='flexBox'>
+        <view class='flexL'>*保险公司</view>
+        <view class='flexC'>
+             <input placeholder="请选择保险公司" disabled="true" />
+        </view>     
+    </view>
+    <view class='flexBox'>
+        <view class='flexL'>*手机号码</view>
+        <view class='flexC'>
+             <input placeholder="请输入您的手机号码"  />
+        </view>     
+    </view>
+    <view class='flexBox yzm'>
+        <view class='flexL'>*验证码</view>
+        <view class='flexC'>
+             <input placeholder="请输入短信验证码"  />
+        </view>  
+        <view class='flexR'>
+            <text class='gray'>获取验证码</text>
+        </view>   
+    </view>
+    <view class='flexBox '>
+        <view class='flexL'>*住址</view>
+        <view class='flexC'>
+             <input placeholder="请选择住址" disabled="true" />
+        </view>  
+        <view class='flexR'>
+            <text class='iconfont icon-address'></text>
+        </view>      
+    </view>
+</view>
+<view class='BtnBox'>
+    <view>
+        提交
+    </view>
+</view>

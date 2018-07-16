@@ -1,0 +1,69 @@
+/* pages/user/record/record.wxss */
+page{
+    background: #f5f5f5;
+}
+.tabTop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    font-size: 30rpx; 
+}
+.tabTop view{
+    flex-grow: 1;
+    box-sizing: border-box;
+}
+.tabTop .active{
+    color: #0894ec;
+    border-bottom: 4rpx #0894ec solid;
+}
+.record{
+    padding-top: 120rpx;
+}
+.record .item{
+    background: #fff;
+    margin-bottom: 40rpx;
+    box-shadow: 0 2rpx 5rpx #ccc;
+}
+.record .title{
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    font-size: 24rpx;
+    padding: 20rpx 50rpx;
+    border-bottom: 1px #f5f5f5 solid;
+}
+.record .contain{
+    padding: 10rpx;
+}
+.record .contain text{
+    display: block;
+    font-size: 24rpx;
+    line-height: 40rpx;
+    padding: 10rpx 40rpx;
+    color: #808080;
+}
+.record .itemBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px #f5f5f5 solid;
+}
+.record .itemBox view{
+    padding: 20rpx 0;
+    font-size: 24rpx;
+    flex-grow: 1;
+    text-align: center;
+    box-sizing: border-box;
+    color: #ff503f;
+}
+.record .itemBox view:last-child{
+    border-left:1px #f5f5f5 solid; 
+}

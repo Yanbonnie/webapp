@@ -1,0 +1,25 @@
+/* pages/index/index.wxss */
+page{
+    background: #efeff4;
+}
+.slide-image{
+    width: 100%;
+    height: 400rpx;
+}
+
+.operBox{
+    display: flex;
+    padding: 30rpx 40rpx;
+    justify-content: space-between;
+
+}
+.operBox text{
+    font-size: 24rpx;   
+    color: #808080; 
+}
+.operBox .iconfont {
+    margin-right: 10rpx;
+}
+.operBox view:nth-child(1) text{
+    color: #ff503f;
+}

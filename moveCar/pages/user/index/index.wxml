@@ -1,0 +1,21 @@
+<!--pages/user/index/index.wxml-->
+
+<view class='infoBox'>
+    <view class='flexL'>
+        <image src='../../../assets/images/header_pic.jpg'></image>
+    </view>
+    <view class='flexR'>
+        <text>小火</text>
+        <text>车牌：粤NP8888</text>
+    </view>
+</view>
+<view class='navList'>
+    <view class='item'>
+        <text>我的资料</text>
+        <text class='iconfont icon-right'></text>
+    </view>
+    <view class='item'>
+        <text>挪车记录</text>
+        <text class='iconfont icon-right'></text>
+    </view>
+</view>
