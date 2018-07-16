@@ -22,7 +22,6 @@ Page({
             // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
             // 所以此处加入 callback 以防止这种情况
             app.userInfoReadyCallback = res => {
-                console.log(res)
                 this.setData({
                     userInfo: res.userInfo,
                     hasUserInfo: true
@@ -67,13 +66,17 @@ Page({
     },
     getAllUserInfo(code, iv, encryptedData){
         let { count }  = this.data;
+        wx.showLoading({
+            title: '加载中...',
+            mask:true
+        })
         REQUEST('POST','userLogin',{
             code,
             iv,
             encryptedData,
         },true).then(res=>{
-            console.log(res);  
             let { openid } = res.data;
+            wx.hideLoading();
             wx.navigateTo({
                 url: `/pages/index/index?openid=${openid}`
             })
@@ -87,15 +90,7 @@ Page({
                     mask: true,
                     title: '授权失败，请退出重试',
                     duration:3000
-                })
-
-
-
-
-
-
-
-                
+                }) 
             }
             ++count;
             this.setData({

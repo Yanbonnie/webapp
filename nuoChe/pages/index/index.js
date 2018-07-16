@@ -1,5 +1,5 @@
 // pages/web/web.js
-require('../../utils/jweixin-1.3.2.js');
+// require('../../utils/jweixin-1.3.2.js');
 // console.log(wx)
 Page({
 
