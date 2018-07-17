@@ -4,9 +4,12 @@
     <view class='flexL'>
         <image src='../../../assets/images/header_pic.jpg'></image>
     </view>
-    <view class='flexR'>
+    <view class='flexC'>
         <text>小火</text>
         <text>车牌：粤NP8888</text>
+    </view>
+    <view class='flexR'>
+        <text class='btn'>分享到朋友圈</text>
     </view>
 </view>
 <view class='navList'>
@@ -24,3 +27,11 @@
     </view>
 </view>
  <navBar bindchangeNav="changeNav" index="{{2}}"></navBar>
+
+ <view class='ewmCover'>
+    <view class='ewmBox'>
+        <image class='img' mode="aspectFit" src="../../../assets/images/ewm.png"></image>
+        <image class='close' src='../../../assets/images/close.png'></image>
+        <view>点击查看大图（长按大图保存，线下打印）</view>
+    </view>
+ </view>

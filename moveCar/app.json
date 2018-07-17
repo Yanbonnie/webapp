@@ -1,13 +1,11 @@
 {
     "pages": [
+        "pages/user/index/index",
         "pages/index/index",
         "pages/apply/apply",
         "pages/enter/enter",
-        
         "pages/user/record/record",
-        "pages/user/info/info",
-        "pages/user/index/index"
-        
+        "pages/user/info/info"
     ],
     "window": {
         "backgroundTextStyle": "light",
