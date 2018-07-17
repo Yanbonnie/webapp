@@ -1,6 +1,7 @@
 /* pages/user/index/index.wxss */
 page{
     background: #f5f5f5;
+    padding-bottom:120rpx;
 }
 
 .infoBox{

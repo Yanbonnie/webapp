@@ -1,10 +1,42 @@
 <!--pages/user/record/record.wxml-->
 <view class='tabTop'>
-    <view class='active'>我的挪车</view>
-    <view>我的车辆</view>
+    <view class="{{tabIndex == 0 ? 'active':''}}" bindtap="changeTab" data-index = "0">我的挪车</view>
+    <view class="{{tabIndex == 1 ? 'active':''}}"  bindtap="changeTab"  data-index = "1">我的车辆</view>
 </view>
-<view class='record'>
-    <view class='item'>
+<view class='record' wx:if="{{tabIndex == 0}}">
+    <view class='item' wx:for="{{mymove}}">
+        <view class='title'>
+            <text>车牌号码</text>
+            <text>{{item.car_number}}</text>
+        </view>
+        <view class='contain'>
+            <text>挪车原因：{{item.reason}}</text>
+            <text>挪车地点：{{item.address}}</text>
+            <text>挪车时间：{{item.at_time}}</text>
+        </view>
+        <view class='itemBox'>
+            <view>拨打电话</view>
+            <view data-code = "{{item.code}}" bindtap='delMymoveHandle'>删除</view>
+        </view>
+    </view>
+</view>
+<view class='record' wx:if="{{tabIndex == 1}}">
+    <view class='item' wx:for="{{mycarlog}}">
+        <view class='title'>
+            <text>车牌号码</text>
+            <text>{{item.car_number}}</text>
+        </view>
+        <view class='contain'>
+            <text>挪车原因：{{item.reason}}</text>
+            <text>挪车地点：{{item.address}}</text>
+            <text>挪车时间：{{item.at_time}}</text>
+        </view>
+        <view class='itemBox'>
+            <view>拨打电话</view>
+            <view data-code = "{{item.code}}" bindtap='delMyCarLogHandle'>删除</view>
+        </view>
+    </view>
+    <!-- <view class='item'>
         <view class='title'>
             <text>车牌号码</text>
             <text>粤N8888</text>
@@ -18,20 +50,5 @@
             <view>拨打电话</view>
             <view>删除</view>
         </view>
-    </view>
-    <view class='item'>
-        <view class='title'>
-            <text>车牌号码</text>
-            <text>粤N8888</text>
-        </view>
-        <view class='contain'>
-            <text>挪车原因：车辆影响他人出行</text>
-            <text>挪车地点：广东省广州市越秀区又是南路145号广东省广州市越秀区又是南路145号广东省广州市越秀区又是南路145号</text>
-            <text>挪车时间：2018-04-02 08:56:28</text>
-        </view>
-        <view class='itemBox'>
-            <view>拨打电话</view>
-            <view>删除</view>
-        </view>
-    </view>
+    </view> -->
 </view>

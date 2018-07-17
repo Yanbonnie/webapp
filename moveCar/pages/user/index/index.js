@@ -1,11 +1,12 @@
 // pages/user/index/index.js
+const { changeNav } = require('../../../utils/pageCom');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    navIndex: 2,
   },
 
   /**
@@ -14,7 +15,7 @@ Page({
   onLoad: function (options) {
   
   },
-
+  changeNav,
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

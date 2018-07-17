@@ -18,4 +18,9 @@
         <text>挪车记录</text>
         <text class='iconfont icon-right'></text>
     </view>
+    <view class='item'>
+        <text>我要申请</text>
+        <text class='iconfont icon-right'></text>
+    </view>
 </view>
+ <navBar bindchangeNav="changeNav" index="{{2}}"></navBar>

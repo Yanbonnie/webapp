@@ -1,0 +1,23 @@
+/* components/navBar/navBar.wxss */
+/*tabBar*/
+.navBar{
+    position: fixed;
+    display: flex;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 100rpx;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    z-index: 10;
+    background: #ffffff;
+}
+.navBar view{
+    flex-grow: 1;
+    text-align: center;
+    color: #929292;
+}
+.navBar .active{
+    color: #0894ec;
+}

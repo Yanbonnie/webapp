@@ -1,8 +1,8 @@
 <!--pages/index/index.wxml-->
-<swiper  autoplay="true"  interval="5000" autoplay="true" indicator-dots="true" indicator-active-color="#0894ec">
-  <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+ <!-- <swiper  autoplay="true"  interval="5000" autoplay="true" indicator-dots="true" indicator-active-color="#0894ec">
+  <block wx:for="{{bannerList}}" wx:key="{{index}}">
     <swiper-item>
-      <image src="{{item}}" class="slide-image" mode='aspectFill'/>
+      <image src="{{item.pic}}" class="slide-image" mode='aspectFill'/>
     </swiper-item>
   </block>
 </swiper>
@@ -11,7 +11,7 @@
     <view class='flexBox' bindtap='chooseImgHandle'>
         <view class='flexL'>*车牌号码</view>
         <view class='flexC'>
-             <input placeholder="请拍照上传需挪车辆" disabled="true" />
+             <input placeholder="请拍照上传需挪车辆" disabled="true" value="{{car_number}}" />
         </view>
         <view class='flexR'>
             <text class='iconfont icon-camera'></text>
@@ -20,9 +20,9 @@
     <view class='flexBox'>
         <view class='flexL'>*挪车原因</view>
         <view class='flexC'>
-             <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-                <view class="picker" wx:if="{{array[index]}}">
-                    {{array[index]}}
+             <picker bindchange="bindPickerChange" value="{{index}}" range="{{reasonList}}">
+                <view class="picker" wx:if="{{reason}}">
+                    {{reason}}
                 </view>
                 <view class="picker gray" wx:else>
                     请选择挪车原因
@@ -45,15 +45,16 @@
         <text class='iconfont icon-warning-o'></text>
         <text>服务说明</text>
     </view>
-    <view>
-        <text class='iconfont icon-square'></text>
-        <text>是否接受回复</text>
+    <view >
+        <text bindtap='replyHandle' class="{{reply ? 'iconfont icon-squarecheck':'iconfont icon-square'}}"></text>
+        <text bindtap='replyHandle'>是否接受回复</text>
     </view>
 </view>
 
 <view class='BtnBox'>
-    <view>
+    <view  class="{{submitStatus ? '':'gray'}}">
         确定
     </view>
-</view>
+</view>  -->
+<navBar bindchangeNav="changeNav" index="{{0}}"></navBar>
 

@@ -85,6 +85,12 @@
     color: #fff;
     border-radius: 8rpx;
 }
+.BtnBox .gray{
+    background: #ccc;
+    color: #f5f5f5;
+}
+
+
 
 
 .cityCover{
