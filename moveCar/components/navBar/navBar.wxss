@@ -10,7 +10,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    z-index: 10;
+    z-index: 9;
     background: #ffffff;
     box-shadow: 0 4rpx 5rpx #ccc inset;
 }

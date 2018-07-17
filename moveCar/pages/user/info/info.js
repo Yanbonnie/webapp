@@ -3,7 +3,7 @@ import Sort from '../../../utils/city_sort';   //城市排序
 
 const app = getApp();
 const { globalData: { REQUEST } } = app;
-const { chooseImgHandle, isPhone } = require('../../../utils/pageCom');
+// const { chooseImgHandle, isPhone } = require('../../../utils/pageCom');
 import pageCom from '../../../utils/pageCom';
 import { dataCom, methodsCom } from '../../../utils/submitCom';
 Page({
@@ -34,7 +34,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        console.log(this.data.insurance_data)
     },
     ...pageCom,
     ...methodsCom,

@@ -1,10 +1,24 @@
 //我的申请页面和我的绑定页面
+const app = getApp();
+import Sort from './city_sort';
+import { REQUEST } from './util';
+let arr2 = [
+    { "id": "v1", "cityName": "北京" },
+    { "id": "v2", "cityName": "上海" },
+    { "id": "v5", "cityName": "天津" },
+    { "id": "v7", "cityName": "安徽" },
+    { "id": "v3", "cityName": "呼和浩特" },
+    { "id": "v4", "cityName": "杭州" },
+    { "id": "v9", "cityName": "海南" },
+    { "id": "v8", "cityName": "张家口" }
+];
+let citylist = Sort.pySegSort(arr2);
 module.exports = {
     dataCom:{
         bannerList: [],
         is_binding: 0,
         cityState: false,
-        insurance_data: '',
+        insurance_data: citylist,
         car_number: '',   //车牌号
         car_type: '',     //车辆类型
         proprietor: '',   //所有人

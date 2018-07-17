@@ -7,6 +7,7 @@ Page({
    */
   data: {
     navIndex: 2,
+    ewmStatus:false,
   },
 
   /**
@@ -25,6 +26,10 @@ Page({
       wx.navigateTo({
           url: '/pages/user/record/record',
       })
+  },
+  showEwmFn(e){
+      const { state } = e.currentTarget.dataset;
+      this.setData({ ewmStatus: state == 1 ? true : false})
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

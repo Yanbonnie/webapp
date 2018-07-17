@@ -21,17 +21,17 @@
         <text>挪车记录</text>
         <text class='iconfont icon-right'></text>
     </view>
-    <view class='item'>
+    <view class='item' bindtap='showEwmFn' data-state="1">
         <text>我要申请</text>
         <text class='iconfont icon-right'></text>
     </view>
 </view>
  <navBar bindchangeNav="changeNav" index="{{2}}"></navBar>
 
- <view class='ewmCover'>
+ <view class='ewmCover' wx:if="{{ewmStatus}}">
     <view class='ewmBox'>
         <image class='img' mode="aspectFit" src="../../../assets/images/ewm.png"></image>
-        <image class='close' src='../../../assets/images/close.png'></image>
+        <image bindtap='showEwmFn' data-state="0" class='close' src='../../../assets/images/close.png'></image>
         <view>点击查看大图（长按大图保存，线下打印）</view>
     </view>
  </view>

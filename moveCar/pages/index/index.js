@@ -23,6 +23,7 @@ Page({
         address: '',           //地址
         reply: false,           //是否接收回复  true false
         submitStatus:true,      //是否可以提交
+        serverState:false
     },
 
     /**
@@ -91,6 +92,7 @@ Page({
     //是否接收回复
     replyHandle(){
         let { reply } = this.data;
+        console.log(reply)
         reply = reply ? false : true;
         this.setData({
             reply
@@ -131,6 +133,12 @@ Page({
                     url: '/pages/user/record/record',
                 })
             },1500)
+        })
+    },
+    operServerCover(e){
+        const { index } = e.currentTarget.dataset;
+        this.setData({
+            serverState:index ==1 ? true : false
         })
     }
 })

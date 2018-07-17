@@ -1,17 +1,7 @@
 // pages/move/move.js
 import Sort from '../../utils/city_sort';   //城市排序
 // let imgUrls = ['../../assets/images/banner.jpg', '../../assets/images/banner.jpg'];
-// let arr2 = [
-//     { "id": "v1", "cityName": "北京" },
-//     { "id": "v2", "cityName": "上海" },
-//     { "id": "v5", "cityName": "天津" },
-//     { "id": "v7", "cityName": "安徽" },
-//     { "id": "v3", "cityName": "呼和浩特" },
-//     { "id": "v4", "cityName": "杭州" },
-//     { "id": "v9", "cityName": "海南" },
-//     { "id": "v8", "cityName": "张家口" }
-// ];
-// let citylist = Sort.pySegSort(arr2);
+
 
 const app = getApp();
 const { globalData: { REQUEST } } = app;
