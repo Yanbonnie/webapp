@@ -85,6 +85,7 @@ module.exports = {
             })
         },
         getMsgCodeFn() {
+            console.log("获取二维码")
             const { mobile, codeStatus } = this.data;
             if (!codeStatus) return;
             if (!mobile) {
