@@ -12,11 +12,13 @@
     width: 100%;
     z-index: 10;
     background: #ffffff;
+    box-shadow: 0 4rpx 5rpx #ccc inset;
 }
 .navBar view{
     flex-grow: 1;
     text-align: center;
     color: #929292;
+    font-size: 28rpx;
 }
 .navBar .active{
     color: #0894ec;

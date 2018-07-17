@@ -11,7 +11,7 @@
     <view class='flexBox' bindtap="chooseFn">
         <view class='flexL'>*车牌号码</view>
         <view class='flexC'>
-             <input placeholder="请拍照上传您的驾驶证" disabled="true" />
+             <input placeholder="请拍照上传您的驾驶证" disabled="true" value="{{car_number}}"/>
         </view>
         <view class='flexR'>
             <text class='iconfont icon-camera'></text>
@@ -21,13 +21,13 @@
     <view class='flexBox'>
         <view class='flexL'>*车辆类型</view>
         <view class='flexC'>
-             <input placeholder="车辆类型"  disabled="true"/>
+             <input placeholder="车辆类型"  disabled="true" value="{{car_type}}"/>
         </view>     
     </view>
     <view class='flexBox'>
-        <view class='flexL'>*收件人</view>
+        <view class='flexL'>*所有人</view>
         <view class='flexC'>
-             <input placeholder="请输入收件人"  disabled="true"/>
+             <input  disabled="true" value="{{proprietor}}"/>
         </view>     
     </view>
     <view class='flexBox' bindtap='showBaoXian'>
@@ -39,29 +39,29 @@
     <view class='flexBox'>
         <view class='flexL'>*手机号码</view>
         <view class='flexC'>
-             <input placeholder="请输入您的手机号码" type='number' />
+             <input placeholder="请输入您的手机号码" type='number' value="{{mobile}}" bindinput='mobileInputChange'/>
         </view>     
     </view>
     <view class='flexBox yzm'>
         <view class='flexL'>*验证码</view>
         <view class='flexC'>
-             <input placeholder="请输入短信验证码"  type='number' value="{{mobile}}"  bindinput="bindinputHandle"/>
+             <input placeholder="请输入短信验证码"  type='number' value="{{code}}"  bindinput="codeInputChange"/>
         </view>  
         <view class='flexR' bindtap="getMsgCodeFn">
-            <text class="{{codeStatus ? '':'gray'}}">{{codeTxt}}</text>
+            <text class="{{codeStatus ? '':'gray'}}" value="{{code}}">{{codeTxt}}</text>
         </view>   
     </view>
     <view class='flexBox ' bindtap='selectAddress'>
         <view class='flexL'>*邮寄地址</view>
         <view class='flexC'>
-             <input placeholder="请选择邮寄地址" disabled="true" />
+             <input placeholder="请选择邮寄地址" disabled="true" value="{{address}}"/>
         </view>  
         <view class='flexR'>
             <text class='iconfont icon-address'></text>
         </view>      
     </view>
 </view>
-<view class='BtnBox'>
+<view class='BtnBox' bindtap='postApplyFn'>
     <view class="{{submitStatus ? '':'gray'}}">
         确定
     </view>

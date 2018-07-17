@@ -10,11 +10,11 @@
     </view>
 </view>
 <view class='navList'>
-    <view class='item'>
+    <view class='item' bindtap='goInfoHandle'>
         <text>我的资料</text>
         <text class='iconfont icon-right'></text>
     </view>
-    <view class='item'>
+    <view class='item' bindtap='goRecordHandle'>
         <text>挪车记录</text>
         <text class='iconfont icon-right'></text>
     </view>

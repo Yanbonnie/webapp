@@ -1,6 +1,6 @@
 <!--components/navBar/navBar.wxml-->
 <view class='navBar'>
-    <view data-index="0" bindtap='changeNav' class="{{index==0?'active':''}}">aaa</view>
-    <view data-index="1" bindtap='changeNav' class="{{index==1?'active':''}}">bbb</view>
-    <view data-index="2" bindtap='changeNav' class="{{index==2?'active':''}}">ccc</view>
+    <view data-index="0" bindtap='changeNav' class="{{index==0?'active':''}}">我要挪车</view>
+    <view data-index="1" bindtap='changeNav' class="{{index==1?'active':''}}">我要申请</view>
+    <view data-index="2" bindtap='changeNav' class="{{index==2?'active':''}}">我的信息</view>
 </view>

@@ -49,7 +49,21 @@ module.exports = {
             wx.redirectTo({
                 url: '/pages/index/index'
             })
-        }
-        
+        }        
+    },
+    //监听code值变化
+    codeInputChange(e){
+        const { value } = e.detail;
+        this.setData({
+            code:value
+        })
+    },
+    //监听手机号码变化
+    mobileInputChange(e){
+        console.log(e)
+        const { value } = e.detail;
+        this.setData({
+            mobile:value
+        })
     }
 }

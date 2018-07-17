@@ -1,5 +1,5 @@
 <!--pages/index/index.wxml-->
- <!-- <swiper  autoplay="true"  interval="5000" autoplay="true" indicator-dots="true" indicator-active-color="#0894ec">
+<swiper  autoplay="true"  interval="5000" autoplay="true" indicator-dots="true" indicator-active-color="#0894ec">
   <block wx:for="{{bannerList}}" wx:key="{{index}}">
     <swiper-item>
       <image src="{{item.pic}}" class="slide-image" mode='aspectFill'/>
@@ -55,6 +55,6 @@
     <view  class="{{submitStatus ? '':'gray'}}">
         确定
     </view>
-</view>  -->
+</view>  
 <navBar bindchangeNav="changeNav" index="{{0}}"></navBar>
 
