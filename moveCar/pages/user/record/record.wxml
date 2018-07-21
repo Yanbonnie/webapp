@@ -3,7 +3,7 @@
     <view class="{{tabIndex == 0 ? 'active':''}}" bindtap="changeTab" data-index = "0">我的挪车</view>
     <view class="{{tabIndex == 1 ? 'active':''}}"  bindtap="changeTab"  data-index = "1">我的车辆</view>
 </view>
-<view class='record'>
+<!-- <view class='record'>
     <view class='item'>
         <view class='title'>
             <text>车牌号码</text>
@@ -19,7 +19,7 @@
             <view>删除</view>
         </view>
     </view>
-</view>
+</view> -->
 <view class='record' wx:if="{{tabIndex == 0}}">
     <view class='item' wx:for="{{mymove}}" wx:key="{{index}}">
         <view class='title'>

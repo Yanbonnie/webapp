@@ -1,5 +1,6 @@
 {
     "enablePullDownRefresh":true,
     "backgroundColor":"#000000",
-    "backgroundTextStyle":"light"
+    "backgroundTextStyle":"light",
+    "enablePullDownRefresh":true
 }

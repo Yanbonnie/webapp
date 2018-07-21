@@ -41,17 +41,7 @@ page{
     color: #acacac;
     border: 1rpx #acacac solid;
     border-radius: 50rpx;
-    width: 80rpx;
-    height: 25rpx;
-    text-align: center;
-    font-size: 18rpx;
-    margin-left: 10rpx;
-}
-.infoBox .flexC .vip{
-    color: #acacac;
-    border: 1rpx #acacac solid;
-    border-radius: 50rpx;
-    width: 80rpx;
+    width: 100rpx;
     height: 25rpx;
     text-align: center;
     font-size: 18rpx;

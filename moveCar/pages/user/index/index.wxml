@@ -2,15 +2,16 @@
 
 <view class='infoBox'>
     <view class='flexL'>
-        <image src='../../../assets/images/header_pic.jpg'></image>
+        <image src='{{wxheadpic}}'></image>
     </view>
     <view class='flexC'>
         <view class='name'>
-            <text>小火</text>
-            <text class='vip vip3'>普通会员</text> <!--升级会员  省级会员-->
+            <text>{{wxname}}</text>
+            <text class='vip' wx:if="{{level==1}}">普通会员</text> <!--升级会员  省级会员-->
+            <text class='vip vip2' wx:elif="{{level==1}}">升级会员</text> <!--升级会员  省级会员-->
+            <text class='vip vip3' wx:else>省级会员</text> <!--升级会员  省级会员-->
         </view>
-        <text>车牌：粤NP8888</text>
-        
+        <text>车牌：{{car_number}}</text>
     </view>
     <view class='flexR'>
         <text class='btn'>我的二维码</text>
@@ -18,7 +19,7 @@
 </view>
 <view class='navList'>
     <view class='item' bindtap='goInfoHandle'>
-        <text>我的资料</text>
+        <text>{{is_binding ? '我的资料':'我要绑定'}}</text>
         <text class='iconfont icon-right'></text>
     </view>
     <view class='item' bindtap='goRecordHandle'>

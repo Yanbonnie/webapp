@@ -8,15 +8,30 @@ Page({
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        count: 0
+        count: 0,
+        share_query:null
     },
-    onLoad: function () {
-        let openid = wx.getStorageSync('openid');
-        if(openid){
-            app.globalData.openid = openid;
-            wx.reLaunch({
-                url: '/pages/index/index',
+    onLoad: function (options) {
+        const { share_query } = options;
+        if (share_query) {
+            this.setData({
+                share_query
             })
+        }   
+        let unionid = wx.getStorageSync('unionid');
+        if (unionid){
+            app.globalData.unionid = unionid;
+            setTimeout(() => {
+                if (share_query) {
+                    let url = decodeURIComponent(share_query);
+                    wx.reLaunch({ url })
+                } else {
+                    wx.reLaunch({
+                        url: '/pages/index/index',
+                    })
+                }
+            }, 200)
+            return;
         }else{
             if (app.globalData.userInfo) {
                 this.setData({
@@ -85,13 +100,27 @@ Page({
             iv,
             encryptedData,
         }, true).then(res => {
-            let { openid } = res.data;
-            app.globalData.openid = openid;
-            wx.setStorageSync('openid', openid)
+            let { openid, unionid } = res.data;
+            // app.globalData.openid = openid;
+            // wx.setStorageSync('openid', openid)
+            app.globalData.unionid = unionid;
+            wx.setStorageSync('unionid', unionid)
+            
             wx.hideLoading();
-            wx.reLaunch({
-                url: '/pages/index/index',
-            })
+            // wx.reLaunch({
+            //     url: '/pages/index/index',
+            // })
+            const { share_query } = this.data;
+            setTimeout(() => {
+                if (share_query) {
+                    let url = decodeURIComponent(share_query);
+                    wx.reLaunch({ url })
+                } else {
+                    wx.reLaunch({
+                        url: '/pages/index/index',
+                    })
+                }
+            }, 200)
         }).catch(res => {
             if (count < 5) {
                 this.loginHandle({ iv, encryptedData })

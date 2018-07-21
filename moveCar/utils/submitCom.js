@@ -35,7 +35,7 @@ module.exports = {
         //获取首页数据
         getBannerFn() {
             REQUEST('GET', 'get_banner', {
-                openid: app.globalData.openid,
+                unionid: app.globalData.unionid,
                 page_type: 2
             }).then(res => {
                 let { bannerList, is_binding, insurance_data } = res;
@@ -56,8 +56,8 @@ module.exports = {
             })
         },
         //图片识别
-        chooseFn() {
-            this.chooseImgHandle(1).then(res => {
+        chooseFn(e) {
+            this.chooseImgHandle(e).then(res => {
                 console.log(res)
                 const { car_number, car_type, proprietor } = res.data;
                 this.setData({
@@ -120,7 +120,7 @@ module.exports = {
             }
             REQUEST('GET', 'get_msgcode', {
                 mobile,
-                openid: app.globalData.openid
+                unionid: app.globalData.unionid
             }).then(res => {
                 this.setData({
                     time: 60,

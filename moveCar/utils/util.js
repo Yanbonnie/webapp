@@ -29,6 +29,10 @@ const URL = {
     'del_mymove':'del_mymove',               //删除我要挪车数据
     'get_mycarlog':'get_mycarlog',           //我的车辆
     'del_mycarlog':'del_mycarlog',           //删除我的车辆    
+    'postShare':'postShare',                 //分享
+    'getFans':'getFans',                     //我的粉丝
+    'getIncome':'getIncome',                 //收入记录
+    'getMyInfo':'getMyInfo',                 //获取我的信息
 }
 
 //请求接口封装
@@ -49,7 +53,7 @@ const REQUEST = (method, url, data, err = false) => {   //err->true  需要对�
                         wx.showToast({
                             icon: 'none',
                             mask: true,
-                            title: res.data.msg,
+                            title: res.data.msg || '请求失败',
                         })
                     }
                 }

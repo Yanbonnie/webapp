@@ -27,6 +27,8 @@ App({
   globalData: {
     userInfo: null,
     REQUEST,
-    openid:null
+    is_binding:null,
+    openid:null,
+    unionid:null,
   }
 })

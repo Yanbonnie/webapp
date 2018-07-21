@@ -1,5 +1,20 @@
 <!--pages/user/fans/fans.wxml-->
-<view class='infoBox'>
+
+
+<view class='infoBox' wx:for="{{list}}" wx:key="{{index}}">
+    <view class='flexL'>
+        <image src='{{item.headpic}}'></image>
+    </view>
+    <view class='flexC'>
+        <view class='money'>
+            <text>金额：￥{{item.money}}</text>
+            <text class='time'>{{item.time}}</text>
+        </view>
+    </view>
+</view>
+
+
+<!-- <view class='infoBox'>
     <view class='flexL'>
         <image src='../../../assets/images/header_pic.jpg'></image>
     </view>
@@ -21,4 +36,4 @@
             <text class='time'>2018-07-21</text>
         </view>
     </view>
-</view>
+</view> -->

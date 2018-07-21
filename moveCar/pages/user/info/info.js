@@ -35,7 +35,10 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(this.data.insurance_data)
+        // console.log(this.data.insurance_data)  保险数据
+        this.setData({
+            is_binding: app.globalData.is_binding
+        })
     },
     ...pageCom,
     ...methodsCom,
@@ -59,7 +62,7 @@ Page({
             submitStatus: false
         })
         REQUEST('POST', 'post_binding', {
-            car_number, car_type, proprietor, address, insurance_code: insurance.code, mobile, code, openid: app.globalData.openid
+            car_number, car_type, proprietor, address, insurance_code: insurance.code, mobile, code, unionid: app.globalData.unionid
         }).then(res => {
             this.setData({
                 submitStatus: true

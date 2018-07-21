@@ -2,13 +2,15 @@
 <swiper  autoplay="true"  interval="5000" autoplay="true" indicator-dots="true" indicator-active-color="#0894ec">
   <block wx:for="{{bannerList}}" wx:key="{{index}}">
     <swiper-item>
-      <image src="{{item.pic}}" class="slide-image" mode='aspectFill'/>
+      <navigator url="/pages/saveDetail/saveDetail">
+        <image src="{{item.pic}}" class="slide-image" mode='aspectFill'/>
+      </navigator>
     </swiper-item>
   </block>
 </swiper>
 
 <view class='formBox mt30'>
-    <view class='flexBox' bindtap='chooseImgHandle'>
+    <view class='flexBox' bindtap='chooseFn' data-page_type = "2">
         <view class='flexL'>*车牌号码</view>
         <view class='flexC'>
              <input placeholder="请拍照上传需挪车辆" disabled="true" value="{{car_number}}" />
@@ -45,13 +47,13 @@
         <text class='iconfont icon-warning-o'></text>
         <text>服务说明</text>
     </view>
-    <view >
-        <text bindtap='replyHandle' class="{{reply ? 'iconfont icon-squarecheck':'iconfont icon-square'}}"></text>
-        <text bindtap='replyHandle'>是否接受回复</text>
+    <view bindtap='replyHandle'>
+        <text  class="{{reply ? 'iconfont icon-squarecheck':'iconfont icon-square'}}"></text>
+        <text>是否接受回复</text>
     </view>
 </view>
 
-<view class='BtnBox'>
+<view class='BtnBox' bindtap='PostMoveCarFn'>
     <view  class="{{submitStatus ? '':'gray'}}">
         确定
     </view>

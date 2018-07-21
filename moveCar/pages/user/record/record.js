@@ -17,7 +17,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        this.getMyMoveFn();
     },
     changeTab(e){
       const { index } = e.currentTarget.dataset;
@@ -37,7 +37,7 @@ Page({
             mask: true
         })
         REQUEST('GET', 'get_mymove', {
-            openid: app.globalData.openid
+            unionid: app.globalData.unionid
         }).then(res => {
             wx.hideLoading();
             this.setData({
@@ -55,7 +55,7 @@ Page({
                 if (res.confirm) {
                     REQUEST('POST', 'del_mymove', {
                         code,
-                        openid: app.globalData.openid
+                        unionid: app.globalData.unionid
                     }).then(res => {
                         this.getMyMoveFn();
                     })
@@ -69,7 +69,7 @@ Page({
             mask: true
         })
         REQUEST('GET', 'get_mycarlog', {
-            openid: app.globalData.openid
+            unionid: app.globalData.unionid
         }).then(res => {
             wx.hideLoading();
             this.setData({
@@ -87,7 +87,7 @@ Page({
                 if (res.confirm) {
                     REQUEST('POST', 'del_mycarlog', {
                         code,
-                        openid: app.globalData.openid
+                        unionid: app.globalData.unionid
                     }).then(res => {
                         this.getMyCarLog();
                     })
@@ -127,7 +127,12 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function () {
-        console.log("用户下拉了");
+        const {tabIndex} = this.data;
+        if (tabIndex == 0) {
+            this.getMyMoveFn();
+        } else {
+            this.getMyCarLog();
+        }
     },
 
     /**

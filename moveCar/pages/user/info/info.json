@@ -1,4 +1,5 @@
 {
+    "navigationBarTitleText": "我要绑定",
     "usingComponents": {
         "citylist": "../../../components/city/city"
     }

@@ -8,7 +8,7 @@
 </swiper> -->
 
 <view class='formBox mt30'>
-    <view class='flexBox' bindtap="chooseFn">
+    <view class='flexBox' bindtap="chooseFn" data-page_type="1">
         <view class='flexL'>*车牌号码</view>
         <view class='flexC'>
             <input placeholder="请拍照上传您的驾驶证" disabled="true" value="{{car_number}}" />
@@ -63,7 +63,7 @@
 </view>
 <view class='BtnBox'>
     <view bindtap='editHandle' data-index="1" wx:if="{{!editStatus}}">
-        编辑
+        {{is_binding ? '编辑':'提交'}}
     </view>
     <block wx:else>
         <view bindtap='editHandle'  data-index="0" class='item gray'>

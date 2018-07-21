@@ -30,30 +30,38 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        // this.setData({
+        //     is_binding:0
+        // })
+        // app.globalData.is_binding = 0;  //判断用户是否绑定
+        this.getBannerFn();
+        this.getLocate();
     },
     changeNav,    //监听导航栏切换
-    // onTabItemTap(item){
-    //     console.log(item)
-    // },
     //获取首页数据
     getBannerFn(){
+        wx.showLoading({
+            title: '加载中...',
+            icon:'none',
+            mask:true
+        })
         REQUEST('GET','get_banner',{
-            openid:app.globalData.openid,
+            unionid: app.globalData.unionid,
             page_type: 2
         }).then(res=>{
-            const { bannerList,is_binding } = res;
+            wx.hideLoading();
+            const { banner_data,is_binding } = res;
             this.setData({
-                bannerList,
+                bannerList:banner_data,
                 is_binding
             })
+            app.globalData.is_binding = is_binding; 
         })
     },
     //图片识别
     chooseImgHandle,  
-    chooseFn(){
-        this.chooseImgHandle(2).then(res=>{
-            console.log(res)
+    chooseFn(e){
+        this.chooseImgHandle(e).then(res=>{
             const { car_number, scene_pic } = res.data;
             this.setData({
                 car_number, scene_pic
@@ -70,11 +78,11 @@ Page({
     },
     //调用定位（选择地址）
     getLocate() {
-        wx.showLoading({
-            title: '定位中...',
-            icon:'none',
-            mask:true
-        })
+        // wx.showLoading({
+        //     title: '定位中...',
+        //     icon:'none',
+        //     mask:true
+        // })
         new qqmap().getLocateInfo().then(val => {//这个方法在另一个文件里，下面有贴出代码
             wx.hideLoading();
             this.setData({
@@ -101,7 +109,8 @@ Page({
     //提交我要挪车接口
     PostMoveCarFn(){
         const { car_number, reason, scene_pic, address, reply, submitStatus} = this.data;
-        if (!car_number && !reason && !scene_pic && !address){
+        console.log(!car_number)
+        if (car_number == ''  ||  reason == '' || scene_pic == '' || address == ''){
             wx.showToast({
                 title: '请填写完整信息',
                 mask:true,
@@ -117,7 +126,7 @@ Page({
         this.setData({
             submitStatus:false
         })
-        REQUEST('POST', 'post_move_car', { car_number, reason, scene_pic, address, reply ,openid:app.globalData.openid}).then(res=>{
+        REQUEST('POST', 'post_move_car', { car_number, reason, scene_pic, address, reply, unionid: app.globalData.unionid}).then(res=>{
             wx.hideLoading();
             this.setData({
                 submitStatus: true
