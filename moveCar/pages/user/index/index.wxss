@@ -28,6 +28,43 @@ page{
     display: block;
     font-size: 24rpx;
 }
+.infoBox .flexC .name{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10rpx;
+    
+}
+.infoBox .flexC .name text{
+    display: block;
+}
+.infoBox .flexC .vip{
+    color: #acacac;
+    border: 1rpx #acacac solid;
+    border-radius: 50rpx;
+    width: 80rpx;
+    height: 25rpx;
+    text-align: center;
+    font-size: 18rpx;
+    margin-left: 10rpx;
+}
+.infoBox .flexC .vip{
+    color: #acacac;
+    border: 1rpx #acacac solid;
+    border-radius: 50rpx;
+    width: 80rpx;
+    height: 25rpx;
+    text-align: center;
+    font-size: 18rpx;
+    margin-left: 10rpx;
+}
+.infoBox .flexC .vip2{
+    border: 1px #fc9b78 solid;
+    color: #fc9b78;
+}
+.infoBox .flexC .vip3{
+    border: 1px #f15922 solid;
+    color: #f15922;
+}
 .infoBox .flexR{
     flex-basis: 160rpx;
     text-align: right;
@@ -69,6 +106,7 @@ page{
     left: 0;
     bottom: 0;
     right: 0;
+    z-index: 10;
 }
 .ewmBox{
     position: absolute;

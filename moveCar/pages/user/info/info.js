@@ -12,7 +12,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-        ...dataCom
+        ...dataCom,
+        editStatus:false,
         // bannerList: [],
         // is_binding: 0,
         // cityState: false,
@@ -74,6 +75,20 @@ Page({
                 })
             }, 1500)
         })
+    },
+    //是否编辑
+    editHandle(e){
+        const { index } = e.currentTarget.dataset;
+        if(index == 1){
+            this.setData({
+                editStatus: true
+            })
+        }else{
+            this.setData({
+                editStatus: false
+            })
+        }
+        
     },
     // getMsgCodeFn() {
     //     const { mobile, codeStatus } = this.data;

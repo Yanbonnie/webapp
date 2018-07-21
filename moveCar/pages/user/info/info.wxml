@@ -1,5 +1,5 @@
 <!--pages/index/index.wxml-->
- <!-- <swiper  autoplay="true"  interval="5000" autoplay="true" indicator-dots="true" indicator-active-color="#0894ec">
+<!-- <swiper  autoplay="true"  interval="5000" autoplay="true" indicator-dots="true" indicator-active-color="#0894ec">
   <block wx:for="{{imgUrls}}" wx:key="{{index}}">
     <swiper-item>
       <image src="{{item}}" class="slide-image" mode='aspectFill'/>
@@ -11,65 +11,71 @@
     <view class='flexBox' bindtap="chooseFn">
         <view class='flexL'>*车牌号码</view>
         <view class='flexC'>
-             <input placeholder="请拍照上传您的驾驶证" disabled="true" value="{{car_number}}"/>
+            <input placeholder="请拍照上传您的驾驶证" disabled="true" value="{{car_number}}" />
         </view>
         <view class='flexR'>
             <text class='iconfont icon-camera'></text>
         </view>
     </view>
-    
+
     <view class='flexBox'>
         <view class='flexL'>*车辆类型</view>
         <view class='flexC'>
-             <input placeholder="车辆类型"  disabled="true" value="{{car_type}}"/>
-        </view>     
+            <input placeholder="车辆类型" disabled="true" value="{{car_type}}" />
+        </view>
     </view>
     <view class='flexBox'>
         <view class='flexL'>*收件人</view>
         <view class='flexC'>
-             <input placeholder="请输入收件人"  disabled="true" value="{{proprietor}}" />
-        </view>     
+            <input placeholder="请输入收件人" disabled="true" value="{{proprietor}}" />
+        </view>
     </view>
     <view class='flexBox' bindtap='showBaoXian'>
         <view class='flexL'>*保险公司</view>
         <view class='flexC'>
-             <input placeholder="请选择保险公司" disabled="true"  value="{{insurance.cityName}}"/>
-        </view>     
+            <input placeholder="请选择保险公司" disabled="true" value="{{insurance.cityName}}" />
+        </view>
     </view>
     <view class='flexBox'>
         <view class='flexL'>*手机号码</view>
         <view class='flexC'>
-             <input placeholder="请输入您的手机号码" type='number' value="{{mobile}}" bindinput='mobileInputChange'/>
-        </view>     
+            <input placeholder="请输入您的手机号码" type='number' value="{{mobile}}" bindinput='mobileInputChange' />
+        </view>
     </view>
-    <view class='flexBox yzm'>
+    <view class='flexBox yzm' wx:if="{{editStatus}}">
         <view class='flexL'>*验证码</view>
         <view class='flexC'>
-             <input placeholder="请输入短信验证码"  type='number' value="{{code}}"  bindinput="codeInputChange"/>
-        </view>  
+            <input placeholder="请输入短信验证码" type='number' value="{{code}}" bindinput="codeInputChange" />
+        </view>
         <view class='flexR' bindtap="getMsgCodeFn">
             <text class="{{codeStatus ? '':'gray'}}">{{codeTxt}}</text>
-        </view>   
+        </view>
     </view>
     <view class='flexBox ' bindtap='selectAddress'>
         <view class='flexL'>*住址</view>
         <view class='flexC'>
-             <input placeholder="请选择住址" disabled="true" value="{{address}}"/>
-        </view>  
+            <input placeholder="请选择住址" disabled="true" value="{{address}}" />
+        </view>
         <view class='flexR'>
             <text class='iconfont icon-address'></text>
-        </view>      
+        </view>
     </view>
 </view>
-<view class='BtnBox' bindtap='postApplyFn'>
-    <view class="{{submitStatus ? '':'gray'}}">
-        确定
+<view class='BtnBox'>
+    <view bindtap='editHandle' data-index="1" wx:if="{{!editStatus}}">
+        编辑
     </view>
+    <block wx:else>
+        <view bindtap='editHandle'  data-index="0" class='item gray'>
+            取消
+        </view>
+        <view class='item' bindtap='postApplyFn' class="item {{submitStatus ? '':'gray'}}">
+            修改
+        </view>
+    </block>
 </view>
 
 
 <view class='cityCover' wx:if="{{cityState}}">
     <citylist citylist="{{insurance_data}}" bindcitytap='cityTap' bindcloseCity="closeCityHandle"></citylist>
-</view> 
-
- 
+</view>

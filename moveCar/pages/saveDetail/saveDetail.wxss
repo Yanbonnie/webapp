@@ -1,0 +1,24 @@
+/* pages/saveDetail/saveDetail.wxss */
+page{
+    background: #fff;
+}
+.img{
+    width: 750rpx;
+    height: 1558rpx;
+}
+.btnBox{
+    padding: 20rpx 0 50rpx;
+    display: flex;
+    justify-content: center;
+}
+.btnBox view{
+    width: 500rpx;
+    text-align: center;
+    height: 80rpx;
+    line-height: 80rpx;
+    background: #0894ec;
+    /* background: #0c3273; */
+    color: #fff;
+    border-radius: 8rpx;
+    font-size: 24rpx;
+}

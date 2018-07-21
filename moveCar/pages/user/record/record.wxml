@@ -3,6 +3,23 @@
     <view class="{{tabIndex == 0 ? 'active':''}}" bindtap="changeTab" data-index = "0">我的挪车</view>
     <view class="{{tabIndex == 1 ? 'active':''}}"  bindtap="changeTab"  data-index = "1">我的车辆</view>
 </view>
+<view class='record'>
+    <view class='item'>
+        <view class='title'>
+            <text>车牌号码</text>
+            <text>粤NP888888</text>
+        </view>
+        <view class='contain'>
+            <text>挪车原因：出行影响他人</text>
+            <text>挪车地点：农讲所地铁站</text>
+            <text>挪车时间：2018-01-02</text>
+        </view>
+        <view class='itemBox'>
+            <view>拨打电话</view>
+            <view>删除</view>
+        </view>
+    </view>
+</view>
 <view class='record' wx:if="{{tabIndex == 0}}">
     <view class='item' wx:for="{{mymove}}" wx:key="{{index}}">
         <view class='title'>

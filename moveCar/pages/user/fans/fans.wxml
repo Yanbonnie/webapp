@@ -1,0 +1,40 @@
+<!--pages/user/fans/fans.wxml-->
+<view class='infoBox'>
+    <view class='flexL'>
+        <image src='../../../assets/images/header_pic.jpg'></image>
+    </view>
+    <view class='flexC'>
+        <view class='name'>
+            <text>小火</text>
+            <text class='vip vip1'>普通会员</text> <!--升级会员  省级会员-->
+        </view>
+        <text class='time'>2018-07-21</text>
+        
+    </view>
+</view>
+<view class='infoBox'>
+    <view class='flexL'>
+        <image src='../../../assets/images/header_pic.jpg'></image>
+    </view>
+    <view class='flexC'>
+        <view class='name'>
+            <text>小火</text>
+            <text class='vip vip2'>升级会员</text> <!--升级会员  省级会员-->
+        </view>
+        <text class='time'>2018-07-21</text>
+        
+    </view>
+</view>
+<view class='infoBox'>
+    <view class='flexL'>
+        <image src='../../../assets/images/header_pic.jpg'></image>
+    </view>
+    <view class='flexC'>
+        <view class='name'>
+            <text>小火</text>
+            <text class='vip vip3'>省级会员</text> <!--升级会员  省级会员-->
+        </view>
+        <text class='time'>2018-07-21</text>
+        
+    </view>
+</view>

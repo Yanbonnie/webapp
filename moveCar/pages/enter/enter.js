@@ -14,7 +14,7 @@ Page({
         let openid = wx.getStorageSync('openid');
         if(openid){
             app.globalData.openid = openid;
-            wx.switchTab({
+            wx.reLaunch({
                 url: '/pages/index/index',
             })
         }else{
@@ -89,7 +89,7 @@ Page({
             app.globalData.openid = openid;
             wx.setStorageSync('openid', openid)
             wx.hideLoading();
-            wx.switchTab({
+            wx.reLaunch({
                 url: '/pages/index/index',
             })
         }).catch(res => {

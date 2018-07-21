@@ -84,6 +84,7 @@
     background: #0894ec;
     color: #fff;
     border-radius: 8rpx;
+    font-size: 24rpx;
 }
 .BtnBox .gray{
     background: #ccc;

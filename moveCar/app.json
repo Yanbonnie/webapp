@@ -1,10 +1,13 @@
 {
     "pages": [
-        "pages/index/index",
+        "pages/enter/enter",
         "pages/user/index/index",
+        "pages/user/income/income",
+        "pages/user/fans/fans",
+        "pages/saveDetail/saveDetail",
+        "pages/index/index",
         
         "pages/apply/apply",
-        "pages/enter/enter",
         "pages/user/record/record",
         "pages/user/info/info"
     ],

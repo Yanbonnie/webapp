@@ -1,0 +1,20 @@
+
+@import '../index/index.wxss';
+page{
+    background: #f5f5f5;
+}
+.infoBox{
+    padding: 20rpx 40rpx;
+}
+.infoBox .flexL image{
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 100%;
+}
+.infoBox .flexC .time{
+    color:#acacac;
+}
+.money{
+    display: flex;
+    justify-content: space-between;
+}

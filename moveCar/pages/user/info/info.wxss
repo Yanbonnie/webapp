@@ -1,3 +1,11 @@
 /* pages/user/info/info.wxss */
 
 @import '../../apply/apply.wxss';
+
+.BtnBox{
+    display: flex;
+    justify-content: space-between;
+}
+.BtnBox .item{
+    width: 45%;
+}
