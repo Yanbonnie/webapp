@@ -16,7 +16,6 @@ export default class qqmap {//获取定位信息
                         longitude: val.longitude
                     },
                     success: function (res) {
-                        console.log(res)
                         resolve(res.result.address);//返回城市
                     },
                     fail: function (res) {

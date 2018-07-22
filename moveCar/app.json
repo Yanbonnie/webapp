@@ -1,5 +1,5 @@
 {
-    "pages": [
+    "pages": [        
         "pages/enter/enter",
         "pages/user/index/index",
         "pages/user/income/income",
@@ -8,12 +8,33 @@
         "pages/index/index",
         "pages/apply/apply",
         "pages/user/record/record",
-        "pages/user/info/info"
+        "pages/user/info/info",
+        "pages/shopping/shopping"
     ],
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#000000",
         "navigationBarTitleText": "我要挪车",
         "navigationBarTextStyle": "white"
+    },
+    "tabBar": {
+        "color": "#929292",
+        "selectedColor": "#0894ec",
+        "backgroundColor": "#ffffff",
+        "borderStyle": "white",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "我要挪车"
+            },
+            {
+                "pagePath": "pages/shopping/shopping",
+                "text": "积分商城"
+            },
+            {
+                "pagePath": "pages/user/index/index",
+                "text": "我的信息"
+            }
+        ]
     }
 }

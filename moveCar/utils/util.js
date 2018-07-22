@@ -36,6 +36,7 @@ const URL = {
     'getMyDetailedInfo':'getMyDetailedInfo', //获取我的资料
     'resetUserInfo':'resetUserInfo',         //修改
     'getShare':'getShare',                   //分享二维码
+    'get_apply':'get_apply',                 //是否申请
 }
 
 //请求接口封装

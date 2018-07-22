@@ -8,7 +8,7 @@
 </swiper> -->
 
 <view class='formBox mt30'>
-    <view class='flexBox' bindtap="chooseFn" data-page_type="1">
+    <view class='flexBox' bindtap="chooseFn" data-page_type="1" data-way="bind">
         <view class='flexL'>*车牌号码</view>
         <view class='flexC'>
             <input placeholder="请拍照上传您的驾驶证" disabled="true" value="{{car_number}}" />
@@ -51,7 +51,7 @@
             <text class="{{codeStatus ? '':'gray'}}">{{codeTxt}}</text>
         </view>
     </view>
-    <view class='flexBox ' bindtap='selectAddress'>
+    <view class='flexBox ' > <!--bindtap='selectAddress'-->
         <view class='flexL'>*住址</view>
         <view class='flexC'>
             <input placeholder="请选择住址" disabled="true" value="{{address}}" />

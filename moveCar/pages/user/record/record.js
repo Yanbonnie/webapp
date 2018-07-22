@@ -40,6 +40,7 @@ Page({
             unionid: app.globalData.unionid
         }).then(res => {
             wx.hideLoading();
+            wx.stopPullDownRefresh()
             this.setData({
                 mymove: res.data ? res.data : [],
                 dataList: res.data ? res.data : [],
@@ -72,6 +73,7 @@ Page({
             unionid: app.globalData.unionid
         }).then(res => {
             wx.hideLoading();
+            wx.stopPullDownRefresh()
             this.setData({
                 mycarlog: res.data ? res.data : [],
                 dataList: res.data ? res.data : [],
@@ -93,6 +95,13 @@ Page({
                     })
                 }
             }
+        })
+    },
+    //拨打电话
+    makePhoneCallHandle(e){
+        const { mobile } = e.currentTarget.dataset;
+        wx.makePhoneCall({
+            phoneNumber:mobile
         })
     },
     /**

@@ -33,7 +33,11 @@ Page({
         this.setData({
             is_binding: app.globalData.is_binding
         })
-        console.log(this.data.is_binding)
+    },
+    /**
+         * 生命周期函数--监听页面显示
+         */
+    onShow: function () {
         this.getMyInfo();
     },
     changeNav,
@@ -41,7 +45,7 @@ Page({
         REQUEST('get', 'getMyInfo', {
             unionid: app.globalData.unionid
         }).then(res => {
-            console.log(res)
+            wx.stopPullDownRefresh();
             const {
                 wxheadpic,
                 wxname,
@@ -60,10 +64,14 @@ Page({
     },
     //分享二维码
     getShareHandle(){
+        wx.showLoading({
+            title: '二维码加载中...',
+            mask:true
+        })
         REQUEST('get','getShare',{
             unionid:app.globalData.unionid
         }).then(res=>{
-            console.log(res)
+            wx.hideLoading();
             this.setData({
                 ewmStatus2:true,
                 friendUrl:res.url
@@ -80,6 +88,38 @@ Page({
             url: '/pages/user/record/record',
         })
     },
+    goApplyHandle(){
+        const {is_binding}=this.data;
+        if(is_binding){
+            wx.navigateTo({
+                url: '/pages/apply/apply',
+            })
+        }else{
+            wx.showModal({
+                title: '提示',
+                content: '抱歉,您未绑定不能申请,请先绑定',
+                confirmText: '去绑定',
+                success: res => {
+                    if (res.confirm) {
+                        wx.navigateTo({
+                            url: '/pages/user/info/info',
+                        })
+                    } else if (res.cancel) {
+                        console.log('用户点击取消')
+                    }
+                }
+            })
+        }
+    },
+    //展示图片
+    previewImgHandle(e){
+        console.log(e)
+        const { img } = e.currentTarget.dataset;
+        wx.previewImage({
+            urls: [img],
+        })
+    },
+    //展示二维码
     showEwmFn(e) {
         const {
             state
@@ -93,7 +133,6 @@ Page({
                 ewmStatus: state == 1 ? true : false
             })
         }
-        
     },
     /**
      * 生命周期函数--监听页面初次渲染完成
@@ -102,12 +141,7 @@ Page({
 
     },
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function() {
-
-    },
+    
 
     /**
      * 生命周期函数--监听页面隐藏
@@ -127,7 +161,7 @@ Page({
      * 页面相关事件处理函数--监听用户下拉动作
      */
     onPullDownRefresh: function() {
-
+        this.getMyInfo();
     },
 
     /**

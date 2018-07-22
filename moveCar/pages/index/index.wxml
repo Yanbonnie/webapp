@@ -58,7 +58,7 @@
         确定
     </view>
 </view>  
-<navBar bindchangeNav="changeNav" index="{{0}}"></navBar>
+<!-- <navBar bindchangeNav="changeNav" index="{{0}}"></navBar> -->
 
 <view class='serverCover' wx:if="{{serverState}}">
     <view class='serverBox'>

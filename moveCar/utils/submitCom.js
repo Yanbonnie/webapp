@@ -12,10 +12,10 @@ module.exports = {
         bannerList: [],
         is_binding: 0,
         cityState: false,
-        insurance_data: citylist,
-        car_number: '888888888',   //车牌号
-        car_type: '小汽车',     //车辆类型
-        proprietor: '小妮子',   //所有人
+        insurance_data: [],
+        car_number: '',   //车牌号
+        car_type: '',     //车辆类型
+        proprietor: '',   //所有人
         address: '',      //地址
         insurance: '',     //选中保险
         mobile: '',
@@ -24,15 +24,16 @@ module.exports = {
         time: 0,
         codeStatus: true,
         codeTxt: '获取验证码',
+        canOper:true,     //是否可以操作
     },
     methodsCom:{
         //获取首页数据
         getBannerFn() {
             REQUEST('GET', 'get_banner', {
                 unionid: app.globalData.unionid,
-                page_type: 2
+                page_type: 1
             }).then(res => {
-                let { bannerList, is_binding, insurance_data } = res;
+                let { banner_data, is_binding, insurance_data } = res;
                 //改造数据
                 insurance_data = insurance_data.map(item => {
                     return {
@@ -43,31 +44,44 @@ module.exports = {
                 //字母排序
                 insurance_data = Sort.pySegSort(insurance_data);
                 this.setData({
-                    bannerList,
+                    bannerList:banner_data,
                     is_binding,
                     insurance_data
                 })
+                
             })
         },
         //图片识别
         chooseFn(e) {
+            const { canOper } = this.data;
+            if (!canOper) return;
+            const { way } = e.currentTarget.dataset;
             this.chooseImgHandle(e).then(res => {
                 console.log(res)
-                const { car_number, car_type, proprietor } = res.data;
+                const { car_number, car_type, proprietor,address } = res.data;
                 this.setData({
                     car_number, car_type, proprietor
                 })
+                if(way == 'bind'){
+                    this.setData({
+                        address
+                    })
+                }
             })
         },
         //显示保险公司
         showBaoXian() {
             console.log("显示保险公司")
+            const { canOper} = this.data;
+            if (!canOper) return;
             this.setData({
                 cityState: true
             })
         },
         //选择地址
         cityTap(e) {
+            const { canOper } = this.data;
+            if (!canOper) return;
             const { city } = e.detail;
             this.setData({
                 insurance: city,
@@ -82,6 +96,8 @@ module.exports = {
         },
         //选择邮寄地址
         selectAddress() {
+            const { canOper } = this.data;
+            if (!canOper) return;
             wx.chooseAddress({
                 success: res => {
                     console.log(res)

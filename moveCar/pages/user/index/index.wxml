@@ -38,12 +38,16 @@
         <text>挪车二维码</text>
         <text class='iconfont icon-right'></text>
     </view>
+    <view class='item' bindtap='goApplyHandle' url="/pages/apply/apply"> 
+        <text>我要申请</text>
+        <text class='iconfont icon-right'></text>
+    </view>
 </view>
- <navBar bindchangeNav="changeNav" index="{{2}}"></navBar>
+ <!-- <navBar bindchangeNav="changeNav" index="{{2}}"></navBar> -->
 
  <view class='ewmCover' wx:if="{{ewmStatus}}">
     <view class='ewmBox'>
-        <image class='img' mode="aspectFit" src="../../../assets/images/ewm.png"></image>
+        <image class='img' mode="aspectFit" data-img="https://car.jc5588.cn/themes/simpleboot3/public/weixin/images/ewm.png" bindtap='previewImgHandle' src="https://car.jc5588.cn/themes/simpleboot3/public/weixin/images/ewm.png"></image>
         <image bindtap='showEwmFn' data-state="0" class='close' src='../../../assets/images/close.png'></image>
         <view>点击查看大图（长按大图保存，线下打印）</view>
     </view>
@@ -51,7 +55,7 @@
 
   <view class='ewmCover' wx:if="{{ewmStatus2}}">
     <view class='ewmBox'>
-        <image class='img' mode="aspectFit" src="{{friendUrl}}"></image>
+        <image class='img' mode="aspectFit" src="{{friendUrl}}" data-img="{{friendUrl}}" bindtap='previewImgHandle'></image>
         <image bindtap='showEwmFn' data-state="2" class='close' src='../../../assets/images/close.png'></image>
         <view>点击查看大图（长按大图保存,分享到朋友圈）</view>
     </view>

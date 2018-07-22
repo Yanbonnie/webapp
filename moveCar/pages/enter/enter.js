@@ -26,7 +26,7 @@ Page({
                     let url = decodeURIComponent(share_query);
                     wx.reLaunch({ url })
                 } else {
-                    wx.reLaunch({
+                    wx.switchTab({
                         url: '/pages/index/index',
                     })
                 }
@@ -116,7 +116,7 @@ Page({
                     let url = decodeURIComponent(share_query);
                     wx.reLaunch({ url })
                 } else {
-                    wx.reLaunch({
+                    wx.switchTab({
                         url: '/pages/index/index',
                     })
                 }

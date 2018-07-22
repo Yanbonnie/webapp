@@ -2,5 +2,5 @@
     "enablePullDownRefresh":true,
     "backgroundColor":"#000000",
     "backgroundTextStyle":"light",
-    "enablePullDownRefresh":true
+    "navigationBarTitleText": "挪车记录"
 }

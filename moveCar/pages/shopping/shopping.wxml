@@ -1,0 +1,5 @@
+<!--pages/shopping/shopping.wxml-->
+<view class='shopping'>
+    <image  src="/assets/images/kaifa.png"></image>
+    开发中...
+</view>

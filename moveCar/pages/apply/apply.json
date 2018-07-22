@@ -1,4 +1,5 @@
 {
+    "navigationBarTitleText": "我要申请",
     "usingComponents": {
         "citylist": "../../components/city/city",
         "navBar": "../../components/navBar/navBar"

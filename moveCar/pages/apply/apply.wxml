@@ -1,14 +1,14 @@
 <!--pages/index/index.wxml-->
  <swiper  autoplay="true"  interval="5000" autoplay="true" indicator-dots="true" indicator-active-color="#0894ec">
-  <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+  <block wx:for="{{bannerList}}" wx:key="{{index}}">
     <swiper-item>
-      <image src="{{item}}" class="slide-image" mode='aspectFill'/>
+      <image src="{{item.pic}}" class="slide-image" mode='aspectFill'/>
     </swiper-item>
   </block>
 </swiper>
 
 <view class='formBox mt30'>
-    <view class='flexBox' bindtap="chooseFn" data-page_type ="1">
+    <view class='flexBox' bindtap="chooseFn" data-page_type ="1" >
         <view class='flexL'>*车牌号码</view>
         <view class='flexC'>
              <input placeholder="请拍照上传您的驾驶证" disabled="true" value="{{car_number}}"/>
@@ -27,7 +27,7 @@
     <view class='flexBox'>
         <view class='flexL'>*所有人</view>
         <view class='flexC'>
-             <input  disabled="true" value="{{proprietor}}"/>
+             <input  disabled="true" value="{{proprietor}}" placeholder='通过驾驶证自动识别' />
         </view>     
     </view>
     <view class='flexBox' bindtap='showBaoXian'>
@@ -42,7 +42,7 @@
              <input placeholder="请输入您的手机号码" type='number' value="{{mobile}}" bindinput='mobileInputChange'/>
         </view>     
     </view>
-    <view class='flexBox yzm'>
+    <view class='flexBox yzm' wx:if="{{!is_apply}}">
         <view class='flexL'>*验证码</view>
         <view class='flexC'>
              <input placeholder="请输入短信验证码"  type='number' value="{{code}}"  bindinput="codeInputChange"/>
@@ -61,15 +61,13 @@
         </view>      
     </view>
 </view>
-<view class='BtnBox' bindtap='postApplyFn'>
+<view class='BtnBox' bindtap='postApplyFn' wx:if="{{!is_apply}}">
     <view class="{{submitStatus ? '':'gray'}}">
-        确定
+        支付邮费
     </view>
 </view>
-
-
 <view class='cityCover' wx:if="{{cityState}}">
     <citylist citylist="{{insurance_data}}" bindcitytap='cityTap' bindcloseCity="closeCityHandle"></citylist>
 </view> 
 
- <navBar bindchangeNav="changeNav" index="{{1}}"></navBar>
+ <!-- <navBar bindchangeNav="changeNav" index="{{1}}"></navBar> -->

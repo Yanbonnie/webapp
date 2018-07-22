@@ -107,7 +107,7 @@ module.exports = {
     },
     //监听手机号码变化
     mobileInputChange(e) {
-        console.log(e)
+        // console.log(e)
         const {
             value
         } = e.detail;

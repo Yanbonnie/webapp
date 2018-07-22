@@ -18,6 +18,7 @@ Page({
         // imgUrls: imgUrls,
         // citylist: citylist,
         navIndex: 1,
+        is_apply:0,
         ...dataCom,
         // bannerList:[],
         // is_binding:0,
@@ -40,10 +41,47 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.get_apply();
         this.getBannerFn();
     },
     ...pageCom,
     ...methodsCom,
+    get_apply(){
+        wx.showLoading({
+            title: '加载中...',
+            mask:true
+        })
+        REQUEST('get','get_apply',{
+            unionid:app.globalData.unionid
+        }).then(res=>{
+            wx.hideLoading();
+            const { is_apply } = res;
+            this.setData({
+                is_apply
+            })
+            if(!is_apply){
+                wx.showModal({
+                    title: '申请说明',
+                    content: '我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明我是说明',
+                    success: res => {
+                        if (res.cancel) {
+                            wx.switchTab({
+                                url: "/pages/user/index/index"
+                            })
+                        }
+                    }
+                })
+            }else{
+                this.setData({
+                    canOper:false
+                })
+                const { address, car_number, car_type, insurance_name, proprietor,mobile} = res.data;
+                this.setData({
+                    address, car_number, car_type, mobile,insurance: { cityName:insurance_name}, proprietor
+                })
+            }
+        })
+    },
     //提交申请信息
     postApplyFn() {
         const { car_number, car_type, proprietor, address, insurance, mobile, code, submitStatus } = this.data;
@@ -67,18 +105,21 @@ Page({
             car_number, car_type, proprietor, address, insurance_code: insurance.code, mobile, code, unionid: app.globalData.unionid
         }).then(res => {
             this.setData({
-                submitStatus: true
+                submitStatus: true,
+                time:0,
+                codeTxt:'获取验证码',
+                codeStatus:true
             })
             wx.showToast({
                 title: '申请成功',
                 mask: true,
                 icon: 'success'
             })
-            // setTimeout(() => {
-            //     wx.navigateTo({
-            //         url: '/pages/user/record/record',
-            //     })
-            // }, 1500)
+            setTimeout(() => {
+                wx.navigateTo({
+                    url: '/pages/user/index/index',
+                })
+            }, 1500)
         })
     },
     // //获取首页数据

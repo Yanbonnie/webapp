@@ -49,11 +49,12 @@ Page({
         const {
             is_binding
         } = app.globalData;
-
-        console.log("is_binding:" + is_binding)
         this.getBannerFn();
         if (is_binding) {
             this.getMyDetailedInfo();
+            this.setData({
+                canOper:false
+            })
         }
 
     },
@@ -118,7 +119,7 @@ Page({
                 icon: 'success'
             })
             setTimeout(() => {
-                wx.navigateBack({
+                wx.switchTab({
                     url: '/pages/user/index/index',
                 })
             }, 1500)
@@ -145,7 +146,7 @@ Page({
                 wxheadpic,
                 wxname,
                 address
-            } = res.userinfo;            
+            } = res.userinfo || {};            
             this.setData({
                 car_number,
                 car_type,
@@ -170,11 +171,13 @@ Page({
         if (is_binding) {
             if (index == 1) {
                 this.setData({
-                    editStatus: true
+                    editStatus: true, 
+                    canOper:true
                 })
             } else {
                 this.setData({
-                    editStatus: false
+                    editStatus: false,
+                    canOper: true
                 })
             }
         } else {

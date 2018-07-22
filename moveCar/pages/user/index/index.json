@@ -1,4 +1,6 @@
 {
+    "enablePullDownRefresh": true,
+    "navigationBarTitleText": "我的信息",
     "usingComponents": {
         "navBar": "../../../components/navBar/navBar"
     }
