@@ -21,7 +21,9 @@ Page({
         wxheadpic: '',
         wxname: '',
         level: 1,
-        car_number:''
+        car_number:'',
+        ewmStatus2:false,
+        friendUrl:''
     },
 
     /**
@@ -56,6 +58,18 @@ Page({
             })
         })
     },
+    //分享二维码
+    getShareHandle(){
+        REQUEST('get','getShare',{
+            unionid:app.globalData.unionid
+        }).then(res=>{
+            console.log(res)
+            this.setData({
+                ewmStatus2:true,
+                friendUrl:res.url
+            })
+        })
+    },
     goInfoHandle() {
         wx.navigateTo({
             url: '/pages/user/info/info',
@@ -70,9 +84,16 @@ Page({
         const {
             state
         } = e.currentTarget.dataset;
-        this.setData({
-            ewmStatus: state == 1 ? true : false
-        })
+        if(state == 2){
+            this.setData({
+                ewmStatus2: false
+            })
+        }else{
+            this.setData({
+                ewmStatus: state == 1 ? true : false
+            })
+        }
+        
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

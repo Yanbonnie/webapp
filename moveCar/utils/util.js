@@ -33,6 +33,9 @@ const URL = {
     'getFans':'getFans',                     //我的粉丝
     'getIncome':'getIncome',                 //收入记录
     'getMyInfo':'getMyInfo',                 //获取我的信息
+    'getMyDetailedInfo':'getMyDetailedInfo', //获取我的资料
+    'resetUserInfo':'resetUserInfo',         //修改
+    'getShare':'getShare',                   //分享二维码
 }
 
 //请求接口封装

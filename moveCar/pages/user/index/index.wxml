@@ -14,7 +14,7 @@
         <text>车牌：{{car_number}}</text>
     </view>
     <view class='flexR'>
-        <text class='btn'>我的二维码</text>
+        <text class='btn' bindtap="getShareHandle">我的二维码</text>
     </view>
 </view>
 <view class='navList'>
@@ -46,5 +46,13 @@
         <image class='img' mode="aspectFit" src="../../../assets/images/ewm.png"></image>
         <image bindtap='showEwmFn' data-state="0" class='close' src='../../../assets/images/close.png'></image>
         <view>点击查看大图（长按大图保存，线下打印）</view>
+    </view>
+ </view>
+
+  <view class='ewmCover' wx:if="{{ewmStatus2}}">
+    <view class='ewmBox'>
+        <image class='img' mode="aspectFit" src="{{friendUrl}}"></image>
+        <image bindtap='showEwmFn' data-state="2" class='close' src='../../../assets/images/close.png'></image>
+        <view>点击查看大图（长按大图保存,分享到朋友圈）</view>
     </view>
  </view>

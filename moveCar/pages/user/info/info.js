@@ -1,11 +1,18 @@
 // pages/move/move.js
-import Sort from '../../../utils/city_sort';   //城市排序
+import Sort from '../../../utils/city_sort'; //城市排序
 
 const app = getApp();
-const { globalData: { REQUEST } } = app;
+const {
+    globalData: {
+        REQUEST
+    }
+} = app;
 // const { chooseImgHandle, isPhone } = require('../../../utils/pageCom');
 import pageCom from '../../../utils/pageCom';
-import { dataCom, methodsCom } from '../../../utils/submitCom';
+import {
+    dataCom,
+    methodsCom
+} from '../../../utils/submitCom';
 Page({
 
     /**
@@ -13,7 +20,7 @@ Page({
      */
     data: {
         ...dataCom,
-        editStatus:false,
+        editStatus: false,
         // bannerList: [],
         // is_binding: 0,
         // cityState: false,
@@ -34,17 +41,37 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         // console.log(this.data.insurance_data)  保险数据
         this.setData({
             is_binding: app.globalData.is_binding
         })
+        const {
+            is_binding
+        } = app.globalData;
+
+        console.log("is_binding:" + is_binding)
+        this.getBannerFn();
+        if (is_binding) {
+            this.getMyDetailedInfo();
+        }
+
     },
     ...pageCom,
     ...methodsCom,
     //提交申请信息
     postApplyFn() {
-        const { car_number, car_type, proprietor, address, insurance, mobile, code, submitStatus } = this.data;
+        const {
+            car_number,
+            car_type,
+            proprietor,
+            address,
+            insurance,
+            mobile,
+            code,
+            submitStatus,
+            is_binding
+        } = this.data;
         if (!car_number || !car_type || !proprietor || !address || !insurance || !mobile || !code) {
             wx.showToast({
                 title: '信息不完整',
@@ -61,37 +88,100 @@ Page({
         this.setData({
             submitStatus: false
         })
-        REQUEST('POST', 'post_binding', {
-            car_number, car_type, proprietor, address, insurance_code: insurance.code, mobile, code, unionid: app.globalData.unionid
+        let url = '';
+        if(is_binding){
+            url ='resetUserInfo'
+        }else{
+            url ='post_binding'
+        }
+        REQUEST('POST', url, {
+            car_number,
+            car_type,
+            proprietor,
+            address,
+            insurance_code: insurance.code,
+            mobile,
+            code,
+            unionid: app.globalData.unionid
         }).then(res => {
             this.setData({
-                submitStatus: true
+                submitStatus: true,
+                time: 0,
+                codeStatus: true,
+                codeTxt: '获取验证码',
+                is_binding: 1
             })
+            app.globalData.is_binding = 1;
             wx.showToast({
-                title: '申请成功',
+                title: '提交成功',
                 mask: true,
                 icon: 'success'
             })
             setTimeout(() => {
-                wx.switchTab({
+                wx.navigateBack({
                     url: '/pages/user/index/index',
                 })
             }, 1500)
         })
     },
+    //获取我的资料
+    getMyDetailedInfo() {
+        wx.showLoading({
+            title: '加载中....',
+            icon:'none',
+            mask:true
+        })
+        REQUEST('get', 'getMyDetailedInfo', {
+            unionid: app.globalData.unionid
+        }).then(res => {
+            wx.hideLoading()
+            const {
+                car_number,
+                car_type,
+                insurance_code,
+                insurance_name,
+                mobile,
+                proprietor,
+                wxheadpic,
+                wxname,
+                address
+            } = res.userinfo;            
+            this.setData({
+                car_number,
+                car_type,
+                insurance:{
+                    code:insurance_code,
+                    cityName:insurance_name,
+                },
+                mobile,
+                proprietor,
+                address
+            })
+        })
+    },
     //是否编辑
-    editHandle(e){
-        const { index } = e.currentTarget.dataset;
-        if(index == 1){
-            this.setData({
-                editStatus: true
-            })
-        }else{
-            this.setData({
-                editStatus: false
-            })
+    editHandle(e) {
+        const {
+            is_binding
+        } = this.data;
+        const {
+            index
+        } = e.currentTarget.dataset;
+        if (is_binding) {
+            if (index == 1) {
+                this.setData({
+                    editStatus: true
+                })
+            } else {
+                this.setData({
+                    editStatus: false
+                })
+            }
+        } else {
+            this.postApplyFn();
         }
-        
+
+
     },
     // getMsgCodeFn() {
     //     const { mobile, codeStatus } = this.data;
@@ -209,49 +299,49 @@ Page({
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
-    onReady: function () {
+    onReady: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
-    onShow: function () {
+    onShow: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
-    onHide: function () {
+    onHide: function() {
 
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
-    onUnload: function () {
+    onUnload: function() {
 
     },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function () {
+    onPullDownRefresh: function() {
 
     },
 
     /**
      * 页面上拉触底事件的处理函数
      */
-    onReachBottom: function () {
+    onReachBottom: function() {
 
     },
 
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
 
     }
 })

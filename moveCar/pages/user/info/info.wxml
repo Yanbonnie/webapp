@@ -21,13 +21,13 @@
     <view class='flexBox'>
         <view class='flexL'>*车辆类型</view>
         <view class='flexC'>
-            <input placeholder="车辆类型" disabled="true" value="{{car_type}}" />
+            <input placeholder="通过上传的驾驶证自动识别" disabled="true" value="{{car_type}}" />
         </view>
     </view>
     <view class='flexBox'>
-        <view class='flexL'>*收件人</view>
+        <view class='flexL'>*所有人</view>
         <view class='flexC'>
-            <input placeholder="请输入收件人" disabled="true" value="{{proprietor}}" />
+            <input placeholder="通过上传的驾驶证自动识别" disabled="true" value="{{proprietor}}" />
         </view>
     </view>
     <view class='flexBox' bindtap='showBaoXian'>
@@ -42,7 +42,7 @@
             <input placeholder="请输入您的手机号码" type='number' value="{{mobile}}" bindinput='mobileInputChange' />
         </view>
     </view>
-    <view class='flexBox yzm' wx:if="{{editStatus}}">
+    <view class='flexBox yzm' wx:if="{{editStatus || is_binding == 0}}">
         <view class='flexL'>*验证码</view>
         <view class='flexC'>
             <input placeholder="请输入短信验证码" type='number' value="{{code}}" bindinput="codeInputChange" />

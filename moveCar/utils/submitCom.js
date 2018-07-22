@@ -3,14 +3,8 @@ const app = getApp();
 import Sort from './city_sort';
 import { REQUEST } from './util';
 let arr2 = [
-    { "id": "v1", "cityName": "北京" },
-    { "id": "v2", "cityName": "上海" },
-    { "id": "v5", "cityName": "天津" },
-    { "id": "v7", "cityName": "安徽" },
-    { "id": "v3", "cityName": "呼和浩特" },
-    { "id": "v4", "cityName": "杭州" },
-    { "id": "v9", "cityName": "海南" },
-    { "id": "v8", "cityName": "张家口" }
+    { "code": "1", "cityName": "平安银行" },
+    { "code": "2", "cityName": "中国人寿" }
 ];
 let citylist = Sort.pySegSort(arr2);
 module.exports = {
@@ -19,9 +13,9 @@ module.exports = {
         is_binding: 0,
         cityState: false,
         insurance_data: citylist,
-        car_number: '',   //车牌号
-        car_type: '',     //车辆类型
-        proprietor: '',   //所有人
+        car_number: '888888888',   //车牌号
+        car_type: '小汽车',     //车辆类型
+        proprietor: '小妮子',   //所有人
         address: '',      //地址
         insurance: '',     //选中保险
         mobile: '',
@@ -124,7 +118,8 @@ module.exports = {
             }).then(res => {
                 this.setData({
                     time: 60,
-                    codeStatus: false
+                    codeStatus: false,
+                    code:res.code
                 })
                 this.countDown();
             })
@@ -132,11 +127,14 @@ module.exports = {
         //验证码倒计时
         countDown() {
             let { time, codeTxt, codeStatus } = this.data;
+            console.log("开始倒计时")
             if (time > 1) {
                 time = time - 1;
-                codeTxt = `获取验证码(${time}s)`;
+                codeTxt = `获取(${time}s)`;
                 this.setData({ time, codeTxt })
-                this.countDown();
+                setTimeout(()=>{
+                    this.countDown();
+                },1000)
             } else {
                 time = 0;
                 codeTxt = '获取验证码',
@@ -147,6 +145,7 @@ module.exports = {
                     codeStatus
                 })
             }
+            console.log(this.data.time)
         },
     }
 }
