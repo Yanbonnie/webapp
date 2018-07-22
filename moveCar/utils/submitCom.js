@@ -108,8 +108,8 @@ module.exports = {
                 }
             })
         },
+        //获取二维码
         getMsgCodeFn() {
-            console.log("获取二维码")
             const { mobile, codeStatus } = this.data;
             if (!codeStatus) return;
             if (!mobile) {
@@ -162,6 +162,6 @@ module.exports = {
                 })
             }
             console.log(this.data.time)
-        },
+        }
     }
 }
