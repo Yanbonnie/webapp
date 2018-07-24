@@ -46,6 +46,7 @@ const URL = {
     'getShare':'getShare',                   //分享二维码
     'get_apply':'get_apply',                 //是否申请
     'payUpgrade':'payUpgrade',               //支付升级会员接口
+    'payPostage':'payPostage',               //支付邮费
 }
 
 //请求接口封装

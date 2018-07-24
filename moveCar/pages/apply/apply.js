@@ -110,16 +110,57 @@ Page({
                 codeTxt:'获取验证码',
                 codeStatus:true
             })
-            wx.showToast({
-                title: '申请成功',
-                mask: true,
-                icon: 'success'
-            })
-            setTimeout(() => {
-                wx.navigateTo({
-                    url: '/pages/user/index/index',
+            this.payPostageHandle();
+            // wx.showToast({
+            //     title: '申请成功',
+            //     mask: true,
+            //     icon: 'success'
+            // })
+            // setTimeout(() => {
+            //     wx.navigateTo({
+            //         url: '/pages/user/index/index',
+            //     })
+            // }, 1500)
+        })
+    },
+    payPostageHandle(){
+        REQUEST('POST', 'payPostage', {
+            unionid: app.globalData.unionid,
+        }).then(res => {
+            wx.hideLoading();
+            const { appId, nonceStr, paySign, signType, timeStamp } = res.data;
+            const package2 = res.data.package;
+            if (res.status == 0) {
+                wx.requestPayment({
+                    timeStamp,
+                    nonceStr,
+                    'package': package2,
+                    signType,
+                    paySign,
+                    'success': res => {
+                        //支付成功
+                        wx.showToast({
+                            title: '申请成功',
+                            mask: true,
+                            icon: 'success'
+                        })
+                        setTimeout(() => {
+                            wx.switchTab({
+                                url: '/pages/user/index/index',
+                            })
+                        }, 1500)
+                    },
+                    'fail': res => {
+                    }
                 })
-            }, 1500)
+            } else {
+                wx.showToast({
+                    title: res.msg,
+                    mask: false,
+                    icon: 'none'
+                })
+            }
+
         })
     },
     // //获取首页数据
