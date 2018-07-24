@@ -1,5 +1,5 @@
 //app.js
-const { REQUEST } = require('./utils/util');
+const { REQUEST, getUrlPara } = require('./utils/util');
 App({
   onLaunch: function () {
     
@@ -27,6 +27,7 @@ App({
   globalData: {
     userInfo: null,
     REQUEST,
+    getUrlPara,
     is_binding:null,
     openid:null,
     unionid:null,

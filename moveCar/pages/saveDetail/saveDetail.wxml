@@ -1,5 +1,5 @@
 <!--pages/saveDetail/saveDetail.wxml-->
 <image class='img' src='/assets/images/detail.jpg'></image>
-<view class='btnBox'>
-    <view>马上升级</view>
+<view class='btnBox' >
+    <view wx:if="{{level == 1}}" bindtap='payUpgradeHandle'>马上升级</view>
 </view>

@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-const { globalData: { REQUEST } } = app;
+const { globalData: { REQUEST, getUrlPara } } = app;
 Page({
     data: {
         motto: '哈哈哈',
@@ -9,13 +9,18 @@ Page({
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         count: 0,
-        share_query:null
+        share_query:null,
+        friend_unionid:''
     },
     onLoad: function (options) {
         const { share_query } = options;
+        // let share_query = '%2Fpages%2Fuser%2Findex%2Findex%3Ffriend_unionid%3DoJuNW0hHmY9lgAtsamZkfEZHGPgQ';
         if (share_query) {
+            let friend_unionid = getUrlPara('friend_unionid', decodeURIComponent(share_query));
+            // console.log("friend_unionid:" + friend_unionid);
             this.setData({
-                share_query
+                share_query,
+                friend_unionid
             })
         }   
         let unionid = wx.getStorageSync('unionid');
@@ -23,9 +28,13 @@ Page({
             app.globalData.unionid = unionid;
             setTimeout(() => {
                 if (share_query) {
+                    const { friend_unionid } = this.data;                 
+                    this.postShareHandle(friend_unionid);
                     let url = decodeURIComponent(share_query);
+                    // console.log('url:' + url)
                     wx.reLaunch({ url })
                 } else {
+                    this.postShareHandle();
                     wx.switchTab({
                         url: '/pages/index/index',
                     })
@@ -76,8 +85,7 @@ Page({
                 hasUserInfo: true
             })
             this.loginHandle(e.detail);
-        }        
-
+        }    
     },
     //登录获取code
     loginHandle({ iv, encryptedData }) {
@@ -114,11 +122,14 @@ Page({
             setTimeout(() => {
                 if (share_query) {
                     let url = decodeURIComponent(share_query);
+                    const { friend_unionid } = this.data;
+                    this.postShareHandle(friend_unionid);
                     wx.reLaunch({ url })
                 } else {
                     wx.switchTab({
                         url: '/pages/index/index',
                     })
+                    this.postShareHandle();
                 }
             }, 200)
         }).catch(res => {
@@ -138,7 +149,15 @@ Page({
                 count
             })
         })
-    }
+    },
+    postShareHandle(friend_openid=''){
+        REQUEST('post','postShare',{
+            my_unionid: app.globalData.unionid,
+            friend_unionid: friend_openid
+        },res=>{
+            console.log(res)
+        })
+    },
 })
 
 /*"tabBar": {

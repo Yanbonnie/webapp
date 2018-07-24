@@ -14,6 +14,14 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
+
+const getUrlPara = function (str, _url) {
+    var reg = new RegExp("(^|&)" + str + "=([^&]*)(&|$)", "i");
+    var search = _url.split('?')[1]
+    var par = search.match(reg);
+    var str = par ? decodeURIComponent(par[2]) : '';
+    return str;
+}
 const Config = {
     reqUrl: 'https://car.jc5588.cn/index.php/wxapp/index/'
 }
@@ -37,6 +45,7 @@ const URL = {
     'resetUserInfo':'resetUserInfo',         //修改
     'getShare':'getShare',                   //分享二维码
     'get_apply':'get_apply',                 //是否申请
+    'payUpgrade':'payUpgrade',               //支付升级会员接口
 }
 
 //请求接口封装
@@ -70,6 +79,7 @@ module.exports = {
     formatTime: formatTime,
     REQUEST,
     Config,
-    URL
+    URL,
+    getUrlPara
 }
 
