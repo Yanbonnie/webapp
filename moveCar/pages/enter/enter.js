@@ -152,7 +152,6 @@ Page({
     },
     //关系接口
     postShareHandle(friend_openid=''){
-        console.log('friend_openid:' + friend_openid)
         REQUEST('POST','postShare',{
             my_unionid: app.globalData.unionid,
             friend_unionid: friend_openid
