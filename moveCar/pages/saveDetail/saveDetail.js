@@ -112,6 +112,10 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function() {
-
+        let url = encodeURIComponent(`/pages/saveDetail/saveDetail?friend_unionid=${app.globalData.unionid}`);
+        return {
+            title: '我要分享一个好东西',
+            path: `/pages/enter/enter?share_query=${url}`
+        }
     }
 })

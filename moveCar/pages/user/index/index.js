@@ -175,11 +175,11 @@ Page({
      * 用户点击右上角分享
      */
     onShareAppMessage: function() {
-        let url = encodeURIComponent(`/pages/user/index/index?friend_unionid=${app.globalData.unionid}`);
-        console.log(url);
+        let shareUrl = encodeURIComponent(`/pages/user/index/index?friend_unionid=${app.globalData.unionid}`);
+        let enterUrl = `/pages/enter/enter?share_query=${shareUrl}`;
         return {
             title: '我要分享一个好东西',
-            path: `/pages/entry/entry?share_query=${url}`
+            path: enterUrl
         }
     }
 })
