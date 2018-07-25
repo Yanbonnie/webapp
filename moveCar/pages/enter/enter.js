@@ -150,7 +150,9 @@ Page({
             })
         })
     },
+    //关系接口
     postShareHandle(friend_openid=''){
+        console.log('friend_openid:' + friend_openid)
         REQUEST('POST','postShare',{
             my_unionid: app.globalData.unionid,
             friend_unionid: friend_openid
@@ -160,24 +162,3 @@ Page({
         })
     }, 
 })
-
-/*"tabBar": {
-    "color": "#929292",
-        "selectedColor": "#0894ec",
-            "backgroundColor": "#ffffff",
-                "borderStyle": "white",
-                    "list": [
-                        {
-                            "pagePath": "pages/index/index",
-                            "text": "aaaa"
-                        },
-                        {
-                            "pagePath": "pages/apply/apply",
-                            "text": "bbbb"
-                        },
-                        {
-                            "pagePath": "pages/user/index/index",
-                            "text": "cccc"
-                        }
-                    ]
-}*/
