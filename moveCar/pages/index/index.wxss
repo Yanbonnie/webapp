@@ -79,3 +79,36 @@ page{
 .serverBox .bottom{
     border-top: 1px #f5f5f5 solid;
 }
+
+.followCover{
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.followCover .close{
+    width: 60rpx;
+    height: 60rpx;
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-align: center;
+    line-height: 50rpx;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+}
+.followCover image{
+    width: 400rpx;
+    height: 400rpx;
+}
+.followCover .tip{
+    font-size: 24rpx;
+    padding-top: 20rpx;
+}

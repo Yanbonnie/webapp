@@ -17,13 +17,15 @@ Page({
         index:-1,
         bannerList:[],
         is_binding: 0,         //绑定状态，1为已绑定，0为未绑定，未绑定⽤用户⽆无权点击 其他⻚页⾯面，只能进入绑定页面
+        isfollow:0,            //是否关注
         car_number: '',        //车牌号码
         reason: '',            //原因
         scene_pic: '',         //照片地址
         address: '',           //地址
         reply: false,           //是否接收回复  true false
         submitStatus:true,      //是否可以提交
-        serverState:false
+        serverState:false,
+        followState:false,      //是否关注
     },
 
     /**
@@ -50,10 +52,11 @@ Page({
             page_type: 2
         }).then(res=>{
             wx.hideLoading();
-            const { banner_data,is_binding } = res;
+            const { banner_data, is_binding, isfollow } = res;
             this.setData({
                 bannerList:banner_data,
-                is_binding
+                is_binding,
+                isfollow:isfollow||0
             })
             app.globalData.is_binding = is_binding; 
         })
@@ -99,12 +102,18 @@ Page({
     },
     //是否接收回复
     replyHandle(){
-        let { reply } = this.data;
-        console.log(reply)
-        reply = reply ? false : true;
-        this.setData({
-            reply
-        })
+        let { isfollow, reply } = this.data;
+        if (!isfollow){  //未关注
+            this.setData({
+                followState:true
+            })
+        }else{
+            reply = reply ? false : true;
+            this.setData({
+                reply
+            })
+        }
+        
     },
     //提交我要挪车接口
     PostMoveCarFn(){
@@ -148,6 +157,11 @@ Page({
         const { index } = e.currentTarget.dataset;
         this.setData({
             serverState:index ==1 ? true : false
+        })
+    },
+    closeFollow(){
+        this.setData({
+            followState:false
         })
     }
 })

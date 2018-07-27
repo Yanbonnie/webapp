@@ -32,10 +32,10 @@
             </picker>
         </view>        
     </view>
-    <view class='flexBox' bindtap='getLocate'>
+    <view class='flexBox' >  <!--bindtap='getLocate'-->
         <view class='flexL'>*选择地址</view>
         <view class='flexC'>
-             <input placeholder="请选择地址" disabled="true" value="{{address}}"/>
+             <input placeholder="请选择地址"  value="{{address}}"/> <!--disabled="true"-->
         </view>  
         <view class='flexR'>
             <text class='iconfont icon-address'></text>
@@ -68,5 +68,11 @@
         </view>
         <view class='bottom' bindtap='operServerCover' data-index="0">我知道了</view>
     </view>
+</view>
+
+<view class='followCover' wx:if="{{followState}}" >
+    <view class='close' bindtap='closeFollow'>x</view>
+    <image src='/assets/images/erweima.png'></image>
+    <view class='tip'>我是提示内容</view>
 </view>
 

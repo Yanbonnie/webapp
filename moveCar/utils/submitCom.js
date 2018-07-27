@@ -11,6 +11,7 @@ module.exports = {
     dataCom:{
         bannerList: [],
         is_binding: 0,
+        isfollow: 0,   //0-未关注  1-已关注
         cityState: false,
         insurance_data: [],
         car_number: '',   //车牌号
@@ -28,12 +29,12 @@ module.exports = {
     },
     methodsCom:{
         //获取首页数据
-        getBannerFn() {
+        getBannerFn(Type='apply') {
             REQUEST('GET', 'get_banner', {
                 unionid: app.globalData.unionid,
                 page_type: 1
             }).then(res => {
-                let { banner_data, is_binding, insurance_data } = res;
+                let { banner_data, is_binding, insurance_data, isfollow } = res;
                 //改造数据
                 insurance_data = insurance_data.map(item => {
                     return {
@@ -46,9 +47,18 @@ module.exports = {
                 this.setData({
                     bannerList:banner_data,
                     is_binding,
+                    isfollow: isfollow || 0,
                     insurance_data
                 })
-                
+                if(Type == 'bind'){  //绑定页面
+                    if (is_binding && !isfollow){   //绑定没关注公众号 已绑定 提示
+                        wx.showModal({
+                            title: '提示',
+                            content: '没有关注公众号无法接收到挪车信息',
+                            showCancel:false
+                        })
+                    }
+                }
             })
         },
         //图片识别

@@ -49,7 +49,7 @@ Page({
         const {
             is_binding
         } = app.globalData;
-        this.getBannerFn();
+        this.getBannerFn('bind');
         if (is_binding) {
             this.getMyDetailedInfo();
             this.setData({
@@ -60,7 +60,7 @@ Page({
     },
     ...pageCom,
     ...methodsCom,
-    //提交申请信息
+    //提交绑定信息
     postApplyFn() {
         const {
             car_number,
@@ -71,7 +71,8 @@ Page({
             mobile,
             code,
             submitStatus,
-            is_binding
+            is_binding,
+            isfollow
         } = this.data;
         if (!car_number || !car_type || !proprietor || !address || !insurance || !mobile || !code) {
             wx.showToast({
@@ -111,7 +112,7 @@ Page({
                 codeStatus: true,
                 codeTxt: '获取验证码',
                 is_binding: 1
-            })
+            })            
             app.globalData.is_binding = 1;
             wx.showToast({
                 title: '提交成功',
@@ -119,9 +120,21 @@ Page({
                 icon: 'success'
             })
             setTimeout(() => {
-                wx.switchTab({
-                    url: '/pages/user/index/index',
-                })
+                if (!isfollow) {
+                    wx.showModal({
+                        title: '提示',
+                        content: '没有关注公众号无法接收到挪车信息',
+                        showCancel: false,
+                        success:res2=>{
+                            if(res2.confirm){
+                                wx.switchTab({
+                                    url: '/pages/user/index/index',
+                                })
+                            }
+                        }
+                    })
+                }
+                
             }, 1500)
         })
     },
