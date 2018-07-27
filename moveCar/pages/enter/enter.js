@@ -16,8 +16,8 @@ Page({
         const { share_query } = options;
         // let share_query = '%2Fpages%2Fuser%2Findex%2Findex%3Ffriend_unionid%3DoJuNW0hHmY9lgAtsamZkfEZHGPgQ';
         if (share_query) {
+            // let friend_unionid = 'aaaaaaaaaaa';
             let friend_unionid = getUrlPara('friend_unionid', decodeURIComponent(share_query));
-            // console.log("friend_unionid:" + friend_unionid);
             this.setData({
                 share_query,
                 friend_unionid
@@ -26,20 +26,24 @@ Page({
         let unionid = wx.getStorageSync('unionid');
         if (unionid){
             app.globalData.unionid = unionid;
-            setTimeout(() => {
-                if (share_query) {
-                    const { friend_unionid } = this.data;                 
-                    this.postShareHandle(friend_unionid);
-                    let url = decodeURIComponent(share_query);
-                    // console.log('url:' + url)
-                    wx.reLaunch({ url })
-                } else {
-                    this.postShareHandle();
-                    wx.switchTab({
-                        url: '/pages/index/index',
+            this.setData({
+                hasUserInfo:true
+            })
+            if (share_query) {
+                const { friend_unionid } = this.data;
+                this.postShareHandle(friend_unionid);
+                let url = decodeURIComponent(share_query);
+                setTimeout(() => {
+                    wx.reLaunch({
+                        url
                     })
-                }
-            }, 200)
+                }, 300)
+            } else {
+                this.postShareHandle();
+                wx.switchTab({
+                    url: '/pages/index/index',
+                })
+            }
             return;
         }else{
             if (app.globalData.userInfo) {
@@ -89,7 +93,6 @@ Page({
     },
     //登录获取code
     loginHandle({ iv, encryptedData }) {
-        console.log("调取登录")
         wx.login({
             success: res => {
                 // 发送 res.code 到后台换取 openId, sessionKey, unionId
@@ -109,29 +112,26 @@ Page({
             encryptedData,
         }, true).then(res => {
             let { openid, unionid } = res.data;
-            // app.globalData.openid = openid;
-            // wx.setStorageSync('openid', openid)
             app.globalData.unionid = unionid;
-            wx.setStorageSync('unionid', unionid)
-            
+            wx.setStorageSync('unionid', unionid)            
             wx.hideLoading();
-            // wx.reLaunch({
-            //     url: '/pages/index/index',
-            // })
             const { share_query } = this.data;
-            setTimeout(() => {
-                if (share_query) {
-                    let url = decodeURIComponent(share_query);
-                    const { friend_unionid } = this.data;
-                    this.postShareHandle(friend_unionid);
-                    wx.reLaunch({ url })
-                } else {
-                    wx.switchTab({
-                        url: '/pages/index/index',
+            if (share_query) {
+                let url = decodeURIComponent(share_query);
+                const { friend_unionid } = this.data;
+                console.log("friend_unionid:" + friend_unionid)
+                this.postShareHandle(friend_unionid);
+                setTimeout(() => {
+                    wx.reLaunch({
+                        url
                     })
-                    this.postShareHandle();
-                }
-            }, 200)
+                }, 300)
+            } else {
+                wx.switchTab({
+                    url: '/pages/index/index',
+                })
+                this.postShareHandle();
+            }
         }).catch(res => {
             if (count < 5) {
                 this.loginHandle({ iv, encryptedData })
@@ -150,33 +150,14 @@ Page({
             })
         })
     },
+    //关系接口
     postShareHandle(friend_openid=''){
-        REQUEST('post','postShare',{
+        REQUEST('POST','postShare',{
             my_unionid: app.globalData.unionid,
             friend_unionid: friend_openid
-        },res=>{
+        }).then(res => {
+            console.log("我是关系结果：")
             console.log(res)
         })
-    },
+    }, 
 })
-
-/*"tabBar": {
-    "color": "#929292",
-        "selectedColor": "#0894ec",
-            "backgroundColor": "#ffffff",
-                "borderStyle": "white",
-                    "list": [
-                        {
-                            "pagePath": "pages/index/index",
-                            "text": "aaaa"
-                        },
-                        {
-                            "pagePath": "pages/apply/apply",
-                            "text": "bbbb"
-                        },
-                        {
-                            "pagePath": "pages/user/index/index",
-                            "text": "cccc"
-                        }
-                    ]
-}*/
