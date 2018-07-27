@@ -1,0 +1,7 @@
+<template name="toptips">
+	<!-- 带点击 -->
+	<view class="toptips {{toptipsStyle}} {{showToptipsFlag ? 'showtips' : ''}}" wx:if="{{hasTap}}" bindtap="tapToptips"><text class="va-middle">{{toptipsMsg || ''}}</text><text class="toptips-num" wx:if="{{!(toptipsNum == '' || toptipsNum == null || toptipsNum == undefined)}}">{{toptipsNum}}</text></view>
+	
+	<!-- 不带点击 -->
+	<view class="toptips {{toptipsStyle}} {{showToptipsFlag ? 'showtips' : ''}}" wx:if="{{!hasTap}}"><text class="va-middle">{{toptipsMsg || ''}}</text><text class="toptips-num" wx:if="{{!(toptipsNum == '' || toptipsNum == null || toptipsNum == undefined)}}">{{toptipsNum}}</text></view>
+</template>

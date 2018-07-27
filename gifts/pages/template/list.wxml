@@ -1,0 +1,33 @@
+<template name="list">
+	<view class="container-list">
+        <view class="userlist-con clearfix">
+            <block wx:key="" wx:for="{{list}}" wx:for-item="item" wx:for-index="idx">
+                <view class="userlist" bindtap="bindDetail" data-code='{{item.code}}'>
+                    <view wx:if="{{item.status == 1}}" class="status disable">已结束</view>
+                    <view class="userlist-pic">
+                        <image src="{{item.pic}}" mode="aspectFill"></image>
+                    </view>
+                    <view class="depth">礼品获得深度{{'<'}}{{item.max_depth}}m</view>
+                    <view class="userlist-inner">
+                        <view class="userlist-name">{{item.name}}</view>
+                        <view class="userlist-num color-gray">
+                            <view>
+                                <text>礼品总数</text>
+                                <text class="userlist-txt color-yellow">{{item.prize_num}}</text>
+                                <text class="color-yellow">件</text>
+                            </view>
+                            <view class='flexR'>
+                                <image src='/images/hourglass.png' wx:if="{{item.is_cd == 1}}"></image>
+                                <image src='/images/shovel.png' wx:else></image>
+                            </view>
+                        </view>
+                        <view  class="userlist-bottom">
+                            <image class="userlist-avatar" src="{{item.wxheadpic}}" mode="aspectFill"></image>
+                            <text class="wxname">{{item.wxname}}</text>
+                        </view>    
+                    </view>
+                </view>
+            </block> 
+        </view>
+    </view>
+</template>

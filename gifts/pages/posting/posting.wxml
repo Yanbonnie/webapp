@@ -1,0 +1,111 @@
+<!--posting.wxml-->
+<import src="../template/toptips.wxml"/>
+<import src="../template/authorize.wxml"/>
+
+<view class=" ">
+	
+	<form bindsubmit="formSubmit" report-submit="true"> 
+		<view class="weui-cells editor_first">
+			
+			<view class="">
+				<view class="btn-upload" bindtap="tapChooseImage" >
+		    		<image  class="icon-add" src="../../images/icon-add.png"/>
+		    		<image wx:if="{{pic_thumb_url}}" src=" {{pic_thumb_url}}" data-idx="{{idx}}" mode="aspectFill"  class="pic_thumb"/>
+		      		<text wx:else>上传图片</text>
+			    </view>
+			</view>
+			<view>
+				<view class="weui-cell" bindtap="tapTextareaFocus" data-keyname="name" id="name">
+					<view class="weui-cell__bd">
+						<input style="font-size:38rpx" class="weui-input" placeholder-class="color-gray" placeholder="礼品名称" cursor-spacing="10" value="{{name}}" name="name" focus="{{name_focus}}" bindinput="textareaInput" bindblur="textareaBlur" data-keyname="name" />
+					</view>
+				</view>
+				
+				<view class="weui-cell" bindtap="tapTextareaFocus" data-keyname="synopsis" id="synopsis">
+					<view class="weui-cell__bd" style="margin:10px 0">
+						<textarea style="min-height:6em;" class="weui-textarea" placeholder-class="color-gray" placeholder="礼品详情" auto-height="true" cursor-spacing="10" maxlength="-1" value="{{synopsis}}" name="synopsis" focus="{{synopsis_focus}}" bindinput="textareaInput" bindblur="textareaBlur" data-keyname="synopsis" />
+					</view>
+				</view> 
+			</view>
+		</view> 
+		<view class="weui-cells">
+			<view class="weui-cell">
+				<view class="weui-cell__hd">发布者信息<text class="icon_help" bindtap=""></text></view>
+				<view class="weui-cell__bd" style="text-align:right">
+					<input class="weui-input" placeholder-class="color-gray" placeholder="发布者信息" cursor-spacing="10" value="{{wxname}}" name="wxname" focus="{{wxname_focus}}" bindinput="textareaInput" bindblur="textareaBlur" data-keyname="wxname" />
+	            </view>
+			</view>
+		</view>        
+		<view class="weui-cells">
+            <view class="weui-cell">
+				<view class="weui-cell__bd">礼品类型</view>
+				<view class="weui-cell__ft">
+					<picker value="{{goods_type - 1}}" bindchange="bindGoodsTypeChange" range="{{goods_type_list}}">
+						<view class="picker select_picker_text color-yellow">{{goods_type_list[goods_type - 1]}}</view>
+					</picker> 
+					<input type="text" name="goods_type" value="{{goods_type}}" hidden="true" />
+	            </view>
+	        </view>
+			<view class="weui-cell">
+				<view class="weui-cell__hd">最大深度<text class="icon_help" bindtap=""></text></view>
+				<view class="weui-cell__bd" style="text-align:right">
+					<input class="weui-input" placeholder-class="color-gray" placeholder="最大深度" cursor-spacing="10" value="{{max_depth}}" name="max_depth" focus="{{max_depth_focus}}" bindinput="textareaInput" bindblur="textareaBlur" data-keyname="max_depth" type="number" />
+	            </view>
+			</view>
+			<view class="weui-cell">
+				<view class="weui-cell__hd">礼品总数<text class="icon_help" bindtap="showCashDepositTips" wx:if="{{false}}"></text></view>
+				<view class="weui-cell__bd" style="text-align:right">
+					<input class="weui-input" type="digit" name="prize_num" value="{{prize_num}}" placeholder-class="color-gray" placeholder="请输入" focus="{{prize_num_focus}}" cursor-spacing="10" bindinput="prizeNumInput" bindblur="prizeNumBlur" type="number" />
+	            </view>
+			</view>
+			<block  wx:if="{{goods_type == 1}}">
+				<view class="weui-cell">
+					<view class="weui-cell__hd">红包金额<text class="icon_help" bindtap="showCashDepositTips" wx:if="{{false}}"></text></view>
+					<view class="weui-cell__bd" style="text-align:right">
+						<input class="weui-input" placeholder-class="color-gray" placeholder="每个红包金额" cursor-spacing="10" value="{{money}}" name="money" focus="{{money_focus}}" bindinput="textareaInput" bindblur="textareaBlur" data-keyname="money" type="digit"  step="0.01"/>
+		            </view>
+				</view>
+			</block>   
+			<block  wx:if="{{goods_type == 2}}">
+				<view class="weui-cell">
+					<view class="weui-cell__hd">预计参与人数<text class="icon_help" bindtap="showCashDepositTips" wx:if="{{false}}"></text></view>
+					<view class="weui-cell__bd" style="text-align:right">
+						<input class="weui-input" placeholder-class="color-gray" placeholder="请输入" cursor-spacing="10" value="{{forecast_num}}" name="forecast_num" focus="{{forecast_num_focus}}" bindinput="textareaInput" bindblur="textareaBlur" data-keyname="forecast_num" type="number"  />
+		            </view>
+				</view>
+				<view class="weui-cell">
+					<view class="weui-cell__bd">领取方式</view>
+					<view class="weui-cell__ft" style="color:inherit">
+						<picker value="{{draw_type - 1}}" bindchange="bindCheckTypeChange" range="{{draw_type_list}}">
+							<view class="picker select_picker_text">{{draw_type_list[draw_type - 1]}}</view>
+						</picker> 
+						<input type="text" name="draw_type" value="{{draw_type}}" hidden="true" />
+		            </view>
+				</view> 
+				<view class="weui-cell" wx:if="{{draw_type == 1}}">
+					<view class="weui-cell__hd">领奖提示</view>
+					<view class="weui-cell__bd" style="text-align:right;">
+						<!-- <text class="color-gray">请联系发布者微信索取礼品</text>
+						<input type="text" name="range" value="{{range}}" hidden="true" /> -->
+						<input class="weui-input" placeholder-class="color-gray" placeholder="请输入" cursor-spacing="10" value="{{draw_info}}" name="draw_info" focus="{{draw_info_focus}}" bindinput="textareaInput" bindblur="textareaBlur" data-keyname="draw_info" />
+		            </view>
+				</view>
+			</block>
+			<view class="weui-cell">
+				<view class="weui-cell__bd">发布到广场</view>
+				<view class="weui-cell__ft" style="color:inherit">
+	            	<view class="body-view">
+	    				<switch checked bindchange="switchChange" color="#fde23d"/>
+					</view>
+					<input type="text" name="is_public" value="{{is_public}}" hidden="true" />
+	            </view>
+			</view>  
+		</view>
+ 
+ 
+	    <view class="ft_box">
+	    	<button class="btn_mh" formType="submit">立即发布</button> 
+	    </view>
+	</form>  
+</view>
+<template is="authorize" data="{{isAuthorize: isAuthorize}}"/>

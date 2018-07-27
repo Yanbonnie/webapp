@@ -1,0 +1,19 @@
+button.load-more-button[loading][type="default"][plain],
+.load-more-button[plain]{
+	background-color: transparent;
+	border: 0;
+}
+button.load-more-button[loading][type="default"][plain]:after,
+.load-more-button:after{
+	display: none;
+}
+
+.load-more-text{
+	color: #939da3;
+	padding: 12px;
+	text-align: center;
+}
+
+.load-more-box{
+	padding: 10px 12px;
+}

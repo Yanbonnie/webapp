@@ -1,0 +1,3 @@
+<template name="shareGuide">
+	<view wx:if="{{shareGuideVisible}}" class="share-guide {{shareGuideFadeIn ? 'share-guide-visible' : ''}}" bindtap="tapShareGuide"></view>
+</template>
