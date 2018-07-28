@@ -156,8 +156,8 @@ Page({
             my_unionid: app.globalData.unionid,
             friend_unionid: friend_openid
         }).then(res => {
-            console.log("我是关系结果：")
-            console.log(res)
+            // console.log("我是关系结果：")
+            // console.log(res)
         })
     }, 
 })

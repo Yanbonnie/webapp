@@ -133,6 +133,10 @@ Page({
                             }
                         }
                     })
+                }else{
+                    wx.switchTab({
+                        url: '/pages/user/index/index',
+                    })
                 }
                 
             }, 1500)

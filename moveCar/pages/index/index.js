@@ -17,7 +17,7 @@ Page({
         index:-1,
         bannerList:[],
         is_binding: 0,         //绑定状态，1为已绑定，0为未绑定，未绑定⽤用户⽆无权点击 其他⻚页⾯面，只能进入绑定页面
-        isfollow:0,            //是否关注
+        isfollow:false,            //是否关注
         car_number: '',        //车牌号码
         reason: '',            //原因
         scene_pic: '',         //照片地址
@@ -56,7 +56,7 @@ Page({
             this.setData({
                 bannerList:banner_data,
                 is_binding,
-                isfollow:isfollow||0
+                isfollow:isfollow || false,
             })
             app.globalData.is_binding = is_binding; 
         })

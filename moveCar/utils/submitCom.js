@@ -11,7 +11,7 @@ module.exports = {
     dataCom:{
         bannerList: [],
         is_binding: 0,
-        isfollow: 0,   //0-未关注  1-已关注
+        isfollow: false,   //0-未关注  1-已关注
         cityState: false,
         insurance_data: [],
         car_number: '',   //车牌号
@@ -47,7 +47,7 @@ module.exports = {
                 this.setData({
                     bannerList:banner_data,
                     is_binding,
-                    isfollow: isfollow || 0,
+                    isfollow: isfollow || false,
                     insurance_data
                 })
                 if(Type == 'bind'){  //绑定页面
