@@ -194,7 +194,7 @@ Page({
             } else {
                 this.setData({
                     editStatus: false,
-                    canOper: true
+                    canOper: false
                 })
             }
         } else {

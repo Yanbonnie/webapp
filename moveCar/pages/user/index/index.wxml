@@ -14,7 +14,7 @@
         <text>车牌：{{car_number}}</text>
     </view>
     <view class='flexR'>
-        <text class='btn' bindtap="getShareHandle">我的二维码</text>
+        <text class='btn' bindtap="getShareHandle">我要推广</text>
     </view>
 </view>
 <view class='navList'>

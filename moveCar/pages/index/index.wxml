@@ -72,7 +72,7 @@
 
 <view class='followCover' wx:if="{{followState}}" >
     <view class='close' bindtap='closeFollow'>x</view>
-    <image src='/assets/images/erweima.png'></image>
-    <view class='tip'>我是提示内容</view>
+    <image src='https://car.jc5588.cn/upload/images/erweima.png' bindtap='showEwm'></image>
+    <view class='tip'>点击查看大图（长按大图识别二维码,关注接收回复）</view>
 </view>
 

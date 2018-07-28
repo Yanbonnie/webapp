@@ -117,8 +117,7 @@ Page({
     },
     //提交我要挪车接口
     PostMoveCarFn(){
-        const { car_number, reason, scene_pic, address, reply, submitStatus} = this.data;
-        console.log(!car_number)
+        const { car_number, reason, scene_pic, address, reply, submitStatus, isfollow} = this.data;
         if (car_number == ''  ||  reason == '' || scene_pic == '' || address == ''){
             wx.showToast({
                 title: '请填写完整信息',
@@ -162,6 +161,12 @@ Page({
     closeFollow(){
         this.setData({
             followState:false
+        })
+    },
+    //展示挪车二维码
+    showEwm(){
+        wx.previewImage({
+            urls: ['https://car.jc5588.cn/upload/images/erweima.png']
         })
     }
 })
