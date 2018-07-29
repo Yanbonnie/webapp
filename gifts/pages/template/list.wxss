@@ -52,8 +52,14 @@
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+    display: flex;
+    align-items: center;
 }
-
+.userlist-name image{
+    width: 35rpx;
+    height: 35rpx;
+    margin-right:10rpx;
+}
 .userlist-inner {
     padding: 20rpx;
     height: 154rpx;

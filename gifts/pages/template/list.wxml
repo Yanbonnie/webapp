@@ -9,7 +9,11 @@
                     </view>
                     <view class="depth">礼品获得深度{{'<'}}{{item.max_depth}}m</view>
                     <view class="userlist-inner">
-                        <view class="userlist-name">{{item.name}}</view>
+                        <view class="userlist-name">
+                            <image wx:if="{{item.goods_type==1}}" src='/images/icon1.png'></image>
+                            <image wx:else="{{item.goods_type}}" src='/images/icon2.png'></image>
+                            <text>{{item.name}}</text>
+                        </view>
                         <view class="userlist-num color-gray">
                             <view>
                                 <text>礼品总数</text>
