@@ -266,7 +266,7 @@ Page({
     onShow: function() {
         var that = this;
 
-        app.checkIsAuthorize({
+        app.checkIsAuthorize({            
             success: function(){
                 if(that.data.contentReady){
                     var newCode = wx.getStorageSync('new_code');

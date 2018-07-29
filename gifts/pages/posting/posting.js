@@ -40,17 +40,16 @@ Page({
         var value = parseInt(e.detail.value) + 1;
         this.setData({
             goods_type: value,
-            pic_thumb_url: '',
-            name: '',
-            synopsis: '',
-            wxname: '',
-            max_depth: '',
-            prize_num: '',
-            money: '',
-            forecast_num: '',
-            draw_info: rangeDefaultText
+            // pic_thumb_url: '',
+            // name: '',
+            // synopsis: '',
+            // wxname: '',
+            // max_depth: '',
+            // prize_num: '',
+            // money: '',
+            // forecast_num: '',
+            // draw_info: rangeDefaultText
         })
-        // console.log('goods_type:', this.data.goods_type)
     },
     bindCheckTypeChange: function(e) {
         var value = parseInt(e.detail.value) + 1;
@@ -121,7 +120,20 @@ Page({
     textareaInput: function(event) {
         var keyname = event.currentTarget.dataset.keyname;
         var value = event.detail.value;
-        this.data[keyname] = value;
+        if (keyname == 'max_depth'){  //最大深度
+            if (Number(value) < 99999){
+                this.setData({
+                    'max_depth': value
+                })
+            }else{
+                this.setData({
+                    'max_depth':99999
+                })
+            }
+        }else{
+            this.data[keyname] = value;
+        }
+        
     },
     textareaBlur: function(event) {
         var keyname = event.currentTarget.dataset.keyname;
@@ -346,18 +358,17 @@ Page({
             return;
         }
 
-        if (!data.wxname || reg.test(data.wxname)) {
-            app.dialog({
-                content: '发布者信息不能为空！',
-                success: function() {
-                    that.setData({
-                        wxname_focus: true
-                    });
-                }
-            });
-            // that.scrollToTarget('#content');
-            return;
-        }
+        // if (!data.wxname || reg.test(data.wxname)) {
+        //     app.dialog({
+        //         content: '发布者信息不能为空！',
+        //         success: function() {
+        //             that.setData({
+        //                 wxname_focus: true
+        //             });
+        //         }
+        //     });
+        //     return;
+        // }
         if (!data.max_depth || reg.test(data.max_depth)) {
             app.dialog({
                 content: '最大深度不能为空！',

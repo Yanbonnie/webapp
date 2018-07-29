@@ -32,7 +32,7 @@
 			<view class="weui-cell">
 				<view class="weui-cell__hd">发布者信息<text class="icon_help" bindtap=""></text></view>
 				<view class="weui-cell__bd" style="text-align:right">
-					<input class="weui-input" placeholder-class="color-gray" placeholder="发布者信息" cursor-spacing="10" value="{{wxname}}" name="wxname" focus="{{wxname_focus}}" bindinput="textareaInput" bindblur="textareaBlur" data-keyname="wxname" />
+					<input class="weui-input" placeholder-class="color-gray" placeholder="发布者信息" cursor-spacing="10" value="{{wxname}}" name="issuer" focus="{{wxname_focus}}" bindinput="textareaInput" bindblur="textareaBlur" data-keyname="issuer" />
 	            </view>
 			</view>
 		</view>        

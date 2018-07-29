@@ -22,8 +22,8 @@
                             </view>
                         </view>
                         <view  class="userlist-bottom">
-                            <image class="userlist-avatar" src="{{item.wxheadpic}}" mode="aspectFill"></image>
-                            <text class="wxname">{{item.wxname}}</text>
+                            <image class="userlist-avatar" wx:if="{{!item.issuer}}" src="{{item.wxheadpic}}" mode="aspectFill"></image>
+                            <text class="wxname">{{item.issuer ? item.issuer : item.wxname}}</text>
                         </view>    
                     </view>
                 </view>
