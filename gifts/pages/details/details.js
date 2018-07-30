@@ -932,7 +932,8 @@ Page({
     onShareAppMessage: function() {
         var that = this;
         var userInfo = wx.getStorageSync('user_info') || {};
-        var path = 'pages/details/details?code=' + that.options.code;
+        // var path = 'pages/details/details?code=' + that.options.code;
+        var path = 'pages/index/index?code=' + that.options.code;
         if(that.data.mainInfo.status == 0){
             path += '&is_share=1&from_unionid=' + userInfo.unionid;
         }

@@ -292,7 +292,10 @@
 
 .digging_gif {
     position: relative;
-    min-height: 200rpx;
+    height: 330rpx;
+}
+.digging_gif_box{
+    height: 330rpx;
 }
 
 .digging_gif image {

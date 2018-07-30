@@ -293,7 +293,24 @@ Page({
     },
     onHide: function (){
     },
-    onLoad: function(options) {        
+    onLoad: function(options) {   
+        console.log("options:")
+        console.log(options)
+        //到详情页面
+        if (options.code){  
+            const { code, from_unionid, is_share}=options;
+            if (is_share){
+                console.log("跳转1")
+                    wx.navigateTo({
+                        url: `/pages/details/details?code=${code}&is_share=${is_share}&from_unionid=${from_unionid}`,
+                    })
+            }else{
+                console.log("跳转2")
+                    wx.navigateTo({
+                        url: `/pages/details/details?code=${code}`,
+                    })
+            }
+        }
         // 标记渠道
         app.markChannel({
             channel: options.channel
