@@ -219,6 +219,27 @@ Page({
                         digNothing:true,
                         gitNone:false,
                     })
+                    setTimeout(()=>{
+                        if (mainInfo.status == 0) {     //项目进项中....
+                            if (mainInfo.is_cd == 1) {  //冷却倒计时
+                                that.runCountdownTime(mainInfo.time);
+                                that.setData({
+                                    winning: false,
+                                    canDiggingCd:false,
+                                    digNothing:false,
+                                    gitNone:false,
+                                })
+                            }
+                        } else {  //项目结束
+                            that.setData({
+                                giftNone: true,
+                                winning:false,
+                                canDiggingCd: false,
+                                diggingCd: false,
+                                digNothing: false,
+                            })
+                        }
+                    },3000)
                     // if (mainInfo.status == 0) {     //项目进项中....
                     //     if (mainInfo.is_cd == 1) {  //冷却倒计时
                     //         that.runCountdownTime(mainInfo.time);
