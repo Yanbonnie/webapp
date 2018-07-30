@@ -7,7 +7,11 @@
     </view>
     <view class="userlist pos_r border_bottom" id='{{mainInfo.id}}'>
         <!-- <view  class="status {{mainInfo.status== 1 && mainInfo.is_cd == 0?'disable':''}}" hidden="{{mainInfo.status == 0 && mainInfo.is_cd == 0}}" >{{mainInfo.status== 1 && mainInfo.is_cd == 0?"已结束":"已冷却"}}</view> -->
-        <view class="userlist-name">{{mainInfo.name}}</view>
+        <view class="userlist-name">
+            <image wx:if="{{item.goods_type==1}}" src='/images/icon1.png'></image>
+            <image wx:else="{{item.goods_type}}" src='/images/icon2.png'></image>
+            <text>{{mainInfo.name}}</text>
+        </view>
         <view class="depth border_top pos_r color-gray">
             <view class="flex-space-between">
                 <view class="flex-shrink">剩余礼品：{{mainInfo.prize_num}} </view>
@@ -15,7 +19,7 @@
                     <text class="rel">当前深度：{{mainInfo.now_depth}}m</text>
                     <image src="https://xnt.xhwxpos.com/mining/static/images/depth.gif" mode="scaleToFill"></image>
                 </view>
-                <view class="flex-shrink">总深度：{{mainInfo.max_depth}}m</view>
+                <view class="flex-shrink" bindtap='modifyTimeHandle'>总深度：{{mainInfo.max_depth}}m</view>
             </view>
         </view>
         <view class="detail border_top pos_r color-gray">
@@ -26,6 +30,7 @@
         </view>
     </view>
     <view class="participant" hidden="{{mainInfo.status == -1}}">
+        <view class='more'><navigator url="/pages/index/index" open-type="switchTab">更多宝贝</navigator></view>
         <view class="digging_gif" wx:if="{{winning}}">   <!---挖宝中或中奖-->
             <view class="icon-score">
                 <image src="../../images/icon-score.png" class="icon-score-pic" mode="widthFix"></image>
@@ -33,14 +38,14 @@
             </view>
             <image src="https://xnt.xhwxpos.com/mining/static/images/gif-digging.gif" mode="widthFix" class="gif-digging" style="visibility:{{digging ? 'visibility' : 'hidden'}}"></image>
             <view style="visibility:{{digging ? 'hidden' : 'visibility'}}">
-                <image src="https://xnt.xhwxpos.com/mining/static/images/gif-diginto.gif" mode="widthFix"></image>
+                <image src="../../images/gif-diginto.gif" mode="widthFix"></image>
                 <button class="btn_digging btn_yellow">挖到宝啦！</button>
             </view>
         </view>
         <view class="digging_gif" wx:if="{{diggingCd}}">  <!--冷却中 diggingCd = true-->
             <view class="icon-score">
                 <image src="../../images/icon-score.png" class="icon-score-pic" mode="widthFix"></image>
-                <view class="num" bindtap='modifyTimeHandle'>{{mainInfo.prize_num}}</view>
+                <view class="num" >{{mainInfo.prize_num}}</view>
             </view>
             <image src="https://xnt.xhwxpos.com/mining/static/images/gif-cd.gif" mode="widthFix"></image>
             <view class="btn_digging btn_light">
@@ -48,25 +53,24 @@
                 <button class="btn_speedup btn_black" bindtap="toggleSharePop">加速</button>
             </view>
         </view>
-
-        <view class="digging_gif" wx:if="{{canDiggingCd}}">  <!--可挖宝 diggingCd = false-->
+        <view class="digging_gif" wx:if="{{canDiggingCd}}">  <!--可挖宝 canDiggingCd = true -->
             <view class="icon-score">
                 <image src="../../images/icon-score.png" class="icon-score-pic" mode="widthFix"></image>
                 <view class="num">{{mainInfo.prize_num}}</view>
             </view>
-            <image src="https://xnt.xhwxpos.com/mining/static/images/gif-cd.gif" mode="widthFix"></image>
+            <image src="https://xnt.xhwxpos.com/mining/static/images/gif-nocd.gif" mode="widthFix"></image>
             <view class="btn_digging btn_light">
                 <view class="progress-bar"><view class="bgline" style="width:{{mainInfo.time / 3600 * 100}}%"></view><text>点击挖宝按钮，立即挖宝</text></view>
                 <button class="btn_speedup btn_black" bindtap="toggleSharePop">挖宝</button>
             </view>
         </view>
-        <view class="digging_gif" wx:if="{{digNothing}}">  <!--什么也没挖到-->
+        <view class="digging_gif" wx:if="{{digNothing}}">  <!--什么也没挖到 digNothing = true-->
             <view class="icon-score">
                 <image src="../../images/icon-score.png" class="icon-score-pic" mode="widthFix"></image>
                 <view class="num">{{mainInfo.prize_num}}</view>
             </view>
-            <image src="https://xnt.xhwxpos.com/mining/static/images/gif-digging.gif" mode="widthFix" class="gif-digging" style="visibility:{{digging ? 'visibility' : 'hidden'}}"></image>
-            <view style="visibility:{{digging ? 'hidden' : 'visibility'}}">
+            <!-- <image src="https://xnt.xhwxpos.com/mining/static/images/gif-digging.gif" mode="widthFix" class="gif-digging" style="visibility:{{digging ? 'visibility' : 'hidden'}}"></image> -->
+            <view>  <!--style="visibility:{{digging ? 'hidden' : 'visibility'}}"-->
                 <image src="https://xnt.xhwxpos.com/mining/static/images/gif-nothing.gif" mode="widthFix"></image>
                 <button class="btn_digging btn_light">什么也没挖到...</button>
             </view>
@@ -76,9 +80,9 @@
                 <image src="../../images/icon-score.png" class="icon-score-pic" mode="widthFix"></image>
                 <view class="num">{{mainInfo.prize_num}}</view>
             </view>
-            <image src="../../images/gif-digging.gif" mode="widthFix" class="gif-digging" style="visibility:{{digging ? 'visibility' : 'hidden'}}"></image>
-            <view style="visibility:{{digging ? 'hidden' : 'visibility'}}">
-                <image src="../../images/gif-over.png" mode="widthFix"></image>
+            <!-- <image src="https://xnt.xhwxpos.com/mining/static/images/gif-digging.gif" mode="widthFix" class="gif-digging" style="visibility:{{digging ? 'visibility' : 'hidden'}}"></image> -->
+            <view> <!-- style="visibility:{{digging ? 'hidden' : 'visibility'}}" -->
+                <image src="https://xnt.xhwxpos.com/mining/static/images/gif-over.png" mode="widthFix"></image>
                 <button class="btn_digging btn_gray">礼品已被挖光</button>
             </view>
         </view>
@@ -232,4 +236,3 @@
         <text>点击预览大图（保存大图分享到朋友圈）</text>
     </view>
 </view>
-<!-- <view class='modifyTime' bindtap='modifyTimeHandle'>修改倒计时</view> -->

@@ -67,12 +67,12 @@
 				</view>
 			</block>   
 			<block  wx:if="{{goods_type == 2}}">
-				<view class="weui-cell">
+				<!-- <view class="weui-cell">
 					<view class="weui-cell__hd">预计参与人数<text class="icon_help" bindtap="showCashDepositTips" wx:if="{{false}}"></text></view>
 					<view class="weui-cell__bd" style="text-align:right">
 						<input class="weui-input" placeholder-class="color-gray" placeholder="请输入" cursor-spacing="10" value="{{forecast_num}}" name="forecast_num" focus="{{forecast_num_focus}}" bindinput="textareaInput" bindblur="textareaBlur" data-keyname="forecast_num" type="number"  />
 		            </view>
-				</view>
+				</view> -->
 				<view class="weui-cell">
 					<view class="weui-cell__bd">领取方式</view>
 					<view class="weui-cell__ft" style="color:inherit">

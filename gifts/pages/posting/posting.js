@@ -418,17 +418,17 @@ Page({
 
         if (that.data.goods_type == 2) {
             data.forecast_num = that.data.forecast_num;
-            if (!data.forecast_num || reg.test(data.forecast_num)) {
-                app.dialog({
-                    content: '预计参与人数不能为空！',
-                    success: function() {
-                        that.setData({
-                            forecast_num_focus: true
-                        });
-                    }
-                });
-                return;
-            }
+            // if (!data.forecast_num || reg.test(data.forecast_num)) {
+            //     app.dialog({
+            //         content: '预计参与人数不能为空！',
+            //         success: function() {
+            //             that.setData({
+            //                 forecast_num_focus: true
+            //             });
+            //         }
+            //     });
+            //     return;
+            // }
 
 
             if (that.data.draw_type == 1) {

@@ -188,8 +188,12 @@ Page({
                 //中奖
                 if (mainInfo.is_prize == 1) {
                     that.setData({
-                        digging: false,
-                        winning: true
+                        winning: true,
+                        digging: false,                        
+                        diggingCd: false,
+                        canDiggingCd: false,
+                        digNothing: false,
+                        gitNone: false,
                     });
                     if (mainInfo.is_draw == 0) {
                         setTimeout(function () {
@@ -208,33 +212,40 @@ Page({
                         }, 1500);
                     }
                 } else {   //没中奖
-                    if (mainInfo.status == 0) {     //项目进项中....
-                        if (mainInfo.is_cd == 1) {  //冷却倒计时
-                            that.runCountdownTime(mainInfo.time);
-                            that.setData({
-                                winning: false,
-                                canDiggingCd:false,
-                                digNothing:false,
-                                gitNone:false,
-                            })
-                        } else {   //可挖宝  is_cd = 0
-                            that.setData({
-                                canDiggingCd: true,
-                                winning: false,   
-                                diggingCd:false,                             
-                                digNothing: false,
-                                gitNone: false,
-                            })
-                        }
-                    } else {  //项目结束
-                        that.setData({
-                            giftNone: true,
-                            winning:false,
-                            canDiggingCd: false,
-                            diggingCd: false,
-                            digNothing: false,
-                        })
-                    }
+                    that.setData({
+                        winning: false,
+                        diggingCd:false,
+                        canDiggingCd:false,
+                        digNothing:true,
+                        gitNone:false,
+                    })
+                    // if (mainInfo.status == 0) {     //项目进项中....
+                    //     if (mainInfo.is_cd == 1) {  //冷却倒计时
+                    //         that.runCountdownTime(mainInfo.time);
+                    //         that.setData({
+                    //             winning: false,
+                    //             canDiggingCd:false,
+                    //             digNothing:false,
+                    //             gitNone:false,
+                    //         })
+                    //     } else {   //可挖宝  is_cd = 0
+                    //         that.setData({
+                    //             canDiggingCd: true,
+                    //             winning: false,   
+                    //             diggingCd:false,                             
+                    //             digNothing: false,
+                    //             gitNone: false,
+                    //         })
+                    //     }
+                    // } else {  //项目结束
+                    //     that.setData({
+                    //         giftNone: true,
+                    //         winning:false,
+                    //         canDiggingCd: false,
+                    //         diggingCd: false,
+                    //         digNothing: false,
+                    //     })
+                    // }
                 }
 
                 
@@ -464,6 +475,12 @@ Page({
                         digging:false,
                         winning:true
                     })
+                    if (mainInfo.goods_type == 2 && mainInfo.draw_type == 1){
+                        app.dialog({
+                            title: '领奖提示',
+                            content: mainInfo.draw_info
+                        });
+                    }
                 }else{ //未中奖
                     if (mainInfo.status == 0) {     //项目进项中....
                         if (mainInfo.is_cd == 1) {  //冷却倒计时
