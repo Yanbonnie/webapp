@@ -43,7 +43,7 @@
                 <image src="https://xnt.xhwxpos.com/mining/static/images/gif-digging.gif" mode="widthFix" class="gif-digging" style="visibility:{{digging ? 'visibility' : 'hidden'}}"></image>
                 <view style="visibility:{{digging ? 'hidden' : 'visibility'}}">
                     <image src="../../images/gif-diginto.gif" mode="widthFix"></image>
-                    <button class="btn_digging btn_yellow">挖到宝啦！</button>
+                    <button bindtap='diggerGiftHandle' class="btn_digging btn_yellow">挖到宝啦！</button>
                 </view>
             </view>
             <view class="digging_gif" wx:if="{{diggingCd}}">

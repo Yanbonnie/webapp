@@ -207,11 +207,13 @@ Page({
                                         content: mainInfo.draw_info
                                     });
                                 }
-                            }else{
-                                app.dialog({
-                                    title: '领奖提示',
-                                    content: '请到微信零钱查看红包'
-                                });
+                            }else{  //红包
+                                setTimeout(() => {
+                                    app.dialog({
+                                        title: '领奖提示',
+                                        content: '请到微信零钱查看红包'
+                                    });
+                                }, 1500)
                             }
                         }, 1500);
                     }
@@ -244,33 +246,6 @@ Page({
                             })
                         }
                     },3000)
-                    // if (mainInfo.status == 0) {     //项目进项中....
-                    //     if (mainInfo.is_cd == 1) {  //冷却倒计时
-                    //         that.runCountdownTime(mainInfo.time);
-                    //         that.setData({
-                    //             winning: false,
-                    //             canDiggingCd:false,
-                    //             digNothing:false,
-                    //             gitNone:false,
-                    //         })
-                    //     } else {   //可挖宝  is_cd = 0
-                    //         that.setData({
-                    //             canDiggingCd: true,
-                    //             winning: false,   
-                    //             diggingCd:false,                             
-                    //             digNothing: false,
-                    //             gitNone: false,
-                    //         })
-                    //     }
-                    // } else {  //项目结束
-                    //     that.setData({
-                    //         giftNone: true,
-                    //         winning:false,
-                    //         canDiggingCd: false,
-                    //         diggingCd: false,
-                    //         digNothing: false,
-                    //     })
-                    // }
                 }
 
                 
@@ -282,6 +257,27 @@ Page({
                 });
             }
         });
+    },
+    //挖到宝提示
+    diggerGiftHandle(){
+        if (mainInfo.goods_type == 2) {
+            if (mainInfo.draw_type == 2) {   //如果是邮寄
+                app.dialog({
+                    title: '领奖提示',
+                    content: '请等待商家发货信息'
+                });
+            } else {   // 如果是现场
+                app.dialog({
+                    title: '领奖提示',
+                    content: mainInfo.draw_info
+                });
+            }
+        } else {
+            app.dialog({
+                title: '领奖提示',
+                content: '请到微信零钱查看红包'
+            });
+        }
     },
     toggleFieldsBox: function() {
         this.setData({
@@ -404,12 +400,6 @@ Page({
                             icon: 'success',
                             duration: 2000
                         });
-                        setTimeout(()=>{
-                            app.dialog({
-                                title: '领奖提示',
-                                content: '请等待商家发货信息'
-                            });
-                        },2000)
                     },
                     fail: function(err) {
                         app.hideLoading();
