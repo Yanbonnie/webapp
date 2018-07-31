@@ -9,7 +9,7 @@
         <!-- <view  class="status {{mainInfo.status== 1 && mainInfo.is_cd == 0?'disable':''}}" hidden="{{mainInfo.status == 0 && mainInfo.is_cd == 0}}" >{{mainInfo.status== 1 && mainInfo.is_cd == 0?"已结束":"已冷却"}}</view> -->
         <view class="userlist-name">
             <image wx:if="{{item.goods_type==1}}" src='https://xnt.xhwxpos.com/mining/static/images/icon1.gif'></image>
-            <image wx:else="{{item.goods_type}}" src='https://xnt.xhwxpos.com/mining/static/images/icon2.gif'></image>
+            <image wx:else src='https://xnt.xhwxpos.com/mining/static/images/icon2.gif'></image>
             <text>{{mainInfo.name}}</text>
         </view>
         <view class="depth border_top pos_r color-gray">
