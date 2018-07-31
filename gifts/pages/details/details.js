@@ -260,6 +260,7 @@ Page({
     },
     //挖到宝提示
     diggerGiftHandle(){
+        const { mainInfo } = this.data;
         if (mainInfo.goods_type == 2) {
             if (mainInfo.draw_type == 2) {   //如果是邮寄
                 app.dialog({

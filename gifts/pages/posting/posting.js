@@ -120,19 +120,35 @@ Page({
     textareaInput: function(event) {
         var keyname = event.currentTarget.dataset.keyname;
         var value = event.detail.value;
-        if (keyname == 'max_depth'){  //最大深度
-            if (Number(value) < 99999){
-                this.setData({
-                    'max_depth': value
-                })
-            }else{
-                this.setData({
-                    'max_depth':99999
-                })
+        const { prize_num, max_depth } = this.data;
+        if (keyname == 'max_depth'){
+            if (Number(value) > 99999) {
+                value = 99999;
             }
-        }else{
-            this.data[keyname] = value;
+            // if (prize_num && Number(value) < Number(prize_num)) {
+            //     wx.showToast({
+            //         title: '最大深度不得小于礼品总数',
+            //         mask: true,
+            //         icon: 'none'
+            //     })
+            //     value = prize_num
+            // }
+
         }
+        if (keyname == 'prize_num'){
+            if (Number(value) > Number(max_depth)) {
+                wx.showToast({
+                    title: '礼品总数不得大于最大深度',
+                    mask:true,
+                    icon:'none'
+                })
+                value = max_depth
+            }
+        }
+        
+        this.setData({
+            ["" + keyname + ""]: value
+        })
         
     },
     textareaBlur: function(event) {
@@ -386,6 +402,18 @@ Page({
             app.dialog({
                 content: '礼品总数不能为空！',
                 success: function() {
+                    that.setData({
+                        prize_num_focus: true
+                    });
+                }
+            });
+            return;
+        }
+
+        if (Number(data.prize_num) > Number(data.max_depth)) {
+            app.dialog({
+                content: '礼品总数不得大于最大深度',
+                success: function () {
                     that.setData({
                         prize_num_focus: true
                     });
