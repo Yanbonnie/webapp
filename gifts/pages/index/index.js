@@ -217,8 +217,9 @@ Page({
     },
     renderPosts: function(list) {
         var that = this;
+        let List = that.data.list.concat(list);
         that.setData({
-            list: that.data.list.concat(list)
+            list: List
         });
     },
     reload: function(args) {

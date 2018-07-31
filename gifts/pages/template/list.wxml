@@ -12,7 +12,7 @@
                         <view class="userlist-name">
                             <image wx:if="{{item.goods_type==1}}" src='https://xnt.xhwxpos.com/mining/static/images/icon1.gif'></image>
                             <image wx:else src='https://xnt.xhwxpos.com/mining/static/images/icon2.gif'></image>
-                            <text>{{item.name}}</text>
+                            <text>{{item.name}}啊啊啊啊啊啊啊啊啊啊啊啊啊啊</text>
                         </view>
                         <view class="userlist-num color-gray">
                             <view>

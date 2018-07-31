@@ -939,7 +939,8 @@ Page({
         }
         return {
             title: '我在有好礼小程序看到了一个大宝贝',
-            path: path
+            path: path,
+            imageUrl: that.data.mainInfo.pic
         }
     },
     //修改倒计时
