@@ -217,8 +217,19 @@ Page({
     },
     renderPosts: function(list) {
         var that = this;
+        let List = that.data.list.concat(list);
+        let LIST = List.map(item=>{
+            if(item.status == 1){
+               return{
+                   ...item,
+                   pic:'/images/open.jpg'
+               } 
+            }else{
+                return item
+            }
+        })
         that.setData({
-            list: that.data.list.concat(list)
+            list: LIST
         });
     },
     reload: function(args) {

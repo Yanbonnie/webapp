@@ -36,14 +36,16 @@
     height: 100%
 }
 
-.depth {
+.depth,.depthGray {
     background: #fde763;
     color: #655e36;
     font-size: 28rpx;
     text-align: center;
     padding: 6rpx;
 }
-
+.depthGray{
+    background: #ccc;
+}
 .userlist-name {
     font-size: 34rpx;
     color: #333;

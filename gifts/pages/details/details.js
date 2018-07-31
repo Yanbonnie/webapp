@@ -205,9 +205,13 @@ Page({
                                     app.dialog({
                                         title: '领奖提示',
                                         content: mainInfo.draw_info
-                                        // content: '请联系发布者微信索取礼品'
                                     });
                                 }
+                            }else{
+                                app.dialog({
+                                    title: '领奖提示',
+                                    content: '请到微信零钱查看红包'
+                                });
                             }
                         }, 1500);
                     }
@@ -395,12 +399,17 @@ Page({
                             });
                             return;
                         }
-
                         wx.showToast({
                             title: data.msg,
                             icon: 'success',
                             duration: 2000
                         });
+                        setTimeout(()=>{
+                            app.dialog({
+                                title: '领奖提示',
+                                content: '请等待商家发货信息'
+                            });
+                        },2000)
                     },
                     fail: function(err) {
                         app.hideLoading();

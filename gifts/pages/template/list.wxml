@@ -7,11 +7,11 @@
                     <view class="userlist-pic">
                         <image src="{{item.pic}}" mode="aspectFill"></image>
                     </view>
-                    <view class="depth">礼品获得深度{{'<'}}{{item.max_depth}}m</view>
-                    <view class="userlist-inner">
+                    <view class="{{item.status == 1 ? 'depthGray':'depth'}}" >礼品获得深度{{'<'}}{{item.max_depth}}m</view>
+                    <view class="userlist-inner"> 
                         <view class="userlist-name">
-                            <image wx:if="{{item.goods_type==1}}" src='/images/icon1.png'></image>
-                            <image wx:else="{{item.goods_type}}" src='/images/icon2.png'></image>
+                            <image wx:if="{{item.goods_type==1}}" src='https://xnt.xhwxpos.com/mining/static/images/icon1.gif'></image>
+                            <image wx:else="{{item.goods_type}}" src='https://xnt.xhwxpos.com/mining/static/images/icon2.gif'></image>
                             <text>{{item.name}}</text>
                         </view>
                         <view class="userlist-num color-gray">
@@ -21,8 +21,8 @@
                                 <text class="color-yellow">件</text>
                             </view>
                             <view class='flexR'>
-                                <image src='/images/hourglass.png' wx:if="{{item.is_cd == 1}}"></image>
-                                <image src='/images/shovel.png' wx:else></image>
+                                <image src='https://xnt.xhwxpos.com/mining/static/images/hourglass.gif' wx:if="{{item.is_cd == 1}}"></image>
+                                <image src='https://xnt.xhwxpos.com/mining/static/images/shovel.gif' wx:else></image>
                             </view>
                         </view>
                         <view  class="userlist-bottom">
