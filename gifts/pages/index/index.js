@@ -305,8 +305,6 @@ Page({
     onHide: function (){
     },
     onLoad: function(options) {   
-        console.log("options:")
-        console.log(options)
         //到详情页面
         if (options.code){  
             const { code, from_unionid, is_share}=options;
