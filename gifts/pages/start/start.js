@@ -17,6 +17,7 @@ Page({
         var that = this;
         var url = app.globalData.redirectPath || '/pages/index/index';
         app.globalData.redirectPath = null;
+        wx.setStorageSync('swiperState', 1)
         if(url.match(/pages\/index\/index/) || url.match(/pages\/posting\/posting/) || url.match(/pages\/self\/self/)){
             wx.switchTab({
                 url: url
