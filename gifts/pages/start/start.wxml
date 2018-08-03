@@ -5,7 +5,8 @@
 		<button class="button" bindgetuserinfo="getUserInfo" open-type="getUserInfo" disabled="{{ajaxLock}}">开始探索</button>
 	</view>
 </view> -->
-<swiper class='swiper' indicator-dots="true" indicator-active-color="#ffffff"  indicator-color="#cccccc" > 
+<!-- indicator-dots="false" indicator-active-color="#ffffff"  indicator-color="#cccccc"  -->
+<swiper class='swiper' > 
   <block wx:for="{{imgUrls}}" wx:key="{{index}}">
     <swiper-item>
       <image src="{{item}}" class="slide-image" mode='aspectFill' bindtap='goDigging' data-index="{{index}}"/>
