@@ -9,7 +9,7 @@
   <block wx:for="{{imgUrls}}" wx:key="{{index}}">
     <swiper-item>
       <image src="{{item}}" class="slide-image" mode='aspectFill' bindtap='goDigging' data-index="{{index}}"/>
-      <button class="button" bindgetuserinfo="getUserInfo" open-type="getUserInfo" disabled="{{ajaxLock}}" wx:if="{{index == 2}}">开始探索</button>
+      <button class="button" bindgetuserinfo="getUserInfo" open-type="getUserInfo" disabled="{{ajaxLock}}" wx:if="{{index == imgUrls.length-1}}">开始探索</button>
     </swiper-item>
   </block>
 </swiper>

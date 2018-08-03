@@ -3,8 +3,7 @@ var app = getApp();
 var shareFields = {};
 var imgUrls = [
     'https://xnt.xhwxpos.com/mining/static/images/intro1.jpg',
-    'https://xnt.xhwxpos.com/mining/static/images/intro2.jpg',
-    'https://xnt.xhwxpos.com/mining/static/images/intro3.jpg'
+    'https://xnt.xhwxpos.com/mining/static/images/intro2.jpg'
 ]
 function resetData(args) {
     if(!args){
