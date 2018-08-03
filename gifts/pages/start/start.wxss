@@ -1,4 +1,28 @@
 page {
     /*background-color: #a67852;*/
     background-color: white;
+    width: 100%;
+    height: 100%;
+}
+
+.swiper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    height: 100%;
+}
+.swiper image{
+    width: 100%;
+    height: 100%;
+}
+.swiper .button{
+    position: absolute;
+    bottom: 50rpx;
+    width: 100%;
+    left: 0;
+    height: 200rpx;
+    opacity: 0;
 }

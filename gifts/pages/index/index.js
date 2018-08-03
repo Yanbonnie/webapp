@@ -1,10 +1,6 @@
 //获取应用实例
 var app = getApp();
-let imgUrls = [
-    '/images/intro1.jpg',
-    '/images/intro2.jpg',
-    '/images/intro3.jpg'
-]
+
 function resetData(args) {
     if(!args){
         args = {};
@@ -18,9 +14,7 @@ function resetData(args) {
         loadMoreLock: false,
         loadMoreStart: null,
         loadMoreEndingText: null,
-        list: [],
-        imgUrls: imgUrls,
-        // swiperState:null,
+        list: []
     }
 }
 
@@ -301,10 +295,6 @@ Page({
     onHide: function (){
     },
     onLoad: function(options) {   
-        let swiperState = wx.getStorageSync('swiperState');
-        console.log(swiperState)
-        this.setData({ swiperState  })
-        console.log(this.data.swiperState)
         //到详情页面
         if (options.code){  
             const { code, from_unionid, is_share}=options;
@@ -332,12 +322,4 @@ Page({
             path: app.globalData.sharePath
         }
     },
-    //继续挖宝
-    goDigging(){
-        wx.setStorageSync('swiperState', 2)
-        this.setData({
-            swiperState:2
-        })
-        console.log(this.data.swiperState)
-    }
 });

@@ -1,13 +1,18 @@
 //获取应用实例
 var app = getApp();
 var shareFields = {};
-
+var imgUrls = [
+    'https://xnt.xhwxpos.com/mining/static/images/intro1.jpg',
+    'https://xnt.xhwxpos.com/mining/static/images/intro2.jpg',
+    'https://xnt.xhwxpos.com/mining/static/images/intro3.jpg'
+]
 function resetData(args) {
     if(!args){
         args = {};
     }
     return {
-        ajaxLock: false
+        ajaxLock: false,
+        imgUrls: imgUrls
     }
 }
 
@@ -17,7 +22,6 @@ Page({
         var that = this;
         var url = app.globalData.redirectPath || '/pages/index/index';
         app.globalData.redirectPath = null;
-        wx.setStorageSync('swiperState', 1)
         if(url.match(/pages\/index\/index/) || url.match(/pages\/posting\/posting/) || url.match(/pages\/self\/self/)){
             wx.switchTab({
                 url: url
