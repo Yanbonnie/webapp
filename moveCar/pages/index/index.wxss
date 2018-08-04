@@ -87,10 +87,10 @@ page{
     right: 0;
     top: 0;
     bottom: 0;
-    background: #fff;
+    background: rgba(0,0,0,0.8);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content:flex-start;
     align-items: center;
 }
 .followCover .close{
@@ -101,14 +101,73 @@ page{
     top: 0;
     text-align: center;
     line-height: 50rpx;
-    background: rgba(0,0,0,0.5);
+    
     color: #fff;
 }
 .followCover image{
-    width: 400rpx;
-    height: 400rpx;
+    width: 750rpx;
+    height: 277rpx;
 }
 .followCover .tip{
     font-size: 24rpx;
     padding-top: 20rpx;
+}
+
+.callCover{
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+}
+.callCover .callBox{
+    background: #fff;
+    border-radius: 8rpx;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 50rpx 0;
+    position: relative;
+}
+.callCover .callBox view{
+    margin:10rpx 0;
+}
+.callCover image{
+    width: 128rpx;
+    height: 128rpx;
+}
+.callCover view text{
+    display: block;
+    text-align: center;
+    font-size: 26rpx;
+    color: #4a4a4a;
+}
+.callCover .callBtn{
+    font-size: 30rpx;
+    width: 300rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: center;
+    background: #0894ec;
+    color: #fff;
+    border-radius: 8rpx;
+    margin-top: 20rpx;
+}
+.callCover .close{
+    position: absolute;
+    right: -50rpx;
+    top: -50rpx;
+
+}
+.callCover .close image{
+    width: 50rpx;
+    height: 50rpx;
 }

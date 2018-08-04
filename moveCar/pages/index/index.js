@@ -26,6 +26,8 @@ Page({
         submitStatus:true,      //是否可以提交
         serverState:false,
         followState:false,      //是否关注
+        callState:true,        //拨打电话状态
+        callUrl:'',            //立即拨打
     },
 
     /**
@@ -38,6 +40,7 @@ Page({
         // app.globalData.is_binding = 0;  //判断用户是否绑定
         this.getBannerFn();
         this.getLocate();
+        
     },
     changeNav,    //监听导航栏切换
     //获取首页数据
@@ -137,18 +140,17 @@ Page({
         REQUEST('POST', 'post_move_car', { car_number, reason, scene_pic, address, reply, unionid: app.globalData.unionid}).then(res=>{
             wx.hideLoading();
             this.setData({
-                submitStatus: true
-            })
+                submitStatus: true                
+            })     
             wx.showToast({
                 title: '提交成功',
                 mask:true,
                 icon: 'success'
-
             })
             setTimeout(()=>{
-                wx.navigateTo({
-                    url: '/pages/user/record/record',
-                })
+                this.setData({
+                    callUrl: res.url
+                })          
             },1500)
         })
     },
@@ -158,15 +160,29 @@ Page({
             serverState:index ==1 ? true : false
         })
     },
-    closeFollow(){
-        this.setData({
-            followState:false
+    //立即拨打
+    callHandle(){
+        wx.showLoading({
+            title: '请稍等',
+            mask:true
+        })
+        REQUEST('POST',this.data.callUrl,{
+            unionid:app.globalData.unionid
+        }).then(res=>{
+            wx.hideLoading();
         })
     },
-    //展示挪车二维码
-    showEwm(){
-        wx.previewImage({
-            urls: ['https://car.jc5588.cn/upload/images/erweima.png']
+    //关闭拨打电话弹窗
+    closeCallCover(){
+        this.setData({
+            callState:false
         })
+        wx.navigateTo({
+            url: '/pages/user/record/record',
+        }) 
+    },
+    //展示关注弹窗
+    showEwm(){
+        this.setData({ followState:false})
     }
 })
