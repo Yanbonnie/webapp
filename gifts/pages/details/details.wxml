@@ -3,7 +3,7 @@
 </view>
 <view class="page" hidden="{{!contentReady || contentErrText}}">
     <view class="userlist-pic">
-        <image src="{{mainInfo.pic}}" mode="widthFix"></image>
+        <image src="{{mainInfo.pic}}" bindtap='previewImg' mode="widthFix" data-img="{{mainInfo.pic}}"></image>
     </view>
     <view class="userlist pos_r border_bottom" id='{{mainInfo.id}}'>
         <!-- <view  class="status {{mainInfo.status== 1 && mainInfo.is_cd == 0?'disable':''}}" hidden="{{mainInfo.status == 0 && mainInfo.is_cd == 0}}" >{{mainInfo.status== 1 && mainInfo.is_cd == 0?"已结束":"已冷却"}}</view> -->
@@ -42,7 +42,7 @@
                 </view>
                 <image src="https://xnt.xhwxpos.com/mining/static/images/gif-digging.gif" mode="widthFix" class="gif-digging" style="visibility:{{digging ? 'visibility' : 'hidden'}}"></image>
                 <view style="visibility:{{digging ? 'hidden' : 'visibility'}}">
-                    <image src="../../images/gif-diginto.gif" mode="widthFix"></image>
+                    <image src="https://xnt.xhwxpos.com/mining/static/images/gif-diginto.gif" mode="widthFix"></image>
                     <button bindtap='diggerGiftHandle' class="btn_digging btn_yellow">挖到宝啦！</button>
                 </view>
             </view>
@@ -249,7 +249,7 @@
         <view class='close' bindtap='closeFriend'>
             <image src='/images/icon-close.png'></image>
         </view>
-        <view class='imgBox' bindtap='previewFriend' data-img="{{friendUrl}}">
+        <view class='imgBox' bindtap='previewImg' data-img="{{friendUrl}}">
             <image src='{{friendUrl}}' mode='aspectFit'></image>
         </view>
         <text>点击预览大图（保存大图分享到朋友圈）</text>

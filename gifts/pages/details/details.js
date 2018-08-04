@@ -66,7 +66,7 @@ Page({
         });
     },
     //预览大图
-    previewFriend(e){
+    previewImg(e){
         const { img } = e.currentTarget.dataset;
         wx.previewImage({
             urls: [img],

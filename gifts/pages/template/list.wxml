@@ -20,10 +20,13 @@
                                 <text class="userlist-txt color-yellow">{{item.prize_num}}</text>
                                 <text class="color-yellow">件</text>
                             </view>
-                            <view class='flexR'>
+                            <view class='flexR' wx:if="{{!item.is_prize}}">
                                 <image src='https://xnt.xhwxpos.com/mining/static/images/hourglass.gif' wx:if="{{item.is_cd == 1 && item.status == 0}}"></image>
                                 <image src='https://xnt.xhwxpos.com/mining/static/images/shovel.gif' wx:if="{{item.is_cd == 0 && item.status == 0}}"></image>
                                 <image src='https://xnt.xhwxpos.com/mining/static/images/empty.gif' wx:if="{{item.status == 1}}"></image>
+                            </view>
+                            <view class='flexR' wx:else>
+                                <image src='https://xnt.xhwxpos.com/mining/static/images/gift.gif'></image>
                             </view>
                         </view>
                         <view  class="userlist-bottom">
