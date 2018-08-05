@@ -26,7 +26,7 @@ Page({
         submitStatus:true,      //是否可以提交
         serverState:false,
         followState:false,      //是否关注
-        callState:true,        //拨打电话状态
+        callState:false,        //拨打电话状态
         callUrl:'',            //立即拨打
     },
 
@@ -149,7 +149,8 @@ Page({
             })
             setTimeout(()=>{
                 this.setData({
-                    callUrl: res.url
+                    callUrl: res.url,
+                    callState:true
                 })          
             },1500)
         })
