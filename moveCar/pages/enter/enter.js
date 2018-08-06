@@ -13,10 +13,11 @@ Page({
         friend_unionid:''
     },
     onLoad: function (options) {
-        // const { share_query } = { share_query:'/2Fpages/2Findex/2Findex/3Ffriend_unionid=oJuNW0p6JAHsCs7CCKDI6RbUgdp4'};
+        // const { share_query } = { share_query:'%2Fpages%2Findex%2Findex%3Ffriend_unionid=oJuNW0p6JAHsCs7CCKDI6RbUgdp4'};
         const { share_query } = options;
         // console.log(share_query);
-        // console.log(decodeURIComponent(share_query));
+        console.log(decodeURIComponent(share_query));
+        // return;
         // let share_query = 'pages/enter/enter?share_query=%2Fpages%2Findex%2Findex%3Ffriend_unionid%oJuNW0p6JAHsCs7CCKDI6RbUgdp4';
         if (share_query) {
             let friend_unionid = getUrlPara('friend_unionid', decodeURIComponent(share_query));
