@@ -39,7 +39,7 @@ Page({
         // })
         // app.globalData.is_binding = 0;  //判断用户是否绑定
         this.getBannerFn();
-        this.getLocate();
+        // this.getLocate();
         
     },
     changeNav,    //监听导航栏切换
@@ -84,12 +84,14 @@ Page({
     },
     //调用定位（选择地址）
     getLocate() {
-        // wx.showLoading({
-        //     title: '定位中...',
-        //     icon:'none',
-        //     mask:true
-        // })
-        new qqmap().getLocateInfo().then(val => {//这个方法在另一个文件里，下面有贴出代码
+        wx.chooseLocation({
+            success: res => {
+                this.setData({
+                    address: res.address
+                })
+            }
+        })
+        /*new qqmap().getLocateInfo().then(val => {//这个方法在另一个文件里，下面有贴出代码
             wx.hideLoading();
             this.setData({
                 address:val
@@ -101,7 +103,7 @@ Page({
                 mask:true,
                 icon:'none'
             })
-        });
+        });*/
     },
     //是否接收回复
     replyHandle(){

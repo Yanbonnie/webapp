@@ -13,11 +13,14 @@ Page({
         friend_unionid:''
     },
     onLoad: function (options) {
+        // const { share_query } = { share_query:'/2Fpages/2Findex/2Findex/3Ffriend_unionid=oJuNW0p6JAHsCs7CCKDI6RbUgdp4'};
         const { share_query } = options;
-        // let share_query = '%2Fpages%2Fuser%2Findex%2Findex%3Ffriend_unionid%3DoJuNW0hHmY9lgAtsamZkfEZHGPgQ';
+        // console.log(share_query);
+        // console.log(decodeURIComponent(share_query));
+        // let share_query = 'pages/enter/enter?share_query=%2Fpages%2Findex%2Findex%3Ffriend_unionid%oJuNW0p6JAHsCs7CCKDI6RbUgdp4';
         if (share_query) {
-            // let friend_unionid = 'aaaaaaaaaaa';
             let friend_unionid = getUrlPara('friend_unionid', decodeURIComponent(share_query));
+            console.log('friend_unionid:' + friend_unionid)
             this.setData({
                 share_query,
                 friend_unionid
@@ -31,6 +34,7 @@ Page({
             })
             if (share_query) {
                 const { friend_unionid } = this.data;
+                console.log('friend_unionid:' + friend_unionid)
                 this.postShareHandle(friend_unionid);
                 let url = decodeURIComponent(share_query);
                 setTimeout(() => {
@@ -151,10 +155,11 @@ Page({
         })
     },
     //关系接口
-    postShareHandle(friend_openid=''){
+    postShareHandle(friend_unionid=''){
+        console.log('friend_unionid' + friend_unionid)
         REQUEST('POST','postShare',{
             my_unionid: app.globalData.unionid,
-            friend_unionid: friend_openid
+            friend_unionid: friend_unionid
         }).then(res => {
             // console.log("我是关系结果：")
             // console.log(res)

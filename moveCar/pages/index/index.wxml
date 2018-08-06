@@ -32,10 +32,10 @@
             </picker>
         </view>        
     </view>
-    <view class='flexBox' >  <!--bindtap='getLocate'-->
+    <view class='flexBox' bindtap='getLocate'>  <!--bindtap='getLocate'-->
         <view class='flexL'>*选择地址</view>
         <view class='flexC'>
-             <input placeholder="请选择地址"  value="{{address}}"/> <!--disabled="true"-->
+             <input placeholder="点击选择事发位置"  value="{{address}}" disabled="true"/> <!--disabled="true"-->
         </view>  
         <view class='flexR'>
             <text class='iconfont icon-address'></text>
