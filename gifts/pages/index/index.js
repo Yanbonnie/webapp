@@ -224,7 +224,6 @@ Page({
     },
     reload: function(args) {
         var that = this;
-
         if (!args) {
             args = {};
         }
@@ -266,7 +265,7 @@ Page({
     },
     onShow: function() {
         var that = this;
-
+        
         app.checkIsAuthorize({            
             success: function(){
                 if(that.data.contentReady){
@@ -294,7 +293,8 @@ Page({
     },
     onHide: function (){
     },
-    onLoad: function(options) {   
+    onLoad: function(options) {  
+        
         //到详情页面
         if (options.code){  
             const { code, from_unionid, is_share}=options;

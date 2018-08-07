@@ -306,10 +306,20 @@ Page({
                     });
                     return;
                 }
-                
+                const { is_public } = that.data;
                 var code = data.code;
                 wx.setStorageSync('new_code', code);
-                that.toDetail();
+                if(is_public){
+                    wx.showModal({
+                        title: '提示',
+                        content: '发布到广场的宝贝将在后台审核后显示在广场列表',
+                        success:res=>{                            
+                            that.toDetail();
+                        }
+                    })
+                }else{
+                    that.toDetail();
+                }
             },
             fail: function(err) {
                 app.hideLoading();
