@@ -1,12 +1,11 @@
 <view wx:if="{{contentErrText}}" style="padding:100rpx 30rpx;text-align:center" class="color-gray">
     {{contentErrText}}
 </view>
-<view class="page" hidden="{{!contentReady || contentErrText}}">
+<view class="page" > <!--hidden="{{!contentReady || contentErrText}}"-->
     <view class="userlist-pic">
         <image src="{{mainInfo.pic}}" bindtap='previewImg' mode="widthFix" data-img="{{mainInfo.pic}}"></image>
     </view>
     <view class="userlist pos_r border_bottom" id='{{mainInfo.id}}'>
-        <!-- <view  class="status {{mainInfo.status== 1 && mainInfo.is_cd == 0?'disable':''}}" hidden="{{mainInfo.status == 0 && mainInfo.is_cd == 0}}" >{{mainInfo.status== 1 && mainInfo.is_cd == 0?"已结束":"已冷却"}}</view> -->
         <view class="userlist-name">
             <image wx:if="{{item.goods_type==1}}" src='https://xnt.xhwxpos.com/mining/static/images/icon1.gif'></image>
             <image wx:else src='https://xnt.xhwxpos.com/mining/static/images/icon2.gif'></image>
@@ -30,78 +29,22 @@
         </view>
     </view>
     <view class="participant" hidden="{{mainInfo.status == -1}}">
-        <view class='more'>
-            <navigator url="/pages/index/index" open-type="switchTab">更多宝贝</navigator>
+        <view class='more' bindtap='getMytools'>
+            我的道具
         </view>
-        <view class='digging_gif_box' hidden="{{mainInfo.status == -1}}">
-            <view class="digging_gif" wx:if="{{winning}}">
-                <!---挖宝中或中奖-->
-                <view class="icon-score">
-                    <image src="../../images/icon-score.png" class="icon-score-pic" mode="widthFix"></image>
-                    <view class="num">{{mainInfo.prize_num}}</view>
-                </view>
-                <image src="https://xnt.xhwxpos.com/mining/static/images/gif-digging.gif" mode="widthFix" class="gif-digging" style="visibility:{{digging ? 'visibility' : 'hidden'}}"></image>
-                <view style="visibility:{{digging ? 'hidden' : 'visibility'}}">
-                    <image src="https://xnt.xhwxpos.com/mining/static/images/gif-diginto.gif" mode="widthFix"></image>
-                    <button bindtap='diggerGiftHandle' class="btn_digging btn_yellow">挖到宝啦！</button>
-                </view>
-            </view>
-            <view class="digging_gif" wx:if="{{diggingCd}}">
-                <!--冷却中 diggingCd = true-->
-                <view class="icon-score">
-                    <image src="../../images/icon-score.png" class="icon-score-pic" mode="widthFix"></image>
-                    <view class="num">{{mainInfo.prize_num}}</view>
-                </view>
-                <image src="https://xnt.xhwxpos.com/mining/static/images/gif-cd.gif" mode="widthFix"></image>
-                <view class="btn_digging btn_light">
-                    <view class="progress-bar">
-                        <view class="bgline" style="width:{{mainInfo.time / 3600 * 100}}%"></view>
-                        <text>休息后{{timeText}}可继续挖宝</text>
-                    </view>
-                    <button class="btn_speedup btn_black" bindtap="toggleSharePop">加速</button>
-                </view>
-            </view>
-            <view class="digging_gif" wx:if="{{canDiggingCd}}">
-                <!--可挖宝 canDiggingCd = true -->
-                <view class="icon-score">
-                    <image src="../../images/icon-score.png" class="icon-score-pic" mode="widthFix"></image>
-                    <view class="num">{{mainInfo.prize_num}}</view>
-                </view>
-                <image src="https://xnt.xhwxpos.com/mining/static/images/gif-nocd.gif" mode="widthFix"></image>
-                <view class="btn_digging btn_light">
-                    <view class="progress-bar">
-                        <view class="bgline" style="width:{{mainInfo.time / 3600 * 100}}%"></view>
-                        <text>点击挖宝按钮，立即挖宝</text>
-                    </view>
-                    <button class="btn_speedup btn_black" bindtap="toggleSharePop">挖宝</button>
-                </view>
-            </view>
-            <view class="digging_gif" wx:if="{{digNothing}}">
-                <!--什么也没挖到 digNothing = true-->
-                <view class="icon-score">
-                    <image src="../../images/icon-score.png" class="icon-score-pic" mode="widthFix"></image>
-                    <view class="num">{{mainInfo.prize_num}}</view>
-                </view>
-                <!-- <image src="https://xnt.xhwxpos.com/mining/static/images/gif-digging.gif" mode="widthFix" class="gif-digging" style="visibility:{{digging ? 'visibility' : 'hidden'}}"></image> -->
-                <view>
-                    <!--style="visibility:{{digging ? 'hidden' : 'visibility'}}"-->
-                    <image src="https://xnt.xhwxpos.com/mining/static/images/gif-nothing.gif" mode="widthFix"></image>
-                    <button class="btn_digging btn_light">什么也没挖到...</button>
-                </view>
-            </view>
-            <view class="digging_gif" wx:if="{{giftNone}}">
-                <!--礼品被挖光了-->
-                <view class="icon-score">
-                    <image src="../../images/icon-score.png" class="icon-score-pic" mode="widthFix"></image>
-                    <view class="num">{{mainInfo.prize_num}}</view>
-                </view>
-                <!-- <image src="https://xnt.xhwxpos.com/mining/static/images/gif-digging.gif" mode="widthFix" class="gif-digging" style="visibility:{{digging ? 'visibility' : 'hidden'}}"></image> -->
-                <view>
-                    <!-- style="visibility:{{digging ? 'hidden' : 'visibility'}}" -->
-                    <image src="https://xnt.xhwxpos.com/mining/static/images/gif-over.png" mode="widthFix"></image>
-                    <button class="btn_digging btn_gray">礼品已被挖光</button>
-                </view>
-            </view>
+        <view class='dig_treasure'>
+            <dig_treasure 
+                mainInfo="{{mainInfo}}" 
+                winning="{{winning}}" 
+                digging="{{digging}}"
+                diggingCd="{{diggingCd}}"  
+                canDiggingCd="{{canDiggingCd}}" 
+                digNothing="{{digNothing}}" 
+                giftNone="{{giftNone}}"
+                bind:diggerGiftHandle="diggerGiftHandle"
+                bind:toggleSharePop = "toggleSharePop"
+                >
+                </dig_treasure>
         </view>
         <view class="ul-list" wx:if="{{mainInfo.status != -1}}">
             <ul class="clearfix">
@@ -243,7 +186,6 @@
 </view>
 
 <!--分享到朋友圈 -->
-<!-- https://xnt.xhwxpos.com/mining/upload/20180729/oNEDDjpNEAJQZR2kNn0x6b8pC4Bs.jpg -->
 <view class='modalCover' wx:if="{{friendStatus}}">
     <view class='modalBody'>
         <view class='close' bindtap='closeFriend'>
@@ -253,5 +195,76 @@
             <image src='{{friendUrl}}' mode='aspectFit'></image>
         </view>
         <text>点击预览大图（保存大图分享到朋友圈）</text>
+    </view>
+</view>
+<!-- 我的道具列表 -->
+<view class='coverProperty cover' wx:if="{{propertyStatus}}">
+    <view class='propertyBox'>
+        <view class='propHeader'>
+            <view class='btn' bindtap='operCover' data-style="exchange">兑换</view>
+            <view>我的道具</view>
+            <view class='btn'><navigator url="/pages/propShopping/propShopping">购买</navigator></view>
+        </view>
+        <view class='propertyList'>
+            <view class='item'>
+            <form  bindsubmit="useTools" report-submit="true" data-tools_id="456">
+                    <view class='form'>
+                        <view class='img'>
+                            <image src='/images/icon-score.png'></image>
+                        </view>
+                        <view class='info'>
+                            <view class='title'>自动铲子</view>
+                            <view class='txt'>完成冷却后可自动挖宝</view>
+                        </view>                        
+                        <button formType="submit" class='button'>Submit</button>
+                    </view>
+                </form>
+                <form bindsubmit="useTools" report-submit="true"  wx:for="{{propertyList}}" wx:key="{{index}}">
+                    <view class='form'>
+                        <view class='img'>
+                            <image src='{{item.pic}}'></image>
+                        </view>
+                        <view class='info'>
+                            <view class='title'>{{item.tools_name}}</view>
+                            <view class='txt'>{{item.tools_explain}}</view>
+                        </view>
+                        <button formType="submit" class='button'>Submit</button>
+                    </view>
+                </form>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class='cover' wx:if="{{exchangeStatus}}">
+    <view class='coverBox exchangeBox'>
+        <form report-submit="true" bindsubmit="exchangeTools">
+            <view class='header'>
+                <text>请输入兑换码</text>
+            </view>
+            <view class='copy'>
+                <input placeholder='兑换码' name="keycode"></input>
+            </view>
+            <view class='question'  catchtap='operCover' data-style="getCodeIntro"><image src='/images/question.png'></image>如何获得兑换码</view>
+            <view class='btnBox'>
+                <view class='btn' data-style="exchange" catchtap='operCover' >取消</view> 
+                <button class='btn' formType="submit">确认</button>  
+            </view>
+        </form>
+    </view>
+</view>
+
+<view class='cover' wx:if="{{getCodeIntroStatus}}">
+    <view class='coverBox getCodeIntroBox'>
+        <view class='header headerCenter'>
+            <text>如何获取兑奖码</text>
+        </view>
+        <view class='getCodeIntro'>
+            <text>备案流程冗长，平台安全防护能力不足，可扩展性不够？滴滴云备案系统专人全流程指导备案，提供证书、WAF、DDOS高防IP等安全服务，有效保障网站安全，同时提供丰富镜像，支持随需扩展资源。备案流程冗长，平台安全防护能力不足，可扩展性不够？滴滴云备案系统专人全流程指导备案，提供证书、WAF、DDOS高防IP等安全服务，有效保障网站安全，同时提供丰富镜像，支持随需扩展资源。备案流程冗长，平台安全防护能力不足，可扩展性不够？滴滴云备案系统专人全流程指导备案，提供证书、WAF、DDOS高防IP等安全服务，有效保障网站安全，同时提供丰富镜像，支持随需扩展资源。备案流程冗长，平台安全防护能力不足，可扩展性不够？滴滴云备案系统专人全流程指导备案，提供证书、WAF、DDOS高防IP等安全服务，有效保障网站安全，同时提供丰富镜像，支持随需扩展资源。</text>
+            
+        </view>
+        <view class='close' bindtap='operCover' data-style="getCodeIntro">
+            <image src='/images/icon-close.png'></image>
+        </view>
     </view>
 </view>

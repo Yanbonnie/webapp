@@ -42,19 +42,23 @@ function resetData(args) {
         ],
         timeText: '',
 
-        winning: false,          //挖宝中或中奖
-        digging:false,           //true  挖宝中    false  中奖   结合winning
-        diggingCd: false,        //冷却中
-        canDiggingCd:false,      //可挖宝
-        digNothing: false,       //什么也没挖到
-        giftNone:false,          //礼品被挖光
+        winning: false,                       //挖宝中或中奖
+        digging: false,                       //true  挖宝中    false  中奖   结合winning
+        diggingCd: false,                     //冷却中
+        canDiggingCd: false,                  //可挖宝
+        digNothing: false,                    //什么也没挖到
+        giftNone: false,                      //礼品被挖光
         hasMoreUser: false,
         showFields: false,
         showPrizeListFlag: false,
         showAddress: false,
         showShareDialog: false,
-        friendUrl:'',
-        friendStatus:false
+        friendUrl: '',                        //分享的图片地址
+        friendStatus: false,                  //分享到朋友圈
+        propertyStatus: false,                //道具弹框
+        propertyList: [],                     //道具数组  tools_id-道具ID tools_name-道具名  tools_type-道具类型 （1自动铲子） tools_num-道具数量  pic-道具图标
+        exchangeStatus:false,                 //兑奖弹框状态
+        getCodeIntroStatus:false,              //获取兑奖码介绍
     }
 }
 
@@ -66,18 +70,20 @@ Page({
         });
     },
     //预览大图
-    previewImg(e){
-        const { img } = e.currentTarget.dataset;
+    previewImg(e) {
+        const {
+            img
+        } = e.currentTarget.dataset;
         wx.previewImage({
             urls: [img],
         })
     },
     //分享到朋友圈
-    toggleShareFriend(){
+    toggleShareFriend() {
         var that = this;
         wx.showLoading({
             title: '加载中...',
-            mask:true
+            mask: true
         })
         app.api.requestHandle({
             url: app.api.stringifyUrl({
@@ -87,17 +93,17 @@ Page({
                 unionid: that.data.userInfo.unionid,
                 code: that.data.options.code,
             },
-            success: function (res) {
+            success: function(res) {
                 wx.hideLoading();
                 let data = res.data;
-                if(data.status == 0){
+                if (data.status == 0) {
                     that.setData({
-                        friendUrl:data.url,
-                        friendStatus:true
+                        friendUrl: data.url,
+                        friendStatus: true
                     })
                 }
             },
-            fail: function (err) {
+            fail: function(err) {
                 app.hideLoading();
                 app.dialog({
                     content: err.errMsg || app.globalData.errMsgText
@@ -105,36 +111,40 @@ Page({
             }
         });
     },
-    closeFriend(){
+    closeFriend() {
         this.setData({
-            friendStatus:false
+            friendStatus: false
         })
     },
     toggleSharePop: function() {
-        const { canDiggingCd } = this.data;
-        if (!canDiggingCd){
+        const {
+            canDiggingCd
+        } = this.data;
+        if (!canDiggingCd) {
             this.setData({
                 showShareDialog: !this.data.showShareDialog
             });
-        }else{
+        } else {
             //调用挖宝接口
             this.setData({
-                'mainInfo.is_cd':1,     //冷却
+                'mainInfo.is_cd': 1, //冷却
                 winning: true,
                 digging: true,
-                canDiggingCd:false,
-                canDiggingCd:false,
-                digNothing:false,
-                giftNone:false
+                canDiggingCd: false,
+                canDiggingCd: false,
+                digNothing: false,
+                giftNone: false
             })
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.miningTask();
-            },2000)
+            }, 2000)
         }
     },
     //挖宝接口
-    miningTask(){
-        const { is_manage } = this.data.mainInfo;
+    miningTask() {
+        const {
+            is_manage
+        } = this.data.mainInfo;
         var that = this;
         var queryData = {
             code: that.data.options.code,
@@ -144,13 +154,13 @@ Page({
         if (queryData.is_share == 1) {
             queryData.from_unionid = that.data.options.from_unionid;
         }
-        
+
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/miningTask'
             }),
             data: queryData,
-            success: function (res) {
+            success: function(res) {
                 // console.info(res);
                 app.hideLoading();
                 that.setData({
@@ -184,30 +194,30 @@ Page({
                         hasMoreUser: true
                     });
                 }
-                
+
                 //中奖
                 if (mainInfo.is_prize == 1) {
                     that.setData({
                         winning: true,
-                        digging: false,                        
+                        digging: false,
                         diggingCd: false,
                         canDiggingCd: false,
                         digNothing: false,
                         gitNone: false,
                     });
                     if (mainInfo.is_draw == 0) {
-                        setTimeout(function () {
+                        setTimeout(function() {
                             // 如果是实物
-                            if (mainInfo.goods_type == 2) {                                
-                                if (mainInfo.draw_type == 2) {   //如果是邮寄
+                            if (mainInfo.goods_type == 2) {
+                                if (mainInfo.draw_type == 2) { //如果是邮寄
                                     that.toggleAddressPop(true);
-                                } else {   // 如果是现场
+                                } else { // 如果是现场
                                     app.dialog({
                                         title: '领奖提示',
                                         content: mainInfo.draw_info
                                     });
                                 }
-                            }else{  //红包
+                            } else { //红包
                                 setTimeout(() => {
                                     app.dialog({
                                         title: '领奖提示',
@@ -217,40 +227,40 @@ Page({
                             }
                         }, 1500);
                     }
-                } else {   //没中奖
+                } else { //没中奖
                     that.setData({
                         winning: false,
-                        diggingCd:false,
-                        canDiggingCd:false,
-                        digNothing:true,
-                        gitNone:false,
+                        diggingCd: false,
+                        canDiggingCd: false,
+                        digNothing: true,
+                        gitNone: false,
                     })
-                    setTimeout(()=>{
-                        if (mainInfo.status == 0) {     //项目进项中....
-                            if (mainInfo.is_cd == 1) {  //冷却倒计时
+                    setTimeout(() => {
+                        if (mainInfo.status == 0) { //项目进项中....
+                            if (mainInfo.is_cd == 1) { //冷却倒计时
                                 that.runCountdownTime(mainInfo.time);
                                 that.setData({
                                     winning: false,
-                                    canDiggingCd:false,
-                                    digNothing:false,
-                                    gitNone:false,
+                                    canDiggingCd: false,
+                                    digNothing: false,
+                                    gitNone: false,
                                 })
                             }
-                        } else {  //项目结束
+                        } else { //项目结束
                             that.setData({
                                 giftNone: true,
-                                winning:false,
+                                winning: false,
                                 canDiggingCd: false,
                                 diggingCd: false,
                                 digNothing: false,
                             })
                         }
-                    },3000)
+                    }, 3000)
                 }
 
-                
+
             },
-            fail: function (err) {
+            fail: function(err) {
                 app.hideLoading();
                 app.dialog({
                     content: err.errMsg || app.globalData.errMsgText
@@ -259,15 +269,17 @@ Page({
         });
     },
     //挖到宝提示
-    diggerGiftHandle(){
-        const { mainInfo } = this.data;
+    diggerGiftHandle() {
+        const {
+            mainInfo
+        } = this.data;
         if (mainInfo.goods_type == 2) {
-            if (mainInfo.draw_type == 2) {   //如果是邮寄
+            if (mainInfo.draw_type == 2) { //如果是邮寄
                 app.dialog({
                     title: '领奖提示',
                     content: '请等待商家发货信息'
                 });
-            } else {   // 如果是现场
+            } else { // 如果是现场
                 app.dialog({
                     title: '领奖提示',
                     content: mainInfo.draw_info
@@ -285,13 +297,13 @@ Page({
             showFields: !this.data.showFields
         });
     },
-    tapManagePrizeInfo: function (event){
+    tapManagePrizeInfo: function(event) {
         var that = this;
         var type = event.currentTarget.dataset.type;
         var idx = event.currentTarget.dataset.idx;
         var winnerList = that.data.winnerList;
         var item = winnerList[idx];
-        
+
         app.showLoading({
             title: '请稍候'
         });
@@ -302,9 +314,9 @@ Page({
             }),
             data: {
                 unionid: that.data.userInfo.unionid,
-              code: that.data.options.code,
-              id: item.id,
-              status: item.status
+                code: that.data.options.code,
+                id: item.id,
+                status: item.status
             },
             success: function(res) {
                 // console.info(res);
@@ -320,7 +332,7 @@ Page({
                 }
 
                 var newData = {};
-              newData['winnerList[' + idx + '].status'] = data.data.status;
+                newData['winnerList[' + idx + '].status'] = data.data.status;
                 newData['winnerList[' + idx + '].time'] = data.data.time;
                 that.setData(newData);
             },
@@ -341,12 +353,12 @@ Page({
         ajaxParam.code = that.data.options.code;
         ajaxParam.unionid = that.data.userInfo.unionid;
 
-        if(!ajaxParam.name || reg.test(ajaxParam.name)){
-                app.dialog({
-                    content: '请填写收货人姓名！'
-                });
-                return;
-        } 
+        if (!ajaxParam.name || reg.test(ajaxParam.name)) {
+            app.dialog({
+                content: '请填写收货人姓名！'
+            });
+            return;
+        }
         if (!ajaxParam.mobile || reg.test(ajaxParam.mobile)) {
             app.dialog({
                 content: '请填写联系电话！'
@@ -368,7 +380,7 @@ Page({
 
         // console.log(ajaxParam);
         // return;
-        
+
         app.confirm({
             title: '提示',
             content: '是否确认提交收件地址？',
@@ -434,6 +446,7 @@ Page({
         });
     },
     getPosts: function(args) {
+        console.log(args.showToastFlag)
         var that = this;
         var param = args.param;
         var success = args.success;
@@ -450,10 +463,10 @@ Page({
             is_share: that.data.options.is_share || 0
         };
 
-        if(queryData.is_share == 1) {
+        if (queryData.is_share == 1) {
             queryData.from_unionid = that.data.options.from_unionid;
         }
-
+        // return;
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getTaskDetails'
@@ -466,7 +479,6 @@ Page({
                 });
 
                 var data = res.data;
-
                 if (!data || typeof data === 'string' || data.status != 0) {
                     that.getPostsFail((data || '').msg, param, fail);
                     return;
@@ -481,7 +493,7 @@ Page({
                 // mainInfo.draw_type = 2;
                 // mainInfo.is_cd = 0;
                 // mainInfo.is_prize = 1;
-                
+
                 that.setData({
                     mainInfo: mainInfo,
                     userList: mainInfo.user || []
@@ -491,37 +503,37 @@ Page({
                         hasMoreUser: true
                     });
                 }
-                if(mainInfo.is_prize){  //中奖
+                if (mainInfo.is_prize) { //中奖
                     that.setData({
-                        digging:false,
-                        winning:true
+                        digging: false,
+                        winning: true
                     })
-                    if (mainInfo.goods_type == 2 && mainInfo.draw_type == 1){
+                    if (mainInfo.goods_type == 2 && mainInfo.draw_type == 1) {
                         app.dialog({
                             title: '领奖提示',
                             content: mainInfo.draw_info
                         });
                     }
-                }else{ //未中奖
-                    if (mainInfo.status == 0) {     //项目进项中....
-                        if (mainInfo.is_cd == 1) {  //冷却倒计时
+                } else { //未中奖
+                    if (mainInfo.status == 0) { //项目进项中....
+                        if (mainInfo.is_cd == 1) { //冷却倒计时
                             that.runCountdownTime(mainInfo.time);
                             that.setData({
                                 winning: false
                             })
-                        } else {   //可挖宝  is_cd = 0
+                        } else { //可挖宝  is_cd = 0
                             that.setData({
                                 winning: false,
-                                canDiggingCd:true
+                                canDiggingCd: true
                             })
                         }
-                    }else{  //项目结束
+                    } else { //项目结束
                         that.setData({
-                            giftNone:true
+                            giftNone: true
                         })
                     }
                 }
-                
+
                 // if(mainInfo.status == 0) {
                 //     if (mainInfo.is_cd == 1) {
                 //         that.runCountdownTime(mainInfo.time);
@@ -559,7 +571,7 @@ Page({
                 //                 digging: false
                 //             })
                 //         }, 2000)
-                    // }
+                // }
                 // }
             },
             fail: function(err) {
@@ -599,7 +611,7 @@ Page({
             }
         });
     },
-    getPayTask: function (args){
+    getPayTask: function(args) {
         var that = this;
         app.showLoading({
             title: '请稍后'
@@ -635,7 +647,7 @@ Page({
             }
         });
     },
-    tapPayTask: function (){
+    tapPayTask: function() {
         var that = this;
         that.getPayTask({
             money: that.data.mainInfo.money,
@@ -643,7 +655,7 @@ Page({
         });
     },
     // 倒计时
-    runCountdownTime: function (leftTime){
+    runCountdownTime: function(leftTime) {
         var that = this;
         clearInterval(ountdownTimeTimer);
         leftTime = parseInt(leftTime || that.data.detail.time);
@@ -652,22 +664,22 @@ Page({
         }
 
         that.renderOuntdownTime(leftTime);
-        ountdownTimeTimer = setInterval(function (){
+        ountdownTimeTimer = setInterval(function() {
             leftTime -= 1;
             that.renderOuntdownTime(leftTime);
-            if(leftTime <= 0){
+            if (leftTime <= 0) {
                 clearInterval(ountdownTimeTimer);
                 // that.reload({
                 //     showToastFlag: true
                 // });
                 that.setData({
-                    canDiggingCd:true,
-                    diggingCd:false
+                    canDiggingCd: true,
+                    diggingCd: false
                 })
             }
-        }, 1000);        
+        }, 1000);
     },
-    renderOuntdownTime: function (leftTime){
+    renderOuntdownTime: function(leftTime) {
         var that = this;
         that.setData({
             time: leftTime,
@@ -853,7 +865,7 @@ Page({
                     })
                 },
                 fail: function(err) {
-                    if(err.Msg != 'chooseAddress:fail cancel'){
+                    if (err.Msg != 'chooseAddress:fail cancel') {
                         app.dialog({
                             content: '授权失败，请删除小程序后再次进入重新授权！'
                         })
@@ -868,7 +880,7 @@ Page({
         if (!args) {
             args = {};
         }
-
+        console.log(args)
         var that = this;
 
         that.getPosts({
@@ -906,17 +918,17 @@ Page({
     onShow: function() {
         var that = this;
         app.checkIsAuthorize({
-            success: function(){
-                if(!that.data.contentReady){
+            success: function() {
+                console.log(that.data.contentReady)
+                if (!that.data.contentReady) {
                     that.reload({
-                        showToastFlag: true
+                        showToastFlag: false
                     });
                 }
             }
         });
     },
-    onHide: function() {
-    },
+    onHide: function() {},
     onLoad: function(options) {
         var that = this;
 
@@ -924,7 +936,6 @@ Page({
         // options = {
         //     code: '7a566a469929cc89590de80161ed3e7e'
         // };
-
         that.setData({
             options: options
         });
@@ -934,7 +945,7 @@ Page({
         var userInfo = wx.getStorageSync('user_info') || {};
         // var path = 'pages/details/details?code=' + that.options.code;
         var path = 'pages/index/index?code=' + that.options.code;
-        if(that.data.mainInfo.status == 0){
+        if (that.data.mainInfo.status == 0) {
             path += '&is_share=1&from_unionid=' + userInfo.unionid;
         }
         return {
@@ -944,7 +955,7 @@ Page({
         }
     },
     //修改倒计时
-    modifyTimeHandle(){
+    modifyTimeHandle() {
         var that = this;
         app.api.requestHandle({
             url: app.api.stringifyUrl({
@@ -954,22 +965,146 @@ Page({
                 unionid: that.data.userInfo.unionid,
                 code: that.data.options.code,
             },
-            success: function (res) {
+            success: function(res) {
                 // console.info(res);
                 app.hideLoading();
                 let data = res.data;
-                if(data.status == 0){
-                    const { time } = data;
+                if (data.status == 0) {
+                    const {
+                        time
+                    } = data;
                     that.runCountdownTime(time);
                 }
 
             },
-            fail: function (err) {
+            fail: function(err) {
                 app.hideLoading();
                 app.dialog({
                     content: err.errMsg || app.globalData.errMsgText
                 });
             }
         });
+    },
+    //获取我的道具
+    getMytools() {
+        this.setData({
+            propertyStatus:true
+        })
+        return;
+        wx.showLoading({
+            title: '加载中...',
+        })
+        app.api.requestHandle({
+            url: app.api.stringifyUrl({
+                path: '/wxapp/Index/getMytools'
+            }),
+            data: {
+                unionid: this.data.userInfo.unionid,
+                code: this.data.options.code,
+            },
+            success: res => {
+                wx.hideLoading();
+                let data = res.data;
+                if (data.status == 0) {
+                    this.setData({
+                        propertyList: data.data,
+                        propertyStatus: true
+                    })
+                } else {
+                    wx.showToast({
+                        title: data.msg || '出错了',
+                        icon: 'none'
+                    })
+                }
+            }
+        });
+    },
+    //使用道具
+    useTools(e) {
+        const {
+            formId
+        } = e.detail;
+        const {
+            tools_id
+        } = e.currentTarget.dataset;
+        app.api.requestHandle({
+            url: app.api.stringifyUrl({
+                path: '/wxapp/Index/useTools'
+            }),
+            data: {
+                unionid: this.data.userInfo.unionid,
+                code: this.data.options.code,
+                formId,
+                tools_id
+            },
+            success: res => {
+                let data = res.data;
+                if (data.status == 0) {
+                    wx.showToast({
+                        title: '成功使用道具',
+                        icon: 'success',
+                        mask: true
+                    })
+                } else {
+                    wx.showToast({
+                        title: data.msg || '出错了',
+                        icon: 'none',
+                        mask: true
+                    })
+                }
+            }
+        });
+    },
+    // 兑换道具接口
+    exchangeTools(e) {
+        const { formId } = e.detail;
+        const { keycode } = e.detail.value;
+        app.api.requestHandle({
+            url: app.api.stringifyUrl({
+                path: '/wxapp/Index/exchangeTools'
+            }),
+            data: {
+                unionid: this.data.userInfo.unionid,
+                code: this.data.options.code,
+                formId,
+                keycode
+            },
+            success: res => {
+                let data = res.data;
+                if (data.status == 0) {
+                    this.setData({
+                        exchangeStatus:false
+                    })
+                    wx.showToast({
+                        title: '成功兑换道具',
+                        icon: 'success',
+                        mask: true
+                    })
+                    //获取我的道具
+                    this.getMytools();
+                } else {
+                    wx.showToast({
+                        title: data.msg || '出错了',
+                        icon: 'none',
+                        mask: true
+                    })
+                }
+            }
+        });
+    },
+    operCover(e){
+        console.log(e)
+        const { style } = e.currentTarget.dataset;
+        if (style == 'getCodeIntro'){  //兑换码提示弹框
+            this.setData({
+                getCodeIntroStatus: !this.data.getCodeIntroStatus
+            })
+        } else if (style == 'exchange'){
+            this.setData({
+                exchangeStatus: !this.data.exchangeStatus
+            })
+        }
+        
     }
+
 });

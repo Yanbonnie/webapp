@@ -1,0 +1,2 @@
+/* components/dig_treasure.wxss */
+@import '../../pages/details/details.wxss';

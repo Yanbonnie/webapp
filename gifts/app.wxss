@@ -11,7 +11,14 @@ page {
 image {
     height: auto;
 }
-
+button::after{
+    border:none;
+}
+input{
+    outline:none;
+    border:none;
+    list-style: none;
+}
 .container {
     height: 100%;
     display: flex;
@@ -251,4 +258,37 @@ textarea {
 
 .va_m {
     vertical-align: middle;
+}
+
+
+
+/* 弹窗 */
+.cover{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background: rgba(0,0,0,0.8);
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.coverBox{
+    width: 580rpx;
+    background: #fff;
+    border-radius: 8rpx;
+}   
+.coverBox .header{
+    height: 100rpx;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20rpx 0 20rpx;
+    align-items: center;
+    border-bottom: 1px #fdfdfd solid;
+}
+.coverBox .headerCenter{
+    justify-content: center;
 }

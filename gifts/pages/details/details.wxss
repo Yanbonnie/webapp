@@ -90,7 +90,9 @@
     -webkit-box-orient: vertical;
 }
 
-.detail .extend_fields {}
+.dig_treasure{
+    height: 330rpx;
+}
 
 .participant {
     background: #fff;
@@ -429,6 +431,7 @@
     width: 100%;
 }
 .modalBody text{
+    padding-top: 30rpx;
     font-size: 28rpx;
     width: 100%;
     display: block;
@@ -446,3 +449,164 @@
     width: 50rpx;
     height: 50rpx;
 }
+
+
+/* 道具 */
+.coverProperty{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+    background: rgba(0,0,0,0.8);
+}
+.propertyBox{
+    width: 600rpx;
+    height: 800rpx;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -300rpx;
+    margin-top: -400rpx;
+    background: #fff;
+    border-radius: 8rpx;
+    display: flex;
+    flex-direction: column;
+
+}
+.propertyBox .propHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100rpx;
+    padding: 0 20rpx;
+}
+.propertyBox .propHeader .btn{
+    width: 120rpx;
+    height: 60rpx;
+    border-radius: 8rpx;
+    background: #fde23d;
+    text-align: center;
+    line-height: 60rpx;
+    color: #4a4a4a;
+    
+}
+
+/* 道具列表 */
+.propertyList .item .form{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    padding: 10rpx 20rpx;
+    border-bottom: 1px #f5f5f5 solid;
+    position: relative;
+}
+.propertyList .item .form .img{
+    flex-basis: 130rpx;
+    height: 100rpx;
+}
+.propertyList .img image{
+    width: 100rpx;
+    height: 100rpx;
+}
+.propertyList .info{
+    flex-grow: 1;
+}
+.propertyList .info .title{
+    font-size: 32rpx;
+    color: #000;
+}
+.propertyList .info  .txt{
+    color: #acacac;
+    font-size: 24rpx;
+}
+.propertyList .button{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.exchangeBox{
+    padding:0 50rpx;
+}
+.exchangeBox .copy{
+    width: 100%;
+    height: 80rpx;
+    border: 1px #f5f5f5 solid;
+    border-radius: 8rpx;
+    padding-left: 20rpx;
+}
+.exchangeBox .copy input{
+    margin-top: 10rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+}
+.exchangeBox .question{
+    padding: 20rpx 0;
+    color: #acacac;
+}
+.exchangeBox .question image{
+    width: 40rpx;
+    height: 40rpx;
+    float: left;
+    margin-right: 10rpx;
+}
+.exchangeBox .btnBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 150rpx;
+    padding-bottom: 20rpx;
+}
+.exchangeBox .btnBox view,.exchangeBox .btnBox button{
+    height: 80rpx;
+    text-align: center;
+    width: 200rpx;
+    line-height: 80rpx;
+    border-radius: 8rpx;
+    box-sizing: border-box;
+    font-size: 36rpx;
+}
+
+.exchangeBox .btnBox view{
+    border:1px #bfbfbf solid;
+}
+.exchangeBox .btnBox button{
+    border:1px #fde23d solid ;
+    background: #fde23d;
+    color: #4a4a4a;
+    padding: 0;
+    display: block;
+    margin: 0;
+}
+.getCodeIntro{
+    max-height: 600rpx;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20rpx;
+    position: relative;
+}
+.getCodeIntro text{
+    line-height: 60rpx;
+}
+.getCodeIntroBox{
+    position: relative;
+}
+.getCodeIntroBox .close{
+    width:50rpx;
+    height: 50rpx;
+    position: absolute;
+    bottom: -90rpx;
+    left: 50%;
+    margin-left: -30rpx;
+}
+.getCodeIntroBox .close image{
+    width: 100%;
+    height: 100%;
+}
+
