@@ -10,7 +10,21 @@
                 <view class='title'>自动铲子</view>
                 <view class='txt'>完成冷却后可自动挖宝</view>
             </view>
-            <view class='buyBox'>
+            <view class='buyBox' data-tools_id="456" bindtap='payTools'>
+                <view class='btn'>购买</view>
+            </view>
+        </view>
+    </view>
+    <view class='item' wx:for="{{toolList}}" wx:key="{{index}}">
+        <view class='form'>
+            <view class='img'>
+                <image src='/images/icon-score.png'></image>
+            </view>
+            <view class='info'>
+                <view class='title'>{{item.name}}</view>
+                <view class='txt'>{{item.explain}}</view>
+            </view>
+            <view class='buyBox' data-tools_id="{{item.tools_id}}" bindtap='payTools'>
                 <view class='btn'>购买</view>
             </view>
         </view>

@@ -1,3 +1,4 @@
+@import '../start/start.wxss';
 .page {
     font-size: 30rpx;
 }
@@ -27,13 +28,27 @@
 
 .userlist-pic {
     width: 100%;
+    position: relative;
 }
 
 .userlist-pic image {
     width: 100%;
     height: auto;
 }
-
+.userlist-pic .rule_btn{
+    width: 100rpx;
+    height: 50rpx;
+    box-shadow: 0rpx 0rpx 10rpx #a3a1a1;
+    border-radius: 50rpx;
+    position: fixed;
+    right: 50rpx;
+    top: 50rpx;
+    text-align: center;
+    line-height: 50rpx;
+    font-size: 24rpx;
+    background: rgba(255,255,255,0.6);
+    z-index: 3;
+}
 .userlist-name {
     font-size: 38rpx;
     color: #333;
@@ -473,7 +488,17 @@
     border-radius: 8rpx;
     display: flex;
     flex-direction: column;
-
+}
+.propertyBox .close{
+    position: absolute;
+    width: 50rpx;
+    height: 50rpx;
+    right: -50rpx;
+    top: -50rpx;
+}
+.propertyBox .close image{
+    width: 50rpx;
+    height: 50rpx;
 }
 .propertyBox .propHeader{
     display: flex;

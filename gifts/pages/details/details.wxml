@@ -4,6 +4,7 @@
 <view class="page" > <!--hidden="{{!contentReady || contentErrText}}"-->
     <view class="userlist-pic">
         <image src="{{mainInfo.pic}}" bindtap='previewImg' mode="widthFix" data-img="{{mainInfo.pic}}"></image>
+        <view class="rule_btn" data-style="rule" catchtap='operCover'>规则</view>
     </view>
     <view class="userlist pos_r border_bottom" id='{{mainInfo.id}}'>
         <view class="userlist-name">
@@ -200,6 +201,7 @@
 <!-- 我的道具列表 -->
 <view class='coverProperty cover' wx:if="{{propertyStatus}}">
     <view class='propertyBox'>
+        <view class='close' catchtap='operCover' data-style="propertyList"><image src='/images/close.png'></image></view>
         <view class='propHeader'>
             <view class='btn' bindtap='operCover' data-style="exchange">兑换</view>
             <view>我的道具</view>
@@ -235,7 +237,7 @@
         </view>
     </view>
 </view>
-
+<!-- 兑换码兑换弹框 -->
 <view class='cover' wx:if="{{exchangeStatus}}">
     <view class='coverBox exchangeBox'>
         <form report-submit="true" bindsubmit="exchangeTools">
@@ -253,7 +255,7 @@
         </form>
     </view>
 </view>
-
+<!-- 获取兑奖码说明 -->
 <view class='cover' wx:if="{{getCodeIntroStatus}}">
     <view class='coverBox getCodeIntroBox'>
         <view class='header headerCenter'>
@@ -268,3 +270,13 @@
         </view>
     </view>
 </view>
+
+<!-- 活动规则 -->
+<swiper class='swiper' wx:if="{{swiperStatus}}" indicator-dots="true" indicator-color="#ffffff" indicator-active-color="#fde763"> 
+  <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image" mode='aspectFill' bindtap='goDigging' data-index="{{index}}"/>
+      <button class="button" bindtap='operCover' data-style="rule">开始探索</button>
+    </swiper-item>
+  </block>
+</swiper>

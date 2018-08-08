@@ -1,7 +1,7 @@
 //获取应用实例
 var app = getApp();
 var ountdownTimeTimer;
-
+let imgUrls = ['https://xnt.xhwxpos.com/mining/static/images/rule1.png', 'https://xnt.xhwxpos.com/mining/static/images/rule2.png', 'https://xnt.xhwxpos.com/mining/static/images/rule3.png']
 function resetData(args) {
     if (!args) {
         args = {};
@@ -59,6 +59,8 @@ function resetData(args) {
         propertyList: [],                     //道具数组  tools_id-道具ID tools_name-道具名  tools_type-道具类型 （1自动铲子） tools_num-道具数量  pic-道具图标
         exchangeStatus:false,                 //兑奖弹框状态
         getCodeIntroStatus:false,              //获取兑奖码介绍
+        swiperStatus:false,                   //活动规则
+        imgUrls: imgUrls
     }
 }
 
@@ -345,6 +347,7 @@ Page({
         });
     },
     confirmSendNews: function(event) {
+        const { formId } = event.detail;
         var that = this;
         var ajaxParam = app.common.extend(true, {}, event.detail.value || {});
         var reg = /^\s+$/ig;
@@ -352,6 +355,7 @@ Page({
 
         ajaxParam.code = that.data.options.code;
         ajaxParam.unionid = that.data.userInfo.unionid;
+        ajaxParam.formId = formId;
 
         if (!ajaxParam.name || reg.test(ajaxParam.name)) {
             app.dialog({
@@ -446,12 +450,11 @@ Page({
         });
     },
     getPosts: function(args) {
-        console.log(args.showToastFlag)
         var that = this;
         var param = args.param;
         var success = args.success;
         var fail = args.fail;
-
+        args.showToastFlag = true;
         if (args.showToastFlag) {
             app.showLoading({
                 title: '请稍候'
@@ -880,7 +883,6 @@ Page({
         if (!args) {
             args = {};
         }
-        console.log(args)
         var that = this;
 
         that.getPosts({
@@ -919,10 +921,13 @@ Page({
         var that = this;
         app.checkIsAuthorize({
             success: function() {
-                console.log(that.data.contentReady)
                 if (!that.data.contentReady) {
                     that.reload({
                         showToastFlag: false
+                    });
+                }else{
+                    that.reload({
+                        showToastFlag: true
                     });
                 }
             }
@@ -1102,6 +1107,14 @@ Page({
         } else if (style == 'exchange'){
             this.setData({
                 exchangeStatus: !this.data.exchangeStatus
+            })
+        } else if (style == 'propertyList'){
+            this.setData({
+                propertyStatus: !this.data.propertyStatus
+            })
+        }else if ( style == 'rule'){
+            this.setData({
+                swiperStatus: !this.data.swiperStatus
             })
         }
         
