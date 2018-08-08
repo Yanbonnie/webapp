@@ -55,7 +55,12 @@ module.exports = {
                         wx.showModal({
                             title: '提示',
                             content: '没有关注公众号无法接收到挪车信息',
-                            showCancel:false
+                            showCancel:false,
+                            success:res=>{
+                                this.setData({
+                                    followState:true                                    
+                                })
+                            }
                         })
                     }
                 }
