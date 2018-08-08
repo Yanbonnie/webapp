@@ -6,15 +6,14 @@ Page({
      * 页面的初始数据
      */
     data: {
-
+        toolList: [],   //道具列表   name-道具名  explain-道具说明   num-道具数量  pic-道具图片
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-        console.log(options);
-        console.log(app)
+        this.getToolsList();
     },
     // 获取商城道具接口
     getToolsList(){
@@ -26,20 +25,12 @@ Page({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getToolsList'
             }),
-            data: {
-                unionid: this.data.userInfo.unionid,
-                code: this.data.options.code,
-                formId,
-                tools_id
-            },
             success: res => {
                 wx.hideLoading();
                 let data = res.data;
                 if (data.status == 0) {
-                    wx.showToast({
-                        title: '成功使用道具',
-                        icon: 'success',
-                        mask: true
+                    this.setData({
+                        toolList:data.data
                     })
                 } else {
                     wx.showToast({
