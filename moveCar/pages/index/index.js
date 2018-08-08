@@ -184,7 +184,7 @@ Page({
             url: '/pages/user/record/record',
         }) 
     },
-    //展示关注弹窗
+    //关闭关注弹窗
     showEwm(){
         this.setData({ followState:false})
     }

@@ -60,6 +60,12 @@
             <text class='iconfont icon-address'></text>
         </view>
     </view>
+    <view class='operBox' wx:if="{{editStatus || is_binding == 0 && !isfollow}}">
+        <view bindtap='replyHandle'>
+            <text  class="{{reply ? 'iconfont icon-squarecheck':'iconfont icon-square'}}"></text>
+            <text>是否接受回复</text>
+        </view>
+    </view>
 </view>
 <view class='BtnBox'>
     <view bindtap='editHandle' data-index="1" wx:if="{{!editStatus}}">
@@ -73,6 +79,10 @@
             修改
         </view>
     </block>
+</view>
+
+<view class='followCover' wx:if="{{followState}}"  bindtap='showEwm'>
+    <image src='/assets/images/guanzhu.png'></image>
 </view>
 
 

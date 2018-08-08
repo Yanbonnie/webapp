@@ -21,6 +21,8 @@ Page({
     data: {
         ...dataCom,
         editStatus: false,
+        followState:false,
+        reply: false,           //是否接收回复  true false
         // bannerList: [],
         // is_binding: 0,
         // cityState: false,
@@ -202,6 +204,25 @@ Page({
         }
 
 
+    },
+    //是否接收回复
+    replyHandle() {
+        let { isfollow, reply } = this.data;
+        if (!isfollow) {  //未关注
+            this.setData({
+                followState: true
+            })
+        } else {
+            reply = reply ? false : true;
+            this.setData({
+                reply
+            })
+        }
+
+    },
+    //关闭关注弹窗
+    showEwm() {
+        this.setData({ followState: false })
     },
     // getMsgCodeFn() {
     //     const { mobile, codeStatus } = this.data;
