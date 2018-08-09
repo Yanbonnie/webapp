@@ -127,6 +127,16 @@
     display: inline-block;
     font-size: 24rpx;
 }
+.participant .more text{
+    display: block;
+    width:24rpx;
+    height: 24rpx;
+    position: absolute;
+    background: #ff503f;
+    right: -6rpx;
+    top: -6rpx;
+    border-radius: 100%;
+}
 .participant .title {
     float: left;
     width: 130rpx;
@@ -319,7 +329,7 @@
     width: 100%;
 }
 
-.icon-score {
+/* .icon-score {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -334,7 +344,7 @@
 
 .icon-score .num {
     display: inline-block;
-}
+} */
 
 .ul-list {
     padding: 17rpx 0 0 25rpx;
@@ -476,14 +486,21 @@
     z-index: 100;
     background: rgba(0,0,0,0.8);
 }
+.dig_treasureBox{
+    position: absolute;
+    left: 0;
+    bottom: -330rpx;
+    width: 100%;
+    height: 330rpx;
+}
 .propertyBox{
     width: 600rpx;
-    height: 800rpx;
+    height: 700rpx;
     position: absolute;
     left: 50%;
     top: 50%;
     margin-left: -300rpx;
-    margin-top: -400rpx;
+    margin-top: -350rpx;
     background: #fff;
     border-radius: 8rpx;
     display: flex;
@@ -519,6 +536,11 @@
 }
 
 /* 道具列表 */
+.propertyList {
+    height: 580rpx;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
 .propertyList .item .form{
     display: flex;
     justify-content: space-between;
@@ -531,6 +553,15 @@
 .propertyList .item .form .img{
     flex-basis: 130rpx;
     height: 100rpx;
+    position: relative;
+}
+.propertyList .item .form .img .num{
+    position: absolute;
+    right: 10rpx;
+    bottom: 0rpx;
+    font-size: 24rpx;
+    background: rgba(255,255,255,0.6);
+    padding: 0 5rpx;
 }
 .propertyList .img image{
     width: 100rpx;

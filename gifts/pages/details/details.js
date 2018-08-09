@@ -60,7 +60,13 @@ function resetData(args) {
         exchangeStatus:false,                 //兑奖弹框状态
         getCodeIntroStatus:false,              //获取兑奖码介绍
         swiperStatus:false,                   //活动规则
-        imgUrls: imgUrls
+        imgUrls: imgUrls,
+        useToolsArr:[],                       //使用过的道具
+        animationTop:null,         
+        animationTopData: {},
+        animationBottom:null,
+        animationBottomData:{},
+
     }
 }
 
@@ -992,10 +998,10 @@ Page({
     },
     //获取我的道具
     getMytools() {
-        this.setData({
-            propertyStatus:true
-        })
-        return;
+        // this.setData({
+        //     propertyStatus:true
+        // })
+        // return;
         wx.showLoading({
             title: '加载中...',
         })
@@ -1024,8 +1030,36 @@ Page({
             }
         });
     },
+    animationHandle(val1,val2){
+        const { animationTop, animationBottom } = this.data;
+        animationTop.top(val1).step();
+        animationBottom.bottom(val2).step();
+        this.setData({
+            animationTopData: animationTop.export()
+        })
+        this.setData({
+            animationBottomData: animationBottom.export()
+        })
+    },
     //使用道具
     useTools(e) {
+        let animation = wx.createAnimation({
+            transformOrigin: "50% 50%",
+            duration: 500,
+            timingFunction: "ease-in",
+            delay: 0
+        })
+        let animation2 = wx.createAnimation({
+            transformOrigin: "50% 50%",
+            duration: 500,
+            timingFunction: "ease-in",
+            delay: 0
+        })
+        this.setData({
+            animationTop:animation,
+            animationBottom: animation2
+        })
+        this.animationHandle('38%',0)
         const {
             formId
         } = e.detail;
@@ -1112,6 +1146,7 @@ Page({
             this.setData({
                 propertyStatus: !this.data.propertyStatus
             })
+            this.animationHandle('50%', '-330rpx');
         }else if ( style == 'rule'){
             this.setData({
                 swiperStatus: !this.data.swiperStatus

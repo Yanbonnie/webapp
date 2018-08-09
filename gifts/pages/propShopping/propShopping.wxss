@@ -14,6 +14,15 @@ page{
 .propertyList .item .form .img{
     flex-basis: 130rpx;
     height: 100rpx;
+    position: relative;
+}
+.propertyList .img .num{
+    position: absolute;
+    right: 10rpx;
+    bottom: 0rpx;
+    font-size: 24rpx;
+    background: rgba(255,255,255,0.6);
+    padding: 0 5rpx;
 }
 .propertyList .img image{
     width: 100rpx;
@@ -43,7 +52,7 @@ page{
 
 }
 .propertyList .buyBox .btn{
-    padding-left: 20rpx;
+    margin-left: 20rpx;
     width: 120rpx;
     height: 60rpx;
     line-height: 60rpx;

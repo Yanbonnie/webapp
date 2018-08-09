@@ -1,7 +1,7 @@
 <!--pages/propShopping/propShopping.wxml-->
 
 <view class='propertyList'>
-    <view class='item'>
+    <!-- <view class='item'>
         <view class='form'>
             <view class='img'>
                 <image src='/images/icon-score.png'></image>
@@ -14,11 +14,12 @@
                 <view class='btn'>购买</view>
             </view>
         </view>
-    </view>
+    </view> -->
     <view class='item' wx:for="{{toolList}}" wx:key="{{index}}">
         <view class='form'>
             <view class='img'>
-                <image src='/images/icon-score.png'></image>
+                <image src='{{item.pic}}'></image>
+                <text class='num'>{{item.num}}</text>
             </view>
             <view class='info'>
                 <view class='title'>{{item.name}}</view>

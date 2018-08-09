@@ -31,6 +31,14 @@ Component({
         digging:{
             type:Boolean,
             value:false
+        },
+        timeText:{
+            type:String,
+            value:'59分59秒'
+        },
+        useTools:{
+            type:Array,
+            value:[]
         }
     },
 

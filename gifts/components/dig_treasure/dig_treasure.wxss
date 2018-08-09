@@ -1,2 +1,50 @@
 /* components/dig_treasure.wxss */
 @import '../../pages/details/details.wxss';
+
+.iconList{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100rpx;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.iconList .icon-score{
+    flex-basis: 60rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.iconList .icon-score-pic {
+    width: 30rpx;
+}
+@keyframes pulse {
+    0% {
+        transform: scale3d(1, 1, 1);
+    }
+
+    50% {
+        transform: scale3d(1.3, 1.3, 1.3);
+    }
+
+    100% {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.pulse {
+    -webkit-animation: pulse 1s ease-in infinite;
+    animation: pulse 1s ease-in infinite;
+}
+
+/* @keyframes headRotate{
+  0% {transform: rotate(0deg);}
+  50% {transform: rotate(180deg);}
+  100% {transform: rotate(360deg);}
+}
+.headRotate{
+    animation: headRotate 6s linear infinite;
+} */

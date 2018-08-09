@@ -6,6 +6,7 @@ Page({
      * 页面的初始数据
      */
     data: {
+        code:'',
         toolList: [],   //道具列表   name-道具名  explain-道具说明   num-道具数量  pic-道具图片
     },
 
@@ -13,6 +14,8 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
+        const { code } = options;
+        this.setData({ code })
         this.getToolsList();
     },
     // 获取商城道具接口
@@ -48,6 +51,10 @@ Page({
     // 购买道具
     payTools(e){
         const { tools_id } = e.currentTarget.dataset;
+        wx.showLoading({
+            title: '请稍等...',
+            mask:true
+        })
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/payTools'
@@ -56,10 +63,11 @@ Page({
                 tools_id
             },
             success: res => {
+                wx.hideLoading();
                 let data = res.data;
                 if(data.status == 0){
-                    const { nonceStr, paySign, signType, timeStamp } = data;
-                    const package2 = data.package
+                    const { appId,nonceStr, paySign, signType, timeStamp } = data.data;
+                    const package2 = data.data.package
                     wx.requestPayment({
                         timeStamp,
                         nonceStr,
@@ -68,9 +76,22 @@ Page({
                         paySign,
                         'success': res => {
                             //支付成功
-                            console.log("支付成功")
+                            const { code } = this.data
+                            wx.showModal({
+                                title: '支付成功',
+                                content: '是否跳转到详情页',
+                                cancelText:'继续购买',
+                                success:res=>{
+                                    if(res.confirm){
+                                        wx.navigateBack({
+                                            delta:1
+                                        })
+                                    }
+                                }
+                            })
                         },
                         'fail': res => {
+
                         }
                     })
                 }else{
