@@ -21,16 +21,19 @@ Page({
             title: '加载中...',
             mask:true
         })
-        app.api.requestHandle({
+        wx.request({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getToolsList'
             }),
-            success: res => {
+            data:{
+                key: app.api.appKey
+            },
+            success:res=>{
                 wx.hideLoading();
                 let data = res.data;
                 if (data.status == 0) {
                     this.setData({
-                        toolList:data.data
+                        toolList: data.data
                     })
                 } else {
                     wx.showToast({
@@ -40,7 +43,46 @@ Page({
                     })
                 }
             }
+        })
+    },
+    // 购买道具
+    payTools(e){
+        const { tools_id } = e.currentTarget.dataset;
+        app.api.requestHandle({
+            url: app.api.stringifyUrl({
+                path: '/wxapp/Index/payTools'
+            }),
+            data: {
+                tools_id
+            },
+            success: res => {
+                let data = res.data;
+                if(data.status == 0){
+                    const { nonceStr, paySign, signType, timeStamp } = data;
+                    const package2 = data.package
+                    wx.requestPayment({
+                        timeStamp,
+                        nonceStr,
+                        'package': package2,
+                        signType,
+                        paySign,
+                        'success': res => {
+                            //支付成功
+                            console.log("支付成功")
+                        },
+                        'fail': res => {
+                        }
+                    })
+                }else{
+                    wx.showToast({
+                        title: data.msg || '出错了',
+                        icon: 'none',
+                        mask: true
+                    })
+                }
+            }
         });
+
     },
     /**
      * 页面相关事件处理函数--监听用户下拉动作

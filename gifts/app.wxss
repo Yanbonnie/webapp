@@ -277,7 +277,7 @@ textarea {
     align-items: center;
 }
 .coverBox{
-    width: 580rpx;
+    width: 500rpx;
     background: #fff;
     border-radius: 8rpx;
 }   
