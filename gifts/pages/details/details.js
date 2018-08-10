@@ -198,6 +198,7 @@ Page({
                     mainInfo: mainInfo,
                     userList: mainInfo.user || []
                 });
+                that.getUsedTools();
                 if (mainInfo.user.length > 50) {
                     that.setData({
                         hasMoreUser: true
@@ -282,23 +283,36 @@ Page({
         const {
             mainInfo
         } = this.data;
-        if (mainInfo.goods_type == 2) {
-            if (mainInfo.draw_type == 2) { //如果是邮寄
+        if (mainInfo.is_draw == 0) {
+            if (mainInfo.goods_type == 2) {
+                if (mainInfo.draw_type == 2) { //如果是邮寄
+                    this.toggleAddressPop(true);
+                } else { // 如果是现场
+                    app.dialog({
+                        title: '领奖提示',
+                        content: mainInfo.draw_info
+                    });
+                }
+            }
+        }else{
+            if (mainInfo.goods_type == 2) {
+                if (mainInfo.draw_type == 2) { //如果是邮寄
+                    app.dialog({
+                        title: '领奖提示',
+                        content: '请等待商家发货信息'
+                    });
+                } else { // 如果是现场
+                    app.dialog({
+                        title: '领奖提示',
+                        content: mainInfo.draw_info
+                    });
+                }
+            } else {
                 app.dialog({
                     title: '领奖提示',
-                    content: '请等待商家发货信息'
-                });
-            } else { // 如果是现场
-                app.dialog({
-                    title: '领奖提示',
-                    content: mainInfo.draw_info
+                    content: '请到微信零钱查看红包'
                 });
             }
-        } else {
-            app.dialog({
-                title: '领奖提示',
-                content: '请到微信零钱查看红包'
-            });
         }
     },
     toggleFieldsBox: function() {
@@ -484,7 +498,7 @@ Page({
             data: queryData,
             success: function(res) {
                 // 获取我使用过的道具
-                that.getUsedTools();
+                
                 app.hideLoading();
                 that.setData({
                     contentReady: true
@@ -510,6 +524,7 @@ Page({
                     mainInfo: mainInfo,
                     userList: mainInfo.user || []
                 });
+                that.getUsedTools();
                 if (mainInfo.user.length > 50) {
                     that.setData({
                         hasMoreUser: true
@@ -520,12 +535,59 @@ Page({
                         digging: false,
                         winning: true
                     })
-                    if (mainInfo.goods_type == 2 && mainInfo.draw_type == 1) {
-                        app.dialog({
-                            title: '领奖提示',
-                            content: mainInfo.draw_info
-                        });
+                    // if (mainInfo.goods_type == 2 && mainInfo.draw_type == 1) {
+                    //     app.dialog({
+                    //         title: '领奖提示',
+                    //         content: mainInfo.draw_info
+                    //     });
+                    // }
+                    if(mainInfo.is_draw == 0){
+                        if (mainInfo.goods_type == 2) {
+                            if (mainInfo.draw_type == 2) { //如果是邮寄
+                                that.toggleAddressPop(true);
+                            } else { // 如果是现场
+                                app.dialog({
+                                    title: '领奖提示',
+                                    content: mainInfo.draw_info
+                                });
+                            }
+                        }
                     }
+
+                    // if (mainInfo.is_prize == 1) {
+                    //     that.setData({
+                    //         winning: true,
+                    //         digging: false,
+                    //         diggingCd: false,
+                    //         canDiggingCd: false,
+                    //         digNothing: false,
+                    //         gitNone: false,
+                    //     });
+                    //     if (mainInfo.is_draw == 0) {
+                    //         setTimeout(function () {
+                    //             // 如果是实物
+                    //             if (mainInfo.goods_type == 2) {
+                    //                 if (mainInfo.draw_type == 2) { //如果是邮寄
+                    //                     that.toggleAddressPop(true);
+                    //                 } else { // 如果是现场
+                    //                     app.dialog({
+                    //                         title: '领奖提示',
+                    //                         content: mainInfo.draw_info
+                    //                     });
+                    //                 }
+                    //             } else { //红包
+                    //                 setTimeout(() => {
+                    //                     app.dialog({
+                    //                         title: '领奖提示',
+                    //                         content: '请到微信零钱查看红包'
+                    //                     });
+                    //                 }, 1500)
+                    //             }
+                    //         }, 1500);
+                    //     }
+                    // }
+
+
                 } else { //未中奖
                     if (mainInfo.status == 0) { //项目进项中....
                         if (mainInfo.is_cd == 1) { //冷却倒计时
@@ -1184,7 +1246,6 @@ Page({
         });
     },
     operCover(e){
-        console.log(e)
         const { style } = e.currentTarget.dataset;
         if (style == 'getCodeIntro'){  //兑换码提示弹框
             this.setData({
@@ -1199,7 +1260,10 @@ Page({
                 propertyStatus: !this.data.propertyStatus,
                 bottomDigState:true
             })
-            this.animationHandle('50%', '-330rpx');
+            if(this.animation){
+                this.animationHandle('50%', '-330rpx');
+            }
+            
         }else if ( style == 'rule'){
             this.setData({
                 swiperStatus: !this.data.swiperStatus
