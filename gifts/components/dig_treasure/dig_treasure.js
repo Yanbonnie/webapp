@@ -31,14 +31,31 @@ Component({
         digging:{
             type:Boolean,
             value:false
+        },
+        timeText:{
+            type:String,
+            value:'59分59秒'
+        },
+        useToolsArr:{
+            type:Array,
+            value:[],
+            // observer:(newVal, oldVal)=>{
+            //     console.log(newVal);
+            //     console.log(oldVal)
+            // }
         }
     },
-
+    attached(){
+        // console.log(this.data.useToolsArr)
+        // this.setData({
+        //     'mainInfo.tools':122
+        // })
+    },
     /**
      * 组件的初始数据
      */
     data: {
-
+        
     },
 
     /**

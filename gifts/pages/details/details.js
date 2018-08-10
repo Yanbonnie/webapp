@@ -60,7 +60,16 @@ function resetData(args) {
         exchangeStatus:false,                 //兑奖弹框状态
         getCodeIntroStatus:false,              //获取兑奖码介绍
         swiperStatus:false,                   //活动规则
-        imgUrls: imgUrls
+        imgUrls: imgUrls,
+        useState:false,                        //是否可以使用
+        useCount:0,                           //使用的数量                    
+        bottomDigState:true,                  //底部挖宝是否显示
+        animationTop:null,         
+        animationTopData: {},
+        animationBottom:null,
+        animationBottomData:{},
+        scrollTopNum:0,
+
     }
 }
 
@@ -191,6 +200,7 @@ Page({
                     mainInfo: mainInfo,
                     userList: mainInfo.user || []
                 });
+                that.getUsedTools();
                 if (mainInfo.user.length > 50) {
                     that.setData({
                         hasMoreUser: true
@@ -275,23 +285,36 @@ Page({
         const {
             mainInfo
         } = this.data;
-        if (mainInfo.goods_type == 2) {
-            if (mainInfo.draw_type == 2) { //如果是邮寄
+        if (mainInfo.is_draw == 0) {
+            if (mainInfo.goods_type == 2) {
+                if (mainInfo.draw_type == 2) { //如果是邮寄
+                    this.toggleAddressPop(true);
+                } else { // 如果是现场
+                    app.dialog({
+                        title: '领奖提示',
+                        content: mainInfo.draw_info
+                    });
+                }
+            }
+        }else{
+            if (mainInfo.goods_type == 2) {
+                if (mainInfo.draw_type == 2) { //如果是邮寄
+                    app.dialog({
+                        title: '领奖提示',
+                        content: '请等待商家发货信息'
+                    });
+                } else { // 如果是现场
+                    app.dialog({
+                        title: '领奖提示',
+                        content: mainInfo.draw_info
+                    });
+                }
+            } else {
                 app.dialog({
                     title: '领奖提示',
-                    content: '请等待商家发货信息'
-                });
-            } else { // 如果是现场
-                app.dialog({
-                    title: '领奖提示',
-                    content: mainInfo.draw_info
+                    content: '请到微信零钱查看红包'
                 });
             }
-        } else {
-            app.dialog({
-                title: '领奖提示',
-                content: '请到微信零钱查看红包'
-            });
         }
     },
     toggleFieldsBox: function() {
@@ -476,6 +499,8 @@ Page({
             }),
             data: queryData,
             success: function(res) {
+                // 获取我使用过的道具
+                
                 app.hideLoading();
                 that.setData({
                     contentReady: true
@@ -501,6 +526,7 @@ Page({
                     mainInfo: mainInfo,
                     userList: mainInfo.user || []
                 });
+                that.getUsedTools();
                 if (mainInfo.user.length > 50) {
                     that.setData({
                         hasMoreUser: true
@@ -511,12 +537,19 @@ Page({
                         digging: false,
                         winning: true
                     })
-                    if (mainInfo.goods_type == 2 && mainInfo.draw_type == 1) {
-                        app.dialog({
-                            title: '领奖提示',
-                            content: mainInfo.draw_info
-                        });
+                    if(mainInfo.is_draw == 0){
+                        if (mainInfo.goods_type == 2) {
+                            if (mainInfo.draw_type == 2) { //如果是邮寄
+                                that.toggleAddressPop(true);
+                            } else { // 如果是现场
+                                app.dialog({
+                                    title: '领奖提示',
+                                    content: mainInfo.draw_info
+                                });
+                            }
+                        }
                     }
+
                 } else { //未中奖
                     if (mainInfo.status == 0) { //项目进项中....
                         if (mainInfo.is_cd == 1) { //冷却倒计时
@@ -536,46 +569,6 @@ Page({
                         })
                     }
                 }
-
-                // if(mainInfo.status == 0) {
-                //     if (mainInfo.is_cd == 1) {
-                //         that.runCountdownTime(mainInfo.time);
-                //     } else {
-                //         // 如果中奖了
-                //         if (mainInfo.is_prize == 1) {
-                //             that.setData({
-                //                 digging: true,
-                //                 winning: true
-                //             });
-                //             if(mainInfo.is_draw == 0){
-                //                 setTimeout(function (){
-                //                     // 如果是实物
-                //                     if(mainInfo.goods_type == 2){
-                //                         // 如果是现场
-                //                         if(mainInfo.draw_type == 2){
-                //                             that.toggleAddressPop(true);
-                //                         } else {
-                //                             app.dialog({
-                //                                 title: '领奖提示',
-                //                                 content: '请联系发布者微信索取礼品'
-                //                             });
-                //                         }
-                //                     }
-                //                 }, 3000);
-                //             }
-                //         } else {
-                //             that.setData({
-                //                 digging: true,
-                //                 digNothing: true
-                //             })
-                //         }
-                //         setTimeout(function() {
-                //             that.setData({
-                //                 digging: false
-                //             })
-                //         }, 2000)
-                // }
-                // }
             },
             fail: function(err) {
                 app.hideLoading();
@@ -944,6 +937,24 @@ Page({
         that.setData({
             options: options
         });
+        
+    },
+    onReady(){
+        var that = this;
+        wx.getSystemInfo({
+              success:  function (res)  {
+                  let windowHeight = res.windowHeight
+                  setTimeout(() => {
+                      var query = wx.createSelectorQuery();
+                      query.select('#the-id').boundingClientRect().exec(function (res2) {
+                          const { bottom, height } = res2[0]
+                          that.setData({
+                              scrollTopNum: bottom - windowHeight
+                          })
+                      })
+                  }, 600)
+              },
+            })        
     },
     onShareAppMessage: function() {
         var that = this;
@@ -990,15 +1001,51 @@ Page({
             }
         });
     },
+    // 获取我使用着的道具
+    // useToolsArr
+    getUsedTools(useTools_id=null){
+        app.api.requestHandle({
+            url: app.api.stringifyUrl({
+                path: '/wxapp/Index/getUsedTools'
+            }),
+            data: {
+                unionid: this.data.userInfo.unionid,
+                code: this.data.options.code,
+            },
+            success: res => {
+                // wx.hideLoading();
+                let data = res.data;
+                if (data.status == 0) {
+                    this.setData({
+                        // useToolsArr: data.data
+                        'mainInfo.tools':data.data,
+                        'mainInfo.useTools_id': useTools_id
+                    })
+                    setTimeout(()=>{
+                        this.setData({
+                            'mainInfo.useTools_id': null
+                        })
+                    },2000)
+                } else {
+                    wx.showToast({
+                        title: data.msg || '出错了',
+                        icon: 'none'
+                    })
+                }
+            }
+        });
+    },
     //获取我的道具
-    getMytools() {
-        this.setData({
-            propertyStatus:true
-        })
-        return;
-        wx.showLoading({
-            title: '加载中...',
-        })
+    getMytools(state=true) {   //false
+        // this.setData({
+        //     propertyStatus:true
+        // })
+        // return;
+        if(state){
+            wx.showLoading({
+                title: '加载中...',
+            })
+        }
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getMytools'
@@ -1024,14 +1071,56 @@ Page({
             }
         });
     },
-    //使用道具
-    useTools(e) {
+    animationHandle(val1,val2){
+        const { animationTop, animationBottom } = this.data;
+        animationTop.top(val1).step();
+        animationBottom.bottom(val2).step();
+        this.setData({
+            animationTopData: animationTop.export()
+        })
+        this.setData({
+            animationBottomData: animationBottom.export()
+        })
+    },
+    useToolsBefore(e){
+        let animation = wx.createAnimation({
+            transformOrigin: "50% 50%",
+            duration: 500,
+            timingFunction: "ease-in",
+            delay: 0
+        })
+        let animation2 = wx.createAnimation({
+            transformOrigin: "50% 50%",
+            duration: 500,
+            timingFunction: "ease-in",
+            delay: 0
+        })
+        this.setData({
+            animationTop: animation,
+            animationBottom: animation2,
+            bottomDigState: false
+        })
+        this.animationHandle('38%', 0);
         const {
             formId
         } = e.detail;
         const {
             tools_id
         } = e.currentTarget.dataset;
+
+    
+        let { useCount, Timer, timeCount } = this.data;
+        useCount = useCount+1;
+        this.setData({ useCount})
+        if (useCount==1){
+            setTimeout(()=>{
+                this.useTools(formId, tools_id)
+            },2000)
+        }
+
+    },
+    //使用道具
+    useTools(formId,tools_id) {        
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/useTools'
@@ -1040,7 +1129,8 @@ Page({
                 unionid: this.data.userInfo.unionid,
                 code: this.data.options.code,
                 formId,
-                tools_id
+                tools_id,
+                num: this.data.useCount
             },
             success: res => {
                 let data = res.data;
@@ -1049,6 +1139,12 @@ Page({
                         title: '成功使用道具',
                         icon: 'success',
                         mask: true
+                    })
+                    this.getUsedTools(tools_id);
+                    this.getMytools(false);
+                    this.setData({
+                        useState: true,
+                        useCount:0
                     })
                 } else {
                     wx.showToast({
@@ -1098,7 +1194,6 @@ Page({
         });
     },
     operCover(e){
-        console.log(e)
         const { style } = e.currentTarget.dataset;
         if (style == 'getCodeIntro'){  //兑换码提示弹框
             this.setData({
@@ -1110,14 +1205,30 @@ Page({
             })
         } else if (style == 'propertyList'){
             this.setData({
-                propertyStatus: !this.data.propertyStatus
+                propertyStatus: !this.data.propertyStatus,
+                bottomDigState:true,
+                useCount:0
             })
+            if(this.animation){
+                this.animationHandle('50%', '-330rpx');
+            }
+            
         }else if ( style == 'rule'){
             this.setData({
                 swiperStatus: !this.data.swiperStatus
             })
         }
         
+    },
+    onPageScroll(res){
+        const { scrollTopNum} = this.data;
+        const { scrollTop } = res;
+        console.log(res)
+        console.log(scrollTopNum)
+        if (scrollTop > scrollTopNum){
+            // 播放动画
+            console.log("播放动画")
+        }
     }
 
 });
