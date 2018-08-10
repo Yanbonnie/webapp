@@ -61,7 +61,8 @@ function resetData(args) {
         getCodeIntroStatus:false,              //获取兑奖码介绍
         swiperStatus:false,                   //活动规则
         imgUrls: imgUrls,
-        useState:true,                        //是否可以使用
+        useState:false,                        //是否可以使用
+        useCount:0,                           //使用的数量                    
         bottomDigState:true,                  //底部挖宝是否显示
         animationTop:null,         
         animationTopData: {},
@@ -535,12 +536,6 @@ Page({
                         digging: false,
                         winning: true
                     })
-                    // if (mainInfo.goods_type == 2 && mainInfo.draw_type == 1) {
-                    //     app.dialog({
-                    //         title: '领奖提示',
-                    //         content: mainInfo.draw_info
-                    //     });
-                    // }
                     if(mainInfo.is_draw == 0){
                         if (mainInfo.goods_type == 2) {
                             if (mainInfo.draw_type == 2) { //如果是邮寄
@@ -553,40 +548,6 @@ Page({
                             }
                         }
                     }
-
-                    // if (mainInfo.is_prize == 1) {
-                    //     that.setData({
-                    //         winning: true,
-                    //         digging: false,
-                    //         diggingCd: false,
-                    //         canDiggingCd: false,
-                    //         digNothing: false,
-                    //         gitNone: false,
-                    //     });
-                    //     if (mainInfo.is_draw == 0) {
-                    //         setTimeout(function () {
-                    //             // 如果是实物
-                    //             if (mainInfo.goods_type == 2) {
-                    //                 if (mainInfo.draw_type == 2) { //如果是邮寄
-                    //                     that.toggleAddressPop(true);
-                    //                 } else { // 如果是现场
-                    //                     app.dialog({
-                    //                         title: '领奖提示',
-                    //                         content: mainInfo.draw_info
-                    //                     });
-                    //                 }
-                    //             } else { //红包
-                    //                 setTimeout(() => {
-                    //                     app.dialog({
-                    //                         title: '领奖提示',
-                    //                         content: '请到微信零钱查看红包'
-                    //                     });
-                    //                 }, 1500)
-                    //             }
-                    //         }, 1500);
-                    //     }
-                    // }
-
 
                 } else { //未中奖
                     if (mainInfo.status == 0) { //项目进项中....
@@ -607,46 +568,6 @@ Page({
                         })
                     }
                 }
-
-                // if(mainInfo.status == 0) {
-                //     if (mainInfo.is_cd == 1) {
-                //         that.runCountdownTime(mainInfo.time);
-                //     } else {
-                //         // 如果中奖了
-                //         if (mainInfo.is_prize == 1) {
-                //             that.setData({
-                //                 digging: true,
-                //                 winning: true
-                //             });
-                //             if(mainInfo.is_draw == 0){
-                //                 setTimeout(function (){
-                //                     // 如果是实物
-                //                     if(mainInfo.goods_type == 2){
-                //                         // 如果是现场
-                //                         if(mainInfo.draw_type == 2){
-                //                             that.toggleAddressPop(true);
-                //                         } else {
-                //                             app.dialog({
-                //                                 title: '领奖提示',
-                //                                 content: '请联系发布者微信索取礼品'
-                //                             });
-                //                         }
-                //                     }
-                //                 }, 3000);
-                //             }
-                //         } else {
-                //             that.setData({
-                //                 digging: true,
-                //                 digNothing: true
-                //             })
-                //         }
-                //         setTimeout(function() {
-                //             that.setData({
-                //                 digging: false
-                //             })
-                //         }, 2000)
-                // }
-                // }
             },
             fail: function(err) {
                 app.hideLoading();
@@ -1142,8 +1063,7 @@ Page({
             animationBottomData: animationBottom.export()
         })
     },
-    //使用道具
-    useTools(e) {
+    useToolsBefore(e){
         let animation = wx.createAnimation({
             transformOrigin: "50% 50%",
             duration: 500,
@@ -1157,56 +1077,65 @@ Page({
             delay: 0
         })
         this.setData({
-            animationTop:animation,
+            animationTop: animation,
             animationBottom: animation2,
-            bottomDigState:false
+            bottomDigState: false
         })
-        this.animationHandle('38%',0)
+        this.animationHandle('38%', 0);
         const {
             formId
         } = e.detail;
         const {
             tools_id
         } = e.currentTarget.dataset;
-        const { useState } = this.data;
-        if (!useState) return;
-        this.setData({
-            useState: false
-        })
-        setTimeout(()=>{            
-            app.api.requestHandle({
-                url: app.api.stringifyUrl({
-                    path: '/wxapp/Index/useTools'
-                }),
-                data: {
-                    unionid: this.data.userInfo.unionid,
-                    code: this.data.options.code,
-                    formId,
-                    tools_id
-                },
-                success: res => {
-                    let data = res.data;
-                    if (data.status == 0) {
-                        wx.showToast({
-                            title: '成功使用道具',
-                            icon: 'success',
-                            mask: true
-                        })
-                        this.getUsedTools(tools_id);
-                        this.getMytools(false);
-                        this.setData({
-                            useState: true
-                        })
-                    } else {
-                        wx.showToast({
-                            title: data.msg || '出错了',
-                            icon: 'none',
-                            mask: true
-                        })
-                    }
+
+    
+        let { useCount, Timer, timeCount } = this.data;
+        useCount = useCount+1;
+        this.setData({ useCount})
+        if (useCount==1){
+            setTimeout(()=>{
+                this.useTools(formId, tools_id)
+            },2000)
+        }
+
+    },
+    //使用道具
+    useTools(formId,tools_id) {        
+        app.api.requestHandle({
+            url: app.api.stringifyUrl({
+                path: '/wxapp/Index/useTools'
+            }),
+            data: {
+                unionid: this.data.userInfo.unionid,
+                code: this.data.options.code,
+                formId,
+                tools_id,
+                num: this.data.useCount
+            },
+            success: res => {
+                let data = res.data;
+                if (data.status == 0) {
+                    wx.showToast({
+                        title: '成功使用道具',
+                        icon: 'success',
+                        mask: true
+                    })
+                    this.getUsedTools(tools_id);
+                    this.getMytools(false);
+                    this.setData({
+                        useState: true,
+                        useCount:0
+                    })
+                } else {
+                    wx.showToast({
+                        title: data.msg || '出错了',
+                        icon: 'none',
+                        mask: true
+                    })
                 }
-            });
-        },1000)
+            }
+        });
     },
     // 兑换道具接口
     exchangeTools(e) {
@@ -1258,7 +1187,8 @@ Page({
         } else if (style == 'propertyList'){
             this.setData({
                 propertyStatus: !this.data.propertyStatus,
-                bottomDigState:true
+                bottomDigState:true,
+                useCount:0
             })
             if(this.animation){
                 this.animationHandle('50%', '-330rpx');

@@ -228,7 +228,7 @@
                         <button formType="submit" class='button'>Submit</button>
                     </view>
                 </form> -->
-                <form bindsubmit="useTools" report-submit="true" wx:for="{{propertyList}}" wx:key="{{index}}" data-tools_id="{{item.tools_id}}">
+                <form bindsubmit="useToolsBefore" report-submit="true" wx:for="{{propertyList}}" wx:key="{{index}}" data-tools_id="{{item.tools_id}}">
                     <view class='form'>
                         <view class='img'>
                             <image src='{{item.pic}}'></image>
