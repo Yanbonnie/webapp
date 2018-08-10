@@ -68,6 +68,7 @@ function resetData(args) {
         animationTopData: {},
         animationBottom:null,
         animationBottomData:{},
+        scrollTopNum:0,
 
     }
 }
@@ -936,6 +937,24 @@ Page({
         that.setData({
             options: options
         });
+        
+    },
+    onReady(){
+        var that = this;
+        wx.getSystemInfo({
+              success:  function (res)  {
+                  let windowHeight = res.windowHeight
+                  setTimeout(() => {
+                      var query = wx.createSelectorQuery();
+                      query.select('#the-id').boundingClientRect().exec(function (res2) {
+                          const { bottom, height } = res2[0]
+                          that.setData({
+                              scrollTopNum: bottom - windowHeight
+                          })
+                      })
+                  }, 600)
+              },
+            })        
     },
     onShareAppMessage: function() {
         var that = this;
@@ -1200,6 +1219,16 @@ Page({
             })
         }
         
+    },
+    onPageScroll(res){
+        const { scrollTopNum} = this.data;
+        const { scrollTop } = res;
+        console.log(res)
+        console.log(scrollTopNum)
+        if (scrollTop > scrollTopNum){
+            // 播放动画
+            console.log("播放动画")
+        }
     }
 
 });

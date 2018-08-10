@@ -3,11 +3,11 @@
 </view>
 <view class="page">
     <!--hidden="{{!contentReady || contentErrText}}"-->
-    <view class="userlist-pic">
+    <view class="userlist-pic" >
         <image src="{{mainInfo.pic}}" bindtap='previewImg' mode="widthFix" data-img="{{mainInfo.pic}}"></image>
         <view class="rule_btn" data-style="rule" catchtap='operCover'>规则</view>
     </view>
-    <view class="userlist pos_r border_bottom" id='{{mainInfo.id}}'>
+    <view class="userlist pos_r border_bottom" >  <!--id='{{mainInfo.id}}'-->
         <view class="userlist-name">
             <image wx:if="{{item.goods_type==1}}" src='https://xnt.xhwxpos.com/mining/static/images/icon1.gif'></image>
             <image wx:else src='https://xnt.xhwxpos.com/mining/static/images/icon2.gif'></image>
@@ -35,7 +35,7 @@
             我的道具
             <text></text>
         </view>
-        <view class='dig_treasure' style="visibility:{{bottomDigState ? 'visibility' : 'hidden'}}">
+        <view class='dig_treasure' style="visibility:{{bottomDigState ? 'visibility' : 'hidden'}}"  id='the-id'>
             <dig_treasure 
                 mainInfo="{{mainInfo}}" 
                 winning="{{winning}}" 
