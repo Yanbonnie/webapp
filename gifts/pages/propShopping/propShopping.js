@@ -76,19 +76,24 @@ Page({
                         paySign,
                         'success': res => {
                             //支付成功
-                            const { code } = this.data
-                            wx.showModal({
+                            const { code } = this.data;
+                            wx.showToast({
                                 title: '支付成功',
-                                content: '是否跳转到详情页',
-                                cancelText:'继续购买',
-                                success:res=>{
-                                    if(res.confirm){
-                                        wx.navigateBack({
-                                            delta:1
-                                        })
-                                    }
-                                }
+                                icon:'success',
+                                mask:true
                             })
+                            // wx.showModal({
+                            //     title: '支付成功',
+                            //     content: '是否跳转到详情页',
+                            //     cancelText:'继续购买',
+                            //     success:res=>{
+                            //         if(res.confirm){
+                            //             wx.navigateBack({
+                            //                 delta:1
+                            //             })
+                            //         }
+                            //     }
+                            // })
                         },
                         'fail': res => {
 

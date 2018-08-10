@@ -56,7 +56,7 @@ function resetData(args) {
         friendUrl: '',                        //分享的图片地址
         friendStatus: false,                  //分享到朋友圈
         propertyStatus: false,                //道具弹框
-        propertyList: [],                     //道具数组  tools_id-道具ID tools_name-道具名  tools_type-道具类型 （1自动铲子） tools_num-道具数量  pic-道具图标
+        propertyList: null,                     //道具数组  tools_id-道具ID tools_name-道具名  tools_type-道具类型 （1自动铲子） tools_num-道具数量  pic-道具图标
         exchangeStatus:false,                 //兑奖弹框状态
         getCodeIntroStatus:false,              //获取兑奖码介绍
         swiperStatus:false,                   //活动规则
@@ -69,6 +69,7 @@ function resetData(args) {
         animationBottom:null,
         animationBottomData:{},
         scrollTopNum:0,
+        info:null
 
     }
 }
@@ -527,6 +528,8 @@ Page({
                     userList: mainInfo.user || []
                 });
                 that.getUsedTools();
+                that.getMytools(true, 1);
+                that.getExchangeInfo();      
                 if (mainInfo.user.length > 50) {
                     that.setData({
                         hasMoreUser: true
@@ -954,7 +957,8 @@ Page({
                       })
                   }, 600)
               },
-            })        
+            }) 
+         
     },
     onShareAppMessage: function() {
         var that = this;
@@ -1036,16 +1040,16 @@ Page({
         });
     },
     //获取我的道具
-    getMytools(state=true) {   //false
+    getMytools(state=true,count=2) {   //false
         // this.setData({
         //     propertyStatus:true
         // })
         // return;
-        if(state){
-            wx.showLoading({
-                title: '加载中...',
-            })
-        }
+        // if(state){
+        //     wx.showLoading({
+        //         title: '加载中...',
+        //     })
+        // }
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getMytools'
@@ -1059,9 +1063,13 @@ Page({
                 let data = res.data;
                 if (data.status == 0) {
                     this.setData({
-                        propertyList: data.data,
-                        propertyStatus: true
+                        propertyList:data.data,
                     })
+                    if(count == 2){
+                        this.setData({
+                            propertyStatus: true
+                        })
+                    }
                 } else {
                     wx.showToast({
                         title: data.msg || '出错了',
@@ -1083,6 +1091,23 @@ Page({
         })
     },
     useToolsBefore(e){
+        const { mainInfo } = this.data;
+        if(mainInfo.is_prize){
+            wx.showToast({
+                title: '您已中奖，不可使用道具',
+                icon:'none',
+                mask:true
+            })
+            return;
+        }
+        if (mainInfo.status == 1){
+            wx.showToast({
+                title: '活动已结束，不可使用道具',
+                icon: 'none',
+                mask: true
+            })
+            return;
+        }
         let animation = wx.createAnimation({
             transformOrigin: "50% 50%",
             duration: 500,
@@ -1110,14 +1135,31 @@ Page({
 
     
         let { useCount, Timer, timeCount } = this.data;
+        let useToolsArr = this.data.mainInfo.tools;
+        let toolsList = this.data.propertyList;
+        useToolsArr = useToolsArr.map((item)=>{
+            if (item.tools_id == tools_id){
+                item.num = item.num + 1;
+            }
+            return item;
+        })
+        toolsList = toolsList.map(item=>{
+            if(item.tools_id == tools_id){
+                item.tools_num = item.tools_num - 1 ;
+            }
+            return item
+        })
         useCount = useCount+1;
-        this.setData({ useCount})
+        this.setData({ 
+            useCount,
+            'mainInfo.tools': useToolsArr,
+            propertyList: toolsList
+        })
         if (useCount==1){
             setTimeout(()=>{
                 this.useTools(formId, tools_id)
             },2000)
         }
-
     },
     //使用道具
     useTools(formId,tools_id) {        
@@ -1209,7 +1251,7 @@ Page({
                 bottomDigState:true,
                 useCount:0
             })
-            if(this.animation){
+            if (this.data.animationTop){
                 this.animationHandle('50%', '-330rpx');
             }
             
@@ -1220,14 +1262,44 @@ Page({
         }
         
     },
+    // 点击购买隐藏弹框
+    buy() {
+        this.setData({
+            propertyStatus: false
+        })
+    },
+    // 获取兑换口令
+    getExchangeInfo(){
+        wx.request({
+            url: app.api.stringifyUrl({
+                path: '/wxapp/Index/getExchangeInfo'
+            }),
+            data: {
+                key: app.api.appKey
+            },success:res=>{                
+                let data = res.data;
+                if (data.status == 0) {
+                    this.setData({
+                        info: data.info
+                    })
+                } else {
+                    wx.showToast({
+                        title: data.msg || '出错了',
+                        icon: 'none',
+                        mask: true
+                    })
+                }
+            }
+        })
+    },
     onPageScroll(res){
         const { scrollTopNum} = this.data;
         const { scrollTop } = res;
-        console.log(res)
-        console.log(scrollTopNum)
+        // console.log(res)
+        // console.log(scrollTopNum)
         if (scrollTop > scrollTopNum){
             // 播放动画
-            console.log("播放动画")
+            // console.log("播放动画")
         }
     }
 

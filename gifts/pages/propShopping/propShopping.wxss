@@ -60,3 +60,15 @@ page{
     background: #fde23d;
 
 }
+
+.back{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    line-height: 100rpx;
+    background: #fde23d;
+    color: #4a4a4a;
+    font-size: 30rpx;
+    text-align: center;
+}

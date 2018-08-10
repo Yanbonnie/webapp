@@ -30,4 +30,5 @@
             </view>
         </view>
     </view>
+    <view class='back'><navigator open-type='navigateBack' delta="1">返回到详情页</navigator></view>
 </view>

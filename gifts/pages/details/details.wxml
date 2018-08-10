@@ -31,9 +31,9 @@
         </view>
     </view>
     <view class="participant" hidden="{{mainInfo.status == -1}}">
-        <view class='more' bindtap='getMytools'>
+        <view class='more' catchtap='operCover' data-style="propertyList" > <!-- bindtap='getMytools' -->
             我的道具
-            <text></text>
+            <text wx:if="{{propertyList.length > 0}}"></text>
         </view>
         <view class='dig_treasure' style="visibility:{{bottomDigState ? 'visibility' : 'hidden'}}"  id='the-id'>
             <dig_treasure 
@@ -210,7 +210,7 @@
         <view class='propHeader'>
             <view class='btn' bindtap='operCover' data-style="exchange">兑换</view>
             <view>我的道具</view>
-            <view class='btn'>
+            <view class='btn' bindtap='buy'>
                 <navigator url="{{'/pages/propShopping/propShopping?code='+options.code}}">购买</navigator>
             </view>
         </view>
@@ -244,6 +244,11 @@
                         <button formType="submit" class='button'>Submit</button>
                     </view>
                 </form>
+                <view class='noMessage' wx:if="{{propertyList && propertyList.length == 0}}">
+                    <image src='/images/smile.png'></image>
+                    <view>抱歉，您目前没有道具</view>
+                    <view>请点击右上角购买按钮购买</view>
+                </view>
             </view>
         </view>
     </view>
@@ -269,13 +274,13 @@
     <view class='coverBox exchangeBox'>
         <form report-submit="true" bindsubmit="exchangeTools">
             <view class='header'>
-                <text>请输入兑换码</text>
+                <text>兑换口令</text>
             </view>
             <view class='copy'>
-                <input placeholder='兑换码' name="keycode"></input>
+                <input placeholder='请输入兑换口令' name="keycode"></input>
             </view>
             <view class='question' catchtap='operCover' data-style="getCodeIntro">
-                <image src='/images/question.png'></image>如何获得兑换码</view>
+                <image src='/images/question.png'></image>如何获得兑换口令</view>
             <view class='btnBox'>
                 <view class='btn' data-style="exchange" catchtap='operCover'>取消</view>
                 <button class='btn' formType="submit">确认</button>
@@ -290,7 +295,7 @@
             <text>如何获取兑奖码</text>
         </view>
         <view class='getCodeIntro'>
-            <text>备案流程冗长，平台安全防护能力不足，可扩展性不够？滴滴云备案系统专人全流程指导备案，提供证书、WAF、DDOS高防IP等安全服务，有效保障网站安全，同时提供丰富镜像，支持随需扩展资源。备案流程冗长，平台安全防护能力不足，可扩展性不够？滴滴云备案系统专人全流程指导备案，提供证书、WAF、DDOS高防IP等安全服务，有效保障网站安全，同时提供丰富镜像，支持随需扩展资源。备案流程冗长，平台安全防护能力不足，可扩展性不够？滴滴云备案系统专人全流程指导备案，提供证书、WAF、DDOS高防IP等安全服务，有效保障网站安全，同时提供丰富镜像，支持随需扩展资源。备案流程冗长，平台安全防护能力不足，可扩展性不够？滴滴云备案系统专人全流程指导备案，提供证书、WAF、DDOS高防IP等安全服务，有效保障网站安全，同时提供丰富镜像，支持随需扩展资源。</text>
+            <text>{{info}}</text>
 
         </view>
         <view class='close' bindtap='operCover' data-style="getCodeIntro">
