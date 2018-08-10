@@ -36,17 +36,26 @@ Component({
             type:String,
             value:'59分59秒'
         },
-        useTools:{
+        useToolsArr:{
             type:Array,
-            value:[]
+            value:[],
+            // observer:(newVal, oldVal)=>{
+            //     console.log(newVal);
+            //     console.log(oldVal)
+            // }
         }
     },
-
+    attached(){
+        // console.log(this.data.useToolsArr)
+        // this.setData({
+        //     'mainInfo.tools':122
+        // })
+    },
     /**
      * 组件的初始数据
      */
     data: {
-
+        
     },
 
     /**

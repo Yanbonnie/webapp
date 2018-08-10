@@ -61,7 +61,8 @@ function resetData(args) {
         getCodeIntroStatus:false,              //获取兑奖码介绍
         swiperStatus:false,                   //活动规则
         imgUrls: imgUrls,
-        useToolsArr:[],                       //使用过的道具
+        useState:true,                        //是否可以使用
+        bottomDigState:true,                  //底部挖宝是否显示
         animationTop:null,         
         animationTopData: {},
         animationBottom:null,
@@ -482,6 +483,8 @@ Page({
             }),
             data: queryData,
             success: function(res) {
+                // 获取我使用过的道具
+                that.getUsedTools();
                 app.hideLoading();
                 that.setData({
                     contentReady: true
@@ -996,15 +999,51 @@ Page({
             }
         });
     },
+    // 获取我使用着的道具
+    // useToolsArr
+    getUsedTools(useTools_id=null){
+        app.api.requestHandle({
+            url: app.api.stringifyUrl({
+                path: '/wxapp/Index/getUsedTools'
+            }),
+            data: {
+                unionid: this.data.userInfo.unionid,
+                code: this.data.options.code,
+            },
+            success: res => {
+                // wx.hideLoading();
+                let data = res.data;
+                if (data.status == 0) {
+                    this.setData({
+                        // useToolsArr: data.data
+                        'mainInfo.tools':data.data,
+                        'mainInfo.useTools_id': useTools_id
+                    })
+                    setTimeout(()=>{
+                        this.setData({
+                            'mainInfo.useTools_id': null
+                        })
+                    },2000)
+                } else {
+                    wx.showToast({
+                        title: data.msg || '出错了',
+                        icon: 'none'
+                    })
+                }
+            }
+        });
+    },
     //获取我的道具
-    getMytools() {
+    getMytools(state=true) {   //false
         // this.setData({
         //     propertyStatus:true
         // })
         // return;
-        wx.showLoading({
-            title: '加载中...',
-        })
+        if(state){
+            wx.showLoading({
+                title: '加载中...',
+            })
+        }
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getMytools'
@@ -1057,7 +1096,8 @@ Page({
         })
         this.setData({
             animationTop:animation,
-            animationBottom: animation2
+            animationBottom: animation2,
+            bottomDigState:false
         })
         this.animationHandle('38%',0)
         const {
@@ -1066,33 +1106,45 @@ Page({
         const {
             tools_id
         } = e.currentTarget.dataset;
-        app.api.requestHandle({
-            url: app.api.stringifyUrl({
-                path: '/wxapp/Index/useTools'
-            }),
-            data: {
-                unionid: this.data.userInfo.unionid,
-                code: this.data.options.code,
-                formId,
-                tools_id
-            },
-            success: res => {
-                let data = res.data;
-                if (data.status == 0) {
-                    wx.showToast({
-                        title: '成功使用道具',
-                        icon: 'success',
-                        mask: true
-                    })
-                } else {
-                    wx.showToast({
-                        title: data.msg || '出错了',
-                        icon: 'none',
-                        mask: true
-                    })
+        const { useState } = this.data;
+        if (!useState) return;
+        this.setData({
+            useState: false
+        })
+        setTimeout(()=>{            
+            app.api.requestHandle({
+                url: app.api.stringifyUrl({
+                    path: '/wxapp/Index/useTools'
+                }),
+                data: {
+                    unionid: this.data.userInfo.unionid,
+                    code: this.data.options.code,
+                    formId,
+                    tools_id
+                },
+                success: res => {
+                    let data = res.data;
+                    if (data.status == 0) {
+                        wx.showToast({
+                            title: '成功使用道具',
+                            icon: 'success',
+                            mask: true
+                        })
+                        this.getUsedTools(tools_id);
+                        this.getMytools(false);
+                        this.setData({
+                            useState: true
+                        })
+                    } else {
+                        wx.showToast({
+                            title: data.msg || '出错了',
+                            icon: 'none',
+                            mask: true
+                        })
+                    }
                 }
-            }
-        });
+            });
+        },1000)
     },
     // 兑换道具接口
     exchangeTools(e) {
@@ -1144,7 +1196,8 @@ Page({
             })
         } else if (style == 'propertyList'){
             this.setData({
-                propertyStatus: !this.data.propertyStatus
+                propertyStatus: !this.data.propertyStatus,
+                bottomDigState:true
             })
             this.animationHandle('50%', '-330rpx');
         }else if ( style == 'rule'){

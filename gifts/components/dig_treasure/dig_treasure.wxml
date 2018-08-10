@@ -3,8 +3,12 @@
 <template name="msgItem">
     <view class='iconList'>
         <view class="icon-score">
-            <image src="../../images/icon-score.png" class="icon-score-pic pulse" mode="widthFix"></image>
+            <image src="../../images/icon-score.png" class="icon-score-pic" mode="widthFix"></image>
             <view class="num">{{prize_num}}</view>
+        </view>
+        <view class='icon-score' wx:for="{{tools}}" wx:key="{{index}}">
+            <image src="{{item.pic}}" class="{{item.tools_id == useTools_id ? 'icon-score-pic pulse' : 'icon-score-pic'}}" mode="widthFix"></image>
+            <view class="num">{{item.num}}</view>
         </view>
     </view>
 </template>
@@ -17,6 +21,7 @@
         <template is="msgItem" data="{{...mainInfo}}"/>
         <image src="https://xnt.xhwxpos.com/mining/static/images/gif-digging.gif" mode="widthFix" class="gif-digging" style="visibility:{{digging ? 'visibility' : 'hidden'}}"></image>
         <view style="visibility:{{digging ? 'hidden' : 'visibility'}}">
+
             <image src="https://xnt.xhwxpos.com/mining/static/images/gif-diginto.gif" mode="widthFix"></image>
             <button bindtap='diggerGiftHandle' class="btn_digging btn_yellow">挖到宝啦！</button>
         </view>

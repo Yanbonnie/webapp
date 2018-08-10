@@ -35,9 +35,19 @@
             我的道具
             <text></text>
         </view>
-        <view class='dig_treasure'>
-            <dig_treasure mainInfo="{{mainInfo}}" winning="{{winning}}" digging="{{digging}}" diggingCd="{{diggingCd}}" canDiggingCd="{{canDiggingCd}}" digNothing="{{digNothing}}" timeText="{{timeText}}" giftNone="{{giftNone}}" useTools="{{useToolsArr}}" bind:diggerGiftHandle="diggerGiftHandle"
-                bind:toggleSharePop="toggleSharePop">
+        <view class='dig_treasure' style="visibility:{{bottomDigState ? 'visibility' : 'hidden'}}">
+            <dig_treasure 
+                mainInfo="{{mainInfo}}" 
+                winning="{{winning}}" 
+                digging="{{digging}}" 
+                diggingCd="{{diggingCd}}" 
+                canDiggingCd="{{canDiggingCd}}" 
+                digNothing="{{digNothing}}" 
+                timeText="{{timeText}}" 
+                giftNone="{{giftNone}}"  
+                bind:diggerGiftHandle="diggerGiftHandle"
+                bind:toggleSharePop="toggleSharePop"
+                >
             </dig_treasure>
         </view>
         <view class="ul-list" wx:if="{{mainInfo.status != -1}}">
@@ -218,7 +228,7 @@
                         <button formType="submit" class='button'>Submit</button>
                     </view>
                 </form> -->
-                <form bindsubmit="useTools" report-submit="true" wx:for="{{propertyList}}" wx:key="{{index}}">
+                <form bindsubmit="useTools" report-submit="true" wx:for="{{propertyList}}" wx:key="{{index}}" data-tools_id="{{item.tools_id}}">
                     <view class='form'>
                         <view class='img'>
                             <image src='{{item.pic}}'></image>
@@ -227,6 +237,9 @@
                         <view class='info'>
                             <view class='title'>{{item.tools_name}}</view>
                             <view class='txt'>{{item.tools_explain}}</view>
+                        </view>
+                        <view class='buyBox' data-tools_id="{{item.tools_id}}" bindtap='payTools'>
+                            <view class='btn'>使用</view>
                         </view>
                         <button formType="submit" class='button'>Submit</button>
                     </view>
@@ -243,7 +256,7 @@
                 canDiggingCd="{{canDiggingCd}}" 
                 digNothing="{{digNothing}}" 
                 timeText="{{timeText}}" 
-                giftNone="{{giftNone}}"                 
+                giftNone="{{giftNone}}"   
             >
                 <!-- useTools="{{useToolsArr}}" 
                 bind:diggerGiftHandle="diggerGiftHandle"

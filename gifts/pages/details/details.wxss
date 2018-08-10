@@ -569,6 +569,7 @@
 }
 .propertyList .info{
     flex-grow: 1;
+    padding-left: 10rpx;
 }
 .propertyList .info .title{
     font-size: 32rpx;
@@ -577,6 +578,18 @@
 .propertyList .info  .txt{
     color: #acacac;
     font-size: 24rpx;
+}
+.propertyList .buyBox{
+    flex-basis: 140rpx;
+
+}
+.propertyList .buyBox .btn{
+    margin-left: 20rpx;
+    width: 120rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: center;
+    background: #fde23d;
 }
 .propertyList .button{
     position: absolute;
