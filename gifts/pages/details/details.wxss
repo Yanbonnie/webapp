@@ -118,7 +118,6 @@
     position: absolute;
     right: 20rpx;
     top: 20rpx;
-    z-index: 2;
     background: #fff;
     border-radius: 50rpx;
     color: #000;
@@ -126,6 +125,7 @@
     box-shadow:2rpx 2rpx 2rpx #ccc;
     display: inline-block;
     font-size: 24rpx;
+    z-index: 4;
 }
 .participant .more text{
     display: block;
