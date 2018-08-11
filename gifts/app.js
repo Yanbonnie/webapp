@@ -4,8 +4,8 @@ var md5 = require('utils/md5.min.js');
 var common = require('pages/template/common.js');
 var toptips = require('pages/template/toptips.js');
 // var posting = require('pages/posting/public-posting.js');
-// var domain = 'https://mining.gdtengnan.com';
-var domain = 'https://xnt.xhwxpos.com/mining';
+var domain = 'https://mining.gdtengnan.com';
+// var domain = 'https://xnt.xhwxpos.com/mining';
 var version = '1.0.0';
 var monitorNewsTimer;
 var repeatLoginNumberOfTimes = 0;
@@ -520,7 +520,8 @@ var app = {
         appKey: 'fbed077c306016743663fcebe31717c2',
         stringifyUrl: function(args) {
             // return this.domain + args.path;
-            return this.domain + '/index.php' + args.path;
+            return this.domain + args.path;
+            // return this.domain + '/index.php' + args.path;
             // return this.domain + (args.pathname || '/api/Applet/smallapp_api.php') + (args.search || '?v=' + version + '&appid=1&is_micro=1&mod=' + args.method);
         },
         // 签名算法
