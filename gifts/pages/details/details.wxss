@@ -590,6 +590,7 @@
     line-height: 60rpx;
     text-align: center;
     background: #fde23d;
+    font-size: 24rpx;
 }
 .propertyList .button{
     position: absolute;

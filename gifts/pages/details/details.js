@@ -1174,13 +1174,13 @@ Page({
         }
         let animation = wx.createAnimation({
             transformOrigin: "50% 50%",
-            duration: 500,
+            duration: 300,
             timingFunction: "ease-in",
             delay: 0
         })
         let animation2 = wx.createAnimation({
             transformOrigin: "50% 50%",
-            duration: 500,
+            duration: 300,
             timingFunction: "ease-in",
             delay: 0
         })

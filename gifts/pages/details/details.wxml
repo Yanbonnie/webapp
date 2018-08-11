@@ -239,9 +239,10 @@
                             <view class='txt'>{{item.tools_explain}}</view>
                         </view>
                         <view class='buyBox' data-tools_id="{{item.tools_id}}" bindtap='payTools'>
-                            <view class='btn'>使用</view>
+                            <!-- <view class='btn'>使用</view> -->
+                            <button formType="submit" class='btn'>使用</button>
                         </view>
-                        <button formType="submit" class='button'>Submit</button>
+                        <!-- <button formType="submit" class='button'>Submit</button> -->
                     </view>
                 </form>
                 <view class='noMessage' wx:if="{{propertyList && propertyList.length == 0}}">
