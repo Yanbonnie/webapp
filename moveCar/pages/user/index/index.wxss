@@ -77,12 +77,27 @@ page{
 .navList .item{
     border-bottom: 1px #f5f5f5 solid;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding: 30rpx;
 }
+.navList .item view{
+    display: flex;
+    flex-basis: 200rpx;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+}
+.navList .item view image{
+    width: 35rpx;
+    height: 35rpx;
+    margin-right: 10rpx;
+}
+.navList .item view text{
+    text-align: left;
+}
 .navList .item text{
-    flex-grow: 1;
+    /* flex-grow: 1; */
     font-size: 24rpx;
 
 }

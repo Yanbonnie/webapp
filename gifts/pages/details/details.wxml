@@ -238,7 +238,7 @@
                             <view class='title'>{{item.tools_name}}</view>
                             <view class='txt'>{{item.tools_explain}}</view>
                         </view>
-                        <view class='buyBox' data-tools_id="{{item.tools_id}}" bindtap='payTools'>
+                        <view class='buyBox' data-tools_id="{{item.tools_id}}">
                             <!-- <view class='btn'>使用</view> -->
                             <button formType="submit" class='btn'>使用</button>
                         </view>

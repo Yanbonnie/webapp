@@ -57,6 +57,7 @@ function resetData(args) {
         friendStatus: false,                  //分享到朋友圈
         propertyStatus: false,                //道具弹框
         propertyList: null,                     //道具数组  tools_id-道具ID tools_name-道具名  tools_type-道具类型 （1自动铲子） tools_num-道具数量  pic-道具图标
+        temPropertyList:null,                   //临时道具数组
         exchangeStatus:false,                 //兑奖弹框状态
         getCodeIntroStatus:false,              //获取兑奖码介绍
         swiperStatus:false,                   //活动规则
@@ -1071,7 +1072,6 @@ Page({
     // 获取我使用着的道具
     // useToolsArr
     getUsedTools(useTools_id=null){
-        console.log("使用道具")
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getUsedTools'
@@ -1127,11 +1127,13 @@ Page({
                 let data = res.data;
                 if (data.status == 0) {
                     this.setData({
-                        propertyList:data.data,
-                    })
+                        propertyList: data.data,
+                        temPropertyList: data.data
+                    })                    
                     if(count == 2){
                         this.setData({
-                            propertyStatus: true
+                            propertyStatus: true,
+                            useCount:0
                         })
                     }
                 } else {
@@ -1155,7 +1157,21 @@ Page({
         })
     },
     useToolsBefore(e){
+        const {
+            formId
+        } = e.detail;
+        const {
+            tools_id
+        } = e.currentTarget.dataset;
         const { mainInfo } = this.data;
+
+        let { useCount, temPropertyList  } = this.data;
+        useCount = useCount + 1;
+        this.setData({ useCount })
+        let useToolsArr = this.data.mainInfo.tools;   //已使用过的道具
+        let toolsList = this.data.propertyList;       //我的道具列表
+        let resetToolsNum = temPropertyList.filter(item => item.tools_id == tools_id)[0].tools_num;  //剩余的数
+
         if(mainInfo.is_prize){
             wx.showToast({
                 title: '您已中奖，不可使用道具',
@@ -1190,44 +1206,47 @@ Page({
             bottomDigState: false
         })
         this.animationHandle('38%', 0);
-        const {
-            formId
-        } = e.detail;
-        const {
-            tools_id
-        } = e.currentTarget.dataset;
-
-    
-        let { useCount } = this.data;
-        let useToolsArr = this.data.mainInfo.tools;
-        if (!useToolsArr){  //第一次使用道具
-            this.useTools(formId, tools_id,1)
+        if (useCount > resetToolsNum) { //使用的道具数量大于本身存在的数量 不处理。。。
+            wx.showToast({
+                title: '使用道具失败',
+                mask:true,
+                icon:'none',
+                success:res=>{
+                    this.setData({
+                        useCount:0
+                    })
+                }
+            })
         }else{
-            let toolsList = this.data.propertyList;
-            useToolsArr = useToolsArr.length > 0 && useToolsArr.map((item) => {
-                if (item.tools_id == tools_id) {
-                    item.num = item.num + 1;
+            if (!useToolsArr) {  //第一次使用道具
+                this.useTools(formId, tools_id, 1)
+            } else {
+                useToolsArr = useToolsArr.length > 0 && useToolsArr.map((item) => {
+                    if (item.tools_id == tools_id) {
+                        item.num = item.num + 1;
+                    }
+                    return item;
+                })
+                toolsList = toolsList.map(item => {
+                    let obj = {...item}
+                    if (obj.tools_id == tools_id) {
+                        obj.tools_num = obj.tools_num - 1;
+                    }
+                    return obj
+                })
+
+                this.setData({
+                    'mainInfo.tools': useToolsArr,
+                    propertyList: toolsList
+                })
+                if (useCount == 1) {
+                    setTimeout(() => {
+                        this.useTools(formId, tools_id, this.data.useCount)
+                    }, 2000)
                 }
-                return item;
-            })
-            toolsList = toolsList.map(item => {
-                if (item.tools_id == tools_id) {
-                    item.tools_num = item.tools_num - 1;
-                }
-                return item
-            })
-            useCount = useCount + 1;
-            this.setData({
-                useCount,
-                'mainInfo.tools': useToolsArr,
-                propertyList: toolsList
-            })
-            if (useCount == 1) {
-                setTimeout(() => {
-                    this.useTools(formId, tools_id, this.data.useCount)
-                }, 2000)
             }
         }
+        
         
     },
     //使用道具
@@ -1246,12 +1265,6 @@ Page({
             success: res => {
                 let data = res.data;
                 if (data.status == 0) {
-                    // wx.showToast({
-                    //     title: '成功使用道具',
-                    //     icon: 'success',
-                    //     mask: true
-                    // })
-                    console.log("成功使用道具")
                     this.getUsedTools(tools_id);
                     this.getMytools(false);
                     this.setData({
@@ -1364,16 +1377,16 @@ Page({
     },
     onPageScroll(res){
         let { scrollTopNum, digMainInfo, mainInfo, bigScrollNum} = this.data;
+        
         const { scrollTop } = res;
-        // console.log(res)
-        // console.log(scrollTopNum)
-        // this.setData({ diggingCd:true})
         if (scrollTop > scrollTopNum && bigScrollNum==0) {
                 bigScrollNum = bigScrollNum+1;
                 this.setData(bigScrollNum)
                 // 播放动画
                 console.log("播放挖宝动画咯")
                 if (mainInfo.is_cd == 0 && mainInfo.status == 0 && mainInfo.is_prize == 0) {  //可挖
+                    const { tools } = mainInfo;
+                    digMainInfo.tools = tools;
                     this.setData({
                         mainInfo: digMainInfo
                     })
@@ -1449,9 +1462,7 @@ Page({
                             }, 3000)
                         }
                     },2000)
-
                 }
-                
             }
         }
 });

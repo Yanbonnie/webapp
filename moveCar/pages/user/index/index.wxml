@@ -19,27 +19,45 @@
 </view>
 <view class='navList'>
     <view class='item' bindtap='goInfoHandle'>
-        <text>{{is_binding ? '我的资料':'我要绑定'}}</text>
+        <view>
+            <image src='/assets/images/icon1.png'></image>
+            <text>{{is_binding ? '我的资料':'我要绑定'}}</text>
+        </view>
         <text class='iconfont icon-right'></text>
     </view>
     <view class='item' bindtap='goRecordHandle'>
-        <text>挪车记录</text>
+        <view>
+            <image src='/assets/images/icon2.png'></image>
+            <text>挪车记录</text>
+        </view>        
         <text class='iconfont icon-right'></text>
     </view>
     <navigator class='item' url="/pages/user/fans/fans"> 
-        <text>我的粉丝</text>
+        <view>
+            <image src='/assets/images/icon3.png'></image>
+            <text>我的粉丝</text>
+        </view>         
         <text class='iconfont icon-right'></text>
     </navigator>
-    <navigator class='item' url="/pages/user/income/income"> 
-        <text>收入记录</text>
+    <navigator class='item' url="/pages/user/income/income">         
+        <view>
+            <image src='/assets/images/icon4.png'></image>
+            <text>收入记录</text>
+        </view> 
         <text class='iconfont icon-right'></text>
     </navigator>
     <view class='item' bindtap='showEwmFn' data-state="1">
-        <text>挪车二维码</text>
+        <view>
+            <image src='/assets/images/icon5.png'></image>
+            <text>挪车二维码</text>
+        </view> 
         <text class='iconfont icon-right'></text>
     </view>
     <view class='item' bindtap='goApplyHandle' url="/pages/apply/apply"> 
-        <text>我要申请</text>
+        <view>
+            <image src='/assets/images/icon6.png'></image>
+            <text>我要申请</text>
+        </view> 
         <text class='iconfont icon-right'></text>
     </view>
 </view>
