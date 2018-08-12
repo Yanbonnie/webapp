@@ -1,23 +1,32 @@
 /* pages/saveDetail/saveDetail.wxss */
 page{
     background: #fff;
+    position: relative;
 }
 .img{
     width: 750rpx;
     height: 1558rpx;
 }
 .btnBox{
-    padding: 20rpx 0 50rpx;
+    position: absolute;
+    width: 238rpx;
+    height: 80rpx;
+    /* background: rgba(0,0,0,0.5); */
+    left: 94rpx;
+    top:384rpx;
+}
+.btnBox2{
+    padding: 0rpx 0 50rpx;
     display: flex;
     justify-content: center;
+    margin-top: -20rpx;
 }
-.btnBox view{
+.btnBox2 view{
     width: 500rpx;
     text-align: center;
     height: 80rpx;
     line-height: 80rpx;
     background: #0894ec;
-    /* background: #0c3273; */
     color: #fff;
     border-radius: 8rpx;
     font-size: 24rpx;

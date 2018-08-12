@@ -1105,15 +1105,6 @@ Page({
     },
     //获取我的道具
     getMytools(state=true,count=2) {   //false
-        // this.setData({
-        //     propertyStatus:true
-        // })
-        // return;
-        // if(state){
-        //     wx.showLoading({
-        //         title: '加载中...',
-        //     })
-        // }
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getMytools'
@@ -1171,7 +1162,6 @@ Page({
         let useToolsArr = this.data.mainInfo.tools;   //已使用过的道具
         let toolsList = this.data.propertyList;       //我的道具列表
         let resetToolsNum = temPropertyList.filter(item => item.tools_id == tools_id)[0].tools_num;  //剩余的数
-
         if(mainInfo.is_prize){
             wx.showToast({
                 title: '您已中奖，不可使用道具',
@@ -1234,7 +1224,6 @@ Page({
                     }
                     return obj
                 })
-
                 this.setData({
                     'mainInfo.tools': useToolsArr,
                     propertyList: toolsList
@@ -1379,11 +1368,10 @@ Page({
         let { scrollTopNum, digMainInfo, mainInfo, bigScrollNum} = this.data;
         
         const { scrollTop } = res;
-        if (scrollTop > scrollTopNum && bigScrollNum==0) {
+        if (scrollTop > scrollTopNum && bigScrollNum==0 && digMainInfo) {
                 bigScrollNum = bigScrollNum+1;
                 this.setData(bigScrollNum)
                 // 播放动画
-                console.log("播放挖宝动画咯")
                 if (mainInfo.is_cd == 0 && mainInfo.status == 0 && mainInfo.is_prize == 0) {  //可挖
                     const { tools } = mainInfo;
                     digMainInfo.tools = tools;

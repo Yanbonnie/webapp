@@ -1,5 +1,19 @@
 <!--pages/shopping/shopping.wxml-->
 <view class='shopping'>
-    <image  src="/assets/images/kaifa.png"></image>
-    开发中...
+    <!-- <image  src="/assets/images/kaifa.png"></image>
+    开发中... -->
+    <view class='itemBox'>
+        <view class='item'>
+            <image src='/assets/images/bg1.jpg'></image>
+            <navigator target="miniProgram" open-type="navigate" app-id="wxff19a47a2427411c" path="/pages/index/index"></navigator>
+        </view>
+        <view class='item'>
+            <image src='/assets/images/bg2.jpg'></image>
+            <navigator target="miniProgram" open-type="navigate" app-id="wxff19a47a2427411c" path="/pages/goods/detail/index?id=200"></navigator>
+        </view>
+        <view class='item'>
+            <image src='/assets/images/bg3.jpg'></image>
+            <navigator target="miniProgram" open-type="navigate" app-id="wxff19a47a2427411c" path="/pages/goods/detail/index?id=200"></navigator>
+        </view>
+    </view>
 </view>
