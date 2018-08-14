@@ -19,6 +19,7 @@ Page({
         // citylist: citylist,
         navIndex: 1,
         is_apply:0,
+        serverState:false,
         ...dataCom,
         // bannerList:[],
         // is_binding:0,
@@ -161,6 +162,12 @@ Page({
                 })
             }
 
+        })
+    },
+    operServerCover(e) {
+        const { index } = e.currentTarget.dataset;
+        this.setData({
+            serverState: index == 1 ? true : false
         })
     },
     // //获取首页数据

@@ -23,3 +23,9 @@ page{
     color:#808080;
     border: 1px #808080 solid;
 }
+.operBox{
+    padding: 30rpx 0;
+}
+.operBox view {
+    height: 50rpx;
+}

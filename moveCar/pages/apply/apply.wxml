@@ -62,6 +62,12 @@
             <text class='iconfont icon-address'></text>
         </view>
     </view>
+    <view class='operBox'>
+    <view bindtap='operServerCover' data-index="1">
+        <text class='iconfont icon-warning-o'></text>
+        <text>使用说明</text>
+    </view>
+</view>
 </view>
 <view class='BtnBox' bindtap='postApplyFn' wx:if="{{!is_apply}}">
     <view class="{{submitStatus ? '':'gray'}}">
@@ -70,6 +76,17 @@
 </view>
 <view class='cityCover' wx:if="{{cityState}}">
     <citylist citylist="{{insurance_data}}" bindcitytap='cityTap' bindcloseCity="closeCityHandle"></citylist>
+</view>
+
+
+<view class='serverCover' wx:if="{{serverState}}">
+    <view class='serverBox'>
+        <view class='title'>服务说明</view>
+        <view class='serverContain'>
+            <text>web-view 组件是一个可以用来承载网页的容器，会自动铺满整个小程序页面。个人类型与海外类型的小程web-view 组件是一个可以用来承载网页的容器，会自动铺满整个小程序页面。个人类型与海外类型的小程web-view 组件是一个可以用来承载网页的容器，会自动铺满整个小程序页面。个人类型与海外类型的小程web-view 组件是一个可以用来承载网页的容器，会自动铺满整个小程序页面。个人类型与海外类型的小程web-view 组件是一个可以用来承载网页的容器，会自动铺满整个小程序页面。个人类型与海外类型的小程web-view 组件是一个可以用来承载网页的容器，会自动铺满整个小程序页面。个人类型与海外类型的小程</text>
+        </view>
+        <view class='bottom' bindtap='operServerCover' data-index="0">我知道了</view>
+    </view>
 </view>
 
 <!-- <navBar bindchangeNav="changeNav" index="{{1}}"></navBar> -->

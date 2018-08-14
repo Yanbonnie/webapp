@@ -19,8 +19,8 @@
 </view>
 <view class='navList'>
     <view class='item' bindtap='goInfoHandle'>
-        <view>
-            <image src='/assets/images/icon1.png'></image>
+        <view class='red'>
+            <image src='/assets/images/icon1_on.png'></image>
             <text>{{is_binding ? '我的资料':'我要绑定'}}</text>
         </view>
         <text class='iconfont icon-right'></text>

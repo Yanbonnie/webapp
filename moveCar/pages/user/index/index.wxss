@@ -81,6 +81,9 @@ page{
     align-items: center;
     padding: 30rpx;
 }
+.navList .item .red{
+    color: #ff503f;
+}
 .navList .item view{
     display: flex;
     flex-basis: 200rpx;

@@ -107,17 +107,25 @@ Page({
     },
     //是否接收回复
     replyHandle(){
-        let { isfollow, reply } = this.data;
-        if (!isfollow){  //未关注
+        let { reply } = this.data;
+        REQUEST('get','getSubscribe',{
+            unionid: app.globalData.unionid
+        }).then(({ subscribe })=>{
             this.setData({
-                followState:true
+                isfollow: subscribe ? true : false
             })
-        }else{
-            reply = reply ? false : true;
-            this.setData({
-                reply
-            })
-        }
+            let { isfollow } = this.data;
+            if (!isfollow) {  //未关注
+                this.setData({
+                    followState: true
+                })
+            } else {
+                reply = reply ? false : true;
+                this.setData({
+                    reply
+                })
+            }
+        })       
         
     },
     //提交我要挪车接口

@@ -84,10 +84,7 @@ Page({
             })
             return;
         }
-        wx.showLoading({
-            title: '提交中...',
-            mask: true
-        })
+        
         if (!submitStatus) return;
         this.setData({
             submitStatus: false
@@ -98,6 +95,10 @@ Page({
         }else{
             url ='post_binding'
         }
+        wx.showLoading({
+            title: '提交中...',
+            mask: true
+        })
         REQUEST('POST', url, {
             car_number,
             car_type,
@@ -107,7 +108,7 @@ Page({
             mobile,
             code,
             unionid: app.globalData.unionid
-        }).then(res => {
+        },true).then(res => {
             this.setData({
                 submitStatus: true,
                 time: 0,
@@ -142,6 +143,19 @@ Page({
                 }
                 
             }, 1500)
+        }).catch(({msg})=>{
+            wx.showModal({
+                title: '提示',
+                content: msg,
+                showCancel:false,
+                success:res=>{
+                    if (res.confirm){
+                        this.setData({
+                            submitStatus:true 
+                        })
+                    }
+                }
+            })
         })
     },
     //获取我的资料

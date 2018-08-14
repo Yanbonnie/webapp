@@ -47,6 +47,7 @@ const URL = {
     'get_apply':'get_apply',                 //是否申请
     'payUpgrade':'payUpgrade',               //支付升级会员接口
     'payPostage':'payPostage',               //支付邮费
+    'getSubscribe':'getSubscribe',           //获取用户有无关注
 }
 
 //请求接口封装
