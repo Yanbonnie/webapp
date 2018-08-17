@@ -1,0 +1,26 @@
+<view class="page">
+  	<view class="list-item box-sizing">
+		<view><image src="{{userInfo.avatar}}"  class="avatar"></image></view>
+		<view class="nickname">{{userInfo.nickName}}</view>
+		<view class="digging-num">
+			<text>挖宝次数：</text>
+			<text>{{mainData.digging_num || 0}}</text>
+		</view> 
+	</view>
+	<view class="list-block flex-box pos_r border_bottom">
+		<view class="flex-item" bindtap="tapMyPartake">我参与的<text class="bold color-yellow">({{mainData.partake_num || 0}})</text>	</view>
+		<view class="icon-arrow"></view>
+	</view> 
+	<view class="list-block flex-box pos_r border_bottom">
+		<view class="flex-item" bindtap="tapMyRelease">我发布的<text class="bold color-yellow">({{mainData.release_num || 0}})</text></view>
+		<view class="icon-arrow"></view>
+	</view> 
+	<view class="list-block flex-box pos_r border_bottom">
+		<view class="flex-item" bindtap="tapMyPrize">我中奖的<text class="bold color-yellow">({{mainData.prize_num || 0}})</text></view>
+		<view class="icon-arrow"></view>
+	</view> 
+	<view class="list-block flex-box">
+		<view class="flex-item" bindtap='chooseAddress'>管理地址</view>
+		<view class="icon-arrow"></view>
+	</view> 
+</view>

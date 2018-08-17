@@ -1,0 +1,30 @@
+.weui-cell_vcode {
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+
+.weui-vcode-btn {
+    display: inline-block;
+    height: 44px;
+    margin-left: 5px;
+    padding: 0 0.6em 0 0.7em;
+    border-left: 0.5px solid #E5E5E5;
+    line-height: 44px;
+    vertical-align: middle;
+    font-size: 17px;
+    color: #3CC51F;
+    border-radius: 0;
+}
+
+.weui-vcode-btn:after{
+    display: none;
+}
+
+button.weui-vcode-btn {
+    background-color: transparent;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+    outline: 0;
+}

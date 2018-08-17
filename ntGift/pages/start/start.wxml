@@ -1,0 +1,16 @@
+<!-- <view class="splash-screen"> -->
+	<!-- <image src="{{'/images/gif-cd.gif'}}" mode="aspectFill" class="slide-image" /> -->
+	<!-- <image src="{{'/images/gif-diginto.gif'}}" mode="widthFix" class="slide-image" /> -->
+	<!-- <view style="padding:15px;text-shadow:0 0 1px rgba(0,0,0,.2);position:absolute;left:0;right:0;bottom:20%;">
+		<button class="button" bindgetuserinfo="getUserInfo" open-type="getUserInfo" disabled="{{ajaxLock}}">开始探索</button>
+	</view>
+</view> -->
+<!-- indicator-dots="false" indicator-active-color="#ffffff"  indicator-color="#cccccc"  -->
+<swiper class='swiper' > 
+  <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image" mode='aspectFill' bindtap='goDigging' data-index="{{index}}"/>
+      <button class="button" bindgetuserinfo="getUserInfo" open-type="getUserInfo" disabled="{{ajaxLock}}" wx:if="{{index == imgUrls.length-1}}">开始探索</button>
+    </swiper-item>
+  </block>
+</swiper>

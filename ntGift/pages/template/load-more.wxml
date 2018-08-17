@@ -1,0 +1,4 @@
+<template name="loadMore">
+	<button wx:if="{{loadMoreStart}}" class="load-more-button" type="default" plain="true" loading="true" hover-class="none"></button>
+	<view wx:if="{{loadMoreEndingText}}" class="load-more-text">{{loadMoreEndingText}}</view>
+</template>

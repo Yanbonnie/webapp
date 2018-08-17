@@ -1,0 +1,7 @@
+<import src="../template/load-more.wxml" />
+<import src="../template/list.wxml" />
+
+<view class="page" hidden="{{!contentReady}}">
+    <template is="list" data="{{list: list}}"/>
+</view>
+<template is="loadMore" data="{{loadMoreStart: loadMoreStart, loadMoreEndingText: loadMoreEndingText}}" />
