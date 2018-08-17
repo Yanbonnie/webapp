@@ -1,0 +1,2 @@
+<!--pages/apply/apply.wxml-->
+<web-view  src="https://baidu.com"></web-view>  

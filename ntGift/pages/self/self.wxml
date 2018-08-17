@@ -19,8 +19,12 @@
 		<view class="flex-item" bindtap="tapMyPrize">我中奖的<text class="bold color-yellow">({{mainData.prize_num || 0}})</text></view>
 		<view class="icon-arrow"></view>
 	</view> 
-	<view class="list-block flex-box">
+	<view class="list-block flex-box pos_r border_bottom">
 		<view class="flex-item" bindtap='chooseAddress'>管理地址</view>
+		<view class="icon-arrow"></view>
+	</view> 
+    <view class="list-block flex-box">
+		<view class="flex-item"><navigator url="/pages/apply/apply">申请内测</navigator></view>
 		<view class="icon-arrow"></view>
 	</view> 
 </view>

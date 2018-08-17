@@ -1,5 +1,5 @@
 {
-    "pages": [        
+    "pages": [
         "pages/index/index",
         "pages/start/start",
         "pages/details/details",
@@ -8,8 +8,8 @@
         "pages/self/myPartake",
         "pages/self/myPrize",
         "pages/self/self",
-        "pages/propShopping/propShopping"
-        
+        "pages/propShopping/propShopping",
+        "pages/apply/apply"
     ],
     "window": {
         "backgroundTextStyle": "light",
