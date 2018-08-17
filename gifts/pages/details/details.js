@@ -1,7 +1,7 @@
 //获取应用实例
 var app = getApp();
 var ountdownTimeTimer;
-let imgUrls = ['https://xnt.xhwxpos.com/mining/static/images/rule1.png', 'https://xnt.xhwxpos.com/mining/static/images/rule2.png', 'https://xnt.xhwxpos.com/mining/static/images/rule3.png']
+let imgUrls = ['https://xnt.xhwxpos.com/mining/static/images/rule1.png', 'https://xnt.xhwxpos.com/mining/static/images/rule3.png']
 function resetData(args) {
     if (!args) {
         args = {};
@@ -16,7 +16,7 @@ function resetData(args) {
         page: 1,
         mainInfo: {},
         userList: [],
-        winnerList: [
+        winnerList: [    //中奖名单
             // {
             //     id: 1,
             //     avatar: 'https://wx.qlogo.cn/mmopen/vi_32/yhNUouLkIkWj6o24icNU6PIbbNTK972P2jpD6icqjw5LfJuLujnrobyPuSQKNibPtm3wmhO7xhJHgaAicgl8pu8xcg/132',
@@ -48,7 +48,7 @@ function resetData(args) {
         canDiggingCd: false,                  //可挖宝
         digNothing: false,                    //什么也没挖到
         giftNone: false,                      //礼品被挖光
-        hasMoreUser: false,
+        hasMoreUser: false,                   //有没有更多用户
         showFields: false,
         showPrizeListFlag: false,
         showAddress: false,
@@ -192,23 +192,17 @@ Page({
 
                 var mainInfo = data.data || {};
                 // test code
-                // mainInfo.status = 0;
-                // mainInfo.goods_type = 1;
-                // mainInfo.draw_type = 2;
-                // mainInfo.is_cd = 0;
-                // mainInfo.is_prize = 0;
                 mainInfo.is_manage = is_manage;
 
                 that.setData({
                     digMainInfo: mainInfo,
-                    userList: mainInfo.user || []
+                    // userList: mainInfo.user || []
                 });
-                // that.getUsedTools();
-                if (mainInfo.user.length > 50) {
-                    that.setData({
-                        hasMoreUser: true
-                    });
-                }
+                // if (mainInfo.user.length > 50) {
+                //     that.setData({
+                //         hasMoreUser: true
+                //     });
+                // }
 
                 //中奖
                 // if (mainInfo.is_prize == 1) {
@@ -480,13 +474,15 @@ Page({
         var param = args.param;
         var success = args.success;
         var fail = args.fail;
-        args.showToastFlag = true;
-        if (args.showToastFlag) {
-            app.showLoading({
-                title: '请稍候'
-            })
-        }
-
+        // args.showToastFlag = true;
+        // if (args.showToastFlag) {
+        //     app.showLoading({
+        //         title: '请稍候'
+        //     })
+        // }
+        // app.showLoading({
+        //     title: '请稍候'
+        // })
         var queryData = {
             code: that.data.options.code,
             is_share: that.data.options.is_share || 0
@@ -496,6 +492,10 @@ Page({
             queryData.from_unionid = that.data.options.from_unionid;
         }
         // return;
+        wx.showLoading({
+            title: '加载中...',
+            mask:true
+        })
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getTaskDetails'
@@ -504,7 +504,7 @@ Page({
             success:res=> {
                 // 获取我使用过的道具
                 
-                app.hideLoading();
+                
                 this.setData({
                     contentReady: true
                 });
@@ -527,16 +527,17 @@ Page({
 
                 this.setData({
                     mainInfo: mainInfo,
-                    userList: mainInfo.user || []
+                    // userList: mainInfo.user || []
                 });
                 this.getUsedTools();
                 this.getMytools(true, 1);
-                this.getExchangeInfo();      
-                if (mainInfo.user.length > 50) {
-                    this.setData({
-                        hasMoreUser: true
-                    });
-                }
+                this.getExchangeInfo();    
+                this.getNextPage();  
+                // if (mainInfo.user.length > 50) {
+                //     this.setData({
+                //         hasMoreUser: true
+                //     });
+                // }
 
                 if (mainInfo.is_prize == 1) {
                     this.setData({
@@ -569,6 +570,7 @@ Page({
                             }
                         }, 1500);
                     }
+                    
                 } else { //没中奖
                     if (mainInfo.status == 0) { //项目进项中....
                         if (mainInfo.is_cd == 1) { //冷却倒计时
@@ -600,44 +602,10 @@ Page({
                         })
                     }
                 }
-
-                // if (mainInfo.is_prize) { //中奖
-                //     that.setData({
-                //         digging: false,
-                //         winning: true
-                //     })
-                //     if(mainInfo.is_draw == 0){
-                //         if (mainInfo.goods_type == 2) {
-                //             if (mainInfo.draw_type == 2) { //如果是邮寄
-                //                 that.toggleAddressPop(true);
-                //             } else { // 如果是现场
-                //                 app.dialog({
-                //                     title: '领奖提示',
-                //                     content: mainInfo.draw_info
-                //                 });
-                //             }
-                //         }
-                //     }
-
-                // } else { //未中奖
-                //     if (mainInfo.status == 0) { //项目进项中....
-                //         if (mainInfo.is_cd == 1) { //冷却倒计时
-                //             that.runCountdownTime(mainInfo.time);
-                //             that.setData({
-                //                 winning: false
-                //             })
-                //         } else { //可挖宝  is_cd = 0
-                //             that.miningTask();
-                //         }
-                //     } else { //项目结束
-                //         that.setData({
-                //             giftNone: true
-                //         })
-                //     }
-                // }
+                wx.hideLoading();
             },
             fail: function(err) {
-                app.hideLoading();
+                wx.hideLoading();
                 that.setData({
                     contentReady: true
                 });
@@ -817,10 +785,19 @@ Page({
                 typeof success === 'function' && success(param);
 
                 var userList = data.data || [];
-
+                if (userList.length < 50) {  //没有更多了
+                    that.setData({
+                        hasMoreUser: false
+                    });
+                }else{
+                    that.setData({
+                        hasMoreUser: true
+                    });
+                }
                 that.setData({
                     userList: that.data.userList.concat(userList)
                 });
+                
             },
             fail: function(err) {
                 app.hideLoading();
@@ -975,7 +952,11 @@ Page({
         });
     },
     onReachBottom: function() {
-        // this.getNextPage();
+        const { hasMoreUser } = this.data;
+        if (hasMoreUser){
+            this.getNextPage();
+        }
+        
     },
     onShow: function() {
         var that = this;

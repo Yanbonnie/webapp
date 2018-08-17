@@ -59,7 +59,7 @@
                     </li>
                 </block>
             </ul>
-            <view class="more-partner" wx:if="{{getMoreUser}}" bindtap="getMoreUser">更多参与者∨</view>
+            <view class="more-partner" wx:if="{{!hasMoreUser}}" >到底了</view> <!--bindtap="getMoreUser"-->
         </view>
     </view>
     <view class="ft_box" wx:if="{{mainInfo.status != -1 && mainInfo.is_manage == 1}}">

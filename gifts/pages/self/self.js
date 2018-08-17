@@ -55,9 +55,9 @@ Page({
                 },
                 fail: function(err) {
                     if(err.Msg != 'chooseAddress:fail cancel'){
-                        app.dialog({
-                            content: '授权失败，请删除小程序后再次进入重新授权！'
-                        })
+                        // app.dialog({
+                        //     content: '授权失败，请删除小程序后再次进入重新授权！'
+                        // })
                     }
                 }
             })
