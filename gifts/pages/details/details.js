@@ -50,6 +50,8 @@ function resetData(args) {
         digNothing: false,                    //什么也没挖到
         giftNone: false,                      //礼品被挖光
         hasMoreUser: false,                   //有没有更多用户
+        hasMoreWinner:false,                  //有没有更多中奖者
+        isFirst:true,                         //是否是第一次请求中奖名单
         showFields: false,
         showPrizeListFlag: false,
         showAddress: false,
@@ -840,19 +842,20 @@ Page({
             showPrizeListFlag: false
         });
     },
-    showPrizeListPop: function() {
+    showPrizeListPop: function(e) {
+        const { prizePage, isFirst } = this.data;
         var that = this;
         app.showLoading({
             title: '请稍候'
         })
-
+        if (e && !isFirst){return false;}  //第二次点击中奖名单，不重复请求
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getPrizeList'
             }),
             data: {
                 code: that.data.options.code,
-                page:1
+                page: prizePage
             },
             success: function(res) {
                 app.hideLoading();
@@ -867,10 +870,21 @@ Page({
                 }
 
                 var list = data.data || [];
-
+                
+                if (list.length < 20) {  //没有更多了
+                    that.setData({
+                        hasMoreWinner: false
+                    });
+                } else {
+                    that.setData({
+                        hasMoreWinner: true
+                    });
+                }
                 that.setData({
-                    winnerList: list,
-                    showPrizeListFlag: true
+                    winnerList: that.data.winnerList.concat(list),
+                    showPrizeListFlag: true,
+                    prizePage:that.data.prizePage+1,
+                    isFirst:false
                 });
             },
             fail: function(err) {
@@ -880,6 +894,13 @@ Page({
                 });
             }
         });
+    },
+    // 中奖名单滚动到底部
+    lowerHandle() {
+        const { hasMoreWinner } = this.data;
+        if (hasMoreWinner) {
+            this.showPrizeListPop();
+        }
     },
     renderPosts: function(list) {
         var that = this;
@@ -1435,5 +1456,6 @@ Page({
                     },2000)
                 }
             }
-        }
+        },
+    
 });

@@ -101,42 +101,46 @@
             </view>
         </view>
         <view class="modal-inner">
-            <view class="winners-list">
-                <view class="winlist-tips" wx:if="{{!winnerList.length}}">暂无内容</view>
-                <block wx:key="" wx:for="{{winnerList}}" wx:for-item="item" wx:for-index="idx">
-                    <view class="flex-space-between pos_r winners-item {{idx ? 'border_top' : ''}}">
-                        <view class="flex-shrink item-l">
-                            <view>
-                                <image src="{{item.avatar}}" class="avatar" mode="aspectFill" />
-                                <view class="color-gray">{{item.wxname}}</view>
-                            </view>
-                        </view>
-                        <view class="flex-item">
-                            <view class="item-m">
-                                <view wx:if="{{mainInfo.goods_type == 2 && mainInfo.draw_type == 2}}">
-                                    <view class="name">{{item.name}}({{item.mobile}})</view>
-                                    <view class="address" wx:if="{{mainInfo.goods_type == 2}}">{{item.address}}</view>
+            <scroll-view scroll-y class="scrollView" bindscrolltolower="lowerHandle">
+                <view class="winners-list">
+                    <view class="winlist-tips" wx:if="{{!winnerList.length}}">暂无内容</view>
+                    <block wx:key="" wx:for="{{winnerList}}" wx:for-item="item" wx:for-index="idx">
+                        <view class="flex-space-between pos_r winners-item {{idx ? 'border_top' : ''}}">
+                            <view class="flex-shrink item-l">
+                                <view>
+                                    <image src="{{item.avatar}}" class="avatar" mode="aspectFill" />
+                                    <view class="color-gray">{{item.wxname}}</view>
                                 </view>
-                                <view wx:else>
-                                    <text class="color-yellow" wx:if="{{item.status == 0}}">待领取</text>
-                                    <text class="color-blue" wx:if="{{item.status == 1}}">已领取</text>
+                            </view>
+                            <view class="flex-item">
+                                <view class="item-m">
+                                    <view wx:if="{{mainInfo.goods_type == 2 && mainInfo.draw_type == 2}}">
+                                        <view class="name">{{item.name}}({{item.mobile}})</view>
+                                        <view class="address" wx:if="{{mainInfo.goods_type == 2}}">{{item.address}}</view>
+                                    </view>
+                                    <view wx:else>
+                                        <text class="color-yellow" wx:if="{{item.status == 0}}">待领取</text>
+                                        <text class="color-blue" wx:if="{{item.status == 1}}">已领取</text>
+                                    </view>
+                                    <view class="time color-gray">{{item.time}}</view>
                                 </view>
-                                <view class="time color-gray">{{item.time}}</view>
+                            </view>
+                            <view class="flex-shrink" wx:if="{{mainInfo.goods_type == 2}}">
+                                <view class="item-r status-yellow" wx:if="{{item.status == 0}}" bindtap="tapManagePrizeInfo" data-type="1" data-idx="{{idx}}">
+                                    <text class="m-status" wx:if="{{mainInfo.goods_type == 2 && mainInfo.draw_type == 2}}">待领取</text>
+                                    <button class="btn_cl">标为已领</button>
+                                </view>
+                                <view class="item-r status-blue" wx:if="{{item.status == 1}}" bindtap="tapManagePrizeInfo" data-type="0" data-idx="{{idx}}">
+                                    <text class="m-status" wx:if="{{mainInfo.goods_type == 2 && mainInfo.draw_type == 2}}">已领取</text>
+                                    <button class="btn_cl">重置状态</button>
+                                </view>
                             </view>
                         </view>
-                        <view class="flex-shrink" wx:if="{{mainInfo.goods_type == 2}}">
-                            <view class="item-r status-yellow" wx:if="{{item.status == 0}}" bindtap="tapManagePrizeInfo" data-type="1" data-idx="{{idx}}">
-                                <text class="m-status" wx:if="{{mainInfo.goods_type == 2 && mainInfo.draw_type == 2}}">待领取</text>
-                                <button class="btn_cl">标为已领</button>
-                            </view>
-                            <view class="item-r status-blue" wx:if="{{item.status == 1}}" bindtap="tapManagePrizeInfo" data-type="0" data-idx="{{idx}}">
-                                <text class="m-status" wx:if="{{mainInfo.goods_type == 2 && mainInfo.draw_type == 2}}">已领取</text>
-                                <button class="btn_cl">重置状态</button>
-                            </view>
-                        </view>
-                    </view>
-                </block>
-            </view>
+                    </block>
+                    <view wx:if="{{!hasMoreWinner && list.length > 20}}">没有更多了</view>
+                </view>
+            </scroll-view>
+            
         </view>
     </view>
 </view>
@@ -216,18 +220,6 @@
         </view>
         <view class='propertyList'>
             <view class='item'>
-                <!-- <form bindsubmit="useTools" report-submit="true" data-tools_id="456">
-                    <view class='form'>
-                        <view class='img'>
-                            <image src='/images/icon-score.png'></image>
-                        </view>
-                        <view class='info'>
-                            <view class='title'>自动铲子</view>
-                            <view class='txt'>完成冷却后可自动挖宝</view>
-                        </view>
-                        <button formType="submit" class='button'>Submit</button>
-                    </view>
-                </form> -->
                 <form bindsubmit="useToolsBefore" report-submit="true" wx:for="{{propertyList}}" wx:key="{{index}}" data-tools_id="{{item.tools_id}}">
                     <view class='form'>
                         <view class='img'>
@@ -239,10 +231,8 @@
                             <view class='txt'>{{item.tools_explain}}</view>
                         </view>
                         <view class='buyBox' data-tools_id="{{item.tools_id}}">
-                            <!-- <view class='btn'>使用</view> -->
                             <button formType="submit" class='btn'>使用</button>
                         </view>
-                        <!-- <button formType="submit" class='button'>Submit</button> -->
                     </view>
                 </form>
                 <view class='noMessage' wx:if="{{propertyList && propertyList.length == 0}}">
@@ -264,9 +254,6 @@
                 timeText="{{timeText}}" 
                 giftNone="{{giftNone}}"   
             >
-                <!-- useTools="{{useToolsArr}}" 
-                bind:diggerGiftHandle="diggerGiftHandle"
-                bind:toggleSharePop="toggleSharePop" -->
             </dig_treasure>
         </view>
     </view>

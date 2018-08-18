@@ -14,7 +14,7 @@ function resetData(args) {
         contentErrText: '',
 
         page: 1,
-        prizePage:1,
+        prizePage: 1,
         mainInfo: {},
         userList: [],
         winnerList: [    //中奖名单
@@ -50,6 +50,8 @@ function resetData(args) {
         digNothing: false,                    //什么也没挖到
         giftNone: false,                      //礼品被挖光
         hasMoreUser: false,                   //有没有更多用户
+        hasMoreWinner: false,                  //有没有更多中奖者
+        isFirst: true,                         //是否是第一次请求中奖名单
         showFields: false,
         showPrizeListFlag: false,
         showAddress: false,
@@ -58,28 +60,28 @@ function resetData(args) {
         friendStatus: false,                  //分享到朋友圈
         propertyStatus: false,                //道具弹框
         propertyList: null,                     //道具数组  tools_id-道具ID tools_name-道具名  tools_type-道具类型 （1自动铲子） tools_num-道具数量  pic-道具图标
-        temPropertyList:null,                   //临时道具数组
-        exchangeStatus:false,                 //兑奖弹框状态
-        getCodeIntroStatus:false,              //获取兑奖码介绍
-        swiperStatus:false,                   //活动规则
+        temPropertyList: null,                   //临时道具数组
+        exchangeStatus: false,                 //兑奖弹框状态
+        getCodeIntroStatus: false,              //获取兑奖码介绍
+        swiperStatus: false,                   //活动规则
         imgUrls: imgUrls,
-        useState:false,                        //是否可以使用
-        useCount:0,                           //使用的数量                    
-        bottomDigState:true,                  //底部挖宝是否显示
-        animationTop:null,         
+        useState: false,                        //是否可以使用
+        useCount: 0,                           //使用的数量                    
+        bottomDigState: true,                  //底部挖宝是否显示
+        animationTop: null,
         animationTopData: {},
-        animationBottom:null,
-        animationBottomData:{},
-        scrollTopNum:0,
-        info:null,
-        digMainInfo:null,    
-        bigScrollNum:0,
+        animationBottom: null,
+        animationBottomData: {},
+        scrollTopNum: 0,
+        info: null,
+        digMainInfo: null,
+        bigScrollNum: 0,
     }
 }
 
 Page({
     data: resetData(),
-    toggleAddressPop: function(flag) {
+    toggleAddressPop: function (flag) {
         this.setData({
             showAddress: typeof flag == 'boolean' ? flag : !this.data.showAddress
         });
@@ -108,7 +110,7 @@ Page({
                 unionid: that.data.userInfo.unionid,
                 code: that.data.options.code,
             },
-            success: function(res) {
+            success: function (res) {
                 wx.hideLoading();
                 let data = res.data;
                 if (data.status == 0) {
@@ -118,7 +120,7 @@ Page({
                     })
                 }
             },
-            fail: function(err) {
+            fail: function (err) {
                 app.hideLoading();
                 app.dialog({
                     content: err.errMsg || app.globalData.errMsgText
@@ -131,7 +133,7 @@ Page({
             friendStatus: false
         })
     },
-    toggleSharePop: function() {
+    toggleSharePop: function () {
         const {
             canDiggingCd
         } = this.data;
@@ -175,7 +177,7 @@ Page({
                 path: '/wxapp/Index/miningTask'
             }),
             data: queryData,
-            success: function(res) {
+            success: function (res) {
                 // console.info(res);
                 app.hideLoading();
                 that.setData({
@@ -270,7 +272,7 @@ Page({
 
 
             },
-            fail: function(err) {
+            fail: function (err) {
                 app.hideLoading();
                 app.dialog({
                     content: err.errMsg || app.globalData.errMsgText
@@ -294,7 +296,7 @@ Page({
                     });
                 }
             }
-        }else{
+        } else {
             if (mainInfo.goods_type == 2) {
                 if (mainInfo.draw_type == 2) { //如果是邮寄
                     app.dialog({
@@ -315,12 +317,12 @@ Page({
             }
         }
     },
-    toggleFieldsBox: function() {
+    toggleFieldsBox: function () {
         this.setData({
             showFields: !this.data.showFields
         });
     },
-    tapManagePrizeInfo: function(event) {
+    tapManagePrizeInfo: function (event) {
         var that = this;
         var type = event.currentTarget.dataset.type;
         var idx = event.currentTarget.dataset.idx;
@@ -341,7 +343,7 @@ Page({
                 id: item.id,
                 status: item.status
             },
-            success: function(res) {
+            success: function (res) {
                 // console.info(res);
                 app.hideLoading();
 
@@ -359,7 +361,7 @@ Page({
                 newData['winnerList[' + idx + '].time'] = data.data.time;
                 that.setData(newData);
             },
-            fail: function(err) {
+            fail: function (err) {
                 app.hideLoading();
                 app.dialog({
                     content: err.errMsg || app.globalData.errMsgText
@@ -367,7 +369,7 @@ Page({
             }
         });
     },
-    confirmSendNews: function(event) {
+    confirmSendNews: function (event) {
         const { formId } = event.detail;
         var that = this;
         var ajaxParam = app.common.extend(true, {}, event.detail.value || {});
@@ -409,7 +411,7 @@ Page({
         app.confirm({
             title: '提示',
             content: '是否确认提交收件地址？',
-            success: function() {
+            success: function () {
                 app.showLoading({
                     title: '请稍候'
                 });
@@ -419,7 +421,7 @@ Page({
                         path: '/wxapp/Index/postMyPrizeInfo'
                     }),
                     data: ajaxParam,
-                    success: function(res) {
+                    success: function (res) {
                         // console.info(res);
                         app.hideLoading();
 
@@ -439,7 +441,7 @@ Page({
                             duration: 2000
                         });
                     },
-                    fail: function(err) {
+                    fail: function (err) {
                         app.hideLoading();
                         app.dialog({
                             content: err.errMsg || app.globalData.errMsgText
@@ -449,13 +451,13 @@ Page({
             }
         });
     },
-    getPostsFail: function(msg, param, fail) {
+    getPostsFail: function (msg, param, fail) {
         typeof fail === 'function' && fail();
 
         var that = this;
         app.dialog({
             content: msg || app.globalData.errMsgText,
-            success: function(res) {
+            success: function (res) {
                 if (res.confirm) {
                     wx.switchTab({
                         url: '/pages/index/index'
@@ -470,7 +472,7 @@ Page({
             contentErrText: msg || app.globalData.errMsgText
         });
     },
-    getPosts: function(args) {
+    getPosts: function (args) {
         var that = this;
         var param = args.param;
         var success = args.success;
@@ -495,17 +497,17 @@ Page({
         // return;
         wx.showLoading({
             title: '加载中...',
-            mask:true
+            mask: true
         })
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getTaskDetails'
             }),
             data: queryData,
-            success:res=> {
+            success: res => {
                 // 获取我使用过的道具
-                
-                
+
+
                 this.setData({
                     contentReady: true
                 });
@@ -532,8 +534,8 @@ Page({
                 });
                 this.getUsedTools();
                 this.getMytools(true, 1);
-                this.getExchangeInfo();    
-                this.getNextPage();  
+                this.getExchangeInfo();
+                this.getNextPage();
                 // if (mainInfo.user.length > 50) {
                 //     this.setData({
                 //         hasMoreUser: true
@@ -571,7 +573,7 @@ Page({
                             }
                         }, 1500);
                     }
-                    
+
                 } else { //没中奖
                     if (mainInfo.status == 0) { //项目进项中....
                         if (mainInfo.is_cd == 1) { //冷却倒计时
@@ -585,11 +587,11 @@ Page({
                         } else {
                             this.setData({
                                 winning: false,
-                                digging:false,
+                                digging: false,
                                 canDiggingCd: false,
                                 digNothing: false,
                                 gitNone: false,
-                                diggingCd:true
+                                diggingCd: true
                             })
                             that.miningTask();
                         }
@@ -605,7 +607,7 @@ Page({
                 }
                 wx.hideLoading();
             },
-            fail: function(err) {
+            fail: function (err) {
                 wx.hideLoading();
                 that.setData({
                     contentReady: true
@@ -614,7 +616,7 @@ Page({
             }
         });
     },
-    runPayment: function(payment) {
+    runPayment: function (payment) {
         var that = this;
 
         wx.requestPayment({
@@ -623,18 +625,18 @@ Page({
             'package': payment.package,
             'signType': payment.signType,
             'paySign': payment.paySign,
-            'success': function(res) {
+            'success': function (res) {
                 wx.showToast({
                     title: '成功',
                     icon: 'success',
-                    success: function() {
+                    success: function () {
                         that.reload({
                             showToastFlag: true
                         });
                     }
                 });
             },
-            'fail': function(err) {
+            'fail': function (err) {
                 wx.showToast({
                     title: err.errMsg || '支付失败，请稍后再试！',
                     icon: 'none'
@@ -642,7 +644,7 @@ Page({
             }
         });
     },
-    getPayTask: function(args) {
+    getPayTask: function (args) {
         var that = this;
         app.showLoading({
             title: '请稍后'
@@ -656,7 +658,7 @@ Page({
                 money: args.money,
                 code: args.code
             },
-            success: function(res) {
+            success: function (res) {
                 var data = res.data;
                 app.hideLoading();
 
@@ -669,16 +671,16 @@ Page({
                 var payment = data.data;
                 that.runPayment(payment);
             },
-            fail: function(err) {
+            fail: function (err) {
                 app.hideLoading();
                 app.dialog({
                     content: err.errMsg || app.globalData.errMsgText,
-                    success: function() {}
+                    success: function () { }
                 });
             }
         });
     },
-    tapPayTask: function() {
+    tapPayTask: function () {
         var that = this;
         that.getPayTask({
             money: that.data.mainInfo.money,
@@ -686,7 +688,7 @@ Page({
         });
     },
     // 倒计时
-    runCountdownTime: function(leftTime) {
+    runCountdownTime: function (leftTime) {
         var that = this;
         clearInterval(ountdownTimeTimer);
         leftTime = parseInt(leftTime || that.data.detail.time);
@@ -695,7 +697,7 @@ Page({
         }
 
         that.renderOuntdownTime(leftTime);
-        ountdownTimeTimer = setInterval(function() {
+        ountdownTimeTimer = setInterval(function () {
             leftTime -= 1;
             that.renderOuntdownTime(leftTime);
             if (leftTime <= 0) {
@@ -706,12 +708,12 @@ Page({
                 that.setData({
                     canDiggingCd: true,
                     diggingCd: false,
-                    bigScrollNum:0
+                    bigScrollNum: 0
                 })
             }
         }, 1000);
     },
-    renderOuntdownTime: function(leftTime) {
+    renderOuntdownTime: function (leftTime) {
         var that = this;
         that.setData({
             time: leftTime,
@@ -719,7 +721,7 @@ Page({
             diggingCd: true
         })
     },
-    formatSeconds: function(value) {
+    formatSeconds: function (value) {
         var secondTime = parseInt(value); // 秒
         var minuteTime = 0; // 分
         var hourTime = 0; // 小时
@@ -746,7 +748,7 @@ Page({
         }
         return result;
     },
-    getUsers: function(args) {
+    getUsers: function (args) {
         var that = this;
         var param = args.param;
         var success = args.success;
@@ -768,7 +770,7 @@ Page({
                 code: that.data.options.code,
                 page: that.data.page
             },
-            success: function(res) {
+            success: function (res) {
                 app.hideLoading();
                 that.setData({
                     loadMoreLock: false
@@ -790,7 +792,7 @@ Page({
                     that.setData({
                         hasMoreUser: false
                     });
-                }else{
+                } else {
                     that.setData({
                         hasMoreUser: true
                     });
@@ -798,9 +800,9 @@ Page({
                 that.setData({
                     userList: that.data.userList.concat(userList)
                 });
-                
+
             },
-            fail: function(err) {
+            fail: function (err) {
                 app.hideLoading();
                 that.setData({
                     loadMoreLock: false
@@ -811,7 +813,7 @@ Page({
             }
         });
     },
-    getNextPage: function() {
+    getNextPage: function () {
         var that = this;
         var loadMoreLock = that.data.loadMoreLock;
         var page = that.data.page;
@@ -823,7 +825,7 @@ Page({
                 param: {
                     page: page + 1
                 },
-                success: function(param) {
+                success: function (param) {
                     that.setData({
                         page: param.page
                     });
@@ -831,30 +833,31 @@ Page({
             });
         }
     },
-    getMoreUser: function() {
+    getMoreUser: function () {
         this.getNextPage();
     },
-    hidePrizeListPop: function() {
+    hidePrizeListPop: function () {
         var that = this;
         that.setData({
             showPrizeListFlag: false
         });
     },
-    showPrizeListPop: function() {
+    showPrizeListPop: function (e) {
+        const { prizePage, isFirst } = this.data;
         var that = this;
         app.showLoading({
             title: '请稍候'
         })
-
+        if (e && !isFirst) { return false; }  //第二次点击中奖名单，不重复请求
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getPrizeList'
             }),
             data: {
                 code: that.data.options.code,
-                page:1
+                page: prizePage
             },
-            success: function(res) {
+            success: function (res) {
                 app.hideLoading();
 
                 var data = res.data;
@@ -868,12 +871,23 @@ Page({
 
                 var list = data.data || [];
 
+                if (list.length < 20) {  //没有更多了
+                    that.setData({
+                        hasMoreWinner: false
+                    });
+                } else {
+                    that.setData({
+                        hasMoreWinner: true
+                    });
+                }
                 that.setData({
-                    winnerList: list,
-                    showPrizeListFlag: true
+                    winnerList: that.data.winnerList.concat(list),
+                    showPrizeListFlag: true,
+                    prizePage: that.data.prizePage + 1,
+                    isFirst: false
                 });
             },
-            fail: function(err) {
+            fail: function (err) {
                 app.hideLoading();
                 app.dialog({
                     content: err.errMsg || app.globalData.errMsgText
@@ -881,18 +895,25 @@ Page({
             }
         });
     },
-    renderPosts: function(list) {
+    // 中奖名单滚动到底部
+    lowerHandle() {
+        const { hasMoreWinner } = this.data;
+        if (hasMoreWinner) {
+            this.showPrizeListPop();
+        }
+    },
+    renderPosts: function (list) {
         var that = this;
         that.setData({
             list: that.data.list.concat(list)
         });
     },
     // 用户选择收货地址
-    chooseAddress: function() {
+    chooseAddress: function () {
         var that = this;
         if (wx.chooseAddress) {
             wx.chooseAddress({
-                success: function(res) {
+                success: function (res) {
                     // console.log(res);
                     that.setData({
                         // "userName": res.userName,
@@ -906,7 +927,7 @@ Page({
                         flag: false
                     })
                 },
-                fail: function(err) {
+                fail: function (err) {
                     if (err.Msg != 'chooseAddress:fail cancel') {
                         app.dialog({
                             content: '授权失败，请删除小程序后再次进入重新授权！'
@@ -918,14 +939,14 @@ Page({
             console.log('当前微信版本不支持chooseAddress');
         }
     },
-    reload: function(args) {
+    reload: function (args) {
         if (!args) {
             args = {};
         }
         var that = this;
 
         that.getPosts({
-            success: function(param) {
+            success: function (param) {
                 that.setData(resetData({
                     options: that.data.options,
                     contentReady: that.data.contentReady
@@ -935,40 +956,40 @@ Page({
             fail: args.fail
         });
     },
-    stopPullDownRefresh: function() {
+    stopPullDownRefresh: function () {
         wx.stopPullDownRefresh({
-            complete: function(res) {
+            complete: function (res) {
                 // console.log(res, new Date())
             }
         })
     },
-    onPullDownRefresh: function() {
+    onPullDownRefresh: function () {
         var that = this;
         this.reload({
-            success: function() {
+            success: function () {
                 that.stopPullDownRefresh();
             },
-            fail: function() {
+            fail: function () {
                 that.stopPullDownRefresh();
             }
         });
     },
-    onReachBottom: function() {
+    onReachBottom: function () {
         const { hasMoreUser } = this.data;
-        if (hasMoreUser){
+        if (hasMoreUser) {
             this.getNextPage();
         }
-        
+
     },
-    onShow: function() {
+    onShow: function () {
         var that = this;
         app.checkIsAuthorize({
-            success: function() {
+            success: function () {
                 if (!that.data.contentReady) {
                     that.reload({
                         showToastFlag: false
                     });
-                }else{
+                } else {
                     that.reload({
                         showToastFlag: true
                     });
@@ -976,8 +997,8 @@ Page({
             }
         });
     },
-    onHide: function() {},
-    onLoad: function(options) {
+    onHide: function () { },
+    onLoad: function (options) {
         var that = this;
 
         // // test code
@@ -987,27 +1008,27 @@ Page({
         that.setData({
             options: options
         });
-        
+
     },
-    onReady(){
+    onReady() {
         var that = this;
         wx.getSystemInfo({
-              success:  function (res)  {
-                  let windowHeight = res.windowHeight
-                  setTimeout(() => {
-                      var query = wx.createSelectorQuery();
-                      query.select('#the-id').boundingClientRect().exec(function (res2) {
-                          const { bottom, height } = res2[0]
-                          that.setData({
-                              scrollTopNum: bottom - windowHeight
-                          })
-                      })
-                  }, 600)
-              },
-            }) 
-         
+            success: function (res) {
+                let windowHeight = res.windowHeight
+                setTimeout(() => {
+                    var query = wx.createSelectorQuery();
+                    query.select('#the-id').boundingClientRect().exec(function (res2) {
+                        const { bottom, height } = res2[0]
+                        that.setData({
+                            scrollTopNum: bottom - windowHeight
+                        })
+                    })
+                }, 600)
+            },
+        })
+
     },
-    onShareAppMessage: function() {
+    onShareAppMessage: function () {
         var that = this;
         var userInfo = wx.getStorageSync('user_info') || {};
         // var path = 'pages/details/details?code=' + that.options.code;
@@ -1032,7 +1053,7 @@ Page({
                 unionid: that.data.userInfo.unionid,
                 code: that.data.options.code,
             },
-            success: function(res) {
+            success: function (res) {
                 // console.info(res);
                 app.hideLoading();
                 let data = res.data;
@@ -1044,7 +1065,7 @@ Page({
                 }
 
             },
-            fail: function(err) {
+            fail: function (err) {
                 app.hideLoading();
                 app.dialog({
                     content: err.errMsg || app.globalData.errMsgText
@@ -1054,7 +1075,7 @@ Page({
     },
     // 获取我使用着的道具
     // useToolsArr
-    getUsedTools(useTools_id=null){
+    getUsedTools(useTools_id = null) {
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getUsedTools'
@@ -1069,14 +1090,14 @@ Page({
                 if (data.status == 0) {
                     this.setData({
                         // useToolsArr: data.data
-                        'mainInfo.tools':data.data,
+                        'mainInfo.tools': data.data,
                         'mainInfo.useTools_id': useTools_id
                     })
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         this.setData({
                             'mainInfo.useTools_id': null
                         })
-                    },2000)
+                    }, 2000)
                 } else {
                     wx.showToast({
                         title: data.msg || '出错了',
@@ -1087,7 +1108,7 @@ Page({
         });
     },
     //获取我的道具
-    getMytools(state=true,count=2) {   //false
+    getMytools(state = true, count = 2) {   //false
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getMytools'
@@ -1103,11 +1124,11 @@ Page({
                     this.setData({
                         propertyList: data.data,
                         temPropertyList: data.data
-                    })                    
-                    if(count == 2){
+                    })
+                    if (count == 2) {
                         this.setData({
                             propertyStatus: true,
-                            useCount:0
+                            useCount: 0
                         })
                     }
                 } else {
@@ -1119,7 +1140,7 @@ Page({
             }
         });
     },
-    animationHandle(val1,val2){
+    animationHandle(val1, val2) {
         const { animationTop, animationBottom } = this.data;
         animationTop.top(val1).step();
         animationBottom.bottom(val2).step();
@@ -1130,7 +1151,7 @@ Page({
             animationBottomData: animationBottom.export()
         })
     },
-    useToolsBefore(e){
+    useToolsBefore(e) {
         const {
             formId
         } = e.detail;
@@ -1139,21 +1160,21 @@ Page({
         } = e.currentTarget.dataset;
         const { mainInfo } = this.data;
 
-        let { useCount, temPropertyList  } = this.data;
+        let { useCount, temPropertyList } = this.data;
         useCount = useCount + 1;
         this.setData({ useCount })
         let useToolsArr = this.data.mainInfo.tools;   //已使用过的道具
         let toolsList = this.data.propertyList;       //我的道具列表
         let resetToolsNum = temPropertyList.filter(item => item.tools_id == tools_id)[0].tools_num;  //剩余的数
-        if(mainInfo.is_prize){
+        if (mainInfo.is_prize) {
             wx.showToast({
                 title: '您已中奖，不可使用道具',
-                icon:'none',
-                mask:true
+                icon: 'none',
+                mask: true
             })
             return;
         }
-        if (mainInfo.status == 1){
+        if (mainInfo.status == 1) {
             wx.showToast({
                 title: '活动已结束，不可使用道具',
                 icon: 'none',
@@ -1182,15 +1203,15 @@ Page({
         if (useCount > resetToolsNum) { //使用的道具数量大于本身存在的数量 不处理。。。
             wx.showToast({
                 title: '使用道具失败',
-                mask:true,
-                icon:'none',
-                success:res=>{
+                mask: true,
+                icon: 'none',
+                success: res => {
                     this.setData({
-                        useCount:0
+                        useCount: 0
                     })
                 }
             })
-        }else{
+        } else {
             if (useToolsArr.length == 0) {  //第一次使用道具
                 this.useTools(formId, tools_id, 1)
             } else {
@@ -1201,7 +1222,7 @@ Page({
                     return item;
                 })
                 toolsList = toolsList.map(item => {
-                    let obj = {...item}
+                    let obj = { ...item }
                     if (obj.tools_id == tools_id) {
                         obj.tools_num = obj.tools_num - 1;
                     }
@@ -1218,11 +1239,11 @@ Page({
                 }
             }
         }
-        
-        
+
+
     },
     //使用道具
-    useTools(formId, tools_id, num) {        
+    useTools(formId, tools_id, num) {
         app.api.requestHandle({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/useTools'
@@ -1241,7 +1262,7 @@ Page({
                     this.getMytools(false);
                     this.setData({
                         useState: true,
-                        useCount:0
+                        useCount: 0
                     })
                 } else {
                     wx.showToast({
@@ -1271,7 +1292,7 @@ Page({
                 let data = res.data;
                 if (data.status == 0) {
                     this.setData({
-                        exchangeStatus:false
+                        exchangeStatus: false
                     })
                     wx.showToast({
                         title: '成功兑换道具',
@@ -1290,32 +1311,32 @@ Page({
             }
         });
     },
-    operCover(e){
+    operCover(e) {
         const { style } = e.currentTarget.dataset;
-        if (style == 'getCodeIntro'){  //兑换码提示弹框
+        if (style == 'getCodeIntro') {  //兑换码提示弹框
             this.setData({
                 getCodeIntroStatus: !this.data.getCodeIntroStatus
             })
-        } else if (style == 'exchange'){
+        } else if (style == 'exchange') {
             this.setData({
                 exchangeStatus: !this.data.exchangeStatus
             })
-        } else if (style == 'propertyList'){
+        } else if (style == 'propertyList') {
             this.setData({
                 propertyStatus: !this.data.propertyStatus,
-                bottomDigState:true,
-                useCount:0
+                bottomDigState: true,
+                useCount: 0
             })
-            if (this.data.animationTop){
+            if (this.data.animationTop) {
                 this.animationHandle('50%', '-330rpx');
             }
-            
-        }else if ( style == 'rule'){
+
+        } else if (style == 'rule') {
             this.setData({
                 swiperStatus: !this.data.swiperStatus
             })
         }
-        
+
     },
     // 点击购买隐藏弹框
     buy() {
@@ -1324,14 +1345,14 @@ Page({
         })
     },
     // 获取兑换口令
-    getExchangeInfo(){
+    getExchangeInfo() {
         wx.request({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getExchangeInfo'
             }),
             data: {
                 key: app.api.appKey
-            },success:res=>{                
+            }, success: res => {
                 let data = res.data;
                 if (data.status == 0) {
                     this.setData({
@@ -1347,93 +1368,94 @@ Page({
             }
         })
     },
-    onPageScroll(res){
-        let { scrollTopNum, digMainInfo, mainInfo, bigScrollNum} = this.data;
-        
+    onPageScroll(res) {
+        let { scrollTopNum, digMainInfo, mainInfo, bigScrollNum } = this.data;
+
         const { scrollTop } = res;
-        if (scrollTop > scrollTopNum && bigScrollNum==0 && digMainInfo) {
-                bigScrollNum = bigScrollNum+1;
-                this.setData(bigScrollNum)
-                // 播放动画
-                if (mainInfo.is_cd == 0 && mainInfo.status == 0 && mainInfo.is_prize == 0) {  //可挖
-                    const { tools } = mainInfo;
-                    digMainInfo.tools = tools;
-                    this.setData({
-                        mainInfo: digMainInfo
-                    })
-                    mainInfo = this.data.mainInfo;  //重新拿
-                    this.setData({
-                        winning: true,
-                        digging: true,
-                        diggingCd: false,
-                        canDiggingCd: false,
-                        digNothing: false,
-                        gitNone: false,
-                    });
-                    setTimeout(()=>{
-                        if (mainInfo.is_prize == 1) {
-                            this.setData({
-                                winning: true,
-                                digging: false,
-                                diggingCd: false,
-                                canDiggingCd: false,
-                                digNothing: false,
-                                gitNone: false,
-                            });
-                            if (mainInfo.is_draw == 0) {
-                                setTimeout(() => {
-                                    // 如果是实物
-                                    if (mainInfo.goods_type == 2) {
-                                        if (mainInfo.draw_type == 2) { //如果是邮寄
-                                            this.toggleAddressPop(true);
-                                        } else { // 如果是现场
-                                            app.dialog({
-                                                title: '领奖提示',
-                                                content: mainInfo.draw_info
-                                            });
-                                        }
-                                    } else { //红包
-                                        setTimeout(() => {
-                                            app.dialog({
-                                                title: '领奖提示',
-                                                content: '请到微信零钱查看红包'
-                                            });
-                                        }, 1500)
-                                    }
-                                }, 1500);
-                            }
-                        } else { //没中奖
-                            this.setData({
-                                winning: false,
-                                diggingCd: false,
-                                canDiggingCd: false,
-                                digNothing: true,
-                                gitNone: false,
-                            })
+        if (scrollTop > scrollTopNum && bigScrollNum == 0 && digMainInfo) {
+            bigScrollNum = bigScrollNum + 1;
+            this.setData(bigScrollNum)
+            // 播放动画
+            if (mainInfo.is_cd == 0 && mainInfo.status == 0 && mainInfo.is_prize == 0) {  //可挖
+                const { tools } = mainInfo;
+                digMainInfo.tools = tools;
+                this.setData({
+                    mainInfo: digMainInfo
+                })
+                mainInfo = this.data.mainInfo;  //重新拿
+                this.setData({
+                    winning: true,
+                    digging: true,
+                    diggingCd: false,
+                    canDiggingCd: false,
+                    digNothing: false,
+                    gitNone: false,
+                });
+                setTimeout(() => {
+                    if (mainInfo.is_prize == 1) {
+                        this.setData({
+                            winning: true,
+                            digging: false,
+                            diggingCd: false,
+                            canDiggingCd: false,
+                            digNothing: false,
+                            gitNone: false,
+                        });
+                        if (mainInfo.is_draw == 0) {
                             setTimeout(() => {
-                                if (mainInfo.status == 0) { //项目进项中....
-                                    if (mainInfo.is_cd == 1) { //冷却倒计时
-                                        this.runCountdownTime(mainInfo.time);
-                                        this.setData({
-                                            winning: false,
-                                            canDiggingCd: false,
-                                            digNothing: false,
-                                            gitNone: false,
-                                        })
+                                // 如果是实物
+                                if (mainInfo.goods_type == 2) {
+                                    if (mainInfo.draw_type == 2) { //如果是邮寄
+                                        this.toggleAddressPop(true);
+                                    } else { // 如果是现场
+                                        app.dialog({
+                                            title: '领奖提示',
+                                            content: mainInfo.draw_info
+                                        });
                                     }
-                                } else { //项目结束
+                                } else { //红包
+                                    setTimeout(() => {
+                                        app.dialog({
+                                            title: '领奖提示',
+                                            content: '请到微信零钱查看红包'
+                                        });
+                                    }, 1500)
+                                }
+                            }, 1500);
+                        }
+                    } else { //没中奖
+                        this.setData({
+                            winning: false,
+                            diggingCd: false,
+                            canDiggingCd: false,
+                            digNothing: true,
+                            gitNone: false,
+                        })
+                        setTimeout(() => {
+                            if (mainInfo.status == 0) { //项目进项中....
+                                if (mainInfo.is_cd == 1) { //冷却倒计时
+                                    this.runCountdownTime(mainInfo.time);
                                     this.setData({
-                                        giftNone: true,
                                         winning: false,
                                         canDiggingCd: false,
-                                        diggingCd: false,
                                         digNothing: false,
+                                        gitNone: false,
                                     })
                                 }
-                            }, 3000)
-                        }
-                    },2000)
-                }
+                            } else { //项目结束
+                                this.setData({
+                                    giftNone: true,
+                                    winning: false,
+                                    canDiggingCd: false,
+                                    diggingCd: false,
+                                    digNothing: false,
+                                })
+                            }
+                        }, 3000)
+                    }
+                }, 2000)
             }
         }
+    },
+
 });
