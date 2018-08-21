@@ -95,11 +95,20 @@
 				<view class="weui-cell__bd">发布到广场</view>
 				<view class="weui-cell__ft" style="color:inherit">
 	            	<view class="body-view">
-	    				<switch checked bindchange="switchChange" color="#fde23d"/>
+	    				<switch checked bindchange="switchChange"  data-status="is_public" color="#fde23d"/>
 					</view>
 					<input type="text" name="is_public" value="{{is_public}}" hidden="true" />
 	            </view>
 			</view>  
+            <view class="weui-cell">
+				<view class="weui-cell__bd teamItem">是否组队<image class='team-icon' src="/images/question.png"></image></view>
+				<view class="weui-cell__ft" style="color:inherit">
+	            	<view class="body-view">
+	    				<switch checked="{{is_team}}" bindchange="switchChange" data-status="is_team" color="#fde23d" />
+					</view>
+					<input type="text" name="is_team" value="{{is_team}}" hidden="true" />
+	            </view>
+			</view>
 		</view>
  
  
@@ -109,3 +118,37 @@
 	</form>  
 </view>
 <template is="authorize" data="{{isAuthorize: isAuthorize}}"/>
+<!-- 使用条款 -->
+<view class="cover" wx:if="{{clauseStatus}}">
+    <view class='coverBox clauseBox'>
+         <image src='/images/close.png' class='close' catchtap='operCover' data-style="clauseStatus" data-status="{{false}}"></image><!-- -->
+        <view class='header headerCenter'>使用条款</view>
+        <view class='coverContainScroll'>
+            <text>sflsajfsdjg</text>
+            <text>sflsajfsdjg</text>
+        </view>
+        <view class='agree' bindtap='changeAgree'>
+            <image src='{{agree ? "/images/checkbox_on.png" : "/images/checkbox.png"}}'></image>
+            <view>同意条款之后才能使用组队功能</view>
+        </view>
+        <view class='btn' bindtap='agreeHandle'>确定</view>
+    </view>
+</view>
+
+
+<!-- 使用条款 -->
+<view class="cover" wx:if="{{explainStatus}}">
+    <view class='coverBox clauseBox'>
+         <image src='/images/close.png' class='close' catchtap='operCover' data-style="explainStatus" data-status="{{false}}"></image><!-- -->
+        <view class='header headerCenter'>组队说明</view>
+        <view class='coverContainScroll'>
+            <text>sflsajfsdjg</text>
+            <text>sflsajfsdjg</text>
+        </view>
+        <!-- <view class='agree' bindtap='changeAgree'>
+            <image src='{{agree ? "/images/checkbox_on.png" : "/images/checkbox.png"}}'></image>
+            <view>同意条款之后才能使用组队功能</view>
+        </view>
+        <view class='btn' bindtap='agreeHandle'>确定</view> -->
+    </view>
+</view>

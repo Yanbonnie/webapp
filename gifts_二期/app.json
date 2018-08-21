@@ -1,0 +1,47 @@
+{
+    "pages": [        
+        "pages/index/index",
+        "pages/start/start",
+        "pages/details/details",
+        "pages/posting/posting",
+        "pages/self/myRelease",
+        "pages/self/myPartake",
+        "pages/self/myPrize",
+        "pages/self/self",
+        "pages/propShopping/propShopping"
+        
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "backgroundColor": "#fde763",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "有好礼",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "color": "#999999",
+        "selectedColor": "#333333",
+        "borderStyle": "black",
+        "backgroundColor": "#FFFFFF",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "images/icon_index.png",
+                "selectedIconPath": "images/icon_index_hover.png",
+                "text": "广场"
+            },
+            {
+                "pagePath": "pages/posting/posting",
+                "iconPath": "images/icon_posting.png",
+                "selectedIconPath": "images/icon_posting_hover.png",
+                "text": "发布"
+            },
+            {
+                "pagePath": "pages/self/self",
+                "iconPath": "images/icon_self.png",
+                "selectedIconPath": "images/icon_self_hover.png",
+                "text": "我的"
+            }
+        ]
+    }
+}

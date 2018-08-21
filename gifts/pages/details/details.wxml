@@ -1,3 +1,5 @@
+
+<!-- <import src="../../wxParse/wxParse.wxml"/> -->
 <view wx:if="{{contentErrText}}" style="padding:100rpx 30rpx;text-align:center" class="color-gray">
     {{contentErrText}}
 </view>
@@ -50,6 +52,22 @@
                 >
             </dig_treasure>
         </view>
+        <view class="ul-list teamlist" wx:if="{{mainInfo.status != -1}}">
+            <view class='clearfix titleBox'>
+                <text class="title">亲友团</text>
+                <text class='none'>亲友挖到宝贝自己将额外多得一份<text class='btnShare'>【立即分享】</text></text>
+                <!-- <view wx:else class='clearfix none'>
+                    
+                </view> -->
+            </view>
+            <view class='clearfix listItem' wx:if="{{teamlist && teamlist.length > 0}}">
+                <view wx:key="{{idx}}" wx:for="{{teamlist}}" wx:for-item="item" wx:for-index="idx">
+                    <image src="{{item.wxheadpic}}"></image>
+                </view>
+            </view>
+            
+        </view>
+
         <view class="ul-list" wx:if="{{mainInfo.status != -1}}">
             <ul class="clearfix">
                 <view class="title">参与者</view>
@@ -81,7 +99,7 @@
         <view class="modal-inner">
             <view class="winners-list">
                 <view class="winlist-tips">
-                    邀请好友共同获得礼品，好友每次挖宝将使您获得振奋精神效果，休息时间立减10分钟。
+                    {{shareTxt}}
                 </view>
             </view>
         </view>
@@ -301,3 +319,20 @@
         </swiper-item>
     </block>
 </swiper>
+
+
+<view class='modalCover' wx:if="{{teamQuestionStatus}}">    
+    <view class='modalBody teamBody'>
+        <view class='close' catchtap='operCover' data-style="teamQuestion">
+            <image src='/images/close.png'></image>
+        </view>
+        <view class='header headerCenter'>
+            <text>如何获取兑奖码</text>
+        </view>
+        <view class="wxParse">
+            <!-- <template is="wxParse" data="{{wxParseData:article.nodes}}"/> -->
+            <view>亲友挖到宝贝自己将额外多得一份</view>
+            <view>【立即分享】</view>
+        </view>
+   </view>
+</view>

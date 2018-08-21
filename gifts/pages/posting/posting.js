@@ -11,12 +11,12 @@ function resetData(args) {
         canIUseOpenShare: wx.canIUse('button.open-type.share'),
         defaultImage: app.defaultImage,
 
-        is_public: 1,
+        is_public: 1,    //是否发布到广场
         goods_type: 1,
         goods_type_list: ['现金红包', '实物'],
         draw_type: 1,
         draw_type_list: ['现场领取', '快递邮寄'],
-
+        is_team:0,       //是否组队
         pic_thumb_url: '',
         name: '',
         synopsis: '',
@@ -29,7 +29,11 @@ function resetData(args) {
 
         submitDone: false,
 
-        coverData: {}
+        coverData: {},
+        agree:true,
+        isAgreeClause: wx.getStorageSync('isAgreeClause') ? wx.getStorageSync('isAgreeClause') : false,     //有没有同意条款
+        clauseStatus:false,
+        explainStatus:false,    //组队说明
     }
 }
 
@@ -161,14 +165,24 @@ Page({
         // console.log('textareaBlur==',data)
     },
     switchChange: function(e) {
+        let isAgreeClause = wx.getStorageSync('isAgreeClause');
+        const { status } = e.currentTarget.dataset;
+        const { is_team } = this.data;
         var that = this;
+        if (status == 'is_team' && is_team == 0 && !isAgreeClause){   //没有同意条款 
+            this.setData({
+                clauseStatus:true,
+                is_team:0
+            })
+            return;
+        }
         if (e.detail.value) {
             that.setData({
-                is_public: 1
+                ["" + status + ""]: 1
             });
         } else {
             that.setData({
-                is_public: 0
+                ["" + status + ""]: 0
             });
         }
     },
@@ -541,5 +555,37 @@ Page({
     onHide: function() {
     },
     onLoad: function(options) {
+        console.log(this.data.isAgreeClause)
+    },
+    // 勾选复选卡
+    changeAgree(){
+        const { agree } = this.data;
+        this.setData({
+            agree:!agree
+        })
+    },
+    // 同意组队条款
+    agreeHandle(){
+        const {agree} = this.data;
+        if(agree){
+            this.setData({
+                is_team:1,
+                clauseStatus:false
+            })
+            wx.setStorageSync('isAgreeClause', true)
+        }else{
+            wx.showToast({
+                title: '请勾选同意使用条款',
+                mask:true,
+                icon:'none'
+            })
+        }
+    },
+    operCover(e){
+        const { style, status } = e.currentTarget.dataset;
+        this.setData({
+            ["" + style+""]:status
+        })
+
     }
 })

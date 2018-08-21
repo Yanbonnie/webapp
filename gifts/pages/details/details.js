@@ -1,7 +1,25 @@
 //获取应用实例
 var app = getApp();
+// var WxParse = require('../../wxParse/wxParse.js');
+// var article = `
+// 	<div style="margin-top:10px;">
+// 		<h3 style="color: #000;">支持的标签ul/li</h3>
+// 		<blockquote>带有内联的li</blockquote>
+// 		<div style="margin-top:10px;">
+// 			<ul>
+// 				<li style="color: red;">我是li 红色</li>
+// 				<li style="color: blue;">我是li 蓝色</li>
+// 				<li style="color: yelloe;">我是li 黄色</li>
+// 			</ul>
+// 		</div>
+// 	</div>`;
+//     WxParse.wxParse('article', 'html', article, this, 25);
 var ountdownTimeTimer;
 let imgUrls = ['https://xnt.xhwxpos.com/mining/static/images/rule1.png', 'https://xnt.xhwxpos.com/mining/static/images/rule3.png']
+//在使用的View中引入WxParse模块
+
+
+
 function resetData(args) {
     if (!args) {
         args = {};
@@ -17,30 +35,8 @@ function resetData(args) {
         prizePage:1,
         mainInfo: {},
         userList: [],
-        winnerList: [    //中奖名单
-            // {
-            //     id: 1,
-            //     avatar: 'https://wx.qlogo.cn/mmopen/vi_32/yhNUouLkIkWj6o24icNU6PIbbNTK972P2jpD6icqjw5LfJuLujnrobyPuSQKNibPtm3wmhO7xhJHgaAicgl8pu8xcg/132',
-            //     wxname: 'Bingoo',getPrizeList
-            //     name: '曹操',
-            //     mobile: '13572687637',
-            //     address: '广州大道中289号南方传媒大厦B塔',
-            //     time: '2018-02-12 13:34:35',
-            //     // 0 待领取，1 已领取
-            //     status: 0
-            // },
-            // {
-            //     id: 2,
-            //     avatar: 'https://wx.qlogo.cn/mmopen/vi_32/yhNUouLkIkWj6o24icNU6PIbbNTK972P2jpD6icqjw5LfJuLujnrobyPuSQKNibPtm3wmhO7xhJHgaAicgl8pu8xcg/132',
-            //     wxname: 'Bingoo',
-            //     name: '曹操',
-            //     mobile: '13572687637',
-            //     address: '广州大道中289号南方传媒大厦B塔',
-            //     time: '2018-02-12 13:34:35',
-            //     // 0 待领取，1 已领取
-            //     status: 1
-            // }
-        ],
+        winnerList: [],    //中奖名单
+        teamlist:[],  //亲友团
         timeText: '',
 
         winning: false,                       //挖宝中或中奖
@@ -76,6 +72,9 @@ function resetData(args) {
         info:null,
         digMainInfo:null,    
         bigScrollNum:0,
+        teamQuestionStatus:false,                //亲友团问号弹框
+        shareTxtArr: ['邀请好友共同获得礼品，好友每次挖宝将使您获得振奋精神效果，休息时间立减10分钟。',"我是点击组队的文案"],
+        shareTxt:''    //分享的文案
     }
 }
 
@@ -135,13 +134,25 @@ Page({
     },
     toggleSharePop: function() {
         const {
-            canDiggingCd
+            canDiggingCd,
+            mainInfo,
+            shareTxtArr
         } = this.data;
         if (!canDiggingCd) {
+            if (mainInfo.is_team){  //组队
+                this.setData({
+                    shareTxt: shareTxtArr[1]
+                })
+            }else{   //没有组队，加速按钮
+                this.setData({
+                    shareTxt: shareTxtArr[0]
+                })
+            }
+            // 点击了组队按钮
             this.setData({
                 showShareDialog: !this.data.showShareDialog
             });
-        } else {
+        }/* else {
             //调用挖宝接口
             this.setData({
                 'mainInfo.is_cd': 1, //冷却
@@ -155,7 +166,7 @@ Page({
             setTimeout(() => {
                 this.miningTask();
             }, 2000)
-        }
+        }*/
     },
     //挖宝接口
     miningTask() {
@@ -178,7 +189,6 @@ Page({
             }),
             data: queryData,
             success: function(res) {
-                // console.info(res);
                 app.hideLoading();
                 that.setData({
                     contentReady: true
@@ -199,78 +209,7 @@ Page({
 
                 that.setData({
                     digMainInfo: mainInfo,
-                    // userList: mainInfo.user || []
                 });
-                // if (mainInfo.user.length > 50) {
-                //     that.setData({
-                //         hasMoreUser: true
-                //     });
-                // }
-
-                //中奖
-                // if (mainInfo.is_prize == 1) {
-                //     that.setData({
-                //         winning: true,
-                //         digging: false,
-                //         diggingCd: false,
-                //         canDiggingCd: false,
-                //         digNothing: false,
-                //         gitNone: false,
-                //     });
-                //     if (mainInfo.is_draw == 0) {
-                //         setTimeout(function() {
-                //             // 如果是实物
-                //             if (mainInfo.goods_type == 2) {
-                //                 if (mainInfo.draw_type == 2) { //如果是邮寄
-                //                     that.toggleAddressPop(true);
-                //                 } else { // 如果是现场
-                //                     app.dialog({
-                //                         title: '领奖提示',
-                //                         content: mainInfo.draw_info
-                //                     });
-                //                 }
-                //             } else { //红包
-                //                 setTimeout(() => {
-                //                     app.dialog({
-                //                         title: '领奖提示',
-                //                         content: '请到微信零钱查看红包'
-                //                     });
-                //                 }, 1500)
-                //             }
-                //         }, 1500);
-                //     }
-                // } else { //没中奖
-                //     that.setData({
-                //         winning: false,
-                //         diggingCd: false,
-                //         canDiggingCd: false,
-                //         digNothing: true,
-                //         gitNone: false,
-                //     })
-                //     setTimeout(() => {
-                //         if (mainInfo.status == 0) { //项目进项中....
-                //             if (mainInfo.is_cd == 1) { //冷却倒计时
-                //                 that.runCountdownTime(mainInfo.time);
-                //                 that.setData({
-                //                     winning: false,
-                //                     canDiggingCd: false,
-                //                     digNothing: false,
-                //                     gitNone: false,
-                //                 })
-                //             }
-                //         } else { //项目结束
-                //             that.setData({
-                //                 giftNone: true,
-                //                 winning: false,
-                //                 canDiggingCd: false,
-                //                 diggingCd: false,
-                //                 digNothing: false,
-                //             })
-                //         }
-                //     }, 3000)
-                // }
-
-
             },
             fail: function(err) {
                 app.hideLoading();
@@ -505,8 +444,7 @@ Page({
             }),
             data: queryData,
             success:res=> {
-                // 获取我使用过的道具
-                
+                // 获取我使用过的道具               
                 
                 this.setData({
                     contentReady: true
@@ -528,20 +466,16 @@ Page({
                 // mainInfo.is_cd = 0;
                 // mainInfo.is_prize = 1;
 
+                // mainInfo.is_team = 1;    //是否组队
+
                 this.setData({
                     mainInfo: mainInfo,
-                    // userList: mainInfo.user || []
+                    teamlist: mainInfo['user'] ? mainInfo['user'] : []
                 });
                 this.getUsedTools();
                 this.getMytools(true, 1);
                 this.getExchangeInfo();    
                 this.getNextPage();  
-                // if (mainInfo.user.length > 50) {
-                //     this.setData({
-                //         hasMoreUser: true
-                //     });
-                // }
-
                 if (mainInfo.is_prize == 1) {
                     this.setData({
                         winning: true,
@@ -708,8 +642,10 @@ Page({
                 that.setData({
                     canDiggingCd: true,
                     diggingCd: false,
-                    bigScrollNum:0
+                    bigScrollNum:0,
+                    digMainInfo:null
                 })
+                this.miningTask();
             }
         }, 1000);
     },
@@ -996,6 +932,8 @@ Page({
                 }
             }
         });
+
+        
     },
     onHide: function() {},
     onLoad: function(options) {
@@ -1311,7 +1249,7 @@ Page({
             }
         });
     },
-    operCover(e){
+    operCover(e){   //操作窗口
         const { style } = e.currentTarget.dataset;
         if (style == 'getCodeIntro'){  //兑换码提示弹框
             this.setData({
@@ -1334,6 +1272,10 @@ Page({
         }else if ( style == 'rule'){
             this.setData({
                 swiperStatus: !this.data.swiperStatus
+            })
+        } else if (style == 'teamQuestion'){
+            this.setData({
+                teamQuestionStatus: !this.data.teamQuestionStatus
             })
         }
         

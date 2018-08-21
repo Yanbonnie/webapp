@@ -35,7 +35,7 @@
                 <view class="bgline" style="width:{{mainInfo.time / 3600 * 100}}%"></view>
                 <text>休息后{{timeText}}可继续挖宝</text>
             </view>
-            <button class="btn_speedup btn_black" bindtap="toggleSharePop">加速</button>
+            <button class="btn_speedup btn_black" bindtap="toggleSharePop">{{mainInfo.is_team ? '组队':'加速'}}</button>
         </view>
     </view>
     <view class="digging_gif" wx:if="{{canDiggingCd}}">

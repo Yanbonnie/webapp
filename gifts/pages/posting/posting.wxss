@@ -45,3 +45,39 @@
     height: 100%;
     background: #f2f2f2;
 }
+.teamItem{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.team-icon{
+    width: 40rpx;
+    height: 40rpx;
+    margin-left: 10rpx;
+}
+.clauseBox{
+    width: 80%;
+    position: relative;
+}
+.clauseBox .agree{
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20rpx;
+}
+.clauseBox .agree image{
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 10rpx;
+
+}
+.clauseBox .btn{
+    margin: 20rpx auto;
+    width: 80%;
+    height: 70rpx;
+    line-height: 70rpx;
+    text-align: center;
+    border-radius: 8rpx;
+    color: #4a4a4a;
+    background: #fde763;
+}

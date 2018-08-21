@@ -1,0 +1,15 @@
+<template name="authorize"> 
+    <view class="modal-bg" wx:if="{{showAuthorize}}">
+    <!-- <view class="modal-bg" hidden="{{showWin}}"> -->
+	  <view class="modal-outer">
+	      <view class="modal-title">
+	        <text>提示</text>
+	      </view> 
+	      <view class="modal-inner"> 
+	        <view  class="winners-list"> 
+	   			 <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权登录</button> 
+	        </view>
+	      </view>
+	  </view>
+	</view>  
+</template>

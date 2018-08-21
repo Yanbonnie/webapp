@@ -280,7 +280,16 @@ textarea {
     width: 500rpx;
     background: #fff;
     border-radius: 8rpx;
+    position: relative;
 }   
+.coverBox .close{
+    width: 50rpx;
+    height: 50rpx;
+    position: absolute;
+    bottom: -100rpx;
+    left: 50%;
+    margin-left: -30rpx;
+}
 .coverBox .header{
     height: 100rpx;
     display: flex;
@@ -291,6 +300,12 @@ textarea {
 }
 .coverBox .headerCenter{
     justify-content: center;
+}
+.coverBox .coverContainScroll{
+    max-height: 600rpx;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20rpx;
 }
 
 .noMessage{

@@ -1,4 +1,6 @@
 @import '../start/start.wxss';
+/* @import "../../wxParse/wxParse.wxss"; */
+
 .page {
     font-size: 30rpx;
 }
@@ -152,7 +154,7 @@
     top: 3px;
 }
 
-.participant ul li {
+.participant ul li,.participant .listItem view {
     width: 57rpx;
     float: left;
     margin: 8rpx;
@@ -169,7 +171,7 @@
     box-sizing: border-box;
 }
 
-.participant ul li image {
+.participant ul li image ,.participant .listItem view image{
     width: 57rpx;
     height: 57rpx;
     border-radius: 50%;
@@ -349,7 +351,26 @@
 .ul-list {
     padding: 17rpx 0 0 25rpx;
 }
-
+.teamlist{
+    border-bottom: 1px #f6f6f6 solid;
+    padding-bottom:20rpx;
+}
+.teamlist .title{
+    top: 0;
+}
+.teamlist .titleBox{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.teamlist .none{
+    color: #939da3;
+    font-size: 26rpx;
+    padding-left: 10rpx;
+}
+.teamlist .none .btnShare{
+    color: #fcc600;
+}
 .btn_digging {
     position: absolute;
     bottom: 30rpx;
@@ -682,4 +703,7 @@
 
 .scrollView{
     height: 400rpx;
+}
+.teamBody{
+    padding: 0;
 }
