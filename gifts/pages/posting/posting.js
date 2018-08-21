@@ -1,5 +1,6 @@
 //获取应用实例
 var app = getApp();
+var WxParse = require('../../wxParse/wxParse.js');
 var rangeDefaultText = '请联系发布者微信索取礼品';
 
 function resetData(args) {
@@ -555,7 +556,9 @@ Page({
     onHide: function() {
     },
     onLoad: function(options) {
-        console.log(this.data.isAgreeClause)
+        // console.log(this.data.isAgreeClause)
+        this.getTeamExplain();
+        this.getTermsExplain();
     },
     // 勾选复选卡
     changeAgree(){
@@ -587,5 +590,60 @@ Page({
             ["" + style+""]:status
         })
 
+    },
+    //shuoming
+    getTeamExplain(){
+        app.api.requestHandle({
+            method: 'GET',
+            url: app.api.stringifyUrl({
+                path: '/wxapp/Index/getTeamExplain'
+            }),
+            success: function (res) {
+                var data = res.data;
+                app.hideLoading();
+
+                if (data.status != 0) {
+                    app.dialog({
+                        content: data.msg || app.globalData.errMsgText
+                    });
+                    return;
+                }
+                WxParse.wxParse('teamExplain', 'html', data.content, this, 5);
+            },
+            fail: function (err) {
+                app.hideLoading();
+                app.dialog({
+                    content: err.errMsg || app.globalData.errMsgText,
+                    success: function () { }
+                });
+            }
+        });
+    },
+    //tiaokuan
+    getTermsExplain() {
+        app.api.requestHandle({
+            method: 'GET',
+            url: app.api.stringifyUrl({
+                path: '/wxapp/Index/getTermsExplain'
+            }),
+            success: function (res) {
+                var data = res.data;
+                app.hideLoading();
+                if (data.status != 0) {
+                    app.dialog({
+                        content: data.msg || app.globalData.errMsgText
+                    });
+                    return;
+                }
+                WxParse.wxParse('termsExplain', 'html', data.content, this, 5);
+            },
+            fail: function (err) {
+                app.hideLoading();
+                app.dialog({
+                    content: err.errMsg || app.globalData.errMsgText,
+                    success: function () { }
+                });
+            }
+        });
     }
 })

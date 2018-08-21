@@ -470,7 +470,7 @@ Page({
 
                 this.setData({
                     mainInfo: mainInfo,
-                    teamlist: mainInfo['user'] ? mainInfo['user'] : []
+                    teamlist: mainInfo['teamlist'] ? mainInfo['teamlist'] : []
                 });
                 this.getUsedTools();
                 this.getMytools(true, 1);

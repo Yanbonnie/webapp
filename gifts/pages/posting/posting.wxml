@@ -1,6 +1,7 @@
 <!--posting.wxml-->
 <import src="../template/toptips.wxml"/>
 <import src="../template/authorize.wxml"/>
+<import src="../../wxParse/wxParse.wxml"/>
 
 <view class=" ">
 	
@@ -124,8 +125,7 @@
          <image src='/images/close.png' class='close' catchtap='operCover' data-style="clauseStatus" data-status="{{false}}"></image><!-- -->
         <view class='header headerCenter'>使用条款</view>
         <view class='coverContainScroll'>
-            <text>sflsajfsdjg</text>
-            <text>sflsajfsdjg</text>
+            <template is="wxParse" data="{{wxParseData:termsExplain.nodes}}"/>
         </view>
         <view class='agree' bindtap='changeAgree'>
             <image src='{{agree ? "/images/checkbox_on.png" : "/images/checkbox.png"}}'></image>
@@ -136,14 +136,13 @@
 </view>
 
 
-<!-- 使用条款 -->
+<!-- shuoming -->
 <view class="cover" wx:if="{{explainStatus}}">
     <view class='coverBox clauseBox'>
          <image src='/images/close.png' class='close' catchtap='operCover' data-style="explainStatus" data-status="{{false}}"></image><!-- -->
         <view class='header headerCenter'>组队说明</view>
         <view class='coverContainScroll'>
-            <text>sflsajfsdjg</text>
-            <text>sflsajfsdjg</text>
+            <template is="wxParse" data="{{wxParseData:teamExplain.nodes}}"/>
         </view>
         <!-- <view class='agree' bindtap='changeAgree'>
             <image src='{{agree ? "/images/checkbox_on.png" : "/images/checkbox.png"}}'></image>
