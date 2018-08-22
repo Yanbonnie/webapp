@@ -483,7 +483,8 @@ Page({
 
                 this.setData({
                     mainInfo: mainInfo,
-                    teamlist: mainInfo['teamlist'] ? mainInfo['teamlist'] : []
+                    teamlist: mainInfo['teamlist'] ? mainInfo['teamlist'] : [],
+                    share_text: mainInfo.share_text
                 });
                 if(count == 1){
                     this.getUsedTools();
