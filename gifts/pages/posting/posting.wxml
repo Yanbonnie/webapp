@@ -58,6 +58,7 @@
 				<view class="weui-cell__bd" style="text-align:right">
 					<input class="weui-input" type="digit" name="prize_num" value="{{prize_num}}" placeholder-class="color-gray" placeholder="请输入" focus="{{prize_num_focus}}" cursor-spacing="10" bindinput="textareaInput"   data-keyname="prize_num" type="number" />  <!--bindblur="prizeNumBlur"   prizeNumInput-->
 	            </view>
+                <text style='color:#ccc' wx:if="{{is_team}}">*2</text>
 			</view>
 			<block  wx:if="{{goods_type == 1}}">
 				<view class="weui-cell">

@@ -122,6 +122,7 @@ Page({
         this.setData(data);
     },
     textareaInput: function(event) {
+        const { is_team } = this.data;
         var keyname = event.currentTarget.dataset.keyname;
         var value = event.detail.value;
         const { prize_num, max_depth } = this.data;
@@ -147,6 +148,15 @@ Page({
                     icon:'none'
                 })
                 value = max_depth
+            }
+
+            if (is_team && Number(value) * 2 > Number(max_depth)) {
+                wx.showToast({
+                    title: '礼品总数不得大于最大深度',
+                    mask: true,
+                    icon: 'none'
+                })
+                value = Math.floor(max_depth / 2)
             }
         }
         
@@ -446,7 +456,7 @@ Page({
             return;
         }
 
-        if (that.data.goods_type == 1) {
+        if (that.data.goods_type == 1) {  //红包
             data.money = that.data.money;
             if (!data.money || reg.test(data.money)) {
                 app.dialog({
@@ -463,12 +473,18 @@ Page({
                 title: '提示',
                 content: '确认发布吗？',
                 success: function() {
+                    console.log(data);
+                    // 组队数值乘以2
+                    const { is_team } = that.data;
+                    if (is_team) {
+                        data.prize_num = Number(data.prize_num) * 2;
+                    }
                     that.submitPostBy1(data);
                 }
             });
         }
 
-        if (that.data.goods_type == 2) {
+        if (that.data.goods_type == 2) {   //实物
             data.forecast_num = that.data.forecast_num;
             // if (!data.forecast_num || reg.test(data.forecast_num)) {
             //     app.dialog({
@@ -504,6 +520,11 @@ Page({
                 title: '提示',
                 content: '确认发布吗？',
                 success: function() {
+                    // 组队数值乘以2
+                    const { is_team } = that.data;
+                    if(is_team){
+                        data.prize_num = Number(data.prize_num) * 2 ;
+                    }
                     that.submitPostBy2(data);
                 }
             });
