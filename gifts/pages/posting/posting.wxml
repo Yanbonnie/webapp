@@ -102,7 +102,7 @@
 	            </view>
 			</view>  
             <view class="weui-cell">
-				<view class="weui-cell__bd teamItem">是否组队<image class='team-icon' src="/images/question.png"></image></view>
+				<view class="weui-cell__bd teamItem">是否组队<image catchtap='operCover' data-style="explainStatus" data-status="{{true}}" class='team-icon' src="/images/question.png"></image></view>
 				<view class="weui-cell__ft" style="color:inherit">
 	            	<view class="body-view">
 	    				<switch checked="{{is_team}}" bindchange="switchChange" data-status="is_team" color="#fde23d" />

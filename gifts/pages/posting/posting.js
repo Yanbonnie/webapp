@@ -598,7 +598,7 @@ Page({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getTeamExplain'
             }),
-            success: function (res) {
+            success: res=> {
                 var data = res.data;
                 app.hideLoading();
 
@@ -626,7 +626,7 @@ Page({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/getTermsExplain'
             }),
-            success: function (res) {
+            success:res=> {
                 var data = res.data;
                 app.hideLoading();
                 if (data.status != 0) {

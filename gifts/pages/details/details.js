@@ -132,7 +132,8 @@ Page({
             friendStatus: false
         })
     },
-    toggleSharePop: function() {
+    toggleSharePop() {
+        console.log(1111111)
         const {
             canDiggingCd,
             mainInfo,
@@ -167,11 +168,12 @@ Page({
                 this.miningTask();
             }, 2000)
         }*/
-    },
+    },    
     //挖宝接口
     miningTask() {
         const {
-            is_manage
+            is_manage,
+            is_team
         } = this.data.mainInfo;
         var that = this;
         var queryData = {
@@ -206,6 +208,7 @@ Page({
                 var mainInfo = data.data || {};
                 // test code
                 mainInfo.is_manage = is_manage;
+                mainInfo.is_team = is_team;
 
                 that.setData({
                     digMainInfo: mainInfo,
