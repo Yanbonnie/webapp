@@ -29,9 +29,8 @@ function resetData(args) {
         range: rangeDefaultText,
 
         submitDone: false,
-
         coverData: {},
-        agree:true,
+        agree:false,
         isAgreeClause: wx.getStorageSync('isAgreeClause') ? wx.getStorageSync('isAgreeClause') : false,     //有没有同意条款
         clauseStatus:false,
         explainStatus:false,    //组队说明

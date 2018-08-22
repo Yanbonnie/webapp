@@ -32,10 +32,10 @@
         <image src="https://xnt.xhwxpos.com/mining/static/images/gif-cd.gif" mode="widthFix"></image>
         <view class="btn_digging btn_light">
             <view class="progress-bar">
-                <view class="bgline" style="width:{{mainInfo.time / 3600 * 100}}%"></view>
+                <view class="bgline" style="width:{{mainInfo.time / 300 * 100}}%"></view>
                 <text>休息后{{timeText}}可继续挖宝</text>
             </view>
-            <button class="btn_speedup btn_black" bindtap="toggleSharePop">{{mainInfo.is_team ? '组队':'加速'}}</button>
+            <button class="btn_speedup btn_black" bindtap="toggleSharePop"  data-key_type="1">{{mainInfo.is_team ? '组队':'分享'}}</button>
         </view>
     </view>
     <view class="digging_gif" wx:if="{{canDiggingCd}}">
@@ -44,7 +44,7 @@
         <image src="https://xnt.xhwxpos.com/mining/static/images/gif-nocd.gif" mode="widthFix"></image>
         <view class="btn_digging btn_light">
             <view class="progress-bar">
-                <view class="bgline" style="width:{{mainInfo.time / 3600 * 100}}%"></view>
+                <view class="bgline" style="width:{{mainInfo.time / 300 * 100}}%"></view>
                 <text>点击挖宝按钮，立即挖宝</text>
             </view>
             <button class="btn_speedup btn_black" bindtap="toggleSharePop">挖宝</button>

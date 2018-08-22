@@ -55,7 +55,7 @@
         <view class="ul-list teamlist" wx:if="{{mainInfo.is_team}}">
             <view class='clearfix titleBox' >
                 <text class="title">亲友团</text>
-                <text class='none' bindtap="toggleSharePop">亲友挖到宝贝自己将额外多得一份<text class='btnShare'>【立即分享】</text></text>
+                <text class='none' bindtap="toggleSharePop"  data-key_type="4">亲友挖到宝贝自己将额外多得一份<text class='btnShare'>【立即分享】</text></text>
                 <!-- <view wx:else class='clearfix none'>
                     
                 </view> -->
@@ -104,8 +104,8 @@
             </view>
         </view>
         <view class="modal-footer share-footer">
-            <button class="btn-commit btn_yellow" bindtap="toggleShareFriend">分享到朋友圈</button>
-            <button class="btn-commit btn_blue" data-name="shareBtn" open-type="share" bindtap="toggleSharePop">发送给好友</button>
+            <button class="btn-commit btn_yellow" bindtap="toggleShareFriend" data-key_type="2">分享到朋友圈</button>
+            <button class="btn-commit btn_blue" data-name="shareBtn" open-type="share" data-key_type="3" bindtap="toggleSharePop">发送给好友</button>
         </view>
     </view>
 </view>

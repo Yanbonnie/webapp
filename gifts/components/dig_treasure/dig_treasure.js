@@ -34,7 +34,7 @@ Component({
         },
         timeText:{
             type:String,
-            value:'59分59秒'
+            value:''
         },
         useToolsArr:{
             type:Array,
@@ -67,9 +67,8 @@ Component({
             this.triggerEvent('diggerGiftHandle');
         },
         // 加速
-        toggleSharePop(){
-            this.triggerEvent('toggleSharePop');
-        },
-
+        toggleSharePop(e){
+            this.triggerEvent('toggleSharePop',e.currentTarget.dataset.key_type);
+        }
     }
 })
