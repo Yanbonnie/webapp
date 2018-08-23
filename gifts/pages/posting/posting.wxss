@@ -82,10 +82,11 @@
     background: #fde763;
 }
 .giftFlex input{
-    width: 500rpx;
+    width: 300rpx;
+    float: right;
+    text-align: right;
 }
 .num{
-    position: absolute;
-    right: 0;
-    top: 0;
+    float: right;
+    line-height: 48rpx;
 }

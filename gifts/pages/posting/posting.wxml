@@ -55,10 +55,11 @@
 			</view>
 			<view class="weui-cell">
 				<view class="weui-cell__hd">礼品总数<text class="icon_help" bindtap="showCashDepositTips" wx:if="{{false}}"></text></view>
-				<view class="weui-cell__bd" style="text-align:right">
+				<view class="weui-cell__bd giftFlex" >
+                    <text style='color:#ccc' wx:if="{{is_team}}" class='num'>*2</text>
 					<input class="weui-input" type="digit" name="prize_num" value="{{prize_num}}" placeholder-class="color-gray" placeholder="请输入" focus="{{prize_num_focus}}" cursor-spacing="10" bindinput="textareaInput"   data-keyname="prize_num" type="number" />  <!--bindblur="prizeNumBlur"   prizeNumInput-->
+                    
 	            </view>
-                <text style='color:#ccc' wx:if="{{is_team}}">*2</text>
 			</view>
 			<block  wx:if="{{goods_type == 1}}">
 				<view class="weui-cell">
