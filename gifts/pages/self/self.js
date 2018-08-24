@@ -196,5 +196,11 @@ Page({
             title: app.globalData.shareTitleByHome,
             path: app.globalData.sharePath
         }
+    },
+    // 显示广告大图
+    showBanner(){
+        wx.previewImage({
+            urls: [''],
+        })
     }
 });

@@ -22,5 +22,8 @@
 	<view class="list-block flex-box">
 		<view class="flex-item" bindtap='chooseAddress'>管理地址</view>
 		<view class="icon-arrow"></view>
-	</view> 
+	</view>
+    <view class='banner' bindtap='showBanner'>
+    
+    </view>
 </view>
