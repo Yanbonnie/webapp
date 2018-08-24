@@ -1,0 +1,97 @@
+.list-item {
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    background: #f3f5f5;
+}
+
+.avatar {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    background: #f8f8f8;
+    display: block;
+    margin: 0 auto;
+}
+
+.list-info {
+    line-height: 2rem;
+    padding: 0 15px;
+    text-align: left;
+}
+
+.list-info text {}
+
+.icon-male,
+.icon-female {
+    width: 30rpx;
+    height: 30rpx;
+    display: inline-block;
+    background: url(http://mat1.gtimg.com/gd/niki/redline/images/icon-male.png) no-repeat center bottom;
+    background-size: auto 100%;
+}
+
+.icon-female {
+    background: url(http://mat1.gtimg.com/gd/niki/redline/images/icon-female.png) no-repeat center bottom;
+    background-size: auto 100%;
+}
+
+.icon-notice {
+    min-width: 40rpx;
+    height: 40rpx;
+    padding: 3px;
+    margin-top: 45rpx;
+    line-height: 40rpx;
+    background: #ff4c59;
+    text-align: center;
+    color: #fff;
+    border-radius: 50%;
+}
+
+.icon-arrow {
+    padding-right: 26rpx;
+    position: relative;
+}
+
+.icon-arrow:after {
+    content: " ";
+    display: inline-block;
+    height: 20rpx;
+    width: 20rpx;
+    border-width: 2rpx 2rpx 0 0;
+    border-color: #c9c9c9;
+    border-style: solid;
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+    position: absolute;
+    top: 50%;
+    margin-top: -8rpx;
+    right: 4rpx;
+}
+
+.list-block {
+    height: 100rpx;
+    line-height: 100rpx;
+    padding: 0 15px;
+    text-align: left;
+    background: #fff;
+}
+
+.bold {
+    font-weight: bold;
+    margin-left: 10rpx;
+}
+
+.nickname {
+    font-size: 34rpx;
+    margin: 10px;
+}
+
+.digging-num {
+    display: inline-block;
+    background: #fde23d;
+    border-radius: 30px;
+    padding: 5px 50rpx;
+    text-align: center;
+    font-size: 30rpx;
+    color: #655e36;
+}

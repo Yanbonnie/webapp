@@ -1,0 +1,8 @@
+{
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance":10,
+    "navigationBarTitleText": "礼品详情",
+    "usingComponents": {
+        "dig_treasure": "../../components/dig_treasure/dig_treasure"
+    }
+}

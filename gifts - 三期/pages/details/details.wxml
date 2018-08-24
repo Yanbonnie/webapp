@@ -1,0 +1,338 @@
+
+<!-- <import src="../../wxParse/wxParse.wxml"/> -->
+<view wx:if="{{contentErrText}}" style="padding:100rpx 30rpx;text-align:center" class="color-gray">
+    {{contentErrText}}
+</view>
+<view class="page">
+    <!--hidden="{{!contentReady || contentErrText}}"-->
+    <view class="userlist-pic" >
+        <image src="{{mainInfo.pic}}" bindtap='previewImg' mode="widthFix" data-img="{{mainInfo.pic}}"></image>
+        <view class="rule_btn" data-style="rule" catchtap='operCover'>规则</view>
+    </view>
+    <view class="userlist pos_r border_bottom" >  <!--id='{{mainInfo.id}}'-->
+        <view class="userlist-name">
+            <image wx:if="{{item.goods_type==1}}" src='https://xnt.xhwxpos.com/mining/static/images/icon1.gif'></image>
+            <image wx:else src='https://xnt.xhwxpos.com/mining/static/images/icon2.gif'></image>
+            <text>{{mainInfo.name}}</text>
+        </view>
+        <view class="depth border_top pos_r color-gray">
+            <view class="flex-space-between">
+                <view class="flex-shrink">剩余礼品：{{mainInfo.prize_num}} </view>
+                <view class="flex-item gradient">
+                    <text class="rel">当前深度：{{mainInfo.now_depth}}m</text>
+                    <image src="https://xnt.xhwxpos.com/mining/static/images/depth.gif" mode="scaleToFill"></image>
+                </view>
+                <view class="flex-shrink" bindtap='modifyTimeHandle'>总深度：{{mainInfo.max_depth}}m</view>
+            </view>
+        </view>
+        <view class="detail border_top pos_r color-gray">
+            <text wx:if="{{!showFields}}" class="ellipsis">{{mainInfo.synopsis}}</text>
+            <text wx:if="{{showFields}}" class="extend_fields">{{mainInfo.synopsis}}</text>
+            <text class="more-detail-fixed" bindtap="toggleFieldsBox" hidden="{{showFields}}" wx:if="{{mainInfo.synopsis.length > 45}}">更多详情∨</text>
+            <text class="more-detail" bindtap="toggleFieldsBox" hidden="{{!showFields}}">收起∧</text>
+        </view>
+    </view>
+    <view class="participant" hidden="{{mainInfo.status == -1}}">
+        <view class='more' catchtap='operCover' data-style="propertyList" > <!-- bindtap='getMytools' -->
+            我的道具
+            <text wx:if="{{propertyList.length > 0}}"></text>
+        </view>
+        <view class='dig_treasure' style="visibility:{{bottomDigState ? 'visibility' : 'hidden'}}"  id='the-id'>
+            <dig_treasure 
+                mainInfo="{{mainInfo}}" 
+                winning="{{winning}}" 
+                digging="{{digging}}" 
+                diggingCd="{{diggingCd}}" 
+                canDiggingCd="{{canDiggingCd}}" 
+                digNothing="{{digNothing}}" 
+                timeText="{{timeText}}" 
+                giftNone="{{giftNone}}"  
+                bind:diggerGiftHandle="diggerGiftHandle"
+                bind:toggleSharePop="toggleSharePop"
+                >
+            </dig_treasure>
+        </view>
+        <view class="ul-list teamlist" wx:if="{{mainInfo.is_team}}">
+            <view class='clearfix titleBox' >
+                <text class="title">亲友团</text>
+                <text class='none' bindtap="toggleSharePop"  data-key_type="4">亲友挖到宝贝自己将额外多得一份<text class='btnShare'>【立即分享】</text></text>
+                <!-- <view wx:else class='clearfix none'>
+                    
+                </view> -->
+            </view>
+            <view class='clearfix listItem' wx:if="{{teamlist && teamlist.length > 0}}">
+                <view wx:key="{{idx}}" wx:for="{{teamlist}}" wx:for-item="item" wx:for-index="idx">
+                    <image src="{{item.wxheadpic}}"></image>
+                </view>
+            </view>
+            
+        </view>
+
+        <view class="ul-list" wx:if="{{mainInfo.status != -1}}">
+            <ul class="clearfix">
+                <view class="title">参与者</view>
+                <block wx:key="" wx:for="{{userList}}" wx:for-item="item" wx:for-index="idx">
+                    <li class="{{item.is_prize==1?'winner':''}}" style="{{item.is_prize==1?'background-image:url(../../images/icon-winner.png)':''}}">
+                        <image src="{{item.wxheadpic}}"></image>
+                    </li>
+                </block>
+            </ul>
+            <view class="more-partner" wx:if="{{!hasMoreUser&&userList.length>50}}" >到底了</view> <!--bindtap="getMoreUser"-->
+        </view>
+    </view>
+    <view class="ft_box" wx:if="{{mainInfo.status != -1 && mainInfo.is_manage == 1}}">
+        <button class="btn_mh" bindtap="showPrizeListPop">中奖名单</button>
+    </view>
+    <view class="ft_box" wx:if="{{mainInfo.status == -1 && mainInfo.is_manage == 1}}">
+        <button class="btn_mh" bindtap="tapPayTask">继续支付</button>
+    </view>
+</view>
+<!-- 分享加速弹窗 -->
+<view class="modal-bg" hidden="{{!showShareDialog}}">
+    <view class="modal-outer dialog_sty">
+        <view class="modal-title">
+            <text>分享加速</text>
+            <view class="modal-close" bindtap="toggleSharePop">
+                <image src="../../images/icon-close.png" />
+            </view>
+        </view>
+        <view class="modal-inner">
+            <view class="winners-list">
+                <view class="winlist-tips">
+                    {{shareTxt}}
+                </view>
+            </view>
+        </view>
+        <view class="modal-footer share-footer">
+            <button class="btn-commit btn_yellow" bindtap="toggleShareFriend" data-key_type="2">分享到朋友圈</button>
+            <button class="btn-commit btn_blue" data-name="shareBtn" open-type="share" data-key_type="3" bindtap="toggleSharePop">发送给好友</button>
+        </view>
+    </view>
+</view>
+<!-- 弹窗列表 实物 中奖名单 -->
+<view class="modal-bg" hidden="{{!showPrizeListFlag}}">
+    <view class="modal-outer">
+        <view class="modal-title">
+            <text>中奖名单</text>
+            <view class="modal-close" bindtap="hidePrizeListPop">
+                <image src="../../images/icon-close.png" />
+            </view>
+        </view>
+        <view class="modal-inner">
+            <scroll-view scroll-y class="scrollView" bindscrolltolower="lowerHandle">
+                <view class="winners-list">
+                    <view class="winlist-tips" wx:if="{{!winnerList.length}}">暂无内容</view>
+                    <block wx:key="" wx:for="{{winnerList}}" wx:for-item="item" wx:for-index="idx">
+                        <view class="flex-space-between pos_r winners-item {{idx ? 'border_top' : ''}}">
+                            <view class="flex-shrink item-l">
+                                <view>
+                                    <image src="{{item.avatar}}" class="avatar" mode="aspectFill" />
+                                    <view class="color-gray">{{item.wxname}}</view>
+                                </view>
+                            </view>
+                            <view class="flex-item">
+                                <view class="item-m">
+                                    <view wx:if="{{mainInfo.goods_type == 2 && mainInfo.draw_type == 2}}">
+                                        <view class="name">{{item.name}}({{item.mobile}})</view>
+                                        <view class="address" wx:if="{{mainInfo.goods_type == 2}}">{{item.address}}</view>
+                                    </view>
+                                    <view wx:else>
+                                        <text class="color-yellow" wx:if="{{item.status == 0}}">待领取</text>
+                                        <text class="color-blue" wx:if="{{item.status == 1}}">已领取</text>
+                                    </view>
+                                    <view class="time color-gray">{{item.time}}</view>
+                                </view>
+                            </view>
+                            <view class="flex-shrink" wx:if="{{mainInfo.goods_type == 2}}">
+                                <view class="item-r status-yellow" wx:if="{{item.status == 0}}" bindtap="tapManagePrizeInfo" data-type="1" data-idx="{{idx}}">
+                                    <text class="m-status" wx:if="{{mainInfo.goods_type == 2 && mainInfo.draw_type == 2}}">待领取</text>
+                                    <button class="btn_cl">标为已领</button>
+                                </view>
+                                <view class="item-r status-blue" wx:if="{{item.status == 1}}" bindtap="tapManagePrizeInfo" data-type="0" data-idx="{{idx}}">
+                                    <text class="m-status" wx:if="{{mainInfo.goods_type == 2 && mainInfo.draw_type == 2}}">已领取</text>
+                                    <button class="btn_cl">重置状态</button>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                    <view wx:if="{{!hasMoreWinner && list.length > 20}}">没有更多了</view>
+                </view>
+            </scroll-view>
+            
+        </view>
+    </view>
+</view>
+<!-- 弹窗 收货地址 -->
+<view class="modal-bg" hidden="{{!showAddress}}" confirm-text="提交">
+    <form bindsubmit="confirmSendNews" report-submit="true">
+        <view class="modal-outer">
+            <view class="modal-title">
+                <text>您已中奖，请填写收件地址</text>
+                <view class="modal-close" bindtap="toggleAddressPop">
+                    <image src="../../images/icon-close.png" />
+                </view>
+            </view>
+            <view class="modal-inner">
+                <view class="">
+                    <view class="weui-cell">
+                        <view class="weui-cell__hd">
+                            <view class="weui-label">收货人</view>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <input class="weui-input" type="text" placeholder-class="color-gray" placeholder="请输入收货人姓名" cursor-spacing="10" value="{{userName}}" name="name" />
+                        </view>
+                    </view>
+                    <view class="weui-cell">
+                        <view class="weui-cell__hd">
+                            <view class="weui-label">联系电话</view>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <input class="weui-input" type="number" placeholder-class="color-gray" placeholder="请输入联系电话" cursor-spacing="10" value="{{telNumber}}" name="mobile" />
+                        </view>
+                    </view>
+                    <view class="weui-cell flex-start">
+                        <view class="weui-cell__hd">
+                            <view class="weui-label" style="margin-top:5px">收件地址</view>
+                        </view>
+                        <view class="weui-cell__bd">
+                            <textarea style="min-height:3em;margin-top:5px" class="weui-textarea" placeholder-class="color-gray" placeholder="请输入详细街道门牌信息" auto-height="true" cursor-spacing="10" value="{{address}}" name="address" fixed="true" />
+                        </view>
+                    </view>
+                </view>
+                <view class="chose-address" bindtap='chooseAddress'>
+                    <image class="va_m" src="../../images/icon-position.png" />
+                    <text class="va_m">选择收货地址</text>
+                </view>
+            </view>
+            <view class="modal-footer">
+                <button class="btn-commit" formType="submit" disabled="{{submitDone}}">提交</button>
+            </view>
+        </view>
+    </form>
+</view>
+
+<!--分享到朋友圈 -->
+<view class='modalCover' wx:if="{{friendStatus}}">
+    <view class='modalBody'>
+        <view class='close' bindtap='closeFriend'>
+            <image src='/images/icon-close.png'></image>
+        </view>
+        <view class='imgBox' bindtap='previewImg' data-img="{{friendUrl}}">
+            <image src='{{friendUrl}}' mode='aspectFit'></image>
+        </view>
+        <text>点击预览大图（保存大图分享到朋友圈）</text>
+    </view>
+</view>
+<!-- 我的道具列表 -->
+<view class='coverProperty cover' wx:if="{{propertyStatus}}">
+    <view class='propertyBox' animation="{{animationTopData}}">
+        <view class='close' catchtap='operCover' data-style="propertyList">
+            <image src='/images/close.png'></image>
+        </view>
+        <view class='propHeader'>
+            <view class='btn' bindtap='operCover' data-style="exchange">兑换</view>
+            <view>我的道具</view>
+            <view class='btn' bindtap='buy'>
+                <navigator url="{{'/pages/propShopping/propShopping?code='+options.code}}">购买</navigator>
+            </view>
+        </view>
+        <view class='propertyList'>
+            <view class='item'>
+                <form bindsubmit="useToolsBefore" report-submit="true" wx:for="{{propertyList}}" wx:key="{{index}}" data-tools_id="{{item.tools_id}}">
+                    <view class='form'>
+                        <view class='img'>
+                            <image src='{{item.pic}}'></image>
+                            <text class='num'>{{item.tools_num}}</text>
+                        </view>
+                        <view class='info'>
+                            <view class='title'>{{item.tools_name}}</view>
+                            <view class='txt'>{{item.tools_explain}}</view>
+                        </view>
+                        <view class='buyBox' data-tools_id="{{item.tools_id}}">
+                            <button formType="submit" class='btn'>使用</button>
+                        </view>
+                    </view>
+                </form>
+                <view class='noMessage' wx:if="{{propertyList && propertyList.length == 0}}">
+                    <image src='/images/smile.png'></image>
+                    <view>抱歉，您目前没有道具</view>
+                    <view>请点击右上角购买按钮购买</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class='dig_treasureBox' animation="{{animationBottomData}}">
+            <dig_treasure 
+                mainInfo="{{mainInfo}}" 
+                winning="{{winning}}" 
+                digging="{{digging}}" 
+                diggingCd="{{diggingCd}}" 
+                canDiggingCd="{{canDiggingCd}}" 
+                digNothing="{{digNothing}}" 
+                timeText="{{timeText}}" 
+                giftNone="{{giftNone}}"   
+            >
+            </dig_treasure>
+        </view>
+    </view>
+<!-- 兑换码兑换弹框 -->
+<view class='cover' wx:if="{{exchangeStatus}}">
+    <view class='coverBox exchangeBox'>
+        <form report-submit="true" bindsubmit="exchangeTools">
+            <view class='header'>
+                <text>兑换口令</text>
+            </view>
+            <view class='copy'>
+                <input placeholder='请输入兑换口令' name="keycode"></input>
+            </view>
+            <view class='question' catchtap='operCover' data-style="getCodeIntro">
+                <image src='/images/question.png'></image>如何获得兑换口令</view>
+            <view class='btnBox'>
+                <view class='btn' data-style="exchange" catchtap='operCover'>取消</view>
+                <button class='btn' formType="submit">确认</button>
+            </view>
+        </form>
+    </view>
+</view>
+<!-- 获取兑奖码说明 -->
+<view class='cover' wx:if="{{getCodeIntroStatus}}">
+    <view class='coverBox getCodeIntroBox'>
+        <view class='header headerCenter'>
+            <text>如何获取兑奖码</text>
+        </view>
+        <view class='getCodeIntro'>
+            <text>{{info}}</text>
+
+        </view>
+        <view class='close' bindtap='operCover' data-style="getCodeIntro">
+            <image src='/images/icon-close.png'></image>
+        </view>
+    </view>
+</view>
+
+<!-- 活动规则 -->
+<swiper class='swiper' wx:if="{{swiperStatus}}" indicator-dots="true" indicator-color="#ffffff" indicator-active-color="#fde763">
+    <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+        <swiper-item>
+            <image src="{{item}}" class="slide-image" mode='aspectFill' bindtap='goDigging' data-index="{{index}}" />
+            <button class="button" bindtap='operCover' data-style="rule">开始探索</button>
+        </swiper-item>
+    </block>
+</swiper>
+
+
+<view class='modalCover' wx:if="{{teamQuestionStatus}}">    
+    <view class='modalBody teamBody'>
+        <view class='close' catchtap='operCover' data-style="teamQuestion">
+            <image src='/images/close.png'></image>
+        </view>
+        <view class='header headerCenter'>
+            <text>如何获取兑奖码</text>
+        </view>
+        <view class="wxParse">
+            <!-- <template is="wxParse" data="{{wxParseData:article.nodes}}"/> -->
+            <view>亲友挖到宝贝自己将额外多得一份</view>
+            <view>【立即分享】</view>
+        </view>
+   </view>
+</view>

@@ -1,0 +1,17 @@
+.share-guide{
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.5) url(https://m.zshlife.com/static/image/gourmet/guide.png?v=1.6.0) no-repeat right top;
+	background-size: 153px 80px;
+	z-index: 1000;
+	opacity: 0;
+	-webkit-transition: opacity .3s;
+	transition: opacity .3s;
+}
+
+.share-guide-visible{
+	opacity: 1;
+}
