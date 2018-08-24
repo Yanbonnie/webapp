@@ -11,7 +11,7 @@
     </view>
     <view class="userlist pos_r border_bottom" >  <!--id='{{mainInfo.id}}'-->
         <view class="userlist-name">
-            <image wx:if="{{item.goods_type==1}}" src='https://xnt.xhwxpos.com/mining/static/images/icon1.gif'></image>
+            <image wx:if="{{mainInfo.goods_type==1}}" src='https://xnt.xhwxpos.com/mining/static/images/icon1.gif'></image>
             <image wx:else src='https://xnt.xhwxpos.com/mining/static/images/icon2.gif'></image>
             <text>{{mainInfo.name}}</text>
         </view>
@@ -60,12 +60,16 @@
                     
                 </view> -->
             </view>
+            <ul class="clearfix">
             <view class='clearfix listItem' wx:if="{{teamlist && teamlist.length > 0}}">
                 <view wx:key="{{idx}}" wx:for="{{teamlist}}" wx:for-item="item" wx:for-index="idx">
+
+                    <li class="{{item.is_prize==1?'winner':''}}" style="{{item.is_prize==1?'background-image:url(../../images/icon-winner.png)':''}}">
                     <image src="{{item.wxheadpic}}"></image>
+                    </li>
                 </view>
             </view>
-            
+            </ul>
         </view>
 
         <view class="ul-list" wx:if="{{mainInfo.status != -1}}">
@@ -128,6 +132,7 @@
                                 <view>
                                     <image src="{{item.avatar}}" class="avatar" mode="aspectFill" />
                                     <view class="color-gray">{{item.wxname}}</view>
+                                    <view class="color-gray">X{{item.prize_num}}份</view>
                                 </view>
                             </view>
                             <view class="flex-item">

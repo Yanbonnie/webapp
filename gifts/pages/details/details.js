@@ -73,7 +73,7 @@ function resetData(args) {
         digMainInfo:null,    
         bigScrollNum:0,
         teamQuestionStatus:false,                //亲友团问号弹框
-        shareTxtArr: ['邀请好友共同获得礼品，好友每次挖宝将使您获得振奋精神效果，休息时间立减10分钟。','好东西不能独享，邀请亲友组队团战，亲友获得礼品，礼品变双份'],
+        shareTxtArr: ['好东西不能独享，邀请好友来获得礼品','好东西不能独享，邀请亲友组队团战，亲友获得礼品，礼品变双份'],
         shareTxt:'',
         share_text:''    //分享的文案
     }
@@ -527,6 +527,14 @@ Page({
                     
                 } else { //没中奖
                     if (mainInfo.status == 0) { //项目进项中....
+                        if(mainInfo.is_prize==2&&mainInfo.is_draw==0&&mainInfo.draw_type==2){
+                            this.toggleAddressPop(true);
+                        }else if(mainInfo.is_prize==2&&mainInfo.draw_type==1){ // 如果是现场
+                            app.dialog({
+                                title: '领奖提示',
+                                content: mainInfo.draw_info
+                            });
+                        }
                         if (mainInfo.is_cd == 1) { //冷却倒计时
                             this.runCountdownTime(mainInfo.time);
                             this.setData({
@@ -547,6 +555,14 @@ Page({
                             that.miningTask();
                         }
                     } else { //项目结束
+                        if(mainInfo.is_prize==2&&mainInfo.is_draw==0&&mainInfo.draw_type==2){
+                            this.toggleAddressPop(true);
+                        }else if(mainInfo.is_prize==2&&mainInfo.draw_type==1){ // 如果是现场
+                            app.dialog({
+                                title: '领奖提示',
+                                content: mainInfo.draw_info
+                            });
+                        }
                         this.setData({
                             giftNone: true,
                             winning: false,
