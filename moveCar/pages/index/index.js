@@ -3,7 +3,11 @@
 import qqmap from '../../utils/map.js';
 const app = getApp();
 const { globalData: { REQUEST } } = app;
-const { chooseImgHandle, changeNav } = require('../../utils/pageCom');
+const { chooseImgHandle, changeNav, codeInputChange, mobileInputChange,isPhone } = require('../../utils/pageCom');
+import {
+    methodsCom
+} from '../../utils/submitCom';
+const { getMsgCodeFn } = methodsCom
 Page({
 
     /**
@@ -28,6 +32,11 @@ Page({
         followState:false,      //是否关注
         callState:false,        //拨打电话状态
         callUrl:'',            //立即拨打
+        code:'',
+        time: 0,
+        mobile:'',
+        codeStatus: true,
+        codeTxt: '获取验证码',
     },
 
     /**
@@ -43,6 +52,10 @@ Page({
         
     },
     changeNav,    //监听导航栏切换
+    mobileInputChange,
+    codeInputChange,   //code值改变
+    getMsgCodeFn,
+    isPhone,
     //获取首页数据
     getBannerFn(){
         wx.showLoading({

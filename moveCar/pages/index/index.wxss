@@ -101,3 +101,20 @@ page{
     width: 50rpx;
     height: 50rpx;
 }
+
+.formBox .yzm .flexR{
+    flex-basis:250rpx;
+}
+.formBox .yzm .flexR text{
+    display: block;
+    padding: 5rpx 5rpx;
+    border: 1px #0894ec solid;
+    border-radius: 8rpx;
+    width: 150rpx;
+    text-align: center;
+    color: #0894ec;
+}
+.formBox .yzm .flexR .gray{
+    color:#808080;
+    border: 1px #808080 solid;
+}
