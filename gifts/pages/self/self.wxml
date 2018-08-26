@@ -24,6 +24,6 @@
 		<view class="icon-arrow"></view>
 	</view>
     <view class='banner' bindtap='showBanner'>
-    
+        <image src='https://xnt.xhwxpos.com/mining/static/images/bannerSmall.jpg'></image>
     </view>
 </view>

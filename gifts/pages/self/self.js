@@ -13,7 +13,8 @@ function resetData(args) {
         canIUseOpenShare: wx.canIUse('button.open-type.share'),
         defaultImage: app.defaultImage,
 
-        mainData: {}
+        mainData: {},
+        showImg:false
     }
 }
 
@@ -86,7 +87,7 @@ Page({
         var that = this;
         var success = args.success;
         var fail = args.fail;
-
+        console.log("请求数据");
         if (args.showToastFlag) {
             app.showLoading({
                 title: '请稍候'
@@ -173,15 +174,23 @@ Page({
         });
     },
     onShow: function() {
+        console.log(123)
+        const { showImg } = this.data;
         var that = this;
-
-        app.checkIsAuthorize({
-            success: function() {                
-                that.reload({
-                    showToastFlag: true
-                });
-            }
-        });
+        if (!showImg){
+            app.checkIsAuthorize({
+                success: function () {
+                    that.reload({
+                        showToastFlag: true
+                    });
+                }
+            });
+        }else{
+            this.setData({
+                showImg: false
+            })
+        }
+        
     },
     onHide: function() {},
     onLoad: function(options) {
@@ -199,8 +208,9 @@ Page({
     },
     // 显示广告大图
     showBanner(){
+        this.setData({showImg:true})
         wx.previewImage({
-            urls: [''],
+            urls: ['https://xnt.xhwxpos.com/mining/static/images/bannerBig.jpg']
         })
     }
 });
