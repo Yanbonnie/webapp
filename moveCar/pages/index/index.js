@@ -21,6 +21,7 @@ Page({
         index:-1,
         bannerList:[],
         is_binding: 0,         //绑定状态，1为已绑定，0为未绑定，未绑定⽤用户⽆无权点击 其他⻚页⾯面，只能进入绑定页面
+        is_verify_phone:0,    
         isfollow:false,            //是否关注
         car_number: '',        //车牌号码
         reason: '',            //原因
@@ -68,10 +69,11 @@ Page({
             page_type: 2
         }).then(res=>{
             wx.hideLoading();
-            const { banner_data, is_binding, isfollow } = res;
+            const { banner_data, is_binding, is_verify_phone, isfollow } = res;
             this.setData({
                 bannerList:banner_data,
                 is_binding,
+                is_verify_phone: is_verify_phone ? is_verify_phone : '',
                 isfollow:isfollow || false,
             })
             app.globalData.is_binding = is_binding; 
@@ -140,6 +142,49 @@ Page({
             }
         })       
         
+    },
+    // 绑定手机成功的时候就提交挪车
+    bindPhone(){
+        const { mobile, code, car_number, reason, scene_pic, address, reply, submitStatus, isfollow} = this.data;
+        if (car_number == '' || reason == '' || scene_pic == '' || address == '') {
+            wx.showToast({
+                title: '请填写完整信息',
+                mask: true,
+                icon: 'none'
+            })
+            return;
+        }
+
+        if (!this.isPhone(mobile)) {
+            wx.showToast({
+                title: '手机号码格式不正确',
+                mask: true,
+                icon: 'none'
+            })
+            return;
+        }
+        if(!code){
+            wx.showToast({
+                title: '验证码不能为空',
+                mask: true,
+                icon: 'none'
+            })
+            return;
+        }
+        // if (!submitStatus) return;
+        // this.setData({
+        //     submitStatus: false
+        // })
+        REQUEST('POST','bindPhone',{
+            mobile,
+            code,
+            unionid: app.globalData.unionid
+        }).then(res=>{
+            this.setData({
+                is_verify_phone:1
+            })
+            this.PostMoveCarFn();
+        })
     },
     //提交我要挪车接口
     PostMoveCarFn(){

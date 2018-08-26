@@ -41,13 +41,13 @@
             <text class='iconfont icon-address'></text>
         </view>      
     </view> 
-    <view class='flexBox' wx:if="{{is_binding == 0}}">
+    <view class='flexBox' wx:if="{{is_verify_phone == 0}}">
         <view class='flexL'>*手机号码</view>
         <view class='flexC'>
             <input placeholder="请输入您的手机号码" type='number' value="{{mobile}}" bindinput='mobileInputChange' />
         </view>
     </view>
-    <view class='flexBox yzm' wx:if="{{is_binding == 0}}">
+    <view class='flexBox yzm' wx:if="{{is_verify_phone == 0}}">
         <view class='flexL'>*验证码</view>
         <view class='flexC'>
             <input placeholder="请输入短信验证码" type='number' value="{{code}}" bindinput="codeInputChange" />
@@ -68,11 +68,16 @@
     </view>
 </view>
 
-<view class='BtnBox' bindtap='PostMoveCarFn'>
+<view class='BtnBox' wx:if="{{is_verify_phone == 0}}" bindtap='bindPhone'>
     <view  class="{{submitStatus ? '':'gray'}}">
         确定
     </view>
 </view>  
+<view class='BtnBox' wx:else bindtap='PostMoveCarFn'>
+    <view  class="{{submitStatus ? '':'gray'}}">
+        确定
+    </view>
+</view> 
 <!-- <navBar bindchangeNav="changeNav" index="{{0}}"></navBar> -->
 
 <view class='serverCover' wx:if="{{serverState}}">
