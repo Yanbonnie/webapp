@@ -84,7 +84,8 @@ Page({
         })
     },
     //提交申请信息
-    postApplyFn() {
+    postApplyFn(e) {
+        const { formId } = e.detail;
         const { car_number, car_type, proprietor, address, insurance, mobile, code, submitStatus } = this.data;
         if (!car_number || !car_type || !proprietor || !address || !insurance || !mobile || !code) {
             wx.showToast({
@@ -103,7 +104,7 @@ Page({
             submitStatus: false
         })
         REQUEST('POST', 'post_apply', {
-            car_number, car_type, proprietor, address, insurance_code: insurance.code, mobile, code, unionid: app.globalData.unionid
+            car_number, car_type, proprietor, address, insurance_code: insurance.code, mobile, code, formId, unionid: app.globalData.unionid
         }).then(res => {
             this.setData({
                 submitStatus: true,

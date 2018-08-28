@@ -9,71 +9,73 @@
     </block>
 </swiper>
 
-<view class='formBox mt30'>
-    <view class='flexBox' bindtap="chooseFn" data-page_type="1">
-        <view class='flexL'>*车牌号码</view>
-        <view class='flexC'>
-            <input placeholder="请拍照上传您的驾驶证" disabled="true" value="{{car_number}}" />
+<form bindsubmit="postApplyFn" report-submit="true">
+    <view class='formBox mt30'>
+        <view class='flexBox' bindtap="chooseFn" data-page_type="1">
+            <view class='flexL'>*车牌号码</view>
+            <view class='flexC'>
+                <input placeholder="请拍照上传您的驾驶证" disabled="true" value="{{car_number}}" />
+            </view>
+            <view class='flexR'>
+                <text class='iconfont icon-camera'></text>
+            </view>
         </view>
-        <view class='flexR'>
-            <text class='iconfont icon-camera'></text>
-        </view>
-    </view>
 
-    <view class='flexBox'>
-        <view class='flexL'>*车辆类型</view>
-        <view class='flexC'>
-            <input placeholder="车辆类型" disabled="true" value="{{car_type}}" />
+        <view class='flexBox'>
+            <view class='flexL'>*车辆类型</view>
+            <view class='flexC'>
+                <input placeholder="车辆类型" disabled="true" value="{{car_type}}" />
+            </view>
+        </view>
+        <view class='flexBox'>
+            <view class='flexL'>*所有人</view>
+            <view class='flexC'>
+                <input disabled="true" value="{{proprietor}}" placeholder='通过驾驶证自动识别' />
+            </view>
+        </view>
+        <view class='flexBox' bindtap='showBaoXian'>
+            <view class='flexL'>*保险公司</view>
+            <view class='flexC'>
+                <input placeholder="请选择保险公司" disabled="true" value="{{insurance.cityName}}" />
+            </view>
+        </view>
+        <view class='flexBox'>
+            <view class='flexL'>*手机号码</view>
+            <view class='flexC'>
+                <input placeholder="请输入您的手机号码" type='number' value="{{mobile}}" bindinput='mobileInputChange' />
+            </view>
+        </view>
+        <view class='flexBox yzm' wx:if="{{!is_apply}}">
+            <view class='flexL'>*验证码</view>
+            <view class='flexC'>
+                <input placeholder="请输入短信验证码" type='number' value="{{code}}" bindinput="codeInputChange" />
+            </view>
+            <view class='flexR' bindtap="getMsgCodeFn">
+                <text class="{{codeStatus ? '':'gray'}}" value="{{code}}">{{codeTxt}}</text>
+            </view>
+        </view>
+        <view class='flexBox ' bindtap='selectAddress'>
+            <view class='flexL'>*邮寄地址</view>
+            <view class='flexC'>
+                <input placeholder="请选择邮寄地址" disabled="true" value="{{address}}" />
+            </view>
+            <view class='flexR'>
+                <text class='iconfont icon-address'></text>
+            </view>
+        </view>
+        <view class='operBox'>
+        <view bindtap='operServerCover' data-index="1">
+            <text class='iconfont icon-warning-o'></text>
+            <text>使用说明</text>
         </view>
     </view>
-    <view class='flexBox'>
-        <view class='flexL'>*所有人</view>
-        <view class='flexC'>
-            <input disabled="true" value="{{proprietor}}" placeholder='通过驾驶证自动识别' />
+    </view>
+    <view class='BtnBox'  wx:if="{{!is_apply}}"> 
+        <view class="{{submitStatus ? '':'gray'}}">
+            <button formType="submit">支付邮费</button>
         </view>
     </view>
-    <view class='flexBox' bindtap='showBaoXian'>
-        <view class='flexL'>*保险公司</view>
-        <view class='flexC'>
-            <input placeholder="请选择保险公司" disabled="true" value="{{insurance.cityName}}" />
-        </view>
-    </view>
-    <view class='flexBox'>
-        <view class='flexL'>*手机号码</view>
-        <view class='flexC'>
-            <input placeholder="请输入您的手机号码" type='number' value="{{mobile}}" bindinput='mobileInputChange' />
-        </view>
-    </view>
-    <view class='flexBox yzm' wx:if="{{!is_apply}}">
-        <view class='flexL'>*验证码</view>
-        <view class='flexC'>
-            <input placeholder="请输入短信验证码" type='number' value="{{code}}" bindinput="codeInputChange" />
-        </view>
-        <view class='flexR' bindtap="getMsgCodeFn">
-            <text class="{{codeStatus ? '':'gray'}}" value="{{code}}">{{codeTxt}}</text>
-        </view>
-    </view>
-    <view class='flexBox ' bindtap='selectAddress'>
-        <view class='flexL'>*邮寄地址</view>
-        <view class='flexC'>
-            <input placeholder="请选择邮寄地址" disabled="true" value="{{address}}" />
-        </view>
-        <view class='flexR'>
-            <text class='iconfont icon-address'></text>
-        </view>
-    </view>
-    <view class='operBox'>
-    <view bindtap='operServerCover' data-index="1">
-        <text class='iconfont icon-warning-o'></text>
-        <text>使用说明</text>
-    </view>
-</view>
-</view>
-<view class='BtnBox' bindtap='postApplyFn' wx:if="{{!is_apply}}">
-    <view class="{{submitStatus ? '':'gray'}}">
-        支付邮费
-    </view>
-</view>
+</form>
 <view class='cityCover' wx:if="{{cityState}}">
     <citylist citylist="{{insurance_data}}" bindcitytap='cityTap' bindcloseCity="closeCityHandle"></citylist>
 </view>

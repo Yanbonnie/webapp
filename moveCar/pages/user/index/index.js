@@ -89,7 +89,7 @@ Page({
         })
     },
     goApplyHandle(){
-        const {is_binding}=this.data;
+        let {is_binding}=this.data;
         if(is_binding){
             wx.navigateTo({
                 url: '/pages/apply/apply',

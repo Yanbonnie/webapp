@@ -73,6 +73,13 @@ const REQUEST = (method, url, data, err = false) => {   //err->true  需要对�
                         })
                     }
                 }
+            },
+            fail:err=>{
+                wx.showToast({
+                    icon: 'none',
+                    mask: true,
+                    title: '服务器出错了',
+                })
             }
         })
     })

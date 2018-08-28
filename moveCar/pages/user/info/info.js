@@ -63,7 +63,8 @@ Page({
     ...pageCom,
     ...methodsCom,
     //提交绑定信息
-    postApplyFn() {
+    postApplyFn(e) {
+        const {formId} = e.detail;
         const {
             car_number,
             car_type,
@@ -107,6 +108,7 @@ Page({
             insurance_code: insurance.code,
             mobile,
             code,
+            formId,
             unionid: app.globalData.unionid
         },true).then(res => {
             this.setData({
@@ -213,9 +215,9 @@ Page({
                     canOper: false
                 })
             }
-        } else {
+        } /*else {
             this.postApplyFn();
-        }
+        }*/
 
 
     },

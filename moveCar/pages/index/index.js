@@ -144,8 +144,10 @@ Page({
         
     },
     // 绑定手机成功的时候就提交挪车
-    bindPhone(){
-        const { mobile, code, car_number, reason, scene_pic, address, reply, submitStatus, isfollow} = this.data;
+    bindPhone(e){
+        console.log(e)
+        const { formId } = e.detail;
+        const { mobile, code, car_number, reason, scene_pic, address, reply, submitStatus, isfollow, is_verify_phone} = this.data;
         if (car_number == '' || reason == '' || scene_pic == '' || address == '') {
             wx.showToast({
                 title: '请填写完整信息',
@@ -155,39 +157,67 @@ Page({
             return;
         }
 
-        if (!this.isPhone(mobile)) {
-            wx.showToast({
-                title: '手机号码格式不正确',
-                mask: true,
-                icon: 'none'
+        if (!is_verify_phone){  //没有绑定手机号
+            if (!this.isPhone(mobile)) {
+                wx.showToast({
+                    title: '手机号码格式不正确',
+                    mask: true,
+                    icon: 'none'
+                })
+                return;
+            }
+            if (!code) {
+                wx.showToast({
+                    title: '验证码不能为空',
+                    mask: true,
+                    icon: 'none'
+                })
+                return;
+            }
+
+            wx.showLoading({
+                title: '提交中...',
+                mask: true
             })
-            return;
-        }
-        if(!code){
-            wx.showToast({
-                title: '验证码不能为空',
-                mask: true,
-                icon: 'none'
-            })
-            return;
-        }
-        // if (!submitStatus) return;
-        // this.setData({
-        //     submitStatus: false
-        // })
-        REQUEST('POST','bindPhone',{
-            mobile,
-            code,
-            unionid: app.globalData.unionid
-        }).then(res=>{
+            if (!submitStatus) return;
             this.setData({
-                is_verify_phone:1
+                submitStatus: false
             })
-            this.PostMoveCarFn();
-        })
+            // 先绑定手机
+            REQUEST('POST', 'bindPhone', {
+                mobile,
+                code,
+                unionid: app.globalData.unionid
+            },true).then(res => {
+                this.setData({
+                    is_verify_phone: 1
+                })
+                this.PostMoveCarFn(formId);
+            }).catch(err=>{
+                this.setData({
+                    submitStatus: true
+                }) 
+                wx.showToast({
+                    icon: 'none',
+                    mask: true,
+                    title: err.msg || '请求失败'
+                })
+            })
+        }else{ //绑定了手机号
+            wx.showLoading({
+                title: '提交中...',
+                mask: true
+            })
+            if (!submitStatus) return;
+            this.setData({
+                submitStatus: false
+            })
+            this.PostMoveCarFn(formId);
+        }
+        
     },
     //提交我要挪车接口
-    PostMoveCarFn(){
+    PostMoveCarFn(formId){
         const { car_number, reason, scene_pic, address, reply, submitStatus, isfollow} = this.data;
         if (car_number == ''  ||  reason == '' || scene_pic == '' || address == ''){
             wx.showToast({
@@ -196,16 +226,8 @@ Page({
                 icon:'none'
             })
             return;
-        }
-        wx.showLoading({
-            title: '提交中...',
-            mask:true
-        })
-        if (!submitStatus) return;
-        this.setData({
-            submitStatus:false
-        })
-        REQUEST('POST', 'post_move_car', { car_number, reason, scene_pic, address, reply, unionid: app.globalData.unionid}).then(res=>{
+        }        
+        REQUEST('POST', 'post_move_car', { car_number, reason, scene_pic, address, reply, formId,unionid: app.globalData.unionid}).then(res=>{
             wx.hideLoading();
             this.setData({
                 submitStatus: true                

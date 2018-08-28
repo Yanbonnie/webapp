@@ -9,75 +9,79 @@
   </block>
 </swiper>
 
-<view class='formBox mt30'>
-    <view class='flexBox' bindtap='chooseFn' data-page_type = "2">
-        <view class='flexL'>*车牌号码</view>
-        <view class='flexC'>
-             <input placeholder="请拍照上传需挪车辆" disabled="true" value="{{car_number}}" />
+<form report-submit="true" bindsubmit="bindPhone">
+    <view class='formBox mt30'>
+        <view class='flexBox' bindtap='chooseFn' data-page_type = "2">
+            <view class='flexL'>*车牌号码</view>
+            <view class='flexC'>
+                <input placeholder="请拍照上传需挪车辆" disabled="true" value="{{car_number}}" />
+            </view>
+            <view class='flexR'>
+                <text class='iconfont icon-camera'></text>
+            </view>
         </view>
-        <view class='flexR'>
-            <text class='iconfont icon-camera'></text>
+        <view class='flexBox'>
+            <view class='flexL'>*挪车原因</view>
+            <view class='flexC'>
+                <picker bindchange="bindPickerChange" value="{{index}}" range="{{reasonList}}">
+                    <view class="picker" wx:if="{{reason}}">
+                        {{reason}}
+                    </view>
+                    <view class="picker gray" wx:else>
+                        请选择挪车原因
+                    </view>
+                </picker>
+            </view>        
+        </view>
+        <view class='flexBox' bindtap='getLocate'>  <!--bindtap='getLocate'-->
+            <view class='flexL'>*选择地址</view>
+            <view class='flexC'>
+                <input placeholder="点击选择事发位置"  value="{{address}}" disabled="true"/> <!--disabled="true"-->
+            </view>  
+            <view class='flexR'>
+                <text class='iconfont icon-address'></text>
+            </view>      
+        </view> 
+        <view class='flexBox' wx:if="{{is_verify_phone == 0}}">
+            <view class='flexL'>*手机号码</view>
+            <view class='flexC'>
+                <input placeholder="请输入您的手机号码" type='number' value="{{mobile}}" bindinput='mobileInputChange' />
+            </view>
+        </view>
+        <view class='flexBox yzm' wx:if="{{is_verify_phone == 0}}">
+            <view class='flexL'>*验证码</view>
+            <view class='flexC'>
+                <input placeholder="请输入短信验证码" type='number' value="{{code}}" bindinput="codeInputChange" />
+            </view>
+            <view class='flexR' bindtap="getMsgCodeFn">
+                <text class="{{codeStatus ? '':'gray'}}">{{codeTxt}}</text>
+            </view>
+        </view>   
+    </view>
+    <view class='operBox'>
+        <view bindtap='operServerCover' data-index="1">
+            <text class='iconfont icon-warning-o'></text>
+            <text>服务说明</text>
+        </view>
+        <view bindtap='replyHandle'>
+            <text  class="{{reply ? 'iconfont icon-squarecheck':'iconfont icon-square'}}"></text>
+            <text>是否接受回复</text>
         </view>
     </view>
-    <view class='flexBox'>
-        <view class='flexL'>*挪车原因</view>
-        <view class='flexC'>
-             <picker bindchange="bindPickerChange" value="{{index}}" range="{{reasonList}}">
-                <view class="picker" wx:if="{{reason}}">
-                    {{reason}}
-                </view>
-                <view class="picker gray" wx:else>
-                    请选择挪车原因
-                </view>
-            </picker>
-        </view>        
-    </view>
-    <view class='flexBox' bindtap='getLocate'>  <!--bindtap='getLocate'-->
-        <view class='flexL'>*选择地址</view>
-        <view class='flexC'>
-             <input placeholder="点击选择事发位置"  value="{{address}}" disabled="true"/> <!--disabled="true"-->
-        </view>  
-        <view class='flexR'>
-            <text class='iconfont icon-address'></text>
-        </view>      
-    </view> 
-    <view class='flexBox' wx:if="{{is_verify_phone == 0}}">
-        <view class='flexL'>*手机号码</view>
-        <view class='flexC'>
-            <input placeholder="请输入您的手机号码" type='number' value="{{mobile}}" bindinput='mobileInputChange' />
-        </view>
-    </view>
-    <view class='flexBox yzm' wx:if="{{is_verify_phone == 0}}">
-        <view class='flexL'>*验证码</view>
-        <view class='flexC'>
-            <input placeholder="请输入短信验证码" type='number' value="{{code}}" bindinput="codeInputChange" />
-        </view>
-        <view class='flexR' bindtap="getMsgCodeFn">
-            <text class="{{codeStatus ? '':'gray'}}">{{codeTxt}}</text>
-        </view>
-    </view>   
-</view>
-<view class='operBox'>
-    <view bindtap='operServerCover' data-index="1">
-        <text class='iconfont icon-warning-o'></text>
-        <text>服务说明</text>
-    </view>
-    <view bindtap='replyHandle'>
-        <text  class="{{reply ? 'iconfont icon-squarecheck':'iconfont icon-square'}}"></text>
-        <text>是否接受回复</text>
-    </view>
-</view>
 
-<view class='BtnBox' wx:if="{{is_verify_phone == 0}}" bindtap='bindPhone'>
-    <view  class="{{submitStatus ? '':'gray'}}">
-        确定
-    </view>
-</view>  
-<view class='BtnBox' wx:else bindtap='PostMoveCarFn'>
-    <view  class="{{submitStatus ? '':'gray'}}">
-        确定
-    </view>
-</view> 
+    <view class='BtnBox'> <!--bindtap='bindPhone'-->
+        <!-- <view  class="{{submitStatus ? '':'gray'}}">
+            确定
+        </view> -->
+        <button class="{{submitStatus ? '':'gray'}}" formType="submit">确定</button>
+    </view>  
+    <!-- <view class='BtnBox' wx:else bindtap='PostMoveCarFn'>   bindtap='PostMoveCarFn' -->
+        <!-- <view  class="{{submitStatus ? '':'gray'}}">
+            确定
+        </view> -->
+        <!-- <button class="{{submitStatus ? '':'gray'}}" formType="submit">确定</button>
+    </view> -->
+</form> 
 <!-- <navBar bindchangeNav="changeNav" index="{{0}}"></navBar> -->
 
 <view class='serverCover' wx:if="{{serverState}}">
