@@ -190,3 +190,10 @@ input{
 .serverBox .bottom{
     border-top: 1px #f5f5f5 solid;
 }
+
+.no-message{
+    width: 100%;
+    line-height: 100rpx;
+    text-align: center;
+    font-size: 28rpx;
+}

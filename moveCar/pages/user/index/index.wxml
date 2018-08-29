@@ -7,9 +7,10 @@
     <view class='flexC'>
         <view class='name'>
             <text>{{wxname}}</text>
-            <text class='vip' wx:if="{{level==1}}">普通会员</text> <!--升级会员  省级会员-->
-            <text class='vip vip2' wx:elif="{{level==1}}">升级会员</text> <!--升级会员  省级会员-->
-            <text class='vip vip3' wx:else>省级会员</text> <!--升级会员  省级会员-->
+            <text class='vip' wx:if="{{level==1}}">普通会员</text> 
+            <text class='vip vip2' wx:elif="{{level==2}}">升级会员</text> 
+            <text class='vip vip3' wx:elif="{{level==3}}">一级代理会员</text>
+            <text class='vip vip4' wx:else>二级代理会员</text> 
         </view>
         <text>车牌：{{car_number}}</text>
     </view>

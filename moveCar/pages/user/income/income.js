@@ -11,7 +11,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-    
+        list:null
     },
 
     /**
@@ -21,9 +21,13 @@ Page({
         this.getIncome();
     },
     getIncome() {
+        wx.showLoading({
+            title: '加载中...',
+        })
         REQUEST('get', 'getIncome', {
             unionid: app.globalData.unionid
         }).then(res => {
+            wx.hideLoading();
             this.setData({
                 list: res.data
             })

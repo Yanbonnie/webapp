@@ -13,7 +13,7 @@
     </view>
 </view>
 
-
+<view class='no-message' wx:if="{{list && list.length == 0}}">暂无数据</view>
 <!-- <view class='infoBox'>
     <view class='flexL'>
         <image src='../../../assets/images/header_pic.jpg'></image>

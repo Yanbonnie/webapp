@@ -8,13 +8,15 @@
     <view class='flexC'>
         <view class='name'>
             <text>{{item.wxname}}</text>
-            <text class='vip vip1' wx:if="{{item.level == 1}}">普通会员</text>
-            <text class='vip vip2' wx:elif="{{item.level == 2}}">升级会员</text>
-            <text class='vip vip3' wx:else>省级会员</text>
+            <text class='vip' wx:if="{{level==1}}">普通会员</text> <!--升级会员  省级会员-->
+            <text class='vip vip2' wx:elif="{{level==2}}">升级会员</text> <!--升级会员  省级会员-->
+            <text class='vip vip3' wx:elif="{{level==3}}">一级代理会员</text> <!--升级会员  省级会员-->
+            <text class='vip vip4' wx:else>二级代理会员</text> <!--升级会员  省级会员-->
         </view>
         <text class='time'>2018-07-21</text>
     </view>
 </view>
+<view class='no-message' wx:if="{{list && list.length == 0}}">暂无数据</view>
 <!-- <view class='infoBox'>
     <view class='flexL'>
         <image src='../../../assets/images/header_pic.jpg'></image>

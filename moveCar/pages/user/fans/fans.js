@@ -7,7 +7,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        list:[],
+        list:null,
     },
 
     /**
@@ -17,9 +17,13 @@ Page({
         this.getFans();
     },
     getFans(){
+        wx.showLoading({
+            title: '加载中...',
+        })
         REQUEST('get','getFans',{
             unionid:app.globalData.unionid
         }).then(res=>{
+            wx.hideLoading();
             this.setData({
                 list:res.data
             })

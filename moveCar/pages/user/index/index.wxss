@@ -52,8 +52,14 @@ page{
     color: #fc9b78;
 }
 .infoBox .flexC .vip3{
+    width: 120rpx;
     border: 1px #f15922 solid;
     color: #f15922;
+}
+.infoBox .flexC .vip4{
+    width: 120rpx;
+    border: 1px #ff503f solid;
+    color: #ff503f;
 }
 .infoBox .flexR{
     flex-basis: 160rpx;
