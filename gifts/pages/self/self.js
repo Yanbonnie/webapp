@@ -177,7 +177,6 @@ Page({
         });
     },
     onShow: function() {
-        console.log(123)
         const { showImg } = this.data;
         var that = this;
         if (!showImg){
@@ -197,6 +196,11 @@ Page({
     },
     onHide: function() {},
     onLoad: function(options) {
+      const { gosignCount} = app.globalData;
+      if (gosignCount){
+        this.setData({ signStatus:true})
+        wx.setStorageSync('go_sign_index', 4);
+      }
         // 标记渠道
         app.markChannel({
             channel: options.channel
@@ -309,6 +313,7 @@ Page({
                 }
 
                 typeof success === 'function' && success();
+              wx.setStorageSync('go_sign_index', 5);
                 // 成功重新请求数据
                 this.getSignData();
             },
@@ -331,5 +336,6 @@ Page({
         if (this.data.signStatus){
           this.getSignData(status);
         }
+      app.globalData.gosignCount = 0;
     }
 });

@@ -341,3 +341,11 @@
         </view>
    </view>
 </view>
+
+<view class='goSignCover' wx:if="{{goSignStatus}}">
+  <view class='goSignBox'>
+    <image class='bg' src='/images/gift_gift_bg.png'></image>
+    <view class='close' bindtap='hideGoSignStatus'></view>
+    <view class='goSign' bindtap='goIndexHandle'></view>
+  </view>
+</view>

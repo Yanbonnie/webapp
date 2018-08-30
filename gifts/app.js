@@ -666,7 +666,8 @@ var app = {
         shareTitleByHome: '有好礼',
         sharePath: '/pages/index/index',
         shareCover: '/images/share.jpg',
-        pageLen: 10
+        pageLen: 10,
+        gosignCount:0
     }
 };
 App(app)

@@ -707,3 +707,38 @@
 .teamBody{
     padding: 0;
 }
+.goSignCover{
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.goSignBox{ 
+  width: 600rpx;
+  height: 600rpx;
+  position: relative;
+}
+.goSignBox .close{
+  width: 80rpx;
+  height: 80rpx;
+  position: absolute;
+  right: 0;
+  top: 182rpx;
+}
+.goSignBox .goSign{
+  top: 483rpx;
+  width: 100%;
+  height: 83rpx;
+  left: 0;
+  position: absolute;
+}
+.goSignBox .bg{
+  width: 600rpx;
+  height: 600rpx !important;
+}
