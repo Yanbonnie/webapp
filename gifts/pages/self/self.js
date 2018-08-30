@@ -1,49 +1,49 @@
 //获取应用实例
 var app = getApp();
-var signData = [
-    {
-        name:'第一天',
-        imgUrl:'/images/sign_1.png',
-        signed:true,
-        overTime:false,
-    },
-    {
-        name: '第二天',
-        imgUrl: '/images/sign_1.png',
-        signed: false,
-        overTime:true
-    },
-    {
-        name: '第三天',
-        imgUrl: '/images/sign_3.png',
-        signed: false,
-        overTime: false
-    },
-    {
-        name: '第四天',
-        imgUrl: '/images/sign_2.png',
-        signed: false,
-        overTime: false
-    },
-    {
-        name: '第五天',
-        imgUrl: '/images/sign_2.png',
-        signed: false,
-        overTime: false
-    },
-    {
-        name: '第六天',
-        imgUrl: '/images/sign_2.png',
-        signed: false,
-        overTime: false
-    },
-    {
-        name: '第七天',
-        imgUrl: '/images/sign_4.png',
-        signed: false,
-        overTime: false
-    }
-]
+// var signData = [
+//     {
+//         name:'第一天',
+//         imgUrl:'/images/sign_1.png',
+//         signed:true,
+//         overTime:false,
+//     },
+//     {
+//         name: '第二天',
+//         imgUrl: '/images/sign_1.png',
+//         signed: false,
+//         overTime:true
+//     },
+//     {
+//         name: '第三天',
+//         imgUrl: '/images/sign_3.png',
+//         signed: false,
+//         overTime: false
+//     },
+//     {
+//         name: '第四天',
+//         imgUrl: '/images/sign_2.png',
+//         signed: false,
+//         overTime: false
+//     },
+//     {
+//         name: '第五天',
+//         imgUrl: '/images/sign_2.png',
+//         signed: false,
+//         overTime: false
+//     },
+//     {
+//         name: '第六天',
+//         imgUrl: '/images/sign_2.png',
+//         signed: false,
+//         overTime: false
+//     },
+//     {
+//         name: '第七天',
+//         imgUrl: '/images/sign_4.png',
+//         signed: false,
+//         overTime: false
+//     }
+// ]
 function resetData(args) {
     if (!args) {
         args = {};
@@ -57,7 +57,10 @@ function resetData(args) {
         defaultImage: app.defaultImage,
 
         mainData: {},
-        signData,
+        signData:null,
+        index_id:null,
+        is_click:null,
+        day_num:null,
         showImg:false,
         signStatus:false
     }
@@ -132,7 +135,6 @@ Page({
         var that = this;
         var success = args.success;
         var fail = args.fail;
-        console.log("请求数据");
         if (args.showToastFlag) {
             app.showLoading({
                 title: '请稍候'
@@ -258,6 +260,110 @@ Page({
             urls: ['https://xnt.xhwxpos.com/mining/static/images/bannerBig.jpg']
         })
     },
+    // 获取签到数据接口
+    getSignData(count = 1){
+        if(count!=1){
+            wx.showLoading({
+                title: '加载中...',
+                mask: true
+            })
+        }
+        app.api.requestHandle({
+            method:'GET',
+            url: app.api.stringifyUrl({
+                path: '/wxapp/Index/getSignData'
+            }),
+            success:  (res)=> {
+                wx.hideLoading();
+
+                var data = res.data;
+
+                if (!data || typeof data === 'string') {
+                    fail && fail();
+                    app.dialog({
+                        content: app.globalData.errMsgText
+                    });
+                    return;
+                }
+
+                if (data.status != 0) {
+                    fail && fail(data.msg);
+                    app.dialog({
+                        content: data.msg || app.globalData.errMsgText
+                    });
+                    return;
+                }
+
+                typeof success === 'function' && success();
+
+                this.setData({
+                    signData: data.data,
+                    index_id:data.index_id,
+                    is_click: data.is_click,
+                    day_num: data.day_num
+                });
+            },
+            fail: function (err) {
+                wx.hideLoading();
+                fail && fail();
+                app.dialog({
+                    content: app.globalData.errMsgText
+                });
+            }
+        });
+    },
+    // 用户签到接口
+    postSignData(e){
+        const { is_click} = this.data;
+        if(!is_click) return;
+        const {formId}=e.detail;
+        wx.showLoading({
+            title: '加载中...',
+            mask:true
+        })
+        app.api.requestHandle({
+            method: 'post',
+            data:{
+                form_id: formId,
+                index:this.data.index_id,
+                unionid:this.data.userInfo.unionid,
+            },
+            url: app.api.stringifyUrl({
+                path: '/wxapp/Index/postSignData'
+            }),
+            success: function (res) {
+                wx.hideLoading();
+                var data = res.data;
+
+                if (!data || typeof data === 'string') {
+                    fail && fail();
+                    app.dialog({
+                        content: app.globalData.errMsgText
+                    });
+                    return;
+                }
+
+                if (data.status != 0) {
+                    fail && fail(data.msg);
+                    app.dialog({
+                        content: data.msg || app.globalData.errMsgText
+                    });
+                    return;
+                }
+
+                typeof success === 'function' && success();
+                // 成功重新请求数据
+                this.getSignData();
+            },
+            fail: function (err) {
+                wx.hideLoading();
+                fail && fail();
+                app.dialog({
+                    content: app.globalData.errMsgText
+                });
+            }
+        });
+    },
     // 操作每日签到
     operSign(){
         
@@ -266,5 +372,8 @@ Page({
         this.setData({
             signStatus: !signStatus
         })
+        if (this.data.signStatus){
+           this.getSignData();
+        }
     }
 });

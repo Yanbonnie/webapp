@@ -39,20 +39,23 @@
         <image class='signImg' src='/images/sign.png'></image>
         <image src='/images/sign_close.png' class='close' bindtap='operSign' ></image>
         <view class='signContain'>
-            <text class='title'>今日已签掉</text>
-            <text class='tip'>已连续签到1天</text>
+            <text class='title'>{{is_click ? '今日已签到':'今日未签到'}}</text>
+            <text class='tip'>已连续签到{{day_num}}天</text>
             <view class='sign-list'>
                 <view class='item' wx:for="{{signData}}" wx:key="{{index}}">
                     <text>{{item.name}}</text>
                     <view class="{{item.signed ? 'imgBox signed':'imgBox'}}" >
                         <image class='gift' src='{{item.imgUrl}}'></image>
-                        <image wx:if="{{item.signed || item.overTime}}" class='icon' src='{{item.signed ? "/images/lq_icon.png":"/images/gq_icon.png"}}'></image>
+                        <image wx:if="{{item.signed}}" class='icon' src='/images/lq_icon.png'></image>
                     </view>
                 </view>
                 
             </view>
-            <view class='signBtn'>
-                立即签到
+            <view  class="{{is_click?'signBtn':'signBtn gray'}}">
+                <form bindsubmit="postSignData" report-submit="true">
+                    立即签到
+                    <button formType="submit"></button>
+                </form>                
             </view>
             <view class='time'>活动时间：2018.09.01-2018.09.07</view>
         </view>

@@ -253,6 +253,19 @@
     text-align: center;
     line-height: 80rpx;
     margin: 30rpx auto 20rpx;
+    position: relative;
+}
+.signBtn.gray{
+    border: 1px #ccc solid;
+    color: #ccc;
+}
+.signBtn button{
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 .time{
     font-size: 22rpx;
