@@ -1,49 +1,5 @@
 //获取应用实例
 var app = getApp();
-// var signData = [
-//     {
-//         name:'第一天',
-//         imgUrl:'/images/sign_1.png',
-//         signed:true,
-//         overTime:false,
-//     },
-//     {
-//         name: '第二天',
-//         imgUrl: '/images/sign_1.png',
-//         signed: false,
-//         overTime:true
-//     },
-//     {
-//         name: '第三天',
-//         imgUrl: '/images/sign_3.png',
-//         signed: false,
-//         overTime: false
-//     },
-//     {
-//         name: '第四天',
-//         imgUrl: '/images/sign_2.png',
-//         signed: false,
-//         overTime: false
-//     },
-//     {
-//         name: '第五天',
-//         imgUrl: '/images/sign_2.png',
-//         signed: false,
-//         overTime: false
-//     },
-//     {
-//         name: '第六天',
-//         imgUrl: '/images/sign_2.png',
-//         signed: false,
-//         overTime: false
-//     },
-//     {
-//         name: '第七天',
-//         imgUrl: '/images/sign_4.png',
-//         signed: false,
-//         overTime: false
-//     }
-// ]
 function resetData(args) {
     if (!args) {
         args = {};
@@ -245,6 +201,7 @@ Page({
         app.markChannel({
             channel: options.channel
         });
+      this.getSignData();
     },
     onShareAppMessage: function() {
         return {
@@ -261,8 +218,8 @@ Page({
         })
     },
     // 获取签到数据接口
-    getSignData(count = 1){
-        if(count!=1){
+    getSignData(status = 1){
+      if (status == 2){
             wx.showLoading({
                 title: '加载中...',
                 mask: true
@@ -331,7 +288,7 @@ Page({
             url: app.api.stringifyUrl({
                 path: '/wxapp/Index/postSignData'
             }),
-            success: function (res) {
+            success: res=> {
                 wx.hideLoading();
                 var data = res.data;
 
@@ -365,15 +322,14 @@ Page({
         });
     },
     // 操作每日签到
-    operSign(){
-        
+    operSign(e){
         const { signStatus } = this.data;
-        console.log(signStatus)
+        const { status } = e.currentTarget.dataset;
         this.setData({
             signStatus: !signStatus
         })
         if (this.data.signStatus){
-           this.getSignData();
+          this.getSignData(status);
         }
     }
 });
