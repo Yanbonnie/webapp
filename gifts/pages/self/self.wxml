@@ -6,6 +6,11 @@
 			<text>挖宝次数：</text>
 			<text>{{mainData.digging_num || 0}}</text>
 		</view> 
+        <view class='signTime' bindtap='operSign'>
+            <image src='/images/sign_time.png'></image>
+            <text>每日签到</text>
+            <view class='signRed'></view>
+        </view>
 	</view>
 	<view class="list-block flex-box pos_r border_bottom">
 		<view class="flex-item" bindtap="tapMyPartake">我参与的<text class="bold color-yellow">({{mainData.partake_num || 0}})</text>	</view>
@@ -25,5 +30,31 @@
 	</view>
     <view class='banner' bindtap='showBanner'>
         <image src='https://xnt.xhwxpos.com/mining/static/images/bannerSmall.jpg'></image>
+    </view>
+</view>
+
+
+<view class='signCover' wx:if="{{signStatus}}">
+    <view class='signBox'>
+        <image class='signImg' src='/images/sign.png'></image>
+        <image src='/images/sign_close.png' class='close' bindtap='operSign' ></image>
+        <view class='signContain'>
+            <text class='title'>今日已签掉</text>
+            <text class='tip'>已连续签到1天</text>
+            <view class='sign-list'>
+                <view class='item' wx:for="{{signData}}" wx:key="{{index}}">
+                    <text>{{item.name}}</text>
+                    <view class="{{item.signed ? 'imgBox signed':'imgBox'}}" >
+                        <image class='gift' src='{{item.imgUrl}}'></image>
+                        <image wx:if="{{item.signed || item.overTime}}" class='icon' src='{{item.signed ? "/images/lq_icon.png":"/images/gq_icon.png"}}'></image>
+                    </view>
+                </view>
+                
+            </view>
+            <view class='signBtn'>
+                立即签到
+            </view>
+            <view class='time'>活动时间：2018.09.01-2018.09.07</view>
+        </view>
     </view>
 </view>

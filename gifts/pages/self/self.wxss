@@ -3,6 +3,34 @@
     padding: 15px;
     text-align: center;
     background: #f3f5f5;
+    position: relative;
+}
+.signTime{
+    position: absolute;
+    right: 20rpx;
+    top: 30rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100rpx;
+}
+.signTime image{
+    width: 48rpx;
+    height: 40rpx;
+    display: block;
+}
+.signTime text{
+    font-size: 20rpx;
+}
+.signRed{
+    width: 10rpx;
+    height: 10rpx;
+    border-radius: 100rpx;
+    position: absolute;
+    right: 25rpx;
+    top: -5rpx;
+    background: #ff503f;
 }
 
 .avatar {
@@ -106,4 +134,128 @@
 .banner image{
     width: 100%;
     height: 100%;
+}
+
+.signCover{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.signBox{
+    width: 702rpx;
+    height: 802rpx;
+    position: relative
+}
+.signBox .close{
+    position: absolute;
+    width: 40rpx;
+    height: 40rpx;
+    right: 20rpx;
+    top: 50rpx;
+    z-index: 9;
+}
+.signImg{
+    width: 100%;
+    height: 100%;
+}
+.signCover .signContain{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.signCover .sign-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 30rpx;
+    width: 620rpx;
+    margin: 0 auto;
+}
+.signContain{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.signContain text{
+    display: block;
+}
+.signContain .title{
+    margin: 50rpx 0 15rpx;
+    text-align: center;
+    font-size: 38rpx;
+    color: #ff9305;
+}
+.signContain .tip{
+    width: 200rpx;
+    text-align: center;
+    margin:0 auto;
+    font-size: 24rpx;
+    padding: 5rpx 0;
+    background: #ff9305;
+    color: #fff;
+    border-radius: 40rpx;
+}
+.signContain .item{
+    width: 142rpx;
+    margin-right: 17rpx;
+    margin-top:20rpx;
+}
+.signContain .item:nth-child(4),.signContain .item:nth-child(7){
+    margin-right: 0;
+}
+.signContain .item .imgBox{
+    width: 142rpx;
+    height: 149rpx;
+    position: relative;
+    border-radius: 20rpx;
+    background: #f1eff0;
+}
+.signContain .item .signed{
+    background: #fde23d;
+}
+.signContain .item text{
+    text-align: center;
+    font-size: 22rpx;
+    color: #504f57;
+    line-height: 40rpx;
+}
+.signContain .item .gift{
+    width: 142rpx;
+    height: 149rpx;
+}
+.signContain .item .icon{
+    width: 112rpx;
+    height: 50rpx;
+    position: absolute;
+    left: 15rpx;
+    top: 40rpx;
+}
+.signBtn{
+    width: 527rpx;
+    height: 80rpx;
+    border: 1px #fde23d solid;
+    border-radius: 50rpx;
+    color: #fde23d;
+    font-size: 34rpx;
+    text-align: center;
+    line-height: 80rpx;
+    margin: 30rpx auto 20rpx;
+}
+.time{
+    font-size: 22rpx;
+    color: #504f57;
+    text-align: center;
 }

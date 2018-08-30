@@ -1,6 +1,49 @@
 //获取应用实例
 var app = getApp();
-
+var signData = [
+    {
+        name:'第一天',
+        imgUrl:'/images/sign_1.png',
+        signed:true,
+        overTime:false,
+    },
+    {
+        name: '第二天',
+        imgUrl: '/images/sign_1.png',
+        signed: false,
+        overTime:true
+    },
+    {
+        name: '第三天',
+        imgUrl: '/images/sign_3.png',
+        signed: false,
+        overTime: false
+    },
+    {
+        name: '第四天',
+        imgUrl: '/images/sign_2.png',
+        signed: false,
+        overTime: false
+    },
+    {
+        name: '第五天',
+        imgUrl: '/images/sign_2.png',
+        signed: false,
+        overTime: false
+    },
+    {
+        name: '第六天',
+        imgUrl: '/images/sign_2.png',
+        signed: false,
+        overTime: false
+    },
+    {
+        name: '第七天',
+        imgUrl: '/images/sign_4.png',
+        signed: false,
+        overTime: false
+    }
+]
 function resetData(args) {
     if (!args) {
         args = {};
@@ -14,7 +57,9 @@ function resetData(args) {
         defaultImage: app.defaultImage,
 
         mainData: {},
-        showImg:false
+        signData,
+        showImg:false,
+        signStatus:false
     }
 }
 
@@ -211,6 +256,15 @@ Page({
         this.setData({showImg:true})
         wx.previewImage({
             urls: ['https://xnt.xhwxpos.com/mining/static/images/bannerBig.jpg']
+        })
+    },
+    // 操作每日签到
+    operSign(){
+        
+        const { signStatus } = this.data;
+        console.log(signStatus)
+        this.setData({
+            signStatus: !signStatus
         })
     }
 });
