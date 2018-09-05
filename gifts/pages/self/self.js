@@ -130,6 +130,12 @@ Page({
                 that.setData({
                     mainData: data.data
                 });
+
+                const { gosignCount } = app.globalData;
+                if (gosignCount) {
+                    that.setData({ signStatus: true })
+                    wx.setStorageSync('go_sign_index', 4);
+                }
             },
             fail: function(err) {
                 app.hideLoading();
@@ -196,11 +202,7 @@ Page({
     },
     onHide: function() {},
     onLoad: function(options) {
-      const { gosignCount} = app.globalData;
-      if (gosignCount){
-        this.setData({ signStatus:true})
-        wx.setStorageSync('go_sign_index', 4);
-      }
+      
         // 标记渠道
         app.markChannel({
             channel: options.channel
