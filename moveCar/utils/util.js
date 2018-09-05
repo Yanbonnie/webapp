@@ -49,6 +49,7 @@ const URL = {
     'payPostage':'payPostage',               //支付邮费
     'getSubscribe':'getSubscribe',           //获取用户有无关注
     'bindPhone':'bindPhone',           //绑定手机
+    'callMobile':'callMobile',         //
 }
 
 //请求接口封装

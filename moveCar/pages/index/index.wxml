@@ -102,7 +102,7 @@
         <view class='close' bindtap='closeCallCover'><image src='/assets/images/close.png'></image></view>
         <view><image src='/assets/images/phone.png'></image></view>
         <view>
-            <text>点击立即拨打</text>
+            <!-- <text>点击立即拨打</text> -->
             <text>隐身免费拨打车主电话</text>
         </view>
         <view class='callBtn' bindtap='callHandle'>立即拨打</view>

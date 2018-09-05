@@ -257,10 +257,15 @@ Page({
             title: '请稍等',
             mask:true
         })
-        REQUEST('POST',this.data.callUrl,{
-            unionid:app.globalData.unionid
+        const { car_number } = this.data;
+        REQUEST('POST','callMobile',{
+            unionid:app.globalData.unionid,
+            car_number
         }).then(res=>{
             wx.hideLoading();
+            wx.navigateTo({
+                url: '/pages/user/record/record',
+            })
         })
     },
     //关闭拨打电话弹窗
