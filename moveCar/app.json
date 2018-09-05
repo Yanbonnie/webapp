@@ -1,5 +1,5 @@
 {
-    "pages": [        
+    "pages": [
         "pages/enter/enter",
         "pages/user/index/index",
         "pages/user/income/income",
@@ -9,7 +9,8 @@
         "pages/apply/apply",
         "pages/user/record/record",
         "pages/user/info/info",
-        "pages/shopping/shopping"
+        "pages/shopping/shopping",
+        "pages/user/put_forward/put_forward"
     ],
     "window": {
         "backgroundTextStyle": "light",

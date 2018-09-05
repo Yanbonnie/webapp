@@ -61,6 +61,17 @@ page{
     border: 1px #ff503f solid;
     color: #ff503f;
 }
+.infoBox .flexC .money{
+    color: #ff503f;
+    border: 1rpx #ff503f solid;
+    border-radius: 50rpx;
+    width: 100rpx;
+    height: 40rpx;
+    text-align: center;
+    font-size: 20rpx;
+    margin-left: 10rpx;
+    line-height: 40rpx;
+}
 .infoBox .flexR{
     flex-basis: 160rpx;
     text-align: right;

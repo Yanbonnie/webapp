@@ -18,6 +18,7 @@ Page({
         navIndex: 2,
         ewmStatus: false,
         is_binding: null,
+        gold:'',       //金币
         wxheadpic: '',
         wxname: '',
         level: 1,
@@ -51,14 +52,16 @@ Page({
                 wxname,
                 level,
                 car_number,
-                is_binding
+                is_binding,
+                gold
             } = res.userinfo;
             this.setData({
                 wxheadpic,
                 wxname,
                 level,
                 car_number,
-                is_binding
+                is_binding,
+                gold: gold ? gold:''
             })
         })
     },
@@ -133,6 +136,12 @@ Page({
                 ewmStatus: state == 1 ? true : false
             })
         }
+    },
+    // 到达提现页面
+    goPutForward(){
+        wx.navigateTo({
+            url: '/pages/user/put_forward/put_forward',
+        })
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

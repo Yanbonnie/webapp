@@ -12,7 +12,11 @@
             <text class='vip vip3' wx:elif="{{level==3}}">一级代理会员</text>
             <text class='vip vip4' wx:else>二级代理会员</text> 
         </view>
-        <text>车牌：{{car_number}}</text>
+        <text>车牌：粤A888888{{car_number}}</text>
+        <view class='name' style='margin-top:10rpx;'>
+            <text>金币：{{gold}}</text>
+            <text class='money' catchtap='goPutForward'>我要提现</text>
+        </view>
     </view>
     <view class='flexR'>
         <text class='btn' bindtap="getShareHandle">我要推广</text>
