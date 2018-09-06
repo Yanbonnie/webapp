@@ -6,7 +6,7 @@
         <image src='{{item.headpic}}'></image>
     </view>
     <view class='flexC'>
-        <view class='money'>
+        <view class='gold'>
             <text>金额：￥{{item.money}}</text>
             <text class='time'>{{item.time}}</text>
         </view>

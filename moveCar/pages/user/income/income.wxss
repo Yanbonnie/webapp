@@ -14,7 +14,7 @@ page{
 .infoBox .flexC .time{
     color:#acacac;
 }
-.money{
+.gold{
     display: flex;
     justify-content: space-between;
 }
