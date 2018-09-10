@@ -1,4 +1,0 @@
-/* pages/test/component/form/form.wxss */
-.indicatorClass{
-  color: #FF503F;
-}

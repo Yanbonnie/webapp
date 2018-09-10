@@ -1,8 +1,0 @@
-<!--pages/system/system.wxml-->
-<text>pages/system/system.wxml</text>\
-<view bindtap='getSystemInfo'>获取系统信息。</view>
-<view bindtap='getNetworkType'>获取网络类型。</view>
-<view bindtap='setScreenBrightness'>设置屏幕亮度。</view>
-<view bindtap='makePhoneCall'>拨打电话</view>
-<view bindtap='scanCode'>调起客户端扫码界面，扫码成功后返回</view>
-<view bindtap='addPhoneContact'>添加联系人</view>

@@ -39,6 +39,7 @@ const WXREQ = (url,method,data,success)=>{
     }
   })
 }
+
 //去除首尾空格
 const TRIM = str=>{
   return str.replace(/\s+/g, '')

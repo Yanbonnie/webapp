@@ -24,9 +24,9 @@
       </view>
     </view>
   </block>
-  <view class="loading" wx:if="{{loading}}">
+  <!-- <view class="loading" wx:if="{{loading}}">
       <image src="/assets/images/loading-bars.svg"></image>
-  </view>
+  </view> -->
   <view class="ending" wx:if="{{ending}}">
       已经到底部啦...
   </view>

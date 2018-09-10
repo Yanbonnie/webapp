@@ -1,16 +1,9 @@
 {
   "pages": [
-    "pages/test/test",
-    "pages/index/index",
-    "pages/list/list",
-    "pages/test/component/form/form",
-    
-    "pages/interface/Interface",
-    "pages/system/system",
-    "pages/storage/storage",
-    "pages/add/add",
-    "pages/logs/logs",
-    "pages/detail/detail"
+    "pages/index/index",    
+    "pages/list/list",    
+    "pages/detail/detail",
+    "pages/add/add"
   ],
   "window": {
     "backgroundTextStyle": "light",

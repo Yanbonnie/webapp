@@ -1,7 +1,6 @@
 //index.js
 //获取应用实例
-const app = getApp()
-
+const app = getApp();
 Page({
   data: {
     motto: '便捷笔记本',
@@ -10,7 +9,7 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },  
   onShow(){
-    app.globalData.editId = null;
+    app.globalData.editId = null;      
   },
   showTabBarRedDot(){
     wx.showTabBarRedDot({
