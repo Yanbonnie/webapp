@@ -3,19 +3,19 @@
     <!-- <image  src="/assets/images/kaifa.png"></image>
     开发中... -->
     <view class='itemBox'>
-        <!-- <view class='item'>
+         <view class='item'>
             <image src='https://car.jc5588.cn/static/images/bg1.jpg'></image>
             <navigator target="miniProgram" open-type="navigate" app-id="wxff19a47a2427411c" path="/pages/index/index"></navigator>
-        </view> -->
-        <view class='item' wx:if="{{level != 1}}">
-            <image src='https://car.jc5588.cn/static/images/bg2.jpg'></image>
-            <navigator target="miniProgram" open-type="navigate" app-id="wxff19a47a2427411c" path="/pages/goods/detail/index?id=201"></navigator>
         </view>
-        <view class='item' wx:if="{{level==1}}">
+        <!--<view class='item' >-->
+            <!--<image src='https://car.jc5588.cn/static/images/bg2.jpg'></image>-->
+            <!--<navigator target="miniProgram" open-type="navigate" app-id="wxff19a47a2427411c" path="/pages/goods/detail/index?id=201"></navigator>-->
+        <!--</view>-->
+        <view class='item' >
             <image src='https://car.jc5588.cn/static/images/bg3.jpg'></image>
             <navigator target="miniProgram" open-type="navigate" app-id="wxff19a47a2427411c" path="/pages/goods/detail/index?id=200"></navigator>
         </view>
-        <view class='item' wx:if="{{level==1}}">
+        <view class='item' wx:if="{{level != 1}}">
             <image src='https://car.jc5588.cn/static/images/bg4.jpg'></image>
              <navigator url="/pages/saveDetail/saveDetail"></navigator>
         </view>

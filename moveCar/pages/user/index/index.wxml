@@ -12,7 +12,7 @@
             <text class='vip vip3' wx:elif="{{level==3}}">一级代理会员</text>
             <text class='vip vip4' wx:else>二级代理会员</text> 
         </view>
-        <text>车牌：粤A888888{{car_number}}</text>
+        <text>车牌：{{car_number}}</text>
         <view class='name' style='margin-top:10rpx;'>
             <text>金币：{{gold}}</text>
             <text class='money' catchtap='goPutForward'>我要提现</text>
@@ -58,13 +58,20 @@
         </view> 
         <text class='iconfont icon-right'></text>
     </view>
-    <view class='item' bindtap='goApplyHandle' url="/pages/apply/apply"> 
+    <view class='item' bindtap='playVideoHandle'> 
+        <view>
+            <image src='/assets/images/icon6.png'></image>
+            <text>操作流程</text>
+        </view> 
+        <text class='iconfont icon-right'></text>
+    </view>
+    <!-- <view class='item' bindtap='goApplyHandle' url="/pages/apply/apply"> 
         <view>
             <image src='/assets/images/icon6.png'></image>
             <text>我要申请</text>
         </view> 
         <text class='iconfont icon-right'></text>
-    </view>
+    </view> -->
 </view>
  <!-- <navBar bindchangeNav="changeNav" index="{{2}}"></navBar> -->
 
@@ -82,4 +89,9 @@
         <image bindtap='showEwmFn' data-state="2" class='close' src='../../../assets/images/close.png'></image>
         <view>点击查看大图（长按大图保存,分享到朋友圈）</view>
     </view>
+ </view>
+
+  <view  class='ewmCover videoCover' wx:if="{{videoStatus}}">
+    <video id="myVideo" src="https://car.jc5588.cn//static/images/1536803975877014.mp4" catchtap=''  controls ></video>
+    <image bindtap='showEwmFn' data-state="3" class='close' src='../../../assets/images/close.png'></image>
  </view>

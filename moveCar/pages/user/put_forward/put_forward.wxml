@@ -1,3 +1,2 @@
 <!--pages/user/put_forward/put_forward.wxml-->
-
 <web-view src="https://car.jc5588.cn/index.php/pay/index/index?unionid={{unionid}}"></web-view>

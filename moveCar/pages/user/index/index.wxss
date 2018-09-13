@@ -161,3 +161,19 @@ page{
     left: 50%;
     margin-left: -30rpx;
 }
+.videoCover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#myVideo{
+    width: 100%;
+}
+.videoCover .close{
+    width: 60rpx;
+    height: 60rpx;
+    position: absolute;
+    bottom: 100rpx;
+    left: 50%;
+    margin-left: -30rpx;
+}

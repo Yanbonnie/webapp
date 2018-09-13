@@ -24,7 +24,9 @@ Page({
         level: 1,
         car_number:'',
         ewmStatus2:false,
-        friendUrl:''
+        friendUrl:'',
+        videoContext: '',
+        videoStatus: false,
     },
 
     /**
@@ -131,6 +133,11 @@ Page({
             this.setData({
                 ewmStatus2: false
             })
+        }else if (state == 3) {
+            this.setData({
+                videoStatus: false
+            })
+            this.videoContext.pause();
         }else{
             this.setData({
                 ewmStatus: state == 1 ? true : false
@@ -143,46 +150,20 @@ Page({
             url: '/pages/user/put_forward/put_forward',
         })
     },
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function() {
-
-    },
-
-    
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function() {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
+    // 播放视频
+    playVideoHandle() {
+        this.setData({
+            videoStatus: true
+        })
+        if(!this.videoContext){
+            this.videoContext = wx.createVideoContext('myVideo');
+        }        
+        console.log(this.videoContext)
+        this.videoContext.play();
+    }, 
     onPullDownRefresh: function() {
         this.getMyInfo();
     },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function() {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
     onShareAppMessage: function() {
         let shareUrl = encodeURIComponent(`/pages/user/index/index?friend_unionid=${app.globalData.unionid}`);
         let enterUrl = `/pages/enter/enter?share_query=${shareUrl}`;

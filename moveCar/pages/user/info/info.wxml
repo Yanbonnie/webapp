@@ -11,7 +11,7 @@
         <view class='flexBox' bindtap="chooseFn" data-page_type="1" data-way="bind">
             <view class='flexL'>*车牌号码</view>
             <view class='flexC'>
-                <input placeholder="请拍照上传您的驾驶证" disabled="true" value="{{car_number}}" />
+                <input placeholder="请拍照上传您的行驶证" disabled="true" value="{{car_number}}" />
             </view>
             <view class='flexR'>
                 <text class='iconfont icon-camera'></text>
@@ -21,13 +21,13 @@
         <view class='flexBox'>
             <view class='flexL'>*车辆类型</view>
             <view class='flexC'>
-                <input placeholder="通过上传的驾驶证自动识别" disabled="true" value="{{car_type}}" />
+                <input placeholder="通过上传的行驶证自动识别" disabled="true" value="{{car_type}}" />
             </view>
         </view>
         <view class='flexBox'>
             <view class='flexL'>*所有人</view>
             <view class='flexC'>
-                <input placeholder="通过上传的驾驶证自动识别" disabled="true" value="{{proprietor}}" />
+                <input placeholder="通过上传的行驶证自动识别" disabled="true" value="{{proprietor}}" />
             </view>
         </view>
         <view class='flexBox' bindtap='showBaoXian'>
