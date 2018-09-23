@@ -17,6 +17,10 @@
             <text>金币：{{gold}}</text>
             <text class='money' catchtap='goPutForward'>我要提现</text>
         </view>
+        <view class='name' style='margin-top:10rpx;'>
+            <text>邀请码：{{invite_id}}</text>
+            <text class='money copy' catchtap='goCopy'>复制</text>
+        </view>
     </view>
     <view class='flexR'>
         <text class='btn' bindtap="getShareHandle">我要推广</text>
@@ -65,6 +69,13 @@
         </view> 
         <text class='iconfont icon-right'></text>
     </view>
+    <view class='item' wx:if="{{is_source == 0}}" bindtap='writeInviteHandle'> 
+        <view>
+            <image src='/assets/images/icon6.png'></image>
+            <text>填写邀请码</text>
+        </view> 
+        <text class='iconfont icon-right'></text>
+    </view>
     <!-- <view class='item' bindtap='goApplyHandle' url="/pages/apply/apply"> 
         <view>
             <image src='/assets/images/icon6.png'></image>
@@ -95,3 +106,19 @@
     <video id="myVideo" src="https://car.jc5588.cn//static/images/1536803975877014.mp4" catchtap=''  controls ></video>
     <image bindtap='showEwmFn' data-state="3" class='close' src='../../../assets/images/close.png'></image>
  </view>
+
+ <view wx:if="{{inviteState}}" class='cover'>
+    <view class='coverBox'>
+    <image catchtap='writeInviteHandle' src='/assets/images/close.png' class='close'></image>
+      <view class='coverTitle'>
+        <text>邀请码</text>
+      </view>
+      <view class='coverBody'>
+        <form report-submit bindsubmit="bindingInvite">
+          <input placeholder="请输入用户的邀请码" name="invite_id"/>
+          <button class='submitCopy' formType="submit">确定</button>
+        </form>
+      </view>
+    </view>
+ </view>
+ <official-account wx:if="{{!isfollow}}" ></official-account>

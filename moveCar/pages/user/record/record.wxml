@@ -21,6 +21,7 @@
     </view>
 </view> -->
 <view class='record' wx:if="{{tabIndex == 0}}">
+    <view class='no-message' wx:if="{{mymove && mymove == 0}}" >暂无数据</view>
     <view class='item' wx:for="{{mymove}}" wx:key="{{index}}">
         <view class='title'>
             <text>车牌号码</text>
@@ -32,12 +33,13 @@
             <text>挪车时间：{{item.at_time}}</text>
         </view>
         <view class='itemBox'>
-            <view bindtap='makePhoneCallHandle' data-mobile="{{item.mobile}}">拨打电话</view>
+            <!-- <view bindtap='makePhoneCallHandle' data-mobile="{{item.mobile}}">拨打电话</view> -->
             <view data-code = "{{item.code}}" bindtap='delMymoveHandle'>删除</view>
         </view>
     </view>
 </view>
 <view class='record' wx:if="{{tabIndex == 1}}">
+    <view class='no-message' wx:if="{{mycarlog && mycarlog == 0}}" >暂无数据</view>
     <view class='item' wx:for="{{mycarlog}}" wx:key="{{index}}">
         <view class='title'>
             <text>车牌号码</text>
@@ -49,7 +51,7 @@
             <text>挪车时间：{{item.at_time}}</text>
         </view>
         <view class='itemBox'>
-            <view bindtap='makePhoneCallHandle' data-mobile="{{item.mobile}}">拨打电话</view>
+            <!-- <view bindtap='makePhoneCallHandle' data-mobile="{{item.mobile}}">拨打电话</view> -->
             <view data-code = "{{item.code}}" bindtap='delMyCarLogHandle'>删除</view>
         </view>
     </view>

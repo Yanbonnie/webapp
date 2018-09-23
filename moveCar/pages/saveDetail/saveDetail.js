@@ -8,6 +8,7 @@ Page({
      */
     data: {
         level:1,
+        is_pay:null,
     },
 
     /**
@@ -22,10 +23,12 @@ Page({
         }).then(res => {
             wx.stopPullDownRefresh();
             const {
-                level
+                level,
+                is_pay
             } = res.userinfo;
             this.setData({
-                level
+                level,
+                is_pay
             })
         })
     },

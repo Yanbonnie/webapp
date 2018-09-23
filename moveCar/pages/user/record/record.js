@@ -8,8 +8,8 @@ Page({
      */
     data: {
         tabIndex:0,
-        mymove: [],
-        mycarlog: [],
+        mymove: null,
+        mycarlog: null,
         dataList:[],
     },
 

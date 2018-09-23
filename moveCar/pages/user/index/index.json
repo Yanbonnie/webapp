@@ -1,6 +1,7 @@
 {
     "enablePullDownRefresh": true,
     "navigationBarTitleText": "我的信息",
+    "backgroundColor":"#000000",
     "usingComponents": {
         "navBar": "../../../components/navBar/navBar"
     }

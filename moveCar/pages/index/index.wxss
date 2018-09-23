@@ -7,9 +7,6 @@ page{
     height: 285rpx;
 }
 
-
-
-
 .followCover{
     position: fixed;
     z-index: 10;
@@ -117,4 +114,7 @@ page{
 .formBox .yzm .flexR .gray{
     color:#808080;
     border: 1px #808080 solid;
+}
+.navigator-hover{
+  background: #000;
 }

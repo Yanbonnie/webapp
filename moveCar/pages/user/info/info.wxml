@@ -33,7 +33,7 @@
         <view class='flexBox' bindtap='showBaoXian'>
             <view class='flexL'>*保险公司</view>
             <view class='flexC'>
-                <input placeholder="请选择保险公司" disabled="true" value="{{insurance.cityName}}" />
+                <input placeholder="请选择车辆在保的保险公司" disabled="true" value="{{insurance.cityName}}" />
             </view>
         </view>
         <view class='flexBox'>

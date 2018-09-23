@@ -21,12 +21,16 @@ Page({
         gold:'',       //金币
         wxheadpic: '',
         wxname: '',
-        level: 1,
+        level: 1,      
         car_number:'',
         ewmStatus2:false,
         friendUrl:'',
         videoContext: '',
         videoStatus: false,
+        is_source:null,   //0显示是否显示邀请码的列表，1不显示
+        inviteState:false,   //填写邀请码弹框
+        invite_id: null,
+        isfollow:0,
     },
 
     /**
@@ -49,13 +53,15 @@ Page({
             unionid: app.globalData.unionid
         }).then(res => {
             wx.stopPullDownRefresh();
+          const { is_source, isfollow} = res;
             const {
                 wxheadpic,
                 wxname,
                 level,
                 car_number,
                 is_binding,
-                gold
+                gold,
+                invite_id
             } = res.userinfo;
             this.setData({
                 wxheadpic,
@@ -63,7 +69,10 @@ Page({
                 level,
                 car_number,
                 is_binding,
-                gold: gold ? gold:''
+                invite_id,
+                gold: gold, 
+                is_source,
+                isfollow
             })
         })
     },
@@ -149,6 +158,56 @@ Page({
         wx.navigateTo({
             url: '/pages/user/put_forward/put_forward',
         })
+    },
+    // 复制
+    goCopy() {
+      const { invite_id } = this.data;
+      wx.setClipboardData({
+        data: invite_id,
+        success: function (res) {
+          wx.getClipboardData({
+            success: function (res) {
+              wx.showToast({
+                title: '复制成功',
+              })
+            }
+          })
+        }
+      })
+    },
+    // 显示邀请码弹框
+    writeInviteHandle(){
+      const { inviteState } = this.data;
+      this.setData({
+        inviteState: !inviteState
+      })
+    },
+    bindingInvite(e){
+      console.log(e);
+      const { formId } = e.detail;
+      const { invite_id } = e.detail.value;
+      if(!invite_id){
+        wx.showToast({
+          icon:'none',
+          title: '邀请码不能为空',
+        })
+        return;
+      }
+      wx.showLoading({
+        title: '提交中...',
+        mask: true
+      })
+      REQUEST('post', 'bindingInvite', {
+        unionid: app.globalData.unionid,
+        invite_id: invite_id,
+        formId:formId
+      }).then(res => {
+        wx.hideLoading();
+        this.setData({
+          is_source:1,
+          inviteState:false
+        })
+      })
     },
     // 播放视频
     playVideoHandle() {

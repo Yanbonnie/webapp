@@ -52,6 +52,11 @@ Page({
         // this.getLocate();
         
     },
+    onShow(){
+      this.setData({
+        submitStatus: true
+      })
+    },
     changeNav,    //监听导航栏切换
     mobileInputChange,
     codeInputChange,   //code值改变
@@ -74,7 +79,8 @@ Page({
                 bannerList:banner_data,
                 is_binding,
                 is_verify_phone: is_verify_phone ? is_verify_phone : '',
-                isfollow:isfollow || false,
+                isfollow:isfollow || 0,
+                reply:isfollow || false
             })
             app.globalData.is_binding = is_binding; 
         })
@@ -145,7 +151,7 @@ Page({
     },
     // 绑定手机成功的时候就提交挪车
     bindPhone(e){
-        console.log(e)
+        if (!submitStatus) return;
         const { formId } = e.detail;
         const { mobile, code, car_number, reason, scene_pic, address, reply, submitStatus, isfollow, is_verify_phone} = this.data;
         if (car_number == '' || reason == '' || scene_pic == '' || address == '') {
@@ -229,9 +235,9 @@ Page({
         }        
         REQUEST('POST', 'post_move_car', { car_number, reason, scene_pic, address, reply, formId,unionid: app.globalData.unionid}).then(res=>{
             wx.hideLoading();
-            this.setData({
-                submitStatus: true                
-            })     
+            // this.setData({
+            //     submitStatus: true                
+            // })     
             wx.showToast({
                 title: '提交成功',
                 mask:true,
@@ -263,9 +269,12 @@ Page({
             car_number
         }).then(res=>{
             wx.hideLoading();
-            wx.navigateTo({
-                url: '/pages/user/record/record',
+            wx.setData({
+              callState:false
             })
+            // wx.navigateTo({
+            //     url: '/pages/user/record/record',
+            // })
         })
     },
     //关闭拨打电话弹窗
