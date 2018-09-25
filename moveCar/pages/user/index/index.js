@@ -31,6 +31,7 @@ Page({
         inviteState:false,   //填写邀请码弹框
         invite_id: null,
         isfollow:0,
+        tip:'',              //二维码分享弹框提示语
     },
 
     /**
@@ -77,12 +78,22 @@ Page({
         })
     },
     //分享二维码
-    getShareHandle(){
+    getShareHandle(e){
+        const { style } = e.currentTarget.dataset;
+        if (style == 'getShare'){
+            this.setData({
+                tip:'点击查看大图（长按大图保存,分享到朋友圈）'
+            })
+        }else{
+            this.setData({
+                tip: '点击查看大图（长按大图保存）'
+            })
+        }
         wx.showLoading({
             title: '二维码加载中...',
             mask:true
         })
-        REQUEST('get','getShare',{
+        REQUEST('get', style ,{
             unionid:app.globalData.unionid
         }).then(res=>{
             wx.hideLoading();
@@ -138,7 +149,7 @@ Page({
         const {
             state
         } = e.currentTarget.dataset;
-        if(state == 2){
+        if(state == 2){   
             this.setData({
                 ewmStatus2: false
             })

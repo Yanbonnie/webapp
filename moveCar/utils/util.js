@@ -51,6 +51,7 @@ const URL = {
     'bindPhone':'bindPhone',                 //绑定手机
     'callMobile':'callMobile',               //
     'bindingInvite':'bindingInvite',         //提交邀请码
+    'getMyQrCode':'getMyQrCode',             //获取我的二维码
 }
 
 //请求接口封装
