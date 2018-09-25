@@ -108,4 +108,4 @@
         <view class='callBtn' bindtap='callHandle'>立即拨打</view>
     </view>
 </view>
-<official-account wx:if="{{isfollow}}" ></official-account>
+<official-account wx:if="{{!isfollow}}" ></official-account>

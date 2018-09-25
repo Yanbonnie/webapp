@@ -151,9 +151,10 @@ Page({
     },
     // 绑定手机成功的时候就提交挪车
     bindPhone(e){
-        if (!submitStatus) return;
+        
         const { formId } = e.detail;
         const { mobile, code, car_number, reason, scene_pic, address, reply, submitStatus, isfollow, is_verify_phone} = this.data;
+        if (!submitStatus) return;
         if (car_number == '' || reason == '' || scene_pic == '' || address == '') {
             wx.showToast({
                 title: '请填写完整信息',
