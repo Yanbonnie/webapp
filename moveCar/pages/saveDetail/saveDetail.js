@@ -1,6 +1,7 @@
 // pages/saveDetail/saveDetail.js
 const app = getApp();
 const { globalData: { REQUEST, getUrlPara } } = app;
+const { onShareAppMessage } = require('../../utils/pageCom');
 Page({
 
     /**
@@ -17,6 +18,7 @@ Page({
     onLoad: function(options) {
         this.getMyInfo();
     },
+    onShareAppMessage,
     getMyInfo() {
         REQUEST('get', 'getMyInfo', {
             unionid: app.globalData.unionid
@@ -114,11 +116,11 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function() {
-        let url = encodeURIComponent(`/pages/saveDetail/saveDetail?friend_unionid=${app.globalData.unionid}`);
-        return {
-            title: '我要分享一个好东西',
-            path: `/pages/enter/enter?share_query=${url}`
-        }
-    }
+    // onShareAppMessage: function() {
+    //     let url = encodeURIComponent(`/pages/saveDetail/saveDetail?friend_unionid=${app.globalData.unionid}`);
+    //     return {
+    //         title: '我要分享一个好东西',
+    //         path: `/pages/enter/enter?share_query=${url}`
+    //     }
+    // }
 })

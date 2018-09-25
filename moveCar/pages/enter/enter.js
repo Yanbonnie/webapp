@@ -38,6 +38,7 @@ Page({
                 console.log('friend_unionid:' + friend_unionid)
                 this.postShareHandle(friend_unionid);
                 let url = decodeURIComponent(share_query);
+                console.log(url)
                 setTimeout(() => {
                     wx.reLaunch({
                         url

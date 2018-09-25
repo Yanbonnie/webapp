@@ -1,6 +1,7 @@
 // pages/user/record/record.js
 const app = getApp();
 const { globalData: { REQUEST } } = app;
+const { onShareAppMessage } = require('../../../utils/pageCom');
 Page({
 
     /**
@@ -19,6 +20,7 @@ Page({
     onLoad: function (options) {
         this.getMyMoveFn();
     },
+    onShareAppMessage,
     changeTab(e){
       const { index } = e.currentTarget.dataset;
       this.setData({
@@ -150,11 +152,4 @@ Page({
     onReachBottom: function () {
         console.log("到底了")
     },
-
-    /**
-     * 用户点击右上角分享
-     */
-    // onShareAppMessage: function () {
-
-    // }
 })

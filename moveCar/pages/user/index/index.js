@@ -80,6 +80,7 @@ Page({
     //分享二维码
     getShareHandle(e){
         const { style } = e.currentTarget.dataset;
+        console.log(style)
         if (style == 'getShare'){
             this.setData({
                 tip:'点击查看大图（长按大图保存,分享到朋友圈）'

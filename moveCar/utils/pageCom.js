@@ -112,5 +112,13 @@ module.exports = {
         this.setData({
             mobile: value
         })
+    },
+    onShareAppMessage: function () {
+        let shareUrl = encodeURIComponent(`/pages/index/index?friend_unionid=${app.globalData.unionid}`);
+        let enterUrl = `/pages/enter/enter?share_query=${shareUrl}`;
+        return {
+            title: '我要分享一个好东西',
+            path: enterUrl
+        }
     }
 }

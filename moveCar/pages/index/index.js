@@ -3,7 +3,7 @@
 import qqmap from '../../utils/map.js';
 const app = getApp();
 const { globalData: { REQUEST } } = app;
-const { chooseImgHandle, changeNav, codeInputChange, mobileInputChange,isPhone } = require('../../utils/pageCom');
+const { chooseImgHandle, changeNav, codeInputChange, mobileInputChange, isPhone, onShareAppMessage } = require('../../utils/pageCom');
 import {
     methodsCom
 } from '../../utils/submitCom';
@@ -51,7 +51,7 @@ Page({
         this.getBannerFn();
         // this.getLocate();
         
-    },
+    },    
     onShow(){
       this.setData({
         submitStatus: true
@@ -62,6 +62,7 @@ Page({
     codeInputChange,   //code值改变
     getMsgCodeFn,
     isPhone,
+    onShareAppMessage,
     //获取首页数据
     getBannerFn(){
         wx.showLoading({

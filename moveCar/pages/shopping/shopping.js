@@ -1,5 +1,6 @@
 // pages/shopping/shopping.js
 const app = getApp();
+const { onShareAppMessage } = require('../../utils/pageCom');
 const {
     globalData: {
         REQUEST
@@ -20,6 +21,7 @@ Page({
     onLoad: function(options) {
         this.getMyInfo();
     },
+    onShareAppMessage,
     getMyInfo() {
         REQUEST('get', 'getMyInfo', {
             unionid: app.globalData.unionid
@@ -69,12 +71,5 @@ Page({
      */
     onReachBottom: function() {
 
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    //   onShareAppMessage: function () {
-
-    //   }
+    }
 })

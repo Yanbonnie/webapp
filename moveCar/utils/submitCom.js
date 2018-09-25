@@ -27,7 +27,7 @@ module.exports = {
         codeTxt: '获取验证码',
         canOper:true,     //是否可以操作
     },
-    methodsCom:{
+    methodsCom:{        
         //获取首页数据
         getBannerFn(Type='apply') {
             REQUEST('GET', 'get_banner', {
