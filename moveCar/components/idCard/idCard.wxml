@@ -1,7 +1,7 @@
 <!--components/idCard/idCard.wxml-->
  <view  class='cover' wx:if="{{idCardStatus}}">
     <view class='coverBox'>
-    <image src='/assets/images/close.png' class='close' bindtap='closeIdCard' data-state="4"></image>
+    <image src='/assets/images/close.png' class='close' bindtap='closeIdCard'></image>
       <view class='coverTitle'>
         <text>提交身份证信息</text>
       </view>
@@ -14,7 +14,10 @@
           <view class='id_pic'>
             <view>请上传身份证正面图片</view>
             <view>
-              <view class='pic' bindtap='uploadImg'>+</view>
+              <view class='pic' wx:if="{{!id_pic}}" bindtap='uploadImg'>+</view>
+              <view class='pic' wx:else>
+                <image mode='aspectFit' src='{{id_pic}}' bindtap='uploadImg'></image>
+              </view>
             </view>
           </view>
           <button class='submitCopy' formType="submit">确定</button>

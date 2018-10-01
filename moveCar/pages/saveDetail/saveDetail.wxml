@@ -5,7 +5,9 @@
     <view wx:if="{{is_pay == 0}}" bindtap='payUpgradeHandle'>马上升级</view>
 </view>
 
-<view  class='cover' wx:if="{{idCardStatus}}">
+<idCard idCardStatus="{{idCardStatus}}" bindidCardStatus="closeIdCardHandle" bindidCardSuccess="idCardSubmitSuccess"></idCard>
+
+<!-- <view  class='cover' wx:if="{{idCardStatus}}">
     <view class='coverBox'>
     <image src='/assets/images/close.png' class='close' bindtap='closeIdCards'></image>
       <view class='coverTitle'>
@@ -13,7 +15,6 @@
       </view>
       <view class='coverBody'>
         <form report-submit bindsubmit="postIdcardHandle">
-          <!-- <view class='tip'></view> -->
           <input placeholder="请输入身份证号" name="id_num" type='idcard'/>
           <view class='blank'></view>
           <input placeholder="请输入姓名" name="id_name" />
@@ -21,4 +22,4 @@
         </form>
       </view>
     </view>
- </view>
+ </view> -->

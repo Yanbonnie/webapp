@@ -127,4 +127,9 @@ module.exports = {
         idCardStatus: false
       })
     },
+    idCardSubmitSuccess(){
+        this.setData({
+            idCardStatus: false
+        })
+    }
 }

@@ -160,5 +160,5 @@
     </view>
  </view> -->
 
-<idCard idCardStatus="{{idCardStatus}}" bindidCardStatus="closeIdCardHandle"></idCard>
+<idCard idCardStatus="{{idCardStatus}}" bindidCardStatus="closeIdCardHandle" bindidCardSuccess="idCardSubmitSuccess"></idCard>
  <official-account wx:if="{{!isfollow}}" ></official-account>

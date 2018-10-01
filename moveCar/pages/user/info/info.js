@@ -90,6 +90,14 @@ Page({
             })
             return;
         }
+        if (is_company && !accounts && !password){
+            wx.showToast({
+                title: '信息不完整',
+                icon: 'none',
+                mask: true
+            })
+            return;
+        }
         
         if (!submitStatus) return;
         this.setData({

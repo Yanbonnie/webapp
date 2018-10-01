@@ -1,7 +1,7 @@
 // pages/saveDetail/saveDetail.js
 const app = getApp();
 const { globalData: { REQUEST, getUrlPara } } = app;
-const { onShareAppMessage } = require('../../utils/pageCom');
+const { onShareAppMessage, closeIdCardHandle, idCardSubmitSuccess } = require('../../utils/pageCom');
 Page({
 
     /**
@@ -10,7 +10,7 @@ Page({
     data: {
         level:1,
         is_pay:null,
-        idCardStatus:false,
+        idCardStatus:true,
     },
 
     /**
@@ -20,6 +20,8 @@ Page({
         this.getMyInfo();
     },
     onShareAppMessage,
+    closeIdCardHandle, 
+    idCardSubmitSuccess,
     getMyInfo() {
         REQUEST('get', 'getMyInfo', {
             unionid: app.globalData.unionid

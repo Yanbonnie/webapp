@@ -1,7 +1,8 @@
 // pages/user/index/index.js
 const {
     changeNav,
-    closeIdCardHandle
+    closeIdCardHandle,
+    idCardSubmitSuccess
 } = require('../../../utils/pageCom');
 const app = getApp();
 const {
@@ -34,7 +35,7 @@ Page({
         isfollow: 0,
         tip: '',              //二维码分享弹框提示语
         is_postidcard: null,    //是否上传过身份证  1-已上传  0-未上传
-        idCardStatus: true,
+        idCardStatus: false,
         id_pic: '',   //身份证图片
     },
 
@@ -53,8 +54,10 @@ Page({
         this.getMyInfo();
     },
     changeNav,
-    // 关闭信用卡弹框
+    // 关闭身份证弹框
     closeIdCardHandle,
+    // 身份证提交成功回调
+    idCardSubmitSuccess,
     getMyInfo() {
         REQUEST('get', 'getMyInfo', {
             unionid: app.globalData.unionid
@@ -162,15 +165,17 @@ Page({
             this.setData({
                 ewmStatus2: false
             })
-        } else if (state == 3) {
+        } else if (state == 3) {   //操作流程弹框
             this.setData({
                 videoStatus: false
             })
             this.videoContext.pause();
-        } else if (state == 4) {   //身份证弹框
+        }else if(state == 4){   //显示身份证信息弹框
             const { idCardStatus } = this.data;
-            this.setData({ idCardStatus: !idCardStatus })
-        } else {
+            this.setData({
+                idCardStatus: !idCardStatus
+            })
+        }else {
             this.setData({
                 ewmStatus: state == 1 ? true : false
             })
@@ -254,18 +259,7 @@ Page({
             path: enterUrl
         }
     },
-    // 提交身份证信息
-    postIdcardHandle(e) {
-        console.log(e)
-        const { id_num, id_name } = e.detail.value;
-        REQUEST('POST', 'postIdcard', {
-            id_num,
-            id_name,
-            unionid: app.globalData.unionid,
-        }).then(res => {
-
-        })
-    },
+    
 
 
 })

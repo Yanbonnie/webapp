@@ -1,2 +1,6 @@
 /* components/idCard/idCard.wxss */
 @import '/app.wxss';
+.pic image{
+    width: 100%;
+    height: 100%;
+}
