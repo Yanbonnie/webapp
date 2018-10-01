@@ -120,5 +120,11 @@ module.exports = {
             title: '我要分享一个好东西',
             path: enterUrl
         }
-    }
+    },
+    //关闭信息框
+    closeIdCardHandle() {
+      this.setData({
+        idCardStatus: false
+      })
+    },
 }

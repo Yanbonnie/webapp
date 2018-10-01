@@ -1,6 +1,7 @@
 // pages/user/index/index.js
 const {
-    changeNav
+    changeNav,
+    closeIdCardHandle
 } = require('../../../utils/pageCom');
 const app = getApp();
 const {
@@ -18,29 +19,29 @@ Page({
         navIndex: 2,
         ewmStatus: false,
         is_binding: null,
-        gold:'',       //金币
+        gold: '',       //金币
         wxheadpic: '',
         wxname: '',
-        level: 1,      
-        car_number:'',
-        ewmStatus2:false,
-        friendUrl:'',
+        level: 1,
+        car_number: '',
+        ewmStatus2: false,
+        friendUrl: '',
         videoContext: '',
         videoStatus: false,
-        is_source:null,   //0显示是否显示邀请码的列表，1不显示
-        inviteState:false,   //填写邀请码弹框
+        is_source: null,   //0显示是否显示邀请码的列表，1不显示
+        inviteState: false,   //填写邀请码弹框
         invite_id: null,
-        isfollow:0,
-        tip:'',              //二维码分享弹框提示语
+        isfollow: 0,
+        tip: '',              //二维码分享弹框提示语
         is_postidcard: null,    //是否上传过身份证  1-已上传  0-未上传
-        idCardStatus:true,
-        id_pic:'',   //身份证图片
+        idCardStatus: true,
+        id_pic: '',   //身份证图片
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function(options) {
+    onLoad: function (options) {
         this.setData({
             is_binding: app.globalData.is_binding
         })
@@ -52,12 +53,14 @@ Page({
         this.getMyInfo();
     },
     changeNav,
+    // 关闭信用卡弹框
+    closeIdCardHandle,
     getMyInfo() {
         REQUEST('get', 'getMyInfo', {
             unionid: app.globalData.unionid
         }).then(res => {
             wx.stopPullDownRefresh();
-          const { is_source, isfollow, is_postidcard,is_pay} = res;
+            const { is_source, isfollow, is_postidcard, is_pay } = res;
             const {
                 wxheadpic,
                 wxname,
@@ -74,38 +77,38 @@ Page({
                 car_number,
                 is_binding,
                 invite_id,
-                gold: gold, 
+                gold: gold,
                 is_source,
                 isfollow,
-                is_postidcard:is_postidcard || 0,
+                is_postidcard: is_postidcard || 0,
                 is_pay: is_pay || 0
             })
         })
     },
     //分享二维码
-    getShareHandle(e){
+    getShareHandle(e) {
         const { style } = e.currentTarget.dataset;
         console.log(style)
-        if (style == 'getShare'){
+        if (style == 'getShare') {
             this.setData({
-                tip:'点击查看大图（长按大图保存,分享到朋友圈）'
+                tip: '点击查看大图（长按大图保存,分享到朋友圈）'
             })
-        }else{
+        } else {
             this.setData({
                 tip: '点击查看大图（长按大图保存）'
             })
         }
         wx.showLoading({
             title: '二维码加载中...',
-            mask:true
+            mask: true
         })
-        REQUEST('get', style ,{
-            unionid:app.globalData.unionid
-        }).then(res=>{
+        REQUEST('get', style, {
+            unionid: app.globalData.unionid
+        }).then(res => {
             wx.hideLoading();
             this.setData({
-                ewmStatus2:true,
-                friendUrl:res.url
+                ewmStatus2: true,
+                friendUrl: res.url
             })
         })
     },
@@ -119,13 +122,13 @@ Page({
             url: '/pages/user/record/record',
         })
     },
-    goApplyHandle(){
-        let {is_binding}=this.data;
-        if(is_binding){
+    goApplyHandle() {
+        let { is_binding } = this.data;
+        if (is_binding) {
             wx.navigateTo({
                 url: '/pages/apply/apply',
             })
-        }else{
+        } else {
             wx.showModal({
                 title: '提示',
                 content: '抱歉,您未绑定不能申请,请先绑定',
@@ -143,7 +146,7 @@ Page({
         }
     },
     //展示图片
-    previewImgHandle(e){
+    previewImgHandle(e) {
         console.log(e)
         const { img } = e.currentTarget.dataset;
         wx.previewImage({
@@ -155,95 +158,95 @@ Page({
         const {
             state
         } = e.currentTarget.dataset;
-        if(state == 2){   
+        if (state == 2) {
             this.setData({
                 ewmStatus2: false
             })
-        }else if (state == 3) {
+        } else if (state == 3) {
             this.setData({
                 videoStatus: false
             })
             this.videoContext.pause();
-        } else if (state == 4){   //身份证弹框
-          const { idCardStatus } = this.data;
-          this.setData({ idCardStatus: !idCardStatus})
-        }else{
+        } else if (state == 4) {   //身份证弹框
+            const { idCardStatus } = this.data;
+            this.setData({ idCardStatus: !idCardStatus })
+        } else {
             this.setData({
                 ewmStatus: state == 1 ? true : false
             })
         }
     },
     // 到达提现页面
-    goPutForward(){
+    goPutForward() {
         wx.navigateTo({
             url: '/pages/user/put_forward/put_forward',
         })
     },
     // 复制
     goCopy() {
-      const { invite_id } = this.data;
-      wx.setClipboardData({
-        data: invite_id,
-        success: function (res) {
-          wx.getClipboardData({
+        const { invite_id } = this.data;
+        wx.setClipboardData({
+            data: invite_id,
             success: function (res) {
-              wx.showToast({
-                title: '复制成功',
-              })
+                wx.getClipboardData({
+                    success: function (res) {
+                        wx.showToast({
+                            title: '复制成功',
+                        })
+                    }
+                })
             }
-          })
-        }
-      })
+        })
     },
     // 显示邀请码弹框
-    writeInviteHandle(){
-      const { inviteState } = this.data;
-      this.setData({
-        inviteState: !inviteState
-      })
-    },
-    bindingInvite(e){
-      console.log(e);
-      const { formId } = e.detail;
-      const { invite_id } = e.detail.value;
-      if(!invite_id){
-        wx.showToast({
-          icon:'none',
-          title: '邀请码不能为空',
-        })
-        return;
-      }
-      wx.showLoading({
-        title: '提交中...',
-        mask: true
-      })
-      REQUEST('post', 'bindingInvite', {
-        unionid: app.globalData.unionid,
-        invite_id: invite_id,
-        formId:formId
-      }).then(res => {
-        wx.hideLoading();
+    writeInviteHandle() {
+        const { inviteState } = this.data;
         this.setData({
-          is_source:1,
-          inviteState:false
+            inviteState: !inviteState
         })
-      })
+    },
+    bindingInvite(e) {
+        console.log(e);
+        const { formId } = e.detail;
+        const { invite_id } = e.detail.value;
+        if (!invite_id) {
+            wx.showToast({
+                icon: 'none',
+                title: '邀请码不能为空',
+            })
+            return;
+        }
+        wx.showLoading({
+            title: '提交中...',
+            mask: true
+        })
+        REQUEST('post', 'bindingInvite', {
+            unionid: app.globalData.unionid,
+            invite_id: invite_id,
+            formId: formId
+        }).then(res => {
+            wx.hideLoading();
+            this.setData({
+                is_source: 1,
+                inviteState: false
+            })
+        })
     },
     // 播放视频
     playVideoHandle() {
         this.setData({
             videoStatus: true
         })
-        if(!this.videoContext){
+        if (!this.videoContext) {
             this.videoContext = wx.createVideoContext('myVideo');
-        }        
+        }
         console.log(this.videoContext)
         this.videoContext.play();
-    }, 
-    onPullDownRefresh: function() {
+    },
+    onPullDownRefresh: function () {
         this.getMyInfo();
     },
-    onShareAppMessage: function() {
+    onShareAppMessage: function () {
         let shareUrl = encodeURIComponent(`/pages/user/index/index?friend_unionid=${app.globalData.unionid}`);
         let enterUrl = `/pages/enter/enter?share_query=${shareUrl}`;
         return {
@@ -253,14 +256,16 @@ Page({
     },
     // 提交身份证信息
     postIdcardHandle(e) {
-      console.log(e)
-      const { id_num, id_name } = e.detail.value;
-      REQUEST('POST', 'postIdcard', {
-        id_num,
-        id_name,
-        unionid: app.globalData.unionid,
-      }).then(res => {
+        console.log(e)
+        const { id_num, id_name } = e.detail.value;
+        REQUEST('POST', 'postIdcard', {
+            id_num,
+            id_name,
+            unionid: app.globalData.unionid,
+        }).then(res => {
 
-      })
+        })
     },
+
+
 })

@@ -1,0 +1,2 @@
+/* components/idCard/idCard.wxss */
+@import '/app.wxss';
