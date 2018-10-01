@@ -183,10 +183,3 @@ page{
     margin-left: -30rpx;
 }
 
-.submitCopy{
-  height: 70rpx;
-  line-height: 70rpx;
-  background: #0894ec;
-  color: #fff;
-  margin-top: 20rpx;
-}

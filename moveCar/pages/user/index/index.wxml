@@ -76,6 +76,13 @@
         </view> 
         <text class='iconfont icon-right'></text>
     </view>
+    <view class='item' bindtap='showEwmFn' data-state="4"> 
+        <view>
+            <image src='/assets/images/icon6.png'></image>
+            <text>填写身份证</text>
+        </view> 
+        <text class='iconfont icon-right'></text>
+    </view>
     <view class='item' wx:if="{{is_source == 0}}" bindtap='writeInviteHandle'> 
         <view>
             <image src='/assets/images/icon6.png'></image>
@@ -128,4 +135,30 @@
       </view>
     </view>
  </view>
+
+
+ <view  class='cover' wx:if="{{idCardStatus}}">
+    <view class='coverBox'>
+    <image src='/assets/images/close.png' class='close' bindtap='showEwmFn' data-state="4"></image>
+      <view class='coverTitle'>
+        <text>提交身份证信息</text>
+      </view>
+      <view class='coverBody'>
+        <form report-submit bindsubmit="postIdcardHandle">
+          <!-- <view class='tip'></view> -->
+          <input placeholder="请输入身份证号" name="id_num" type='idcard'/>
+          <view class='blank'></view>
+          <input placeholder="请输入姓名" name="id_name" />
+          <view class='id_pic'>
+            <view>请上传身份证正面图片</view>
+            <view>
+              <view class='pic'>+</view>
+            </view>
+          </view>
+          <button class='submitCopy' formType="submit">确定</button>
+        </form>
+      </view>
+    </view>
+ </view>
+
  <official-account wx:if="{{!isfollow}}" ></official-account>

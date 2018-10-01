@@ -52,6 +52,7 @@ const URL = {
     'callMobile':'callMobile',               //
     'bindingInvite':'bindingInvite',         //提交邀请码
     'getMyQrCode':'getMyQrCode',             //获取我的二维码
+    'postIdcard':'postIdcard',               //提交身份证信息   
 }
 
 //请求接口封装

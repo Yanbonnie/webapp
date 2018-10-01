@@ -1,7 +1,9 @@
 /* pages/user/info/info.wxss */
 
 @import '../../apply/apply.wxss';
-
+.formBox .flexBox .flexL{
+  flex-basis: 180rpx;
+}
 .BtnBox{
     display: flex;
     justify-content: space-between;

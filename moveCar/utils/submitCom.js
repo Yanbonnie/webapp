@@ -34,7 +34,7 @@ module.exports = {
                 unionid: app.globalData.unionid,
                 page_type: 1
             }).then(res => {
-                let { banner_data, is_binding, insurance_data, isfollow } = res;
+              let { banner_data, is_binding, insurance_data, isfollow, is_pay} = res;
                 //改造数据
                 insurance_data = insurance_data.map(item => {
                     return {
@@ -48,7 +48,8 @@ module.exports = {
                     bannerList:banner_data,
                     is_binding,
                     isfollow: isfollow || false,
-                    insurance_data
+                    insurance_data,
+                    is_pay:is_pay
                 })
                 if(Type == 'bind'){  //绑定页面
                     if (is_binding && !isfollow){   //绑定没关注公众号 已绑定 提示

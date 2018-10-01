@@ -4,3 +4,21 @@
 <view class='btnBox2' >
     <view wx:if="{{is_pay == 0}}" bindtap='payUpgradeHandle'>马上升级</view>
 </view>
+
+<view  class='cover' wx:if="{{idCardStatus}}">
+    <view class='coverBox'>
+    <image src='/assets/images/close.png' class='close' bindtap='closeIdCards'></image>
+      <view class='coverTitle'>
+        <text>为了便于您查询电子表单，请完善下面信息</text>
+      </view>
+      <view class='coverBody'>
+        <form report-submit bindsubmit="postIdcardHandle">
+          <!-- <view class='tip'></view> -->
+          <input placeholder="请输入身份证号" name="id_num" type='idcard'/>
+          <view class='blank'></view>
+          <input placeholder="请输入姓名" name="id_name" />
+          <button class='submitCopy' formType="submit">确定</button>
+        </form>
+      </view>
+    </view>
+ </view>

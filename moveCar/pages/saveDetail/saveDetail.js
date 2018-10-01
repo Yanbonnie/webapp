@@ -10,6 +10,7 @@ Page({
     data: {
         level:1,
         is_pay:null,
+        idCardStatus:false,
     },
 
     /**
@@ -54,8 +55,11 @@ Page({
                     paySign,
                     'success': res => {
                         //支付成功
-                        wx.switchTab({
-                            url: '/pages/user/index/index'
+                        // wx.switchTab({
+                        //     url: '/pages/user/index/index'
+                        // })
+                        this.setData({
+                          idCardStatus:true
                         })
                     },
                     'fail': res => {
@@ -70,6 +74,24 @@ Page({
             }
 
         })
+    },
+    // 关闭身份信息框
+    closeIdCards(){
+      this.setData({
+        idCardStatus:false,
+      })
+    },
+    // 提交身份证信息
+    postIdcardHandle(e){
+      console.log(e)
+      const { id_num ,id_name } = e.detail.value;
+      REQUEST('POST', 'postIdcard', {
+        id_num,
+        id_name,
+        unionid: app.globalData.unionid,
+      }).then(res=>{
+
+      })
     },
     /**
      * 生命周期函数--监听页面初次渲染完成

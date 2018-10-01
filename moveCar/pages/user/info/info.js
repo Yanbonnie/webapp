@@ -23,6 +23,8 @@ Page({
         editStatus: false,
         followState:false,
         reply: false,           //是否接收回复  true false
+        is_company:1,           //我是公司用户  1 0
+        is_pay:null,             //是否支付
         // bannerList: [],
         // is_binding: 0,
         // cityState: false,
@@ -65,6 +67,8 @@ Page({
     //提交绑定信息
     postApplyFn(e) {
         const {formId} = e.detail;
+        console.log(e)
+        const { accounts, password} = e.detail.value;
         const {
             car_number,
             car_type,
@@ -75,7 +79,8 @@ Page({
             code,
             submitStatus,
             is_binding,
-            isfollow
+            isfollow,
+            is_company
         } = this.data;
         if (!car_number || !car_type || !proprietor || !address || !insurance || !mobile || !code) {
             wx.showToast({
@@ -109,6 +114,9 @@ Page({
             mobile,
             code,
             formId,
+            is_company,
+            accounts: is_company ? accounts:'',
+            password: is_company ? password:'',
             unionid: app.globalData.unionid
         },true).then(res => {
             this.setData({
@@ -239,5 +247,11 @@ Page({
     //关闭关注弹窗
     showEwm() {
         this.setData({ followState: false })
+    },
+    // 我是公司用户
+    switchChange(e){
+      this.setData({
+        is_company:e.detail.value ? 1 : 0
+      })
     }
 })

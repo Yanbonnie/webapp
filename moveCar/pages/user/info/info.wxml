@@ -60,6 +60,24 @@
                 <text class='iconfont icon-address'></text>
             </view>
         </view>
+        <view class='flexBox' wx:if="{{!is_pay && is_pay != null}}">
+            <view class='flexL'>*我是公司用户</view>
+            <view class='flexC'>
+                <switch checked bindchange="switchChange"/>
+            </view>
+        </view>
+        <view class='flexBox' wx:if="{{is_company && !is_pay && is_pay != null}}">
+            <view class='flexL'>*授权账号</view>
+            <view class='flexC'>
+                <input placeholder="请输入账号" name="accounts" />
+            </view>
+        </view>
+        <view class='flexBox' wx:if="{{is_company && !is_pay && is_pay != null}}">
+            <view class='flexL'>*授权密码</view>
+            <view class='flexC'>
+                <input placeholder="请输入密码" type='password' name="password"/>
+            </view>
+        </view>
     </view>
     <view class='BtnBox'>
          <view  wx:if="{{!editStatus}}">
@@ -86,3 +104,22 @@
 <view class='cityCover' wx:if="{{cityState}}">
     <citylist citylist="{{insurance_data}}" bindcitytap='cityTap' bindcloseCity="closeCityHandle"></citylist>
 </view>
+
+<!-- <view  class='cover'>
+    <view class='coverBox'>
+    <image src='/assets/images/close.png' class='close'></image>
+      <view class='coverTitle'>
+        <text>提示</text>
+      </view>
+      <view class='coverBody'>
+        <form report-submit bindsubmit="postIdcardHandle">
+          <view class='tip'>为了便于您查询电子表单，请输入</view>
+          <input placeholder="请输入身份证号" name="id_num"/>
+          <view class='blank'></view>
+          <input placeholder="请输入姓名" name="id_name"/>
+          <view class='blank'></view>
+          <button class='submitCopy' formType="submit">确定</button>
+        </form>
+      </view>
+    </view>
+ </view> -->

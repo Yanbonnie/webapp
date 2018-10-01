@@ -32,6 +32,9 @@ Page({
         invite_id: null,
         isfollow:0,
         tip:'',              //二维码分享弹框提示语
+        is_postidcard: null,    //是否上传过身份证  1-已上传  0-未上传
+        idCardStatus:true,
+        id_pic:'',   //身份证图片
     },
 
     /**
@@ -54,7 +57,7 @@ Page({
             unionid: app.globalData.unionid
         }).then(res => {
             wx.stopPullDownRefresh();
-          const { is_source, isfollow} = res;
+          const { is_source, isfollow, is_postidcard,is_pay} = res;
             const {
                 wxheadpic,
                 wxname,
@@ -73,7 +76,9 @@ Page({
                 invite_id,
                 gold: gold, 
                 is_source,
-                isfollow
+                isfollow,
+                is_postidcard:is_postidcard || 0,
+                is_pay: is_pay || 0
             })
         })
     },
@@ -159,6 +164,9 @@ Page({
                 videoStatus: false
             })
             this.videoContext.pause();
+        } else if (state == 4){   //身份证弹框
+          const { idCardStatus } = this.data;
+          this.setData({ idCardStatus: !idCardStatus})
         }else{
             this.setData({
                 ewmStatus: state == 1 ? true : false
@@ -242,5 +250,17 @@ Page({
             title: '我要分享一个好东西',
             path: enterUrl
         }
-    }
+    },
+    // 提交身份证信息
+    postIdcardHandle(e) {
+      console.log(e)
+      const { id_num, id_name } = e.detail.value;
+      REQUEST('POST', 'postIdcard', {
+        id_num,
+        id_name,
+        unionid: app.globalData.unionid,
+      }).then(res => {
+
+      })
+    },
 })

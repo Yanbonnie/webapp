@@ -239,6 +239,37 @@ input{
   border: 1px #dedede solid;
   padding-left: 20rpx;
 }
+.coverBody .tip{
+  line-height: 80rpx;
+}
+.coverBody .blank{
+  height: 30rpx;
+}
+.coverBody .id_pic{
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  margin-top: 20rpx;
+}
+.coverBody .id_pic view:nth-child(1){
+  flex-basis: 250rpx;
+}
+.coverBody .id_pic .pic{
+  width: 100rpx;
+  height: 100rpx;
+  background: #f5f5f5;
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 100rpx;
+  color: #ccc;
+}
+.submitCopy{
+  height: 70rpx;
+  line-height: 70rpx;
+  background: #0894ec;
+  color: #fff;
+  margin-top: 20rpx;
+}
 swiper{
   height: 300rpx;
 }
