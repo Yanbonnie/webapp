@@ -23,7 +23,7 @@ Page({
         editStatus: false,
         followState:false,
         reply: false,           //是否接收回复  true false
-        is_company:1,           //我是公司用户  1 0
+        is_company:0,           //我是公司用户  1 0
         is_pay:null,             //是否支付
         // bannerList: [],
         // is_binding: 0,
@@ -90,7 +90,7 @@ Page({
             })
             return;
         }
-        if (is_company && !accounts && !password){
+        if (is_company && (!accounts || !password)){
             wx.showToast({
                 title: '信息不完整',
                 icon: 'none',
@@ -142,6 +142,7 @@ Page({
             })
             setTimeout(() => {
                 if (!isfollow) {
+        wx.hideLoading();
                     wx.showModal({
                         title: '提示',
                         content: '没有关注公众号无法接收到挪车信息',
@@ -155,6 +156,7 @@ Page({
                         }
                     })
                 }else{
+        wx.hideLoading();
                     wx.switchTab({
                         url: '/pages/user/index/index',
                     })
@@ -162,6 +164,7 @@ Page({
                 
             }, 1500)
         }).catch(({msg})=>{
+        wx.hideLoading();
             wx.showModal({
                 title: '提示',
                 content: msg,

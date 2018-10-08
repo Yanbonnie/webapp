@@ -10,7 +10,8 @@ Page({
     data: {
         level:1,
         is_pay:null,
-        idCardStatus:true,
+        idCardStatus:false,
+        is_postidcard: 0,
     },
 
     /**
@@ -29,10 +30,12 @@ Page({
             wx.stopPullDownRefresh();
             const {
                 level,
+                is_postidcard,
                 is_pay
             } = res.userinfo;
             this.setData({
                 level,
+                is_postidcard: is_postidcard || 0,
                 is_pay
             })
         })

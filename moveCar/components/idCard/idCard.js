@@ -14,7 +14,9 @@ Component({
      * 组件的初始数据
      */
     data: {
-        id_pic:''  
+        id_pic:'',
+        id_num:'',
+        id_name:''
     },
 
     /**
@@ -41,7 +43,7 @@ Component({
                         wx.showToast({
                             title: '上传成功',
                         })
-                        this.setData({ id_pic: upres.id_pic})
+                        this.setData({ id_pic: upres.url, id_num:upres.id_num,id_name:upres.id_name})
                     });
                 }
             })
@@ -74,22 +76,21 @@ Component({
                         }
                     },
                     fail: err => {
-                        console.log('aaaaaaaaaaaa')
                         wx.showToast({
                             icon: 'none',
                             mask: true,
-                            title: '服务器出错了',
+                            title: msg ? msg : '服务器出错了',
                         })
                     },
-                    complete:function(err,sufn){
-                        if(err){
-                            wx.showToast({
-                                icon: 'none',
-                                mask: true,
-                                title: '服务器出错了',
-                            })
-                        }
-                    }
+                    // complete:function(err,sufn){
+                    //     if(err){
+                    //         wx.showToast({
+                    //             icon: 'none',
+                    //             mask: true,
+                    //             title: msg ? msg : '服务器出错了',
+                    //         })
+                    //     }
+                    // }
                 })
             })
 
@@ -98,9 +99,10 @@ Component({
         postIdcardHandle(e) {
             const { id_num, id_name } = e.detail.value;
             const { id_pic } = this.data;
-            if(!id_num || !id_name || id_pic){
+            if(!id_num || !id_name || !id_pic){
                 wx.showToast({
-                    title: '信息提交不完整',
+                    icon: 'none',
+                    title: '信息提交不完整！',
                     mask:true
                 })
                 return;
@@ -117,10 +119,11 @@ Component({
             }).then(res => {
                 wx.hideLoading();
                 this.triggerEvent('idCardSuccess', true);
-                wx.showToast({
-                    title: '提交成功',
-                    mask:true
-                })
+            wx.showToast({
+                title: '提交成功,两个工作日后请您到太平洋保险公司官网查询您的电子保单',
+                mask:true,
+                icon: 'success'
+            })
                 
             })
         },

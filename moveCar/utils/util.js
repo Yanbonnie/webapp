@@ -45,7 +45,7 @@ const URL = {
     'resetUserInfo':'resetUserInfo',         //修改
     'getShare':'getShare',                   //分享二维码
     'get_apply':'get_apply',                 //是否申请
-    'payUpgrade':'payUpgrade',               //支付升级会员接口
+    'payUpgrade':'payUpgrade',               //支付金牌会员接口
     'payPostage':'payPostage',               //支付邮费
     'getSubscribe':'getSubscribe',           //获取用户有无关注
     'bindPhone':'bindPhone',                 //绑定手机
@@ -53,7 +53,7 @@ const URL = {
     'bindingInvite':'bindingInvite',         //提交邀请码
     'getMyQrCode':'getMyQrCode',             //获取我的二维码
     'postIdcard':'postIdcard',               //提交身份证信息  
-    'uploadIdCard':'uploadIdCard',           //上传身份证照片
+    'uploadIdCard':'UploadFileIdCard',           //上传身份证照片
 }
 
 //请求接口封装

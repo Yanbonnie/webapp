@@ -8,9 +8,6 @@
       <view class='coverBody'>
         <form report-submit bindsubmit="postIdcardHandle">
           <!-- <view class='tip'></view> -->
-          <input placeholder="请输入身份证号" name="id_num" type='idcard'/>
-          <view class='blank'></view>
-          <input placeholder="请输入姓名" name="id_name" />
           <view class='id_pic'>
             <view>请上传身份证正面图片</view>
             <view>
@@ -20,6 +17,13 @@
               </view>
             </view>
           </view>
+          
+          <view class="infoText" wx:if="{{id_name}}">*请核对下面姓名和身份证码是否有误</view>
+          <input placeholder="请输入身份证号" name="id_num" type='idcard' value="{{id_num}}"/>
+          <view class='blank'></view>
+          <input placeholder="请输入姓名" name="id_name" value="{{id_name}}"/>
+          
+          <view class="infoText">* 为了便于您查询电子保单请输入车辆所有人的身份证号和姓名</view>
           <button class='submitCopy' formType="submit">确定</button>
         </form>
       </view>

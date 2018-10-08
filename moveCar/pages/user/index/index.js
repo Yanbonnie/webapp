@@ -37,6 +37,7 @@ Page({
         is_postidcard: null,    //是否上传过身份证  1-已上传  0-未上传
         idCardStatus: false,
         id_pic: '',   //身份证图片
+        is_pay:null
     },
 
     /**
@@ -86,6 +87,9 @@ Page({
                 is_postidcard: is_postidcard || 0,
                 is_pay: is_pay || 0
             })
+            // if (is_pay && is_postidcard == 0){
+            //     this.setData({})
+            // }
         })
     },
     //分享二维码

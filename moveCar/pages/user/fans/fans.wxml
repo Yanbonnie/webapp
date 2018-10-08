@@ -8,10 +8,10 @@
     <view class='flexC'>
         <view class='name'>
             <text>{{item.wxname}}</text>
-            <text class='vip' wx:if="{{item.level==1}}">普通会员</text> <!--升级会员  省级会员-->
-            <text class='vip vip2' wx:elif="{{item.level==2}}">升级会员</text> <!--升级会员  省级会员-->
-            <text class='vip vip3' wx:elif="{{item.level==3}}">一级代理会员</text> <!--升级会员  省级会员-->
-            <text class='vip vip4' wx:else>二级代理会员</text> <!--升级会员  省级会员-->
+            <text class='vip' wx:if="{{item.level==1}}">普通会员</text> <!--金牌会员  省级会员-->
+            <text class='vip vip2' wx:elif="{{item.level==2}}">金牌会员</text> <!--金牌会员  省级会员-->
+            <text class='vip vip3' wx:elif="{{item.level==3}}">省级代理会员</text> <!--金牌会员  省级会员-->
+            <text class='vip vip4' wx:else>区域代理会员</text> <!--金牌会员  省级会员-->
         </view>
         <text class='time'>{{item.time}}</text>
     </view>
@@ -36,7 +36,7 @@
     <view class='flexC'>
         <view class='name'>
             <text>小火</text>
-            <text class='vip vip2'>升级会员</text>
+            <text class='vip vip2'>金牌会员</text>
         </view>
         <text class='time'>2018-07-21</text>
 

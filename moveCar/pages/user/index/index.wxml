@@ -8,9 +8,9 @@
         <view class='name'>
             <text>{{wxname}}</text>
             <text class='vip' wx:if="{{level==1}}">普通会员</text> 
-            <text class='vip vip2' wx:elif="{{level==2}}">升级会员</text> 
-            <text class='vip vip3' wx:elif="{{level==3}}">一级代理会员</text>
-            <text class='vip vip4' wx:else>二级代理会员</text> 
+            <text class='vip vip2' wx:elif="{{level==2}}">金牌会员</text>
+            <text class='vip vip3' wx:elif="{{level==3}}">省级代理会员</text>
+            <text class='vip vip4' wx:else>区域代理会员</text>
         </view>
         <text>车牌：{{car_number}}</text>
         <view class='name' style='margin-top:10rpx;'>
@@ -76,7 +76,7 @@
         </view> 
         <text class='iconfont icon-right'></text>
     </view>
-    <view class='item' bindtap='showEwmFn' data-state="4"> 
+    <view class='item' wx:if="{{is_pay&&is_postidcard==0}}" bindtap='showEwmFn' data-state="4"> 
         <view>
             <image src='/assets/images/icon6.png'></image>
             <text>填写身份证</text>

@@ -63,7 +63,7 @@
         <view class='flexBox' wx:if="{{!is_pay && is_pay != null}}">
             <view class='flexL'>*我是公司用户</view>
             <view class='flexC'>
-                <switch checked bindchange="switchChange"/>
+                <switch  bindchange="switchChange"/>
             </view>
         </view>
         <view class='flexBox' wx:if="{{is_company && !is_pay && is_pay != null}}">
