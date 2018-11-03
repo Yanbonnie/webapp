@@ -19,9 +19,10 @@ const Config = {
 }
 
 const URL = {
-    'userLogin': 'userLogin', //登录接口
+    'userLogin': 'userLogin',            //登录接口
     'getslideimage':'getslideimage',     //幻灯片
     'getcategory':'getcategory',         //获取分类
+    'wechatauth':'wechatauth',
 }
 
 //请求接口封装

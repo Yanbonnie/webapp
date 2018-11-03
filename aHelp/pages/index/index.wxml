@@ -14,7 +14,7 @@
         <view class='banner'>
             <!-- <image src='/assets/images/banner.jpg' mode='aspectFill'></image> -->
             <swiper class='banner'>
-            <block wx:for="{{bannerList}}">
+            <block wx:for="{{bannerList}}" wx:key="unique">
                 <swiper-item>
                 <image src="{{item.url}}" class="slide-image" mode='aspectFill'/>
                 </swiper-item>
@@ -26,6 +26,7 @@
             <view class='right'>
                 <image src='/assets/images/photo.jpg'></image>
                 <text>个人中心</text>
+                <button  open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
             </view>
         </view>
         <view class='getcategory'>
