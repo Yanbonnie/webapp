@@ -1,0 +1,88 @@
+<!--index.wxml-->
+<view class="container">
+    <!-- <view class="userinfo">
+        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+        <block wx:else>
+            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+            <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        </block>
+    </view>
+    <view class="usermotto">
+        <text class="user-motto">{{motto}}</text>
+    </view> -->
+    <view class='wrap-con'>
+        <view class='banner'>
+            <!-- <image src='/assets/images/banner.jpg' mode='aspectFill'></image> -->
+            <swiper class='banner'>
+            <block wx:for="{{bannerList}}">
+                <swiper-item>
+                <image src="{{item.url}}" class="slide-image" mode='aspectFill'/>
+                </swiper-item>
+            </block>
+            </swiper>
+        </view>
+        <view class='memberCenter'>
+            <view class='left'></view>
+            <view class='right'>
+                <image src='/assets/images/photo.jpg'></image>
+                <text>个人中心</text>
+            </view>
+        </view>
+        <view class='getcategory'>
+            <view class='item' wx:for="{{getcategory}}" wx:key="unique" bindtap='getcategorySecData' data-id="{{item.id}}" data-name="{{item.name}}">
+                <view class='image'>
+                    <image mode='aspectFit' src='{{item.icon}}'></image>
+                </view>
+                <text>{{item.name}}</text>
+            </view>
+        </view>
+    </view>
+    <view class='order' animation="{{animationData}}">
+        <view class='order-list'>
+            <view class='order-title'>已选故障</view>
+            <view class='order-item' wx:for="{{orderList}}" wx:key="unique">
+                <text>{{item.name}}</text>
+                <text>￥{{item.price}}</text>
+                <image class='close' bindtap='delOrder' data-id="{{item.id}}" src='/assets/images/close.png'></image>
+            </view>
+        </view>
+    </view>
+    <view class='footer'>
+        <view class='icon' bindtap='showListHandle'>
+            <image src='/assets/images/computer.png'></image>
+            <text wx:if="{{orderList.length>0}}">{{orderList.length}}</text>
+        </view>
+        <view class='tip'>选择故障，预估报价</view>
+        <view class='appointmentBtn'>马上预约</view>
+    </view>
+</view>
+
+<view class='cover' wx:if="{{barrierState}}">
+    <view class='barrier'>
+        <view class='title'>{{barrierTitle}}</view>
+        <view class='barrier-cont'>
+            <view class='list' wx:if="{{getcategorySec.length>0}}">
+                <view class="{{curOrderId == item.id ? 'list-item active':'list-item'}}" wx:for="{{getcategorySec}}" wx:key="unique" bindtap='selectItemHandle' data-id="{{item.id}}" data-price="{{item.price}}" data-name="{{item.name}}" data-parentid="{{item.parentId}}">
+                    <text>{{item.name}}</text>
+                    <text>￥{{item.price}}</text>
+                </view>
+            </view>
+            <view class='list' wx:else>
+                <view class="no-message">
+                    <text>暂无分类</text>
+                </view>
+            </view>
+            <view class='remarks'>
+                <view>备注</view>
+                <view>
+                    <text>1、系统生成报价为预估价格，实际价格以工程师上门检测或远程检测为准；</text>
+                    <text>2、工程师完成维护之后，请自行更改电脑密码。</text>
+                </view>
+            </view>
+        </view>
+        <view class='operBtn'>
+            <view bindtap='closeBarrier' data-stype="cancle">取消</view>
+            <view bindtap='closeBarrier' data-stype="sure">确定</view>
+        </view>
+    </view>
+</view>

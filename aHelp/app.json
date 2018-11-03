@@ -1,0 +1,12 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#0365c8",
+    "navigationBarTitleText": "爱帮电脑维修",
+    "navigationBarTextStyle":"white"
+  }
+}
