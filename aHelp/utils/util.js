@@ -1,3 +1,5 @@
+
+const Promise = require('./es6-promise')
 const formatTime = date => {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
@@ -43,7 +45,9 @@ const REQUEST = ({ method='get', url, data={}, header={}, err=false}) => { //err
                 if (res.data.api_status == 1) {
                     resolve(res.data);
                 } else {
+                    
                     if (err) {
+                        
                         reject(res.data)
                     } else {
                         wx.showToast({

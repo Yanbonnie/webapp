@@ -1,5 +1,6 @@
 // pages/member/index/index.js
 const app = getApp();
+const Promise = require('../../../utils/es6-promise.js');
 Page({
 
     /**

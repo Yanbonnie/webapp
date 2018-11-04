@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp()
 const { globalData: { REQUEST}} = app;
+const Promise = require('../../utils/es6-promise.js');
 Page({
     data: {
         userInfo: {},
@@ -100,13 +101,13 @@ Page({
     // 登陆
     getAllUserInfo(code, iv, encryptedData) {
         let { count, btnType } = this.data;
-        if (btnType && btnType == 'appointment') {  //点击马上预约
-            this.appointmentHandle();
-        }
-        if (btnType && btnType == 'member') {  //点击个人中心
-            this.goMemberCenter();
-        };
-        return;
+        // if (btnType && btnType == 'appointment') {  //点击马上预约
+        //     this.appointmentHandle();
+        // }
+        // if (btnType && btnType == 'member') {  //点击个人中心
+        //     this.goMemberCenter();
+        // };
+        // return;
         REQUEST({
             method: 'post',
             url: 'wechatauth',
@@ -117,15 +118,17 @@ Page({
             },
             err:true
         }).then(res => {
-            let { openid, unionid } = res.data;
-            app.globalData.unionid = unionid;
-            if ( btnType && btnType == 'appointment'){  //点击马上预约
-                this.appointmentHandle();
-            }
-            if(btnType && btnType == 'member'){  //点击个人中心
-                this.goMemberCenter();
-            }
+            console.log(res)
+            // let { openid, unionid } = res.data;
+            // app.globalData.unionid = unionid;
+            // if ( btnType && btnType == 'appointment'){  //点击马上预约
+            //     this.appointmentHandle();
+            // }
+            // if(btnType && btnType == 'member'){  //点击个人中心
+            //     this.goMemberCenter();
+            // }
         }).catch(res => {
+            console.log(res)
             if (count < 5) {
                 this.loginHandle({ iv, encryptedData })
             } else {
