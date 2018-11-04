@@ -1,0 +1,26 @@
+/* pages/member/order/order_list/order_list.wxss */
+.order-item{
+    margin-bottom: 20rpx;
+    background: #ffffff;
+    border-top: 1rpx #e0e0e0 solid;
+    border-bottom: 1rpx #e0e0e0 solid;
+}
+.flex-box{
+    display: flex;
+    margin: 0 30rpx;
+    justify-content: space-between;
+    padding: 30rpx 0;
+}
+.txt{
+    margin: 0 30rpx;
+    line-height: 50rpx;
+    border-top: 1rpx #e0e0e0 solid;
+    border-bottom: 1rpx #e0e0e0 solid;
+    padding: 30rpx 0;
+}
+.txt view{
+    color: #808080;
+}
+.txt view:first-child{
+    color: #000;
+}

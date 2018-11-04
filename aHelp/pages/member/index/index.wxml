@@ -1,0 +1,60 @@
+<!--pages/member/index/index.wxml-->
+<view class='memberCennter'>
+    <view class='head'>
+        <image src='{{userInfo.avatarUrl}}'></image>
+        <text>{{userInfo.nickName}}</text>
+    </view>
+    <view class='member-list'>
+        <view class='list-item' bindtap='navagateTo' data-page="/pages/member/order/order_list/order_list">
+            <view class='image'>
+                <image src='/assets/images/order.png'></image>
+            </view>
+            <view class='label'>
+                我的订单
+            </view>
+            <image class='icon-right' src='/assets/images/right.png'></image>
+        </view>
+        <view class='list-item'>
+            <view class='image'>
+                <image src='/assets/images/quan.png'></image>
+            </view>
+            <view class='label'>
+                抵用券
+            </view>
+            <image class='icon-right' src='/assets/images/right.png'></image>
+        </view>
+        <view class='list-item'>
+            <view class='image'>
+                <image src='/assets/images/phone.png'></image>
+            </view>
+            <view class='label'>
+                热线电话
+            </view>
+            <view class='txt'>
+                15989223570
+            </view>
+            <image class='icon-right' src='/assets/images/right.png'></image>
+        </view>
+        <view class='list-item'>
+            <view class='image'>
+                <image src='/assets/images/xy.png'></image>
+            </view>
+            <view class='label'>
+                用户协议
+            </view>
+            <view class='txt'>
+                查看
+            </view>
+            <image class='icon-right' src='/assets/images/right.png'></image>
+        </view>
+        <view class='list-item'>
+            <view class='image'>
+                <image src='/assets/images/about.png'></image>
+            </view>
+            <view class='label'>
+                关于我们
+            </view>
+            <image class='icon-right' src='/assets/images/right.png'></image>
+        </view>
+    </view>
+</view>

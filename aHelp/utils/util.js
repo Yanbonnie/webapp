@@ -26,8 +26,7 @@ const URL = {
 }
 
 //请求接口封装
-const REQUEST = ({ method, url, data={}, header={}, err=false}) => { //err->true  需要对失败进行特殊处理
-    console.log(data,header,err)
+const REQUEST = ({ method='get', url, data={}, header={}, err=false}) => { //err->true  需要对失败进行特殊处理
     return new Promise((resolve, reject) => {
         wx.request({
             method,
@@ -40,7 +39,7 @@ const REQUEST = ({ method, url, data={}, header={}, err=false}) => { //err->true
                 ...header
             },
             success: res => {
-                wx.hideLoading()
+                // wx.hideLoading()
                 if (res.data.api_status == 1) {
                     resolve(res.data);
                 } else {

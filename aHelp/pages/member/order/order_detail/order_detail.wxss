@@ -1,0 +1,80 @@
+/* pages/member/order/sure_order/sure_order.wxss */
+.sure_order{
+    padding-bottom: 150rpx;
+}
+.list-box{
+    background: #ffffff;
+    margin-bottom: 20rpx;
+}
+.list-item{
+    display: flex;
+    align-items: center;
+    padding: 30rpx 0;
+    margin: 0 50rpx;
+    border-bottom: 1px #e0e0e0 solid;
+}
+.list-item:last-child{
+    border: 0;
+}
+.list-item .left{
+    flex-basis: 140rpx;
+}
+.list-item .right{
+    flex: 1;
+    color: #808080;
+}
+.list-item .orange{
+    color: #fd6502;
+}
+
+.list-item2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30rpx 0;
+    margin: 0 50rpx;
+    border-bottom: 1px #e0e0e0 solid;
+    position: relative;
+}
+.list-item2.gray .left,.list-item2.gray .right{
+    color: #808080;
+}
+
+.list-item2 .right{
+    color: #808080;
+}
+.list-item2 .orange{
+    color: #fd6502;
+}
+.list-item2 .tip{
+    position: absolute;
+    font-size: 20rpx;
+    bottom: 5rpx;
+    color: #808080;
+
+}
+.btnBox{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 100rpx;
+    display: flex;
+    background: #ffffff;
+    box-shadow: 0 -1rpx 2rpx 2rpx #dedede;
+    justify-content: center;
+    align-items: center;
+}
+.btnBox view{
+    width: 200rpx;
+    line-height: 60rpx;
+    height: 60rpx;
+    border: 1rpx #e0e0e0 solid;
+    text-align: center;
+    margin: 0 50rpx;
+}
+.btnBox view:last-child{
+    background: #fe6603;
+    color: #ffffff;
+    border: 1rpx #fe6603 solid;
+}

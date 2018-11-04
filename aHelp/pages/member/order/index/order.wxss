@@ -1,0 +1,195 @@
+/* pages/member/order.wxss */
+
+.evaluate .txt{
+    padding: 30rpx 0;
+    text-align: center;
+    background: #0364cb;
+    color: #ff982c;
+}
+.evaluate .txt .price{
+    font-size: 40rpx;
+    font-weight: bold;
+    padding-top: 10rpx;
+}
+.evaluate .btnBox{
+    height: 95rpx;
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    box-shadow: 0 1rpx 1rpx #cccccc;
+}
+.evaluate .btnBox view{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.evaluate .btnBox view:nth-child(1){
+    border-right: 1rpx #e1e1e1 solid;
+}
+.evaluate .btnBox image{
+    width: 50rpx;
+    height: 50rpx;
+    margin-right: 10rpx;
+}
+.evaluate .btnBox view text{
+    font-size: 30rpx;
+}
+
+.selectWay{
+    margin-top: 20rpx;
+    padding-bottom: 50rpx;
+    
+   
+}
+.selectWay .title{
+    font-size: 32rpx;
+    text-align: center;
+    padding: 30rpx 0;
+    background: #ffffff;
+}
+.wayBox{
+    display: flex;
+    align-items: center;
+    padding-bottom: 20rpx;
+    background: #ffffff;   
+}
+.wayBox view{
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+.wayBox .selected text{
+    color:#fe6601; 
+}
+.wayBox view .icon{
+    width:0;
+    height:5rpx;
+    border: 10rpx solid transparent;
+    border-bottom: 20rpx solid #fdffcd;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    bottom:-20rpx;
+    display: none;
+}
+.wayBox view image{
+    width: 70rpx;
+    height: 70rpx;
+}
+.wayBox view text{
+    display: block;
+    color: #767676;
+    padding-top: 5rpx;
+}
+.wayBox .selected .icon{
+    display: block;
+}
+.wayTipBox{
+    background: #ffffff;
+    padding-bottom: 20rpx;
+}
+.wayTip{
+    width: 650rpx;
+    margin: 0 auto;
+    background: #fdffcd;
+    border-radius: 8rpx;
+    color: #fa8a55;
+    padding: 20rpx;
+    font-size: 24rpx;
+    text-align: center;
+}
+
+.form-item{
+    display: flex;
+    align-items: center;
+    height: 95rpx;
+    border-top: 1rpx #e1e1e1 solid;
+    background: #ffffff;
+}
+.heightauto{
+    height: auto;
+    min-height: 95rpx;
+}
+.form-item .left{
+    flex-basis: 100rpx;
+    text-align: center;
+    color: #808080;
+}
+.form-item .left image{
+    width: 40rpx;
+    height: 40rpx;
+}
+.form-item .right{
+    flex:1;
+}
+.form-item .right .agreement{
+    color: #0364cb;
+}
+.form-item .gray{
+    color: #808080;
+}
+.form-item textarea{
+    height: 80rpx;
+    padding-top: 25rpx;
+}
+.sweet{
+    padding: 20rpx 30rpx 50rpx;
+    background: #f2f2f2;
+}
+.sweet text{
+    display: block;
+    color: #808080;
+}
+.sureBtn{
+    width: 700rpx;
+    margin: 0 auto;
+    background: #fe6601;
+    border: 0;
+    border-radius: 8rpx;
+    color: #ffffff;
+}
+
+
+
+.orderBox{
+    width: 70%;
+    background: #ffffff;
+    padding: 30rpx 40rpx;
+    position: relative;
+    border-radius: 8rpx;
+}
+.orderBox .close{
+    position: absolute;
+    right: -25rpx;
+    top: -25rpx;
+    width: 50rpx;
+    height: 50rpx;
+    background: #ffffff;
+    border-radius: 100%;
+    overflow: hidden;
+}
+.orderBox .close image{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.orderBox .title{
+    text-align: center;
+    font-size: 30rpx;
+}
+.orderBox .list .item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80rpx;
+    border-bottom: 1rpx #e1e1e1 solid;
+}
+.orderBox .list .item:last-child{
+    border: 0;
+}
+.orderBox .list .item text:last-child{
+    color: #fa8a55;
+}
+
+

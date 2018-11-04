@@ -1,0 +1,16 @@
+<!--pages/member/order/success/success.wxml-->
+<view class='success'>
+    <view class='blank'></view>
+    <image  src='/assets/images/success.png'></image>
+    <view class='success_txt'>下单成功</view>
+    <view class='text_list'>
+        <text>下单已经成功</text>
+        <text>订单号:64324654654</text>
+        <text>请将您的设备寄送到xxx</text>
+        <text>客服联系电话:020-45434564</text>
+    </view>
+    <view class='btnBox'>
+        <view bindtap='goHomeHandle'>返回首页</view>
+        <view bindtap='goOrderHandle'>查看订单</view>
+    </view>
+</view>

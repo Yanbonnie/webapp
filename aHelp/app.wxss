@@ -10,10 +10,20 @@ page{
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
+  overflow: hidden;
 } 
 
 view,text{
     font-size: 26rpx;
+}
+.mask-pop{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 9;
 }
 .cover{
     position: fixed;
@@ -21,7 +31,7 @@ view,text{
     right: 0;
     top: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0);
     z-index: 10;
     display: flex;
     justify-content: center;

@@ -1,0 +1,62 @@
+/* pages/member/index/index.wxss */
+page{
+    background: #ffffff;
+}
+.head{
+    height: 250rpx;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: #0066cc;
+    justify-content: center;
+}
+.head image{
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 100%;
+    display: block;
+    margin: 0 auto;
+}
+.head text{
+    color: #ffffff;
+    font-size: 30rpx;
+    padding-top: 15rpx;
+}
+.member-list{
+    background: #ffffff;
+}
+.list-item{
+    margin: 0 30rpx;
+    border-bottom: 1rpx #e0e0e0 solid;
+    padding: 25rpx 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.list-item .image{
+    flex-basis: 40rpx;
+    height: 40rpx;
+}
+.list-item .image image{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.list-item .label{
+    flex-basis: 200rpx;
+    height: 40rpx;
+    padding-left: 20rpx;
+}
+.list-item .txt{
+    flex: 1;
+    padding-right: 80rpx;
+    text-align: right;
+}
+.list-item .icon-right{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 40rpx;
+    height: 40rpx;
+    margin-top: -20rpx;
+}

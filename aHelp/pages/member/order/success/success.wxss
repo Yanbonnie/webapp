@@ -1,0 +1,56 @@
+/* pages/member/order/success/success.wxss */
+page{
+    background: #ffffff;
+}
+.blank{
+    height: 50rpx;
+}
+image{
+    width: 120rpx;
+    display: block;
+    height: 120rpx;
+    margin:0 auto;
+}
+.success_txt{
+    text-align: center;
+    font-size: 40rpx;
+    padding-top: 30rpx;
+    font-weight: bold;
+    color: #fe6601;
+    padding-bottom: 50rpx;
+}
+.text_list{
+    padding-left: 50rpx;
+    padding-top: 50rpx;
+}
+.text_list text{
+    display: block;
+    line-height: 50rpx;
+    font-size: 28rpx;
+    color: #808080;
+}
+
+.btnBox{
+    position: fixed;
+    bottom: 200rpx;
+    padding: 0 50rpx;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between
+}
+.btnBox view{
+    width: 300rpx;
+    line-height: 100rpx;
+    text-align: center;
+    border: 1rpx #e1e1e1 solid;
+    border-radius: 8rpx;
+    font-size: 30rpx;
+    color: #808080;
+
+}
+.btnBox view:last-child{
+    background: #fe6601;
+    color: #ffffff;
+    border: 1rpx #fe6601 solid;
+}

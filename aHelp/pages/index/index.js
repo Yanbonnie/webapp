@@ -4,7 +4,6 @@ const app = getApp()
 const { globalData: { REQUEST}} = app;
 Page({
     data: {
-        motto: 'Hello World',
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -18,7 +17,8 @@ Page({
         barrierState:false,     //故障弹框状态
         orderList:[],           //订单数据
         curOrderId:null,        //当前选中的订单数据,
-        code:''
+        count: 0,               //请求登陆接口count
+        btnType:'',             //点击个人中心或者马上预约未登录的情况
     },
     //事件处理函数
     bindViewTap: function() {
@@ -27,99 +27,126 @@ Page({
         })
     },
     onLoad: function() {
-        // 调用接口
-        this.getcategoryData();
-        this.getslideimageData();
+        // 调用接口 幻灯片和一级分类数据
+        wx.showLoading({
+            title: '加载中......',
+        })
+        Promise.all([REQUEST({ url: 'getslideimage' }), REQUEST({ url: 'getcategory', data: { parentId: 0} })]).then(res=>{
+            wx.hideLoading();
+            this.setData({
+                bannerList:res[0].data,
+                getcategory:res[1].data
+            })
+        })
 
         this.animation = wx.createAnimation({
             duration: 1000,
             timingFunction: 'ease',
         })
-        wx.login({
-            success:res=>{
-                console.log(res)
-                this.setData({ code :res.code})
-            }
-        })
+
         if (app.globalData.userInfo) {
             this.setData({
-                userInfo: app.globalData.userInfo,
+                userInfo: app.globalData.userInfo.userInfo,
                 hasUserInfo: true
             })
-           
         } else if (this.data.canIUse) {
             // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
             // 所以此处加入 callback 以防止这种情况
             app.userInfoReadyCallback = res => {
-                console.log(res)
                 this.setData({
                     userInfo: res.userInfo,
                     hasUserInfo: true
                 })
-                const { iv, encryptedData} = res;
-                this.wechatauth({ iv, encryptedData})
+                this.loginHandle(res)
             }
         } else {
             // 在没有 open-type=getUserInfo 版本的兼容处理
             wx.getUserInfo({
                 success: res => {
-                    app.globalData.userInfo = res.userInfo
+                    app.globalData.userInfo = res;
                     this.setData({
                         userInfo: res.userInfo,
                         hasUserInfo: true
                     })
-                    const { iv, encryptedData } = res;
-                    this.wechatauth({ iv, encryptedData })
+                    this.loginHandle(res)
                 }
             })
         }
     },
+    // 获取用户信息回调函数
     getUserInfo: function(e) {
         console.log(e)
-        app.globalData.userInfo = e.detail.userInfo;
-        console.log(e.detail.userInfo)
-
-        this.setData({
-            userInfo: e.detail.userInfo,
-            hasUserInfo: true
+        const { stype } = e.currentTarget.dataset;
+        if(e.detail.userInfo){ //拿到了用户信息才往下操作
+            app.globalData.userInfo = e.detail;
+            this.setData({
+                userInfo: e.detail.userInfo,
+                hasUserInfo: true,
+                btnType: stype
+            })
+            this.loginHandle(e.detail)
+        }        
+    },
+    //登录获取code
+    loginHandle({ iv, encryptedData }) {
+        wx.login({
+            success: res => {
+                // 发送 res.code 到后台换取 openId, sessionKey, unionId
+                const { code } = res;
+                this.getAllUserInfo(code, iv, encryptedData)
+            }
         })
-        this.wechatauth()
     },
     // 登陆
-    wechatauth({ iv, encryptedData}){
+    getAllUserInfo(code, iv, encryptedData) {
+        let { count, btnType } = this.data;
+        if (btnType && btnType == 'appointment') {  //点击马上预约
+            this.appointmentHandle();
+        }
+        if (btnType && btnType == 'member') {  //点击个人中心
+            this.goMemberCenter();
+        };
+        return;
         REQUEST({
             method: 'post',
             url: 'wechatauth',
             data: {
-                code:this.data.code,
+                code,
                 iv,
                 encryptedData
-            }
+            },
+            err:true
         }).then(res => {
-            console.log(res)
-            this.setData({
-                getcategory: res.data
-            })
-        }) 
-    },
-    // 一级分类
-    getcategoryData(){
-        REQUEST({
-            method:'get',
-            url:'getcategory',
-            data:{
-                parentId:0
+            let { openid, unionid } = res.data;
+            app.globalData.unionid = unionid;
+            if ( btnType && btnType == 'appointment'){  //点击马上预约
+                this.appointmentHandle();
             }
-        }).then(res=>{
-            console.log(res)
+            if(btnType && btnType == 'member'){  //点击个人中心
+                this.goMemberCenter();
+            }
+        }).catch(res => {
+            if (count < 5) {
+                this.loginHandle({ iv, encryptedData })
+            } else {
+                wx.hideLoading();
+                wx.showToast({
+                    icon: 'none',
+                    mask: true,
+                    title: '授权失败，请退出重试',
+                    duration: 3000
+                })
+            }
+            ++count;
             this.setData({
-                getcategory:res.data
+                count
             })
         })
     },
     // 二级分类
     getcategorySecData(e) {
-        const { id , name} = e.currentTarget.dataset;
+        const { parentid , name} = e.currentTarget.dataset;
+        const { orderList } = this.data;
         wx.showLoading({
             title: '请求中...',
         })
@@ -127,27 +154,31 @@ Page({
             method: 'get',
             url: 'getcategory',
             data: {
-                parentId: id
+                parentId: parentid
             }
         }).then(res => {
-            
+            wx.hideLoading()
             this.setData({
                 getcategorySec: res.data,
                 barrierState:true,
                 barrierTitle:name                
             })
+            // 初始化二级选中
+            if(orderList.length>0){
+                orderList.forEach(item => {
+                    if (item.parentId == parentid) {
+                        this.setData({ curOrderId: item.id })
+                    }
+                })
+            }else{
+                this.setData({ curOrderId: null })
+            }
         })
     },
     // 二级分类选择
     selectItemHandle(e){
-        const { id, name, price, parentid} = e.currentTarget.dataset;
-        let { orderList } = this.data;
-        // 1.需要先判断当前选中的分类再订单列表中有无同级分类,没有，直接添加到列表，有，需要先把同级的选中分类去除再添加到列表
-        if (orderList.some(item =>item.parentid == parentid)){ //有
-            orderList = orderList.filter(item => item.parentid != parentid)
-        }
-        orderList.push({ id, name, price, parentid })
-        this.setData({ orderList, curOrderId:id})
+        const { id } = e.currentTarget.dataset;
+        this.setData({ curOrderId: id })
     },
     // 删除已选故障数据
     delOrder(e){
@@ -158,22 +189,12 @@ Page({
         if(this.data.orderList.length == 0){
             this.animation.translateY('100%').step(); 
         }
+        this.getcategoryCount();
         this.setData({
             animationData: this.animation.export(),
             isShow:false
         })
-    },
-    // 幻灯片
-    getslideimageData() {
-        REQUEST({
-            method: 'get',
-            url: 'getslideimage'
-        }).then(res => {
-            console.log(res)
-            this.setData({
-                bannerList: res.data
-            })
-        })
+
     },
     // 展开订单列表
     showListHandle(){
@@ -184,23 +205,78 @@ Page({
         }else{
             this.animation.translateY('100%').step();
         }   
-        
         this.setData({
             animationData: this.animation.export(),
             isShow: !isShow
         })
     },
-    // 关闭二级弹框
+    // 关闭二级弹框 确定，取消
     closeBarrier(e){
         const { stype } = e.currentTarget.dataset;
-        let { orderList, curOrderId } = this.data;
-        if (stype == 'cancle'){            
-            orderList = orderList.filter(item =>item.id != curOrderId)
+        let { orderList, curOrderId, getcategorySec } = this.data;
+
+        if (stype == 'sure'){  //点击确定按钮
+            getcategorySec.forEach(item=>{
+                if (item.id == curOrderId){
+                    orderList = orderList.filter(item2 => item2.parentId != item.parentId)  //先过滤同级
+                    orderList.push({
+                        id:item.id, 
+                        name:item.name, 
+                        price:item.price, 
+                        parentId: item.parentId
+                    })
+                }
+            })
         }        
         this.setData({
             barrierState:false,
             orderList
         })
-    }
+        this.getcategoryCount();
+    },
+    // 计算一级是否选中
+    getcategoryCount(){
+        let { getcategory, orderList } = this.data;
+        getcategory = getcategory.map(item => {
+            let checked = false;
+            orderList.forEach(orderItem => {
+                if (orderItem.parentId == item.id) {
+                    checked = true
+                }
+            })
+            return {
+                ...item,
+                checked
+            }
+        })
+        this.setData({ getcategory })
+    },
+    // 跳转到个人中心页面
+    goMemberCenter(){
+        const { hasUserInfo } = this.data;
+        if (hasUserInfo) {
+            wx.navigateTo({
+                url: '/pages/member/index/index',
+            })
+        }
+    },
+    // 马上预约
+    appointmentHandle(){
+        const { hasUserInfo, orderList } = this.data;
+        if(hasUserInfo){
+            if (orderList.length <= 0){
+                wx.showToast({
+                    icon:'none',
+                    title: '请选择故障',
+                })
+                return;
+            }
+            app.globalData.orderList = orderList;
+            wx.navigateTo({
+                url: '/pages/member/order/index/order',
+            })
+        }
+        
+    },
 
 })

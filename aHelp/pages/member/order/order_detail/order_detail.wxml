@@ -1,0 +1,86 @@
+<!--pages/member/order/sure_order/sure_order.wxml-->
+<view class='sure_order'>
+    <view class='list-box'>
+        <view class='list-item'>
+            <view class='left'>订单状态</view>
+            <view class='right orange'>订单已提交，等待工程师联系</view>
+        </view>
+    </view>
+
+    <view class='list-box'>
+        <view class='list-item'>
+            <view class='left'>订单编号</view>
+            <view class='right'>AB2243241542</view>
+        </view>
+        <view class='list-item'>
+            <view class='left'>下单时间</view>
+            <view class='right'>2018-10-11 17:30:00</view>
+        </view>
+    </view>
+
+    <view class='list-box'>
+        <view class='list-item'>
+            <view class='left'>联系人</view>
+            <view class='right'>小妮子</view>
+        </view>
+        <view class='list-item'>
+            <view class='left'>联系电话</view>
+            <view class='right'>18825039685</view>
+        </view>
+        <view class='list-item'>
+            <view class='left'>服务地址</view>
+            <view class='right'>刷卡的风景阿拉斯加地方</view>
+        </view>
+        <view class='list-item'>
+            <view class='left'>寄件地址</view>
+            <view class='right'>阿斯顿发生</view>
+        </view>
+        <view class='list-item'>
+            <view class='left'>服务电话</view>
+            <view class='right'>14545424545</view>
+        </view>
+    </view>
+    <view class='list-box'>
+        <view class='list-item2'>
+            <view class='left'>维修项目</view>
+            <view class='right'></view>
+        </view>
+        <view class='list-item2 gray'>
+            <view class='left'>windows重装系统</view>
+            <view class='right'>￥82.00</view>
+        </view>
+        <view class='list-item2 gray'>
+            <view class='left'>windows重装系统</view>
+            <view class='right'>￥82.00</view>
+        </view>
+        
+    </view>
+
+    <view class='list-box'>
+        <view class='list-item2'>
+            <view class='left'>维修价格</view>
+            <view class='right'>$350.00</view>
+        </view>
+        <view class='list-item2 '>
+            <view class='left'>优惠价格</view>
+            <view class='right'>￥20.00</view>
+        </view>
+        <view class='list-item2'>
+            <view class='left'>
+                预付总价
+                <text class='tip'>最终价格以检测后最终方案价格为准</text>
+            </view>
+            <view class='right orange'>￥340.00</view>
+        </view>
+    </view>
+    <view class='list-box'>
+        <view class='list-item'>
+            <view class='left'>留言</view>
+            <view class='right'>sfasdfsad</view>
+        </view>
+    </view>
+    <view class='btnBox'>
+        <view>取消订单</view>
+        <view>付款</view>
+    </view>
+</view>

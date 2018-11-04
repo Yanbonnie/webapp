@@ -1,0 +1,144 @@
+<!--pages/member/order.wxml-->
+<view class='order'>
+    <view class='evaluate'>
+        <view class='txt'>
+            <view>评估维修价格</view>
+            <view class='price'>报价等待检测</view>
+        </view>
+        <view class='btnBox'>
+            <view bindtap='againSelect'>
+                <image src='/assets/images/refresh.png'></image>
+                <text>重新选择</text>
+            </view>
+            <view bindtap='operOrderHandle'>
+                <image src='/assets/images/list.png'></image>
+                <text>故障列表</text>
+            </view>
+        </view>
+    </view>
+    <view class='selectWay'>
+        <view class='title'>选择维修方式</view>
+        <view class='wayBox' >
+            <view  class="{{selectIndex == 0 ? 'selected':''}}" bindtap='selectWayHandle' data-way="0">
+                <image src='/assets/images/yc.png'></image>
+                <text>远程服务</text>
+                <view class='icon'></view>
+            </view>
+            <view  class="{{selectIndex == 1 ? 'selected':''}}" bindtap='selectWayHandle' data-way="1">
+                <image src='/assets/images/sm.png'></image>
+                <text>上门维修</text>
+                <view class='icon'></view>
+            </view>
+            <view  class="{{selectIndex == 2 ? 'selected':''}}" bindtap='selectWayHandle' data-way="2">
+                <image src='/assets/images/dp.png'></image>
+                <text>送店维修</text>
+                <view class='icon'></view>
+            </view>
+            <view  class="{{selectIndex == 3 ? 'selected':''}}" bindtap='selectWayHandle' data-way="3">
+                <image src='/assets/images/wx.png'></image>
+                <text>现场服务</text>
+                <view class='icon'></view>
+            </view>
+        </view>
+        <view class='wayTipBox'>
+            <view class='wayTip'>
+                <view>{{tipArr[selectIndex]}}</view>
+            </view>
+        </view>
+        <form bindsubmit="formSubmit" bindreset="formReset">
+            <!-- 服务时间 -->
+            <view class='form-item' wx:if="{{selectIndex != 2 }}"> 
+                <view class='left'>
+                    <image src='/assets/images/time.png'></image>
+                </view>
+                <view class='right'>
+                    <picker mode="multiSelector" bindchange="bindMultiPickerChange" range="{{serverTime}}" value="{{timeValue}}">
+                        <view wx:if="{{timeValue.length > 0 }}" class="picker">
+                            {{serverTime[0][timeValue[0]] + serverTime[1][timeValue[1]]}}
+                        </view>
+                        <view class='picker gray' wx:else>
+                            {{ selectIndex == 0 ? '请选择远程服务时间' : selectIndex == 1 ? '请选择上门服务时间' : '预约时间'}}
+                        </view>
+                    </picker>
+                </view>
+            </view>
+            <!-- 快递单 -->
+            <view class='form-item' wx:if="{{selectIndex == 2 }}"> 
+                <view class='left'>
+                    <image src='/assets/images/order.png'></image>
+                </view>
+                <view class='right'>
+                    <input  placeholder="快递单号" type='number' name="ordernum"/>
+                </view>
+            </view>
+            <!-- 远程服务工具 -->
+            <view class='form-item' wx:if="{{selectIndex == 0}}"> 
+                <view class='left'>
+                    <image src='/assets/images/gj.png'></image>
+                </view>
+                <view class='right'>
+                    <picker mode="selector" bindchange="bindselectorChange" range="{{tool}}" value="{{toolValue}}">
+                        <view  class="{{toolValue || toolValue == 0 ? 'picker':'picker gray'}}">
+                            {{toolValue || toolValue == 0 ? tool[toolValue] : '请选择远程服务工具'}}
+                        </view>
+                    </picker>
+                </view>
+            </view>
+            <!-- 详细的上门地址 -->
+            <view class='form-item' wx:if="{{selectIndex == 1}}"> 
+                <view class='left'>
+                    <image src='/assets/images/address.png'></image>
+                </view>
+                <view class='right' bindtap='chooseAddressHandle'>
+                    <input  placeholder="填写详细的上门地址" disabled value="{{address}}" name="address"/>
+                </view>
+            </view>
+            <!-- 维修地址 -->
+            <view class='form-item' wx:if="{{selectIndex == 2 || selectIndex == 3}}"> 
+                <view class='left'>
+                    <image src='/assets/images/address.png'></image>
+                </view>
+                <view class='right'>
+                    <input  placeholder="维修店地址：广州市天河区百脑汇一楼101" disabled/>
+                </view>
+            </view>
+            <view class='form-item heightauto'> 
+                <view class='left'>
+                    留言
+                </view>
+                <view class='right'>
+                    <textarea placeholder="请留言，详细描述你的一些疑问，让工程师提前做好准备，节省您的宝贵时间" name="message"/>
+                </view>
+            </view>
+            <view class='form-item'> 
+                <view class='left'>
+                    <image src='/assets/images/check-square-on.png'></image>
+                </view>
+                <view class='right'>
+                    我已详细阅读并且同意<text class='agreement'>《爱帮用户服务协议》</text>
+                </view>
+            </view>
+            <view class='sweet'>
+                <text>温馨提示:</text>
+                <text>1、具体维修时间待工程师l联系确认</text>
+                <text>2、具体维修价格待工程师与你确认,并得到你同意后再维修</text>
+                <text>3、维修时，请你在电脑旁边</text>
+            </view>
+            <button class='sureBtn' form-type="submit"> 确定维修 </button>
+        </form>
+    </view>
+</view>
+
+<view class='mask-pop' wx:if="{{orderState}}"></view>
+<view class='cover' wx:if="{{orderState}}">
+    <view class='orderBox'>
+        <view class='close' bindtap='operOrderHandle'><image src='/assets/images/close_solid.png'></image></view>
+        <view class='title'>已选故障</view>
+        <view class='list' >
+            <view class='item' wx:for="{{orderList}}" wx:key="unique">
+                <text>{{item.name}}</text>
+                <text>${{item.price}}</text>
+            </view>
+        </view>
+    </view>
+</view>
