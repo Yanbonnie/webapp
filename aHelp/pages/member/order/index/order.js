@@ -19,6 +19,7 @@ Page({
         selectIndex:0,   //0-远程服务 1-上门维修 2-送店维修 3-现场服务
         tipArr:["请提供QQ远程或者Teamviewer ID、密码给维修工程师",'请填写详细的上门地址和联系电话','请寄送到指定的维修地点，自付快递费用','请在上班期间，送到指定的维修地点'],
         orderState:false,    //故障列表弹框展示状态
+        agreeState:false,
     },
 
     /**
@@ -80,5 +81,10 @@ Page({
         wx.redirectTo({
             url:'/pages/member/order/success/success'
         })
+    },
+    // 显示隐藏用户协议弹框
+    operAgreementBox(){
+        const { agreeState } = this.data;
+        this.setData({ agreeState : !agreeState})
     }
 })

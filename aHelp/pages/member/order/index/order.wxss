@@ -132,6 +132,7 @@
 .form-item textarea{
     height: 80rpx;
     padding-top: 25rpx;
+    z-index: 0;
 }
 .sweet{
     padding: 20rpx 30rpx 50rpx;
@@ -192,4 +193,61 @@
     color: #fa8a55;
 }
 
-
+.agreementCover{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ffffff;
+    z-index: 10;
+}
+.agreementBox{
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.agreementBox .head{
+    flex-basis: 100rpx;
+    text-align: center;
+    position: relative;
+    line-height: 100rpx;
+}
+.agreementBox .head text{
+    font-size: 40rpx;
+}
+.agreementBox .head .close{
+    width: 50rpx;
+    height: 50rpx;
+    position: absolute;
+    right: 50rpx;
+    top: 25rpx;
+}
+.agreementBox .head image{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.agreementBox .body{
+    flex: 1;
+    padding: 20rpx;
+    overflow: auto;
+}
+.agreementBox .body text{
+    display: block;
+    color: #8a8a8a;
+    text-align: justify;
+    line-height: 40rpx;
+    /* text-indent: 40rpx; */
+}
+.agreementBox .body .title{
+    text-indent: 0rpx;
+    font-size: 30rpx;
+    margin-top: 20rpx;
+    margin-bottom: 10rpx;
+    color: #000;
+}

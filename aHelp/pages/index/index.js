@@ -118,7 +118,7 @@ Page({
             },
             err:true
         }).then(res => {
-            console.log(res)
+            console.log(res.decryptedData)
             // let { openid, unionid } = res.data;
             // app.globalData.unionid = unionid;
             // if ( btnType && btnType == 'appointment'){  //点击马上预约
