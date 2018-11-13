@@ -28,6 +28,7 @@ App({
     globalData: {
         userInfo: null,
         REQUEST,
-        orderList:[]
+        orderList:[],
+        unionid:null
     }
 })

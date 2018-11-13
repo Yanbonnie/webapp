@@ -19,22 +19,22 @@
     <view class='selectWay'>
         <view class='title'>选择维修方式</view>
         <view class='wayBox' >
-            <view  class="{{selectIndex == 0 ? 'selected':''}}" bindtap='selectWayHandle' data-way="0">
+            <view  class="{{selectIndex == 1 ? 'selected':''}}" bindtap='selectWayHandle' data-way="1">
                 <image src='/assets/images/yc.png'></image>
                 <text>远程服务</text>
                 <view class='icon'></view>
             </view>
-            <view  class="{{selectIndex == 1 ? 'selected':''}}" bindtap='selectWayHandle' data-way="1">
+            <view  class="{{selectIndex == 2 ? 'selected':''}}" bindtap='selectWayHandle' data-way="2">
                 <image src='/assets/images/sm.png'></image>
                 <text>上门维修</text>
                 <view class='icon'></view>
             </view>
-            <view  class="{{selectIndex == 2 ? 'selected':''}}" bindtap='selectWayHandle' data-way="2">
+            <view  class="{{selectIndex == 3 ? 'selected':''}}" bindtap='selectWayHandle' data-way="3">
                 <image src='/assets/images/dp.png'></image>
                 <text>送店维修</text>
                 <view class='icon'></view>
             </view>
-            <view  class="{{selectIndex == 3 ? 'selected':''}}" bindtap='selectWayHandle' data-way="3">
+            <view  class="{{selectIndex == 4 ? 'selected':''}}" bindtap='selectWayHandle' data-way="4">
                 <image src='/assets/images/wx.png'></image>
                 <text>现场服务</text>
                 <view class='icon'></view>
@@ -47,23 +47,23 @@
         </view>
         <form bindsubmit="formSubmit" bindreset="formReset">
             <!-- 服务时间 -->
-            <view class='form-item' wx:if="{{selectIndex != 2 }}"> 
+            <view class='form-item' wx:if="{{selectIndex != 3 }}"> 
                 <view class='left'>
                     <image src='/assets/images/time.png'></image>
                 </view>
                 <view class='right'>
-                    <picker mode="multiSelector" bindchange="bindMultiPickerChange" range="{{serverTime}}" value="{{timeValue}}">
+                    <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="columnchangeHandle" range="{{serverTime}}" value="{{timeValue}}">
                         <view wx:if="{{timeValue.length > 0 }}" class="picker">
-                            {{serverTime[0][timeValue[0]] + serverTime[1][timeValue[1]]}}
+                            {{serverTime[0][timeValue[0]] + "  " + serverTime[1][timeValue[1]]}}
                         </view>
                         <view class='picker gray' wx:else>
-                            {{ selectIndex == 0 ? '请选择远程服务时间' : selectIndex == 1 ? '请选择上门服务时间' : '预约时间'}}
+                            {{ selectIndex == 1 ? '请选择远程服务时间' : selectIndex == 2 ? '请选择上门服务时间' : '预约时间'}}
                         </view>
                     </picker>
                 </view>
             </view>
             <!-- 快递单 -->
-            <view class='form-item' wx:if="{{selectIndex == 2 }}"> 
+            <view class='form-item' wx:if="{{selectIndex == 3 }}"> 
                 <view class='left'>
                     <image src='/assets/images/order.png'></image>
                 </view>
@@ -72,7 +72,7 @@
                 </view>
             </view>
             <!-- 远程服务工具 -->
-            <view class='form-item' wx:if="{{selectIndex == 0}}"> 
+            <view class='form-item' wx:if="{{selectIndex == 1}}"> 
                 <view class='left'>
                     <image src='/assets/images/gj.png'></image>
                 </view>
@@ -85,7 +85,7 @@
                 </view>
             </view>
             <!-- 详细的上门地址 -->
-            <view class='form-item' wx:if="{{selectIndex == 1}}"> 
+            <view class='form-item' wx:if="{{selectIndex == 2}}"> 
                 <view class='left'>
                     <image src='/assets/images/address.png'></image>
                 </view>
@@ -94,12 +94,12 @@
                 </view>
             </view>
             <!-- 维修地址 -->
-            <view class='form-item' wx:if="{{selectIndex == 2 || selectIndex == 3}}"> 
+            <view class='form-item' wx:if="{{selectIndex == 3 || selectIndex == 4}}"> 
                 <view class='left'>
                     <image src='/assets/images/address.png'></image>
                 </view>
                 <view class='right'>
-                    <input  placeholder="维修店地址：广州市天河区百脑汇一楼101" disabled/>
+                    <input  placeholder="维修店地址：广州市天河区百脑汇一楼101" value="维修店地址：广州市天河区百脑汇一楼101" name="StoreAddress" disabled/>
                 </view>
             </view>
             <view class='form-item heightauto'> 

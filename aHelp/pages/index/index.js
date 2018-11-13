@@ -118,8 +118,10 @@ Page({
             },
             err:true
         }).then(res => {
-            console.log(res.decryptedData)
-            // let { openid, unionid } = res.data;
+            console.log(res)
+            let { openid, unionid } = res;
+            app.globalData.unionid = unionid;
+
             // app.globalData.unionid = unionid;
             // if ( btnType && btnType == 'appointment'){  //点击马上预约
             //     this.appointmentHandle();
@@ -273,6 +275,18 @@ Page({
                     title: '请选择故障',
                 })
                 return;
+            }
+            if(!app.globalData.unionId){
+                wx.getUserInfo({
+                    success: res => {
+                        app.globalData.userInfo = res;
+                        this.setData({
+                            userInfo: res.userInfo,
+                            hasUserInfo: true
+                        })
+                        this.loginHandle(res)
+                    }
+                })
             }
             app.globalData.orderList = orderList;
             wx.navigateTo({

@@ -1,4 +1,3 @@
-var md5 = require('./md5.js')
 
 const Promise = require('./es6-promise')
 const formatTime = date => {
@@ -22,33 +21,23 @@ const Config = {
 }
 
 const URL = {
-    'getslideimage': 'getslideimage', //幻灯片
-    'getcategory': 'getcategory', //获取分类
-    'wechatauth': 'wechatauth', //登陆接口
-    'createorder': 'createorder', //创建订单      
+    'userLogin': 'userLogin',            //登录接口
+    'getslideimage':'getslideimage',     //幻灯片
+    'getcategory':'getcategory',         //获取分类
+    'wechatauth':'wechatauth',
 }
 
 //请求接口封装
-const REQUEST = ({
-    method = 'get',
-    url,
-    data = {},
-    header = {},
-    err = false
-}) => { //err->true  需要对失败进行特殊处理
+const REQUEST = ({ method='get', url, data={}, header={}, err=false}) => { //err->true  需要对失败进行特殊处理
     return new Promise((resolve, reject) => {
-        var key = '6ff0041a7b03ee2c2556c11fe8df0c4a';
-        var x_time = Math.floor(new Date().getTime() / 1000);
-        var agent = "Api Client";
-
         wx.request({
             method,
             url: Config.reqUrl + URL[url],
             data,
-            header: {
-                'X-User-Agent': agent,
-                'X-Authorization-Time': x_time,
-                'X-Authorization-Token': md5.hex_md5(key + x_time + agent),
+            header:{
+                'X-Authorization-Token': '841e34cad5e266379ae2dd92f94d9df9',
+                'X-Authorization-Time': new Date().getTime(),
+                'X-User-Agent': 'api',
                 ...header
             },
             success: res => {
@@ -56,9 +45,9 @@ const REQUEST = ({
                 if (res.data.api_status == 1) {
                     resolve(res.data);
                 } else {
-
+                    
                     if (err) {
-
+                        
                         reject(res.data)
                     } else {
                         wx.showToast({
