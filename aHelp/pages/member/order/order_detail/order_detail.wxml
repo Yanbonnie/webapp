@@ -10,34 +10,34 @@
     <view class='list-box'>
         <view class='list-item'>
             <view class='left'>订单编号</view>
-            <view class='right'>AB2243241542</view>
+            <view class='right'>{{orderDetail.orderId}}</view>
         </view>
         <view class='list-item'>
             <view class='left'>下单时间</view>
-            <view class='right'>2018-10-11 17:30:00</view>
+            <view class='right'>{{orderDetail.created_at}}</view>
         </view>
     </view>
 
     <view class='list-box'>
         <view class='list-item'>
             <view class='left'>联系人</view>
-            <view class='right'>小妮子</view>
+            <view class='right'>{{userInfo.nickName}}</view>
         </view>
         <view class='list-item'>
             <view class='left'>联系电话</view>
             <view class='right'>18825039685</view>
         </view>
-        <view class='list-item'>
-            <view class='left'>服务地址</view>
-            <view class='right'>刷卡的风景阿拉斯加地方</view>
+        <view class='list-item' wx:if="{{orderDetail.serviceAddress}}">
+            <view class='left'>上门服务地址</view>
+            <view class='right'>{{orderDetail.serviceAddress}}</view>
         </view>
-        <view class='list-item'>
+        <view class='list-item' wx:if="{{orderDetail.storeAddress || orderDetail.storeAddress == 0}}">
             <view class='left'>寄件地址</view>
-            <view class='right'>阿斯顿发生</view>
+            <view class='right'>{{orderDetail.storeAddress}}</view>
         </view>
         <view class='list-item'>
             <view class='left'>服务电话</view>
-            <view class='right'>14545424545</view>
+            <view class='right'>15989223570</view>
         </view>
     </view>
     <view class='list-box'>
@@ -45,38 +45,38 @@
             <view class='left'>维修项目</view>
             <view class='right'></view>
         </view>
-        <view class='list-item2 gray'>
+        <view class='list-item2 gray' wx:for="{{categoryList}}" wx:key="{{item.id}}">
+            <view class='left'>{{item.name}}</view>
+            <view class='right'>￥{{item.price}}</view>
+        </view>
+        <!-- <view class='list-item2 gray'>
             <view class='left'>windows重装系统</view>
             <view class='right'>￥82.00</view>
-        </view>
-        <view class='list-item2 gray'>
-            <view class='left'>windows重装系统</view>
-            <view class='right'>￥82.00</view>
-        </view>
+        </view> -->
         
     </view>
 
     <view class='list-box'>
-        <view class='list-item2'>
+        <!-- <view class='list-item2'>
             <view class='left'>维修价格</view>
             <view class='right'>$350.00</view>
         </view>
         <view class='list-item2 '>
             <view class='left'>优惠价格</view>
             <view class='right'>￥20.00</view>
-        </view>
+        </view> -->
         <view class='list-item2'>
             <view class='left'>
                 预付总价
                 <text class='tip'>最终价格以检测后最终方案价格为准</text>
             </view>
-            <view class='right orange'>￥340.00</view>
+            <view class='right orange'>￥{{orderDetail.finalPrice}}</view>
         </view>
     </view>
     <view class='list-box'>
         <view class='list-item'>
             <view class='left'>留言</view>
-            <view class='right'>sfasdfsad</view>
+            <view class='right'>{{orderDetail.leaveMessage ? orderDetail.leaveMessage : '暂无留言'}}</view>
         </view>
     </view>
     <view class='btnBox'>

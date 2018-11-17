@@ -17,7 +17,7 @@
     border: 0;
 }
 .list-item .left{
-    flex-basis: 140rpx;
+    flex-basis: 180rpx;
 }
 .list-item .right{
     flex: 1;
@@ -35,6 +35,9 @@
     margin: 0 50rpx;
     border-bottom: 1px #e0e0e0 solid;
     position: relative;
+}
+.list-item2:last-child{
+    border: 0;
 }
 .list-item2.gray .left,.list-item2.gray .right{
     color: #808080;

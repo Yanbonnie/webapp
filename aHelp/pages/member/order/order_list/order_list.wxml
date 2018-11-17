@@ -1,17 +1,16 @@
 <!--pages/member/order/order_list/order_list.wxml-->
 <view class='order_list'>
-    <view class='order-item' wx:for="{{[1,1,1]}}" wx:key="unique" bindtap='goDetail'>
+    <view class='order-item' wx:for="{{orderList}}" wx:key="{{item.id}}" bindtap='goDetail' data-id="{{item.id}}">
         <view class='flex-box'>
-            <view class='left'>订单编号:4242154512</view>
+            <view class='left'>订单编号:{{item.orderId}}</view>
             <view class='right'>预约中</view>
         </view>
         <view class='txt'>
-            <view>更换电源</view>
-            <view>系统损坏无法启动,重装WIN7</view>
+            <view wx:for="{{item.serviceCategory}}" wx:key="{{categoryItem.id}}" wx:for-item="categoryItem">{{categoryItem.name}}</view>
         </view>
         <view class='flex-box'>
-            <view class='left'>合计:￥80</view>
-            <view class='right'>2018-11-04 15:00:22</view>
+            <view class='left'>合计:￥{{item.finalPrice}}</view>
+            <view class='right'>{{item.created_at}}</view>
         </view>
     </view>
 </view>

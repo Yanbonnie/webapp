@@ -21,6 +21,6 @@
 .txt view{
     color: #808080;
 }
-.txt view:first-child{
+/* .txt view:first-child{
     color: #000;
-}
+} */

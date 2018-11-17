@@ -1,7 +1,13 @@
 // pages/member/order.js
 const app = getApp();
-const { globalData:{REQUEST} } = app;
-const { formatTime } = require('../../../../utils/util.js')
+const {
+    globalData: {
+        REQUEST
+    }
+} = app;
+const {
+    formatTime
+} = require('../../../../utils/util.js')
 Page({
 
     /**
@@ -10,66 +16,99 @@ Page({
     data: {
         serverTime: [],
         tool: ["QQ", "Teamviewer"],
-        timeValue:[],    //时间        
-        toolValue:null,  //服务工具
-        address:'',      //地址
-        ordernum:'',     //快递单号
-        message:'',      //留言
-        orderList:[],    //故障列表
-        selectIndex:1,   //1-远程服务 2-上门维修 3-送店维修 4-现场服务
-        tipArr:["","请提供QQ远程或者Teamviewer ID、密码给维修工程师",'请填写详细的上门地址和联系电话','请寄送到指定的维修地点，自付快递费用','请在上班期间，送到指定的维修地点'],
-        orderState:false,    //故障列表弹框展示状态
-        agreeState:false,
+        timeValue: [], //时间        
+        toolValue: null, //服务工具
+        address: '', //地址
+        ordernum: '', //快递单号
+        message: '', //留言
+        orderList: [], //故障列表
+        selectIndex: 1, //1-远程服务 2-上门维修 3-送店维修 4-现场服务
+        tipArr: ["", "请提供QQ远程或者Teamviewer ID、密码给维修工程师", '请填写详细的上门地址和联系电话', '请寄送到指定的维修地点，自付快递费用', '请在上班期间，送到指定的维修地点'],
+        orderState: false, //故障列表弹框展示状态
+        agreeState: false,
+        storeaddressArr:[],
+        storeaddress:[],
+        storeaddressVal:0
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function(options) {
         this.setData({
             orderList: app.globalData.orderList
-        })  
+        })
         this.setData({
-            'serverTime[0]': this.getDay(30).map(item=>item.time),
-            'serverTime[1]': this.getHour(new Date().getTime()).map(item=>item.time)
+            'serverTime[0]': this.getDay(30).map(item => item.time),
+            'serverTime[1]': this.getHour(new Date().getTime()).map(item => item.time)
         })
         console.log(this.data.serverTime)
+        this.getstoreaddress();
     },
-    // 处理时间
-    operTime(){
-        
+    // 获取店铺位置
+    getstoreaddress() {
+        REQUEST({
+            url:'getstoreaddress',
+        }).then(res=>{
+            let storeaddress = res.data.map(item=>item.address)
+            this.setData({ storeaddressArr: res.data, storeaddress})
+        })
+    },
+    // 店铺修改
+    bindstoreChange({
+        detail: {
+            value
+        }
+    }){
+        this.setData({ storeaddressVal:value})
     },
     // 选择维修方式
-    selectWayHandle(e){
-        const { way } = e.currentTarget.dataset;
-        this.setData({ selectIndex: way})
+    selectWayHandle(e) {
+        const {
+            way
+        } = e.currentTarget.dataset;
+        this.setData({
+            selectIndex: way
+        })
     },
     // 选择服务时间
-    bindMultiPickerChange({detail:{value}}){
-        if(!value[1]){
+    bindMultiPickerChange({
+        detail: {
+            value
+        }
+    }) {
+        if (!value[1]) {
             value[1] = 0;
         }
         this.setData({
-            timeValue:value
+            timeValue: value
         })
     },
     // 选择服务时间日期
-    columnchangeHandle({ detail: { value } }){
+    columnchangeHandle({
+        detail: {
+            value
+        }
+    }) {
         this.setData({
-            'serverTime[1]': this.getHour(new Date(this.data.serverTime[0][value]).getTime()).map(item=>item.time)
+            'serverTime[1]': this.getHour(new Date(this.data.serverTime[0][value]).getTime()).map(item => item.time)
         })
     },
     // 选择服务工具
-    bindselectorChange({detail:{value}}){
+    bindselectorChange({
+        detail: {
+            value
+        }
+    }) {
         this.setData({
-            toolValue:value
+            toolValue: value
         })
-        
+
     },
     // 选择地址
-    chooseAddressHandle(){
+    chooseAddressHandle() {
         wx.chooseAddress({
-            success:res=> {
+            success: res => {
                 console.log(res)
                 this.setData({
                     address: `${res.userName}:${res.telNumber},地址:${res.cityName}${res.countyName}${res.detailInfo}`
@@ -78,22 +117,36 @@ Page({
         })
     },
     // 重新选择
-    againSelect(){
+    againSelect() {
         wx.navigateBack({
-            delta:1
+            delta: 1
         })
     },
     //关闭列表弹框
-    operOrderHandle(){
-        const { orderState } = this.data;
+    operOrderHandle() {
+        const {
+            orderState
+        } = this.data;
         this.setData({
             orderState: !orderState
         })
     },
     // 确定维修
-    formSubmit(e){
-        const { address, ordernum, message, StoreAddress} = e.detail.value;
-        const { selectIndex, serverTime, timeValue, toolValue,orderList} = this.data;
+    formSubmit(e) {
+        const {
+            address,
+            ordernum,
+            message
+        } = e.detail.value;
+        const {
+            selectIndex,
+            serverTime,
+            timeValue,
+            toolValue,
+            orderList,
+            storeaddressVal,
+            storeaddress
+        } = this.data;
         console.log(orderList)
 
         // let serviceTools = tool;
@@ -101,13 +154,13 @@ Page({
         // wx.redirectTo({
         //     url:'/pages/member/order/success/success'
         // })
-        
-        if(selectIndex != 3){
-            if (timeValue.length == 0){
+
+        if (selectIndex != 3) {
+            if (timeValue.length == 0) {
                 wx.showToast({
                     title: '请选择时间',
-                    mask:true,
-                    icon:"none"
+                    mask: true,
+                    icon: "none"
                 })
                 return;
             }
@@ -120,7 +173,7 @@ Page({
                 })
                 return;
             }
-        }else if (selectIndex == 2) {
+        } else if (selectIndex == 2) {
             if (message == '') {
                 wx.showToast({
                     title: '请填写详细的上门地址',
@@ -128,69 +181,79 @@ Page({
                     icon: "none"
                 })
                 return;
-            }            
-        }else if (selectIndex == 3) {
+            }
+        } else if (selectIndex == 3) {
             if (ordernum == '') {
                 wx.showToast({
                     title: '请填写快递单号',
                     mask: true,
                     icon: "none"
                 })
-                return;
             }
         }
         let reqData = {}
         let serviceTime = serverTime[0][timeValue[0]] + " " + serverTime[1][timeValue[1]];
-        let serviceTools = Number(toolValue) + 1;
-        switch (selectIndex){
-            case 1:
+        let serviceTools_id = Number(toolValue) + 1;
+        switch (selectIndex) {
+            case "1":
                 reqData = {
                     serviceTime,
-                    serviceTools
+                    serviceTools_id
                 }
                 break;
-            case 2:
+            case "2":
                 reqData = {
                     serviceTime,
-                    serviceAddress:address
+                    serviceAddress: address
                 }
                 break;
-            case 3:
+            case "3":
                 reqData = {
-                    TrackingNumber:ordernum,
-                    StoreAddress
+                    trackingNumber: ordernum,
+                    storeAddress: storeaddressVal
                 }
                 break;
-            case 4:
+            case "4":
                 reqData = {
                     serviceTime,
-                    StoreAddress
+                    storeAddress: storeaddressVal
                 }
                 break;
             default:
                 break;
         }
-        let catogoryId = orderList.map(item=>item.id)
-        // let finalPrice = 
+        let item = orderList.map(item => item.id);
+        wx.showLoading({
+            title: '提交中....',
+            mask:true
+        })
         REQUEST({
             method: 'post',
-            url: 'createorder',
+            url: 'createorders',
             data: {
-                userId:app.globalData.unionid,   //必填
-                catogoryId,                      //必填
-                serviceId:selectIndex,           //必填
-                orderStatus:'1',                 //必填
-                finalPrice,
+                unionId: app.globalData.unionid, //必填
+                item, //必填
+                serviceType_id: selectIndex, //必填
+                orderStatus: '1', //必填
+                // finalPrice,
                 ...reqData
             }
-        }).then(res=>{
-            console.log(res)
+        }).then(res => {
+            wx.hideLoading();
+            wx.redirectTo({
+                url:`/pages/member/order/success/success?id=${res.id}`
+            })
+            
         })
     },
     // 显示隐藏用户协议弹框
-    operAgreementBox(){
-        const { agreeState } = this.data;
-        this.setData({ agreeState : !agreeState})
+    operAgreementBox() {
+        const {
+            agreeState
+        } = this.data;
+        this.setData({
+            agreeState: !agreeState
+        })
     },
     //获取时间
     getDay(dayNum) {

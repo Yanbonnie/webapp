@@ -20,6 +20,7 @@ Page({
         curOrderId:null,        //当前选中的订单数据,
         count: 0,               //请求登陆接口count
         btnType:'',             //点击个人中心或者马上预约未登录的情况
+        goOrder:null,           //1-跳转到下单页面 2-用户中心
     },
     //事件处理函数
     bindViewTap: function() {
@@ -100,7 +101,7 @@ Page({
     },
     // 登陆
     getAllUserInfo(code, iv, encryptedData) {
-        let { count, btnType } = this.data;
+        let { count, btnType, goOrder } = this.data;
         // if (btnType && btnType == 'appointment') {  //点击马上预约
         //     this.appointmentHandle();
         // }
@@ -118,17 +119,20 @@ Page({
             },
             err:true
         }).then(res => {
-            console.log(res)
             let { openid, unionid } = res;
             app.globalData.unionid = unionid;
-
-            // app.globalData.unionid = unionid;
-            // if ( btnType && btnType == 'appointment'){  //点击马上预约
-            //     this.appointmentHandle();
-            // }
-            // if(btnType && btnType == 'member'){  //点击个人中心
-            //     this.goMemberCenter();
-            // }
+            if(!unionid){
+                wx.getUserInfo({
+                    success: res => {
+                        app.globalData.userInfo = res;
+                        this.setData({
+                            userInfo: res.userInfo,
+                            hasUserInfo: true
+                        })
+                        this.loginHandle(res)
+                    }
+                })
+            }
         }).catch(res => {
             console.log(res)
             if (count < 5) {
@@ -260,13 +264,22 @@ Page({
     goMemberCenter(){
         const { hasUserInfo } = this.data;
         if (hasUserInfo) {
-            wx.navigateTo({
-                url: '/pages/member/index/index',
-            })
+            if (!app.globalData.unionid) {
+                wx.showModal({
+                    title: '温馨提示',
+                    content: '网络繁忙，请退出重试',
+                })
+            }else{
+                wx.navigateTo({
+                    url: '/pages/member/index/index?unionid='+app.globalData.unionid,
+                })
+            }
+            
         }
     },
     // 马上预约
     appointmentHandle(){
+        wx.hideLoading();
         const { hasUserInfo, orderList } = this.data;
         if(hasUserInfo){
             if (orderList.length <= 0){
@@ -276,22 +289,19 @@ Page({
                 })
                 return;
             }
-            if(!app.globalData.unionId){
-                wx.getUserInfo({
-                    success: res => {
-                        app.globalData.userInfo = res;
-                        this.setData({
-                            userInfo: res.userInfo,
-                            hasUserInfo: true
-                        })
-                        this.loginHandle(res)
-                    }
+            if(!app.globalData.unionid){
+                wx.showModal({
+                    title: '温馨提示',
+                    content: '网络繁忙，请退出重试',
+                })
+            }else{
+                
+                app.globalData.orderList = orderList;
+                wx.navigateTo({
+                    url: '/pages/member/order/index/order',
                 })
             }
-            app.globalData.orderList = orderList;
-            wx.navigateTo({
-                url: '/pages/member/order/index/order',
-            })
+            
         }
         
     },

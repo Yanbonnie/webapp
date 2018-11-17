@@ -22,10 +22,14 @@ const Config = {
 }
 
 const URL = {
-    'getslideimage': 'getslideimage', //幻灯片
-    'getcategory': 'getcategory', //获取分类
-    'wechatauth': 'wechatauth', //登陆接口
-    'createorder': 'createorder', //创建订单      
+    'getslideimage': 'getslideimage',        //幻灯片
+    'getcategory': 'getcategory',            //获取分类
+    'wechatauth': 'wechatauth',              //登陆接口
+    'getstoreaddress':'getstoreaddress',     //获取门店地址
+    'createorders':'createorders',           //创建订单
+    'getorderdetail':'getorderdetail',       //获取订单详情
+    'getservicename':'getservicename',       //获取维修项目name
+    'getorderlist':'getorderlist',           //获取订单列表
 }
 
 //请求接口封装

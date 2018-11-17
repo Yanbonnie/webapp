@@ -99,7 +99,12 @@
                     <image src='/assets/images/address.png'></image>
                 </view>
                 <view class='right'>
-                    <input  placeholder="维修店地址：广州市天河区百脑汇一楼101" value="维修店地址：广州市天河区百脑汇一楼101" name="StoreAddress" disabled/>
+                    <!-- <input  placeholder="维修店地址：广州市天河区百脑汇一楼101" value="维修店地址：广州市天河区百脑汇一楼101" name="StoreAddress" disabled/> -->
+                    <picker mode="selector" bindchange="bindstoreChange" range="{{storeaddress}}" value="{{storeaddressVal}}">
+                        <view  class="picker">
+                            {{storeaddress[storeaddressVal]}}
+                        </view>
+                    </picker>
                 </view>
             </view>
             <view class='form-item heightauto'> 

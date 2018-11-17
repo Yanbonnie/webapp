@@ -1,66 +1,76 @@
 // pages/member/order/sure_order/sure_order.js
+// pages/member/order.js
+const app = getApp();
+const {
+    globalData: {
+        REQUEST
+    },
+    userInfo
+} = app;
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        id:null,
+        orderDetail:null,
+        userInfo:null,
+        categoryList:[],
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        // 在没有 open-type=getUserInfo 版本的兼容处理
+        wx.getUserInfo({
+            success: res => {
+                this.setData({
+                    userInfo: res.userInfo,
+                })
+            }
+        })
 
+        const { id } = options;
+        this.setData({id});
+        this.getorderdetailData(id);
+        
     },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
+    getorderdetailData(id){
+        wx.showLoading({
+            title: '加载中...',
+            mask:true
+        })
+        REQUEST({
+            url: 'getorderdetail',
+            data: {
+                orderId:'SO1000'+id
+            }
+        }).then(res => {
+            wx.hideLoading();
+            let categoryIds = res.data[0].serviceCategory.map(item=>item.item);
+            let reqArr = [];
+            categoryIds.forEach(item=>{
+                reqArr.push(REQUEST({ url: 'getservicename', data: { id: item}}))
+            })
+            this.setData({ orderDetail:res.data[0]})
+            this.getservicename(reqArr);
+        })
     },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
+    getservicename(reqArr){
+        Promise.all(reqArr).then(res => {
+            let list = res.map(item=>{
+                return {
+                    name: item.data[0].name,
+                    price: item.data[0].price,
+                    id:item.data[0].id
+                }
+            })
+            this.setData({
+                categoryList:list
+            })
+        })
     }
+
 })

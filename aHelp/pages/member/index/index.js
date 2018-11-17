@@ -22,7 +22,7 @@ Page({
     navagateTo(e){
         const { page } = e.currentTarget.dataset;
         wx.navigateTo({
-            url: page,
+            url: page+'?unionid='+app.globalData.unionid,
         })
     }
 
