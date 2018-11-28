@@ -22,6 +22,7 @@ Page({
         })
     },
     goOrderHandle(){
+        const {id} = this.data;
         wx.redirectTo({
             url: '/pages/member/order/order_detail/order_detail?id='+id,
         })

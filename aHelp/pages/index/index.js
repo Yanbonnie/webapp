@@ -21,6 +21,7 @@ Page({
         count: 0,               //请求登陆接口count
         btnType:'',             //点击个人中心或者马上预约未登录的情况
         goOrder:null,           //1-跳转到下单页面 2-用户中心
+        remark:'',
     },
     //事件处理函数
     bindViewTap: function() {
@@ -155,6 +156,8 @@ Page({
     // 二级分类
     getcategorySecData(e) {
         const { parentid , name} = e.currentTarget.dataset;
+        let remark = this.data.getcategory.filter(item=>item.id == parentid)[0].remark
+        this.setData({ remark })
         const { orderList } = this.data;
         wx.showLoading({
             title: '请求中...',

@@ -30,6 +30,8 @@ const URL = {
     'getorderdetail':'getorderdetail',       //获取订单详情
     'getservicename':'getservicename',       //获取维修项目name
     'getorderlist':'getorderlist',           //获取订单列表
+    'sendsms': 'sendsms',                    //发送验证码
+    'updatesms': 'updatesms',                //验证手机
 }
 
 //请求接口封装

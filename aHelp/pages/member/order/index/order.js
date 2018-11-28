@@ -28,7 +28,9 @@ Page({
         agreeState: false,
         storeaddressArr:[],
         storeaddress:[],
-        storeaddressVal:0
+        storeaddressVal:0,
+        mobile:"",         //手机号码
+        keyinCode:'',      //验证码
     },
 
     /**
@@ -131,12 +133,68 @@ Page({
             orderState: !orderState
         })
     },
+    //监听联系方式输入
+    bindMobileInput(e){
+        const { value } = e.detail;
+        this.setData({
+            mobile:value
+        })
+    },
+    //监听验证码方式输入
+    bindCodeInput(e) {
+        const { value } = e.detail;
+        this.setData({
+            keyinCode: value
+        })
+    },
+    getCodeHandle(e){
+        const { mobile } = this.data;
+        if(!mobile){
+            wx.showToast({
+                icon: 'none',
+                title: '请输入手机号码',
+            })
+            return;
+        }
+        if (!this.isPhone(mobile)) {            
+            wx.showToast({
+                icon:'none',
+                title: '手机号码格式不正确',
+            })
+            return;
+        }
+        wx.showLoading({
+            title: '发送中,请注意查收',
+        })
+        REQUEST({
+            method: 'post',
+            url: 'sendsms',
+            data: {
+                mobile
+            }
+        }).then(res => {
+            wx.hideLoading();
+        })
+    },
+    isPhone: function (str) {  //判断是否是正确的手机
+        if (typeof str === 'number') {
+            str = str.toString();
+        }
+        return /^0?1[3|4|5|7|8][0-9]\d{8}$/.test(str);
+    },
+    //验证手机真是性
+    // updatesmsHandle(){
+    //     const { mobile, keyinCode} = this.data;
+        
+        
+    // },
     // 确定维修
     formSubmit(e) {
         const {
             address,
             ordernum,
-            message
+            message,
+            keyinCode
         } = e.detail.value;
         const {
             selectIndex,
@@ -145,15 +203,9 @@ Page({
             toolValue,
             orderList,
             storeaddressVal,
-            storeaddress
+            storeaddress,
+            mobile
         } = this.data;
-        console.log(orderList)
-
-        // let serviceTools = tool;
-        console.log(e)
-        // wx.redirectTo({
-        //     url:'/pages/member/order/success/success'
-        // })
 
         if (selectIndex != 3) {
             if (timeValue.length == 0) {
@@ -174,7 +226,7 @@ Page({
                 return;
             }
         } else if (selectIndex == 2) {
-            if (message == '') {
+            if (address == '') {
                 wx.showToast({
                     title: '请填写详细的上门地址',
                     mask: true,
@@ -191,6 +243,28 @@ Page({
                 })
             }
         }
+        if (!mobile) {
+            wx.showToast({
+                icon: 'none',
+                title: '请输入手机号码',
+            })
+            return;
+        }
+        if (!this.isPhone(mobile)) {
+            wx.showToast({
+                icon: 'none',
+                title: '手机号码格式不正确',
+            })
+            return;
+        }
+        if (!keyinCode) {
+            wx.showToast({
+                icon: 'none',
+                title: '请输入验证码',
+            })
+            return;
+        }
+
         let reqData = {}
         let serviceTime = serverTime[0][timeValue[0]] + " " + serverTime[1][timeValue[1]];
         let serviceTools_id = Number(toolValue) + 1;
@@ -225,25 +299,36 @@ Page({
         let item = orderList.map(item => item.id);
         wx.showLoading({
             title: '提交中....',
-            mask:true
+            mask: true
         })
         REQUEST({
             method: 'post',
-            url: 'createorders',
+            url: 'updatesms',
             data: {
-                unionId: app.globalData.unionid, //必填
-                item, //必填
-                serviceType_id: selectIndex, //必填
-                orderStatus: '1', //必填
-                // finalPrice,
-                ...reqData
+                mobile,
+                keyinCode
             }
         }).then(res => {
-            wx.hideLoading();
-            wx.redirectTo({
-                url:`/pages/member/order/success/success?id=${res.id}`
+            REQUEST({
+                method: 'post',
+                url: 'createorders',
+                data: {
+                    unionId: app.globalData.unionid, //必填
+                    item, //必填
+                    serviceType_id: selectIndex, //必填
+                    orderStatus: '1', //必填
+                    message,
+                    mobile,
+                    // finalPrice,
+                    ...reqData
+                }
+            }).then(res => {
+                wx.hideLoading();
+                wx.redirectTo({
+                    url: `/pages/member/order/success/success?id=${res.id}`
+                })
+
             })
-            
         })
     },
     // 显示隐藏用户协议弹框
