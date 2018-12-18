@@ -297,6 +297,7 @@ image {
     flex-direction: column;
     overflow: hidden;
     align-items: center;
+    border-radius: 10rpx;
     justify-content: center;
 }
 
@@ -313,18 +314,18 @@ image {
 }
 
 .barrier .operBtn view {
-    width: 180rpx;
-    height: 75rpx;
+    width: 260rpx;
+    height: 95rpx;
     font-size: 26rpx;
     text-align: center;
     border: 1rpx #c8c8c8 solid;
-    line-height: 75rpx;
+    line-height: 95rpx;
     margin: 0 20rpx;
     border-radius: 8rpx;
 }
 
 .barrier .barrier-cont {
-    width: 85%;
+    width: 95%;
     flex: 1;
     overflow: auto;
 }
@@ -348,6 +349,7 @@ image {
 
 .barrier .remarks {
     display: flex;
+    padding: 0 20rpx;
 }
 
 .barrier .operBtn view:nth-child(2) {

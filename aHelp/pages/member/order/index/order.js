@@ -25,10 +25,10 @@ Page({
         selectIndex: 1, //1-远程服务 2-上门维修 3-送店维修 4-现场服务
         tipArr: ["", "请提供QQ远程或者Teamviewer ID、密码给维修工程师", '请填写详细的上门地址和联系电话', '请寄送到指定的维修地点，自付快递费用', '请在上班期间，送到指定的维修地点'],
         orderState: false, //故障列表弹框展示状态
-        agreeState: false,
         storeaddressArr:[],
         storeaddress:[],
         storeaddressVal:0,
+        elderMobile:false,    //是否存在原始手机号码
         mobile:"",         //手机号码
         keyinCode:'',      //验证码
     },
@@ -46,6 +46,22 @@ Page({
         })
         console.log(this.data.serverTime)
         this.getstoreaddress();
+        this.getmobileHandle();
+    },
+    // 验证用户是否已经提供过手机信息
+    getmobileHandle(){
+        REQUEST({
+            url: 'getmobile',
+            data:{
+                unionid:app.globalData.unionid
+            }
+        }).then(res => {
+            console.log(res)
+            if(res.data.length > 0){
+                this.setData({ mobile: res.data[0].mobile, elderMobile:true })
+            }
+            
+        })
     },
     // 获取店铺位置
     getstoreaddress() {
@@ -113,7 +129,8 @@ Page({
             success: res => {
                 console.log(res)
                 this.setData({
-                    address: `${res.userName}:${res.telNumber},地址:${res.cityName}${res.countyName}${res.detailInfo}`
+                    // address: `${res.userName}:${res.telNumber},地址:${res.cityName}${res.countyName}${res.detailInfo}`
+                    address: `${res.cityName}${res.countyName}${res.detailInfo}`
                 })
             }
         })
@@ -170,7 +187,8 @@ Page({
             method: 'post',
             url: 'sendsms',
             data: {
-                mobile
+                mobile,
+                unionid:app.globalData.unionid
             }
         }).then(res => {
             wx.hideLoading();
@@ -204,7 +222,8 @@ Page({
             orderList,
             storeaddressVal,
             storeaddress,
-            mobile
+            mobile,
+            elderMobile
         } = this.data;
 
         if (selectIndex != 3) {
@@ -257,7 +276,7 @@ Page({
             })
             return;
         }
-        if (!keyinCode) {
+        if (!keyinCode && !elderMobile) {
             wx.showToast({
                 icon: 'none',
                 title: '请输入验证码',
@@ -301,14 +320,7 @@ Page({
             title: '提交中....',
             mask: true
         })
-        REQUEST({
-            method: 'post',
-            url: 'updatesms',
-            data: {
-                mobile,
-                keyinCode
-            }
-        }).then(res => {
+        if (elderMobile){  //不需要验证
             REQUEST({
                 method: 'post',
                 url: 'createorders',
@@ -325,19 +337,47 @@ Page({
             }).then(res => {
                 wx.hideLoading();
                 wx.redirectTo({
-                    url: `/pages/member/order/success/success?id=${res.id}`
+                    url: `/pages/member/order/success/success?id=${res.data.orderId}`
                 })
 
             })
-        })
+        }else{
+            REQUEST({
+                method: 'post',
+                url: 'updatesms',
+                data: {
+                    mobile,
+                    keyinCode
+                }
+            }).then(res => {
+                REQUEST({
+                    method: 'post',
+                    url: 'createorders',
+                    data: {
+                        unionId: app.globalData.unionid, //必填
+                        item, //必填
+                        serviceType_id: selectIndex, //必填
+                        orderStatus: '1', //必填
+                        message,
+                        mobile,
+                        // finalPrice,
+                        ...reqData
+                    }
+                }).then(res => {
+                    wx.hideLoading();
+                    wx.redirectTo({
+                        url: `/pages/member/order/success/success?id=${res.data.orderId}`
+                    })
+
+                })
+            })
+        }
+        
     },
     // 显示隐藏用户协议弹框
     operAgreementBox() {
-        const {
-            agreeState
-        } = this.data;
-        this.setData({
-            agreeState: !agreeState
+        wx.navigateTo({
+            url: '/pages/member/agreement/agreement'
         })
     },
     //获取时间

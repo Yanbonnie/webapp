@@ -23,7 +23,7 @@
             </view>
             <image class='icon-right' src='/assets/images/right.png'></image>
         </view>
-        <view class='list-item'>
+        <view class='list-item' bindtap='makePhoneCallHandle' data-phone="15989223570">
             <view class='image'>
                 <image src='/assets/images/phone.png'></image>
             </view>
@@ -35,7 +35,7 @@
             </view>
             <image class='icon-right' src='/assets/images/right.png'></image>
         </view>
-        <view class='list-item'>
+        <view class='list-item' bindtap='navagateTo' data-page="/pages/member/agreement/agreement" >
             <view class='image'>
                 <image src='/assets/images/xy.png'></image>
             </view>

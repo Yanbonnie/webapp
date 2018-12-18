@@ -55,7 +55,7 @@
             <image src='/assets/images/computer.png'></image>
             <text wx:if="{{orderList.length>0}}">{{orderList.length}}</text>
         </view>
-        <view class='tip'>选择故障，预估报价</view>
+        <view class='tip'> {{priceAll ? '预估报价￥'+priceAll : '选择故障，预估报价'}}</view>
         <view class='appointmentBtn' bindtap='appointmentHandle'>
             马上预约
             <button open-type="getUserInfo" wx:if="{{!hasUserInfo}}" data-stype="appointment" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
@@ -80,9 +80,8 @@
                 </view>
             </view>
             <view class='remarks'>
-                <view wx:if="{{remark != ''}}">备注</view>
                 <view>
-                    {{remark}}
+                    {{'备注 '+remark}}
                     <!-- <text>1、系统生成报价为预估价格，实际价格以工程师上门检测或远程检测为准；</text>
                     <text>2、工程师完成维护之后，请自行更改电脑密码。</text> -->
                 </view>

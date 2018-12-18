@@ -12,7 +12,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.3.0",
-	"appid": "wxf3f642eeab6647c7",
+	"appid": "wx5b75875565e2e821",
 	"projectname": "aHelp",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -36,13 +36,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 0,
 			"list": [
 				{
 					"id": 0,
 					"name": "订单详情",
 					"pathName": "pages/member/order/order_detail/order_detail",
-					"query": "id=29"
+					"query": "id=SOD2018121812425700054"
 				},
 				{
 					"id": 1,

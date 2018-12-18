@@ -1,9 +1,9 @@
 <!--pages/member/order/order_list/order_list.wxml-->
 <view class='order_list'>
-    <view class='order-item' wx:for="{{orderList}}" wx:key="{{item.id}}" bindtap='goDetail' data-id="{{item.id}}">
+    <view class='order-item' wx:for="{{orderList}}" wx:key="{{item.id}}" bindtap='goDetail' data-id="{{item.orderId}}">
         <view class='flex-box'>
             <view class='left'>订单编号:{{item.orderId}}</view>
-            <view class='right'>预约中</view>
+            <view class='right'>{{item.orderStateText}}</view>
         </view>
         <view class='txt'>
             <view wx:for="{{item.serviceCategory}}" wx:key="{{categoryItem.id}}" wx:for-item="categoryItem">{{categoryItem.name}}</view>

@@ -18,6 +18,13 @@ Page({
             userInfo:app.globalData.userInfo.userInfo
         })
     },
+    // 拨打电话
+    makePhoneCallHandle(e){
+        const { phone } = e.currentTarget.dataset;
+        wx.makePhoneCall({
+            phoneNumber: phone // 仅为示例，并非真实的电话号码
+        })
+    },
     // 页面跳转
     navagateTo(e){
         const { page } = e.currentTarget.dataset;

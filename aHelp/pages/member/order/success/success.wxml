@@ -3,7 +3,7 @@
     <view class='blank'></view>
     <image  src='/assets/images/success.png'></image>
     <view class='success_txt'>下单成功</view>
-    <view class='order_txt'>订单号：SO1000{{id}}</view>
+    <view class='order_txt'>订单号：{{id}}</view>
     <view class='btnBox'>
         <view bindtap='goHomeHandle'>返回首页</view>
         <view bindtap='goOrderHandle'>查看订单</view>

@@ -32,6 +32,8 @@ const URL = {
     'getorderlist':'getorderlist',           //获取订单列表
     'sendsms': 'sendsms',                    //发送验证码
     'updatesms': 'updatesms',                //验证手机
+    'wxpay':'wxpay',                         //微信支付
+    'getmobile':'getmobile',         //验证是否已经提供过手机信息
 }
 
 //请求接口封装

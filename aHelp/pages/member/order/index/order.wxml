@@ -112,11 +112,11 @@
                     <image src='/assets/images/phone.png'></image>
                 </view>
                 <view class='right'>
-                    <input  placeholder="请输入您的联系方式" bindinput="bindMobileInput" type='number' name="mobile"/>
+                    <input  placeholder="请输入您的联系方式" bindinput="bindMobileInput" value="{{mobile}}" type='number' name="mobile"/>
                 </view>
-                <view class="getCode" bindtap='getCodeHandle'>获取验证码</view>
+                <view class="getCode" bindtap='getCodeHandle' wx:if="{{!elderMobile}}">获取验证码</view>
             </view>
-            <view class='form-item'> 
+            <view class='form-item' wx:if="{{!elderMobile}}"> 
                 <view class='left'>
                     <image src='/assets/images/yzm.png'></image>
                 </view>

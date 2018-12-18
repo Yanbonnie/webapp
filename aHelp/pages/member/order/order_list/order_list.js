@@ -36,9 +36,16 @@ Page({
             }
         }).then(res => {
             wx.hideLoading();
-            this.setData({
-                orderList:res.data
+            let orderList = res.data.map(item=>{
+                return{
+                    orderStateText: item.orderStatus == 1 ? '已预约':item.orderStatus == 2 ? '已付款' : item.orderStatus == 3 ? '维修中' : '已完成',
+                    ...item,
+                }
             })
+            this.setData({
+                orderList: orderList
+            })
+            console.log(orderList)
             res.data.forEach((orderItem, index)=>{
                 let reqArr = orderItem.serviceCategory.map(categoryItem=>{
                     return REQUEST({ url: 'getservicename', data: { id: categoryItem.item } })

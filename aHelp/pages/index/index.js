@@ -22,6 +22,7 @@ Page({
         btnType:'',             //点击个人中心或者马上预约未登录的情况
         goOrder:null,           //1-跳转到下单页面 2-用户中心
         remark:'',
+        priceAll:null,          //预估报价
     },
     //事件处理函数
     bindViewTap: function() {
@@ -122,6 +123,8 @@ Page({
         }).then(res => {
             let { openid, unionid } = res;
             app.globalData.unionid = unionid;
+            app.globalData.openid = openid;
+            // return;
             if(!unionid){
                 wx.getUserInfo({
                     success: res => {
@@ -239,11 +242,19 @@ Page({
                     })
                 }
             })
-        }        
+            
+        }    
+        let priceAll = 0; 
+        orderList.forEach(item=>{
+            priceAll += item.price;
+        })   
         this.setData({
             barrierState:false,
-            orderList
+            orderList,
+            priceAll
         })
+        console.log(this.data.orderList)
+        this.data
         this.getcategoryCount();
     },
     // 计算一级是否选中
