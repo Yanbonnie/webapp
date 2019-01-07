@@ -55,7 +55,13 @@ Page({
             categoryIds.forEach(item=>{
                 reqArr.push(REQUEST({ url: 'getservicename', data: { id: item}}))
             })
-            this.setData({ orderDetail: res.data[0]})
+            let resultData = res.data[0];
+            let comment = resultData.orderStatus == 1 ? '订单预约中，代付款' : resultData.orderStatus == 2 ? '订单已付款，待工程师联系' : resultData.orderStatus == 3 ? '维系服务中' : resultData.orderStatus == 4 ?'已完成，很荣幸为您服务' : '订单已取消';
+            let orderDetail = {
+                ...resultData,
+                comment: resultData.comment ? resultData.comment : comment
+            }
+            this.setData({ orderDetail: orderDetail})
             this.getservicename(reqArr);
         })
     },
@@ -90,7 +96,6 @@ Page({
             }
         }).then(res => {
             wx.hideLoading();
-            console.log(res)
             const { appId, nonceStr, paySign, signType, timeStamp } = res.data.pay;
             const  package2  = res.data.pay.package;
             wx.requestPayment({
@@ -106,6 +111,27 @@ Page({
                 'fail': res => {
                 }
             })
+        })
+    },
+    cancelOrder(){
+        const { id } = this.data;  
+        REQUEST({
+            method: 'post',
+            url: 'cancelorder',
+            data: {
+                orderStatus:String(5),
+                orderId:id
+            }
+        }).then(res => {
+            wx.showToast({
+                title: '订单取消成功',
+                icon:'success',
+                mask:true
+            })
+            setTimeout(()=>{
+                this.getorderdetailData(id)
+            },2000)
+            // 
         })
     }
 

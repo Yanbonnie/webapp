@@ -31,6 +31,16 @@ Page({
         wx.navigateTo({
             url: page+'?unionid='+app.globalData.unionid,
         })
+    },
+    tabQuan(){
+        wx.showModal({
+            title: '提示',
+            content: '没有可使用的优惠券',
+            showCancel:false,
+            success(res) {
+                
+            }
+        })
     }
 
 })

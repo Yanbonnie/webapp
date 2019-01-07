@@ -1,16 +1,19 @@
 <!--pages/member/order/order_list/order_list.wxml-->
 <view class='order_list'>
-    <view class='order-item' wx:for="{{orderList}}" wx:key="{{item.id}}" bindtap='goDetail' data-id="{{item.orderId}}">
-        <view class='flex-box'>
-            <view class='left'>订单编号:{{item.orderId}}</view>
-            <view class='right'>{{item.orderStateText}}</view>
-        </view>
-        <view class='txt'>
-            <view wx:for="{{item.serviceCategory}}" wx:key="{{categoryItem.id}}" wx:for-item="categoryItem">{{categoryItem.name}}</view>
-        </view>
-        <view class='flex-box'>
-            <view class='left'>合计:￥{{item.finalPrice}}</view>
-            <view class='right'>{{item.created_at}}</view>
+    <view class='no-message' wx:if="{{orderList.length == 0}}">暂无数据</view>
+    <view wx:else>
+        <view class='order-item' wx:for="{{orderList}}" wx:key="{{item.id}}" bindtap='goDetail' data-id="{{item.orderId}}">
+            <view class='flex-box'>
+                <view class='left'>订单编号:{{item.orderId}}</view>
+                <view class="right {{item.orderClass}}">{{item.orderStateText}}</view>
+            </view>
+            <view class='txt'>
+                <view wx:for="{{item.serviceCategory}}" wx:key="{{categoryItem.id}}" wx:for-item="categoryItem">{{categoryItem.name}}</view>
+            </view>
+            <view class='flex-box'>
+                <view class='left'>合计:￥{{item.finalPrice}}</view>
+                <view class='right'>{{item.created_at}}</view>
+            </view>
         </view>
     </view>
 </view>

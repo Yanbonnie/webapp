@@ -1,0 +1,20 @@
+/* pages/member/about/about.wxss */
+page{
+    background: #ffffff;
+}
+.head{
+    padding: 20rpx 0;
+}
+.head text{
+    display: block;
+    text-align: center;
+    font-size: 40rpx;
+    color: #000000;
+}
+.contain {
+    padding: 0 30rpx;
+}
+.contain text{
+    line-height: 50rpx;
+    font-size: 30rpx;
+}

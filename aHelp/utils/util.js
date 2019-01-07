@@ -33,7 +33,8 @@ const URL = {
     'sendsms': 'sendsms',                    //发送验证码
     'updatesms': 'updatesms',                //验证手机
     'wxpay':'wxpay',                         //微信支付
-    'getmobile':'getmobile',         //验证是否已经提供过手机信息
+    'getmobile':'getmobile',                 //验证是否已经提供过手机信息
+    'cancelorder':'cancelorder',             //取消订单
 }
 
 //请求接口封装

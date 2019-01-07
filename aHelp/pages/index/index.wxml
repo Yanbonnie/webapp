@@ -3,7 +3,7 @@
     <view class='wrap-con'>
         <view class='banner'>
             <!-- <image src='/assets/images/banner.jpg' mode='aspectFill'></image> -->
-            <swiper class='banner'>
+            <swiper class='banner' autoplay="true">
             <block wx:for="{{bannerList}}" wx:key="unique">
                 <swiper-item>
                 <image src="{{item.url}}" class="slide-image" mode='aspectFill'/>
@@ -40,7 +40,7 @@
             </view>
         </view>
     </view>
-    <view class='order' animation="{{animationData}}">
+    <view class='order' animation="{{animationData}}" wx:if="{{gzState}}">
         <view class='order-list'>
             <view class='order-title'>已选故障</view>
             <view class='order-item' wx:for="{{orderList}}" wx:key="unique">
@@ -55,7 +55,8 @@
             <image src='/assets/images/computer.png'></image>
             <text wx:if="{{orderList.length>0}}">{{orderList.length}}</text>
         </view>
-        <view class='tip'> {{priceAll ? '预估报价￥'+priceAll : '选择故障，预估报价'}}</view>
+        <view class='tip' wx:if="{{priceAll}}">预估报价<text>￥{{priceAll}}</text></view>
+        <view class='tip' wx:else>选择故障，预估报价</view>
         <view class='appointmentBtn' bindtap='appointmentHandle'>
             马上预约
             <button open-type="getUserInfo" wx:if="{{!hasUserInfo}}" data-stype="appointment" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
@@ -69,7 +70,7 @@
         <view class='title'>{{barrierTitle}}</view>
         <view class='barrier-cont'>
             <view class='list' wx:if="{{getcategorySec.length>0}}">
-                <view class="{{curOrderId == item.id ? 'list-item active':'list-item'}}" wx:for="{{getcategorySec}}" wx:key="unique" bindtap='selectItemHandle' data-id="{{item.id}}">
+                <view class="{{curOrderId == item.id ? 'list-item active':'list-item'}}" wx:for="{{getcategorySec}}" wx:key="unique" bindtap='selectItemHandle' data-id="{{item.id}}" data-remark="{{item.remark}}">
                     <text>{{item.name}}</text>
                     <text>￥{{item.price}}</text>
                 </view>

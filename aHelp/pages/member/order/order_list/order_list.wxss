@@ -21,6 +21,29 @@
 .txt view{
     color: #808080;
 }
+.flex-box .yuyue{
+    border:1rpx #fe6603 solid;
+    background: #fe6603;
+    padding: 3rpx 5rpx;
+    color: #ffffff;
+    border-radius: 8rpx;
+    width: 100rpx;
+    text-align: center;
+}
+.flex-box .finish{
+    border:1rpx #1AAD19 solid;
+    background: #1AAD19;
+    padding: 3rpx 5rpx;
+    color: #ffffff;
+    border-radius: 8rpx;
+    width: 100rpx;
+    text-align: center;
+}
+.no-message{
+    text-align: center;
+    font-size: 32rpx;
+    padding-top: 50rpx;
+}
 /* .txt view:first-child{
     color: #000;
 } */

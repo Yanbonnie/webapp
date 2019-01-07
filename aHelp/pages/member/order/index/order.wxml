@@ -20,22 +20,26 @@
         <view class='title'>选择维修方式</view>
         <view class='wayBox' >
             <view  class="{{selectIndex == 1 ? 'selected':''}}" bindtap='selectWayHandle' data-way="1">
-                <image src='/assets/images/yc.png'></image>
+                <image wx:if="{{selectIndex == 1}}"  src='/assets/images/yc-live.png'></image>
+                <image wx:else   src='/assets/images/yc.png'></image>
                 <text>远程服务</text>
                 <view class='icon'></view>
             </view>
             <view  class="{{selectIndex == 2 ? 'selected':''}}" bindtap='selectWayHandle' data-way="2">
-                <image src='/assets/images/sm.png'></image>
+                <image wx:if="{{selectIndex == 2}}" src='/assets/images/sm-live.png'></image>
+                <image wx:else src='/assets/images/sm.png'></image>
                 <text>上门维修</text>
                 <view class='icon'></view>
             </view>
             <view  class="{{selectIndex == 3 ? 'selected':''}}" bindtap='selectWayHandle' data-way="3">
-                <image src='/assets/images/dp.png'></image>
+                <image wx:if="{{selectIndex == 3}}" src='/assets/images/dp-live.png'></image>
+                <image wx:else src='/assets/images/dp.png'></image>
                 <text>送店维修</text>
                 <view class='icon'></view>
             </view>
             <view  class="{{selectIndex == 4 ? 'selected':''}}" bindtap='selectWayHandle' data-way="4">
-                <image src='/assets/images/wx.png'></image>
+                <image wx:if="{{selectIndex == 4}}" src='/assets/images/wx-live.png'></image>
+                <image wx:else src='/assets/images/wx.png'></image>
                 <text>现场服务</text>
                 <view class='icon'></view>
             </view>
@@ -160,7 +164,7 @@
         <view class='list' >
             <view class='item' wx:for="{{orderList}}" wx:key="unique">
                 <text>{{item.name}}</text>
-                <text>${{item.price}}</text>
+                <text>￥{{item.price}}</text>
             </view>
         </view>
     </view>

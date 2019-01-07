@@ -11,7 +11,8 @@ Page({
      * 页面的初始数据
      */
     data: {
-        orderList:[],
+        orderList:null,
+        unionid:null,
     },
 
     /**
@@ -21,8 +22,14 @@ Page({
         const {
             unionid
         } = options;
-        this.getorderlistData(unionid)
+        this.setData({
+            unionid
+        })
+        // this.getorderlistData(unionid)
 
+    },
+    onShow:function(){
+        this.getorderlistData(this.data.unionid)
     },
     getorderlistData(unionid) {
         wx.showLoading({
@@ -38,14 +45,14 @@ Page({
             wx.hideLoading();
             let orderList = res.data.map(item=>{
                 return{
-                    orderStateText: item.orderStatus == 1 ? '已预约':item.orderStatus == 2 ? '已付款' : item.orderStatus == 3 ? '维修中' : '已完成',
+                    orderStateText: item.orderStatus == 1 ? '已预约' : item.orderStatus == 2 ? '已付款' : item.orderStatus == 3 ? '维修中' : item.orderStatus == 4 ? '已完成' : '已取消',
+                    orderClass: item.orderStatus == 1 ? 'yuyue' : item.orderStatus == 2 ? 'finish' : item.orderStatus == 3 ? '' : '',
                     ...item,
                 }
             })
             this.setData({
                 orderList: orderList
             })
-            console.log(orderList)
             res.data.forEach((orderItem, index)=>{
                 let reqArr = orderItem.serviceCategory.map(categoryItem=>{
                     return REQUEST({ url: 'getservicename', data: { id: categoryItem.item } })
@@ -64,9 +71,12 @@ Page({
                     id: item.data[0].id
                 }
             })
-            this.setData({
-                ["orderList[" + index + "].serviceCategory"]: list
-            })
+            if(this.data.orderList.length > 0){
+                this.setData({
+                    ["orderList[" + index + "].serviceCategory"]: list
+                })
+            }
+            
         })
     },
     goDetail(e) {

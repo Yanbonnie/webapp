@@ -6,7 +6,8 @@
         "pages/member/order/order_detail/order_detail",
         "pages/member/order/success/success",
         "pages/member/order/index/order",
-        "pages/member/agreement/agreement"
+        "pages/member/agreement/agreement",
+        "pages/member/about/about"
     ],
     "window": {
         "backgroundTextStyle": "light",

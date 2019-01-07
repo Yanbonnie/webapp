@@ -61,7 +61,7 @@
     bottom: 0;
     right: 0;
     left: 0;
-    height: 100rpx;
+    height: 140rpx;
     display: flex;
     background: #ffffff;
     box-shadow: 0 -1rpx 2rpx 2rpx #dedede;
@@ -70,11 +70,13 @@
 }
 .btnBox view{
     width: 200rpx;
-    line-height: 60rpx;
-    height: 60rpx;
+    line-height: 80rpx;
+    height: 80rpx;
     border: 1rpx #e0e0e0 solid;
     text-align: center;
     margin: 0 50rpx;
+    border-radius: 10rpx;
+    font-size: 30rpx;
 }
 .btnBox view:last-child{
     background: #fe6603;

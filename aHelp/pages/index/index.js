@@ -23,6 +23,7 @@ Page({
         goOrder:null,           //1-跳转到下单页面 2-用户中心
         remark:'',
         priceAll:null,          //预估报价
+        gzState:false,
     },
     //事件处理函数
     bindViewTap: function() {
@@ -30,21 +31,33 @@ Page({
             url: '../logs/logs'
         })
     },
+    onShow:function(option){
+        if (!app.globalData.catchList){
+            this.setData({ curOrderId: null, orderList: [], priceAll: null })
+            Promise.all([REQUEST({ url: 'getslideimage' }), REQUEST({ url: 'getcategory', data: { parentId: 0 } })]).then(res => {
+                wx.hideLoading();
+                this.setData({
+                    bannerList: res[0].data,
+                    getcategory: res[1].data.reverse()
+                })
+            })
+        }        
+    },
     onLoad: function() {
         // 调用接口 幻灯片和一级分类数据
         wx.showLoading({
             title: '加载中......',
         })
-        Promise.all([REQUEST({ url: 'getslideimage' }), REQUEST({ url: 'getcategory', data: { parentId: 0} })]).then(res=>{
-            wx.hideLoading();
-            this.setData({
-                bannerList:res[0].data,
-                getcategory:res[1].data
-            })
-        })
-
+        // Promise.all([REQUEST({ url: 'getslideimage' }), REQUEST({ url: 'getcategory', data: { parentId: 0} })]).then(res=>{
+        //     wx.hideLoading();
+        //     this.setData({
+        //         bannerList:res[0].data,
+        //         getcategory:res[1].data.reverse()
+        //     })
+        // })
+        
         this.animation = wx.createAnimation({
-            duration: 1000,
+            duration: 300,
             timingFunction: 'ease',
         })
 
@@ -79,7 +92,6 @@ Page({
     },
     // 获取用户信息回调函数
     getUserInfo: function(e) {
-        console.log(e)
         const { stype } = e.currentTarget.dataset;
         if(e.detail.userInfo){ //拿到了用户信息才往下操作
             app.globalData.userInfo = e.detail;
@@ -138,7 +150,6 @@ Page({
                 })
             }
         }).catch(res => {
-            console.log(res)
             if (count < 5) {
                 this.loginHandle({ iv, encryptedData })
             } else {
@@ -159,8 +170,8 @@ Page({
     // 二级分类
     getcategorySecData(e) {
         const { parentid , name} = e.currentTarget.dataset;
-        let remark = this.data.getcategory.filter(item=>item.id == parentid)[0].remark
-        this.setData({ remark })
+        // let remark = this.data.getcategory.filter(item=>item.id == parentid)[0].remark
+        // this.setData({ remark })
         const { orderList } = this.data;
         wx.showLoading({
             title: '请求中...',
@@ -176,7 +187,7 @@ Page({
             this.setData({
                 getcategorySec: res.data,
                 barrierState:true,
-                barrierTitle:name                
+                barrierTitle:name,               
             })
             // 初始化二级选中
             if(orderList.length>0){
@@ -185,15 +196,33 @@ Page({
                         this.setData({ curOrderId: item.id })
                     }
                 })
+            let repeatArr = orderList.filter((item)=>{
+                return item.parentId == parentid
+            })
+            if(repeatArr.length > 0){
+                this.setData({ 
+                    curOrderId: repeatArr[0].id, 
+                    remark:repeatArr[0].remark 
+                })
             }else{
-                this.setData({ curOrderId: null })
+                this.setData({
+                    curOrderId: res.data[0] ? res.data[0].id : null,
+                    remark: res.data[0] ? res.data[0].remark : null
+                })
+            }
+                
+            }else{
+                this.setData({ 
+                    curOrderId: res.data[0] ? res.data[0].id : null,
+                    remark:res.data[0] ? res.data[0].remark : null
+                })
             }
         })
     },
     // 二级分类选择
     selectItemHandle(e){
-        const { id } = e.currentTarget.dataset;
-        this.setData({ curOrderId: id })
+        const { id,remark } = e.currentTarget.dataset;
+        this.setData({ curOrderId: id, remark,gzState:false})
     },
     // 删除已选故障数据
     delOrder(e){
@@ -203,19 +232,30 @@ Page({
         this.setData({ orderList })
         if(this.data.orderList.length == 0){
             this.animation.translateY('100%').step(); 
+            this.setData({
+                animationData: this.animation.export(),
+                isShow: false
+            })
         }
         this.getcategoryCount();
-        this.setData({
-            animationData: this.animation.export(),
-            isShow:false
+        let priceAll = 0;
+        orderList.forEach(item => {
+            priceAll += item.price;
         })
-
+        this.setData({
+            priceAll
+        })
     },
     // 展开订单列表
     showListHandle(){
         if(this.data.orderList.length <= 0) return;
-        const { isShow } = this.data;
+        let Timer = null;
+        const { isShow, gzState } = this.data;
+        
         if(!isShow){ 
+            this.setData({
+                gzState: true
+            })
             this.animation.translateY(0).step();
         }else{
             this.animation.translateY('100%').step();
@@ -224,6 +264,18 @@ Page({
             animationData: this.animation.export(),
             isShow: !isShow
         })
+        if (!this.data.isShow){
+            clearTimeout(Timer)
+            Timer = setTimeout(()=>{
+                this.setData({
+                    gzState:false
+                })
+            },300)
+        }else{
+            this.setData({
+                gzState: true
+            })
+        }
     },
     // 关闭二级弹框 确定，取消
     closeBarrier(e){
@@ -238,11 +290,11 @@ Page({
                         id:item.id, 
                         name:item.name, 
                         price:item.price, 
-                        parentId: item.parentId
+                        parentId: item.parentId,
+                        remark:item.remark
                     })
                 }
             })
-            
         }    
         let priceAll = 0; 
         orderList.forEach(item=>{
@@ -253,8 +305,6 @@ Page({
             orderList,
             priceAll
         })
-        console.log(this.data.orderList)
-        this.data
         this.getcategoryCount();
     },
     // 计算一级是否选中
@@ -284,6 +334,7 @@ Page({
                     content: '网络繁忙，请退出重试',
                 })
             }else{
+                app.globalData.catchList = false;   //清楚首页缓存
                 wx.navigateTo({
                     url: '/pages/member/index/index?unionid='+app.globalData.unionid,
                 })
@@ -309,7 +360,7 @@ Page({
                     content: '网络繁忙，请退出重试',
                 })
             }else{
-                
+                app.globalData.catchList = true;   //缓存首页数据
                 app.globalData.orderList = orderList;
                 wx.navigateTo({
                     url: '/pages/member/order/index/order',

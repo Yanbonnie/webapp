@@ -25,14 +25,26 @@
         </view>
         <view class='list-item'>
             <view class='left'>联系电话</view>
-            <view class='right'>18825039685</view>
+            <view class='right'>{{orderDetail.mobile}}</view>
+        </view>        
+        <view class='list-item' wx:if="{{orderDetail.serviceTime}}">
+            <view class='left'>{{orderDetail.serviceType_id == 1 ? '远程服务时间':orderDetail.serviceType_id == 2 ? '上门服务时间' : '预约时间'}}</view>
+            <view class='right'>{{orderDetail.serviceTime}}</view>
+        </view>
+        <view class='list-item' wx:if="{{orderDetail.trackingNumber}}">
+            <view class='left'>快递单号</view>
+            <view class='right'>{{orderDetail.trackingNumber}}</view>
+        </view>
+        <view class='list-item' wx:if="{{orderDetail.serviceTools_id}}">
+            <view class='left'>远程服务工具</view>
+            <view class='right'>{{orderDetail.serviceTools_id}}</view>
         </view>
         <view class='list-item' wx:if="{{orderDetail.serviceAddress}}">
             <view class='left'>上门服务地址</view>
             <view class='right'>{{orderDetail.serviceAddress}}</view>
         </view>
-        <view class='list-item' wx:if="{{orderDetail.storeAddress || orderDetail.storeAddress == 0}}">
-            <view class='left'>寄件地址</view>
+        <view class='list-item' wx:if="{{orderDetail.storeAddress}}">
+            <view class='left'>店铺地址</view>
             <view class='right'>{{orderDetail.storeAddress}}</view>
         </view>
         <view class='list-item'>
@@ -79,8 +91,8 @@
             <view class='right'>{{orderDetail.message ? orderDetail.message : '暂无留言'}}</view>
         </view>
     </view>
-    <view class='btnBox' wx:if="{{orderDetail.orderStatus == 1 || orderDetail.orderStatus == 2 }}">
-        <view>取消订单</view>
-        <view wx:if="{{orderDetail.orderStatus == 1}}" bindtap='payMoney'>付款</view>
+    <view class='btnBox' wx:if="{{orderDetail.orderStatus == 1}}">
+        <view bindtap='cancelOrder'>取消订单</view>
+        <view bindtap='payMoney'>付款</view>
     </view>
 </view>

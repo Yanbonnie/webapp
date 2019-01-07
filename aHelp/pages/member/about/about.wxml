@@ -1,0 +1,9 @@
+<!--pages/member/about/about.wxml-->
+<view class='about'>
+        <view class='head'>
+            <text>关于我们</text>  
+        </view>
+        <view class='contain'>
+            <text>我们是广州市爱帮网路科技有限公司,欢迎联系我们</text>
+        </view>
+    </view>

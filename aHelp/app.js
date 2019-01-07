@@ -32,5 +32,6 @@ App({
         orderList:[],
         unionid:null,
         openid:null,
+        catchList:false,
     }
 })

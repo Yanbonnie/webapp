@@ -22,7 +22,7 @@ Page({
         ordernum: '', //快递单号
         message: '', //留言
         orderList: [], //故障列表
-        selectIndex: 1, //1-远程服务 2-上门维修 3-送店维修 4-现场服务
+        selectIndex: '1', //1-远程服务 2-上门维修 3-送店维修 4-现场服务
         tipArr: ["", "请提供QQ远程或者Teamviewer ID、密码给维修工程师", '请填写详细的上门地址和联系电话', '请寄送到指定的维修地点，自付快递费用', '请在上班期间，送到指定的维修地点'],
         orderState: false, //故障列表弹框展示状态
         storeaddressArr:[],
@@ -44,7 +44,8 @@ Page({
             'serverTime[0]': this.getDay(30).map(item => item.time),
             'serverTime[1]': this.getHour(new Date().getTime()).map(item => item.time)
         })
-        console.log(this.data.serverTime)
+
+
         this.getstoreaddress();
         this.getmobileHandle();
     },
@@ -56,7 +57,6 @@ Page({
                 unionid:app.globalData.unionid
             }
         }).then(res => {
-            console.log(res)
             if(res.data.length > 0){
                 this.setData({ mobile: res.data[0].mobile, elderMobile:true })
             }
@@ -109,7 +109,7 @@ Page({
         }
     }) {
         this.setData({
-            'serverTime[1]': this.getHour(new Date(this.data.serverTime[0][value]).getTime()).map(item => item.time)
+            'serverTime[1]': this.getHour(new Date(this.data.serverTime[0][value].replace(/-/g, '/')).getTime()).map(item => item.time)
         })
     },
     // 选择服务工具
@@ -127,7 +127,6 @@ Page({
     chooseAddressHandle() {
         wx.chooseAddress({
             success: res => {
-                console.log(res)
                 this.setData({
                     // address: `${res.userName}:${res.telNumber},地址:${res.cityName}${res.countyName}${res.detailInfo}`
                     address: `${res.cityName}${res.countyName}${res.detailInfo}`
@@ -288,25 +287,25 @@ Page({
         let serviceTime = serverTime[0][timeValue[0]] + " " + serverTime[1][timeValue[1]];
         let serviceTools_id = Number(toolValue) + 1;
         switch (selectIndex) {
-            case "1":
+            case '1':
                 reqData = {
                     serviceTime,
                     serviceTools_id
                 }
                 break;
-            case "2":
+            case '2':
                 reqData = {
                     serviceTime,
                     serviceAddress: address
                 }
                 break;
-            case "3":
+            case '3':
                 reqData = {
                     trackingNumber: ordernum,
                     storeAddress: storeaddressVal
                 }
                 break;
-            case "4":
+            case '4':
                 reqData = {
                     serviceTime,
                     storeAddress: storeaddressVal
@@ -336,6 +335,7 @@ Page({
                 }
             }).then(res => {
                 wx.hideLoading();
+                app.globalData.catchList = false;  //订单提交成功之后清楚首页缓存
                 wx.redirectTo({
                     url: `/pages/member/order/success/success?id=${res.data.orderId}`
                 })
@@ -385,31 +385,15 @@ Page({
         if (!dayNum) {
             return []
         }
+        var dayArr = [];
         var oDate = new Date();
-        var dayArr = [{
-            // time: '今天' + oDate.getFullYear() + '-' + (oDate.getMonth()) + '-' + (oDate.getDate()),
-            time: oDate.getFullYear() + '-' + (oDate.getMonth()) + '-' + (oDate.getDate()),
-            number: oDate.getTime()
-        }];
-        for (var i = 1; i < dayNum; i++) {
-            //dayArr.push(new Date(oDate.getFullYear(), oDate.getMonth(), oDate.getDate() + i));   //把未来几天的时间放到数组里
-            var nextDate = new Date(oDate.getFullYear(), oDate.getMonth(), oDate.getDate() + i);
-            var time = {}
-            if (i == 1) {
-                time = {
-                    // time: '明天' + oDate.getFullYear() + '-' + (nextDate.getMonth()) + '-' + (nextDate.getDate()),
-                    time: oDate.getFullYear() + '-' + (nextDate.getMonth()) + '-' + (nextDate.getDate()),
-                    number: nextDate.getTime()
-                }
-            } else {
-                time = {
-                    time: oDate.getFullYear() + '-' + (nextDate.getMonth()) + '-' + (nextDate.getDate()),
-                    number: nextDate.getTime()
-                }
-            }
-            dayArr.push(time)
+        for (var i = 0; i < dayNum; i++) {
+            var cDay = new Date(new Date().setDate(new Date().getDate() + i));
+            dayArr.push({
+                time: cDay.getFullYear() + '-' + (parseInt(cDay.getMonth())+1) + '-' + cDay.getDate(),
+                number: cDay.getTime()
+            })
         }
-        console.log(dayArr);
         return dayArr;
     },
     //获取小时

@@ -14,7 +14,7 @@
             </view>
             <image class='icon-right' src='/assets/images/right.png'></image>
         </view>
-        <view class='list-item'>
+        <view class='list-item' bindtap='tabQuan'>
             <view class='image'>
                 <image src='/assets/images/quan.png'></image>
             </view>
@@ -35,6 +35,18 @@
             </view>
             <image class='icon-right' src='/assets/images/right.png'></image>
         </view>
+        <view class='list-item' bindtap='makePhoneCallHandle' data-phone="15989223570">
+            <view class='image'>
+                <image src='/assets/images/phone.png'></image>
+            </view>
+            <view class='label'>
+                加盟电话
+            </view>
+            <view class='txt'>
+                15989223570
+            </view>
+            <image class='icon-right' src='/assets/images/right.png'></image>
+        </view>
         <view class='list-item' bindtap='navagateTo' data-page="/pages/member/agreement/agreement" >
             <view class='image'>
                 <image src='/assets/images/xy.png'></image>
@@ -47,7 +59,7 @@
             </view>
             <image class='icon-right' src='/assets/images/right.png'></image>
         </view>
-        <view class='list-item'>
+        <view class='list-item' bindtap='navagateTo' data-page="/pages/member/about/about" >
             <view class='image'>
                 <image src='/assets/images/about.png'></image>
             </view>
